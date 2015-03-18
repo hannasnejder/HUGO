@@ -8,6 +8,7 @@ package hugo;
 /**
  *
  * @author HannaSnejder
+ * PARTY
  */
 public class HUGO {
 
