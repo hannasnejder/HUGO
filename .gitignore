@@ -12,7 +12,7 @@
 hs_err_pid*
 
 #private xml file
-*private.xml
+private.xml
 
 #ant specific
 dist/
