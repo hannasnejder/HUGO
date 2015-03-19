@@ -13,3 +13,4 @@ hs_err_pid*
 
 #private xml file
 *private.xml
+/HUGO/build/
