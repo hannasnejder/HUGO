@@ -13,14 +13,14 @@ public class HUGO {
 
         ds = new DataStore();
 
-        ds.setFileName("/home/itn/Dokument/warehouse.txt");
+        ds.setFileName("/Users/CarolineAskerud/Desktop/warehouse.txt");
         ds.readNet();
         
-        ds.setFileName1("/home/itn/Dokument/orderfil.txt");
-        ds.readNet1();
+        /*ds.setFileName1("/Users/CarolineAskerud/Desktop/test.txt");
+        ds.readNet1();*/
         
-        ds.setFileName1("/home/itn/Dokument/orderfil.txt");
-        ds.readNet1();
+        /*ds.setFileName1("/home/itn/Dokument/orderfil.txt");
+        ds.readNet1();*/
 
         cui = new ControlUI(ds);
         cui.setVisible(true);
