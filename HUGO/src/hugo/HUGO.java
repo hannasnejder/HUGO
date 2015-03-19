@@ -4,12 +4,12 @@ package hugo;
  *Den här klassen motsvarar warehouse klassen från labb 1 och 2 
  * 
  */
-public class hugo {
+public class HUGO {
 
     DataStore ds;
     ControlUI cui;
 
-    hugo(){
+    HUGO(){
 
         ds = new DataStore();
 
@@ -51,6 +51,9 @@ public class hugo {
          * All that is done here is to make an instance of the WarehouseControl class,
          * and thereby, call the WarehouseControl constructor.
         */
-        hugo x = new hugo();
+        HUGO x = new HUGO();
     }
+
+ //Kommentar kommentar kommnetar kommentar   
+
 }

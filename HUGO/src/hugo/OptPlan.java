@@ -8,7 +8,7 @@ package hugo;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import static javafx.beans.binding.Bindings.length;
+//import static javafx.beans.binding.Bindings.length;
 
 
 
