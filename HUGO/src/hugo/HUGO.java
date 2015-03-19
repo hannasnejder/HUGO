@@ -10,6 +10,7 @@ package hugo;
  * @author HannaSnejder
  * PARTY
  */
+//provar lite 
 public class HUGO {
 
     /**
