@@ -13,15 +13,15 @@ public class HUGO {
 
         ds = new DataStore();
 
-        ds.setFileName("C:/Users/Johanna/Desktop/Hugo/HUGO");
+        ds.setFileName("C:/Users/Johanna/Desktop/Hugo/HUGO/warehouse.txt");
         ds.readNet();
         
-        /*ds.setFileName1("/Users/CarolineAskerud/Desktop/test.txt");
-        ds.readNet1();*/
+        ds.setFileName1("C:/Users/Johanna/Desktop/Hugo/HUGO/orderfil.txt");
+        ds.readNet1();
         
-        /*ds.setFileName1("/home/itn/Dokument/orderfil.txt");
-        ds.readNet1();*/
-
+        ds.setFileName2("C:/Users/Johanna/Desktop/Hugo/HUGO/avstandsmatris.txt");
+        ds.readNet2();
+        
         cui = new ControlUI(ds);
         cui.setVisible(true);
         cui.showStatus();
