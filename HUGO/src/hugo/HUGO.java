@@ -13,7 +13,7 @@ public class HUGO {
 
         ds = new DataStore();
 
-        ds.setFileName("/Users/CarolineAskerud/Desktop/warehouse.txt");
+        ds.setFileName("C:/Users/Johanna/Desktop/Hugo/HUGO");
         ds.readNet();
         
         /*ds.setFileName1("/Users/CarolineAskerud/Desktop/test.txt");
@@ -51,6 +51,8 @@ public class HUGO {
         HUGO x = new HUGO();
     }
 
- //Kommentar kommentar kommnetar kommentar   
+ //Kommentar kommentar kommnetar kommentar 
+ //Test test test 
+    //Nytt test
 
 }

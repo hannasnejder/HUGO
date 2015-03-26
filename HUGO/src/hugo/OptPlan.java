@@ -52,12 +52,11 @@ public class OptPlan {
         dijkstra.execute(nodes.get(Order[k] - 1));
         LinkedList<Vertex> path = dijkstra.getPath(nodes.get(Order[k+1] - 1));
         
-        // Get shortest path
-        for (int i = 0; i < path.size(); i++){
-        System.out.println(path.get(i));
-        ds.nodeColor[Integer.parseInt(path.get(i).getId())-1] = 1; 
-        
-        }
+            // Get shortest path
+            for (Vertex path1 : path) {
+                System.out.println(path1);
+                ds.nodeColor[Integer.parseInt(path1.getId()) - 1] = 1;
+            }
         
         // Undirected arcs in the shortest path
         for (int i = 0; i < path.size()-1; i++){

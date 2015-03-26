@@ -42,13 +42,15 @@ public class MapPanel extends JPanel {
             double xscale = 1.0 * width / xsize;
             double yscale = 1.0 * height / ysize;
             
+            for (int i = 0; i < ds.nodes; i++) {
             x = (int) ds.robotX;
             y = (int) ds.robotY;
             
-             g.fillOval(x-((circlesize)/2), height - y- (circlesize) / 2, circlesize, circlesize); 
+            g.fillOval(x-((circlesize)/2), height - y- (circlesize) / 2, circlesize, circlesize); 
 
             g.setColor(DARK_COLOR);
-
+            
+            }
             // Draw nodes as circles
             for (int i = 0; i < ds.nodes; i++) {
                 x = (int) (ds.nodeX[i] * xscale);
@@ -94,10 +96,7 @@ public class MapPanel extends JPanel {
                 // System.out.println("Arc "+i+": "+ds.arcStart[i]+" "+ds.arcEnd[i]);
 
             }
-            
-            
         }
-       
-        
+   
     } // end paintComponent
 }
