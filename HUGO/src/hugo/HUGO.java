@@ -51,6 +51,7 @@ public class HUGO {
         HUGO x = new HUGO();
     }
 
- //Kommentar kommentar kommnetar kommentar   
+ //Kommentar kommentar kommnetar kommentar 
+ //Test test test 
 
 }
