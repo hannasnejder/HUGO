@@ -114,10 +114,12 @@ public class DataStore {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        robotX = nodeX[0];
-        robotY = nodeY[0];
+        //Ändra var robotpricken börjar, vid vilken position
+        robotX = nodeX[8];
+        robotY = nodeY[8];
+
     }
-    public void readNet1() {
+    /*public void readNet1() {
         String line1;
         besoknoder = " "; 
         
@@ -152,6 +154,10 @@ public class DataStore {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-    }
+        
+        robotX = nodeX[8];
+        robotY = nodeY[8];
+    }*/
 
+     
 }
