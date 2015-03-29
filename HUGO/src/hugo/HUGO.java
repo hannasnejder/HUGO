@@ -1,6 +1,6 @@
 package hugo;
 
-/**
+/*
  *Den här klassen motsvarar warehouse klassen från labb 1 och 2 
  * 
  */
@@ -12,20 +12,18 @@ public class HUGO {
     HUGO(){
 
         ds = new DataStore();
+        //Skulle behöva lösas så att vi kan ha det på Git -> inte byta sökväg hela tiden 
+       // ds.setFileName("/Users/HannaSnejder/Desktop/hugo/HUGO/warehouse.txt");
+        ds.setFileName("../../HUGO/warehouse.txt");
 
-        ds.setFileName("/Users/CarolineAskerud/Desktop/warehouse.txt");
         ds.readNet();
         
-        /*ds.setFileName1("/Users/CarolineAskerud/Desktop/test.txt");
-        ds.readNet1();*/
-        
-        /*ds.setFileName1("/home/itn/Dokument/orderfil.txt");
-        ds.readNet1();*/
+ 
 
         cui = new ControlUI(ds);
         cui.setVisible(true);
         cui.showStatus();
-         
+        
         RobotRead r1 = new RobotRead (ds, cui);
         Thread t1 = new Thread(r1);
         GuiUpdate g1 = new GuiUpdate (ds,cui);
