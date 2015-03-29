@@ -1,6 +1,6 @@
 package hugo;
 
-/**
+/*
  *Den här klassen motsvarar warehouse klassen från labb 1 och 2 
  * 
  */
@@ -12,20 +12,19 @@ public class HUGO {
     HUGO(){
 
         ds = new DataStore();
+        //slipper byta sökväg - förhoppningsvis 
+       // ds.setFileName("/Users/HannaSnejder/Desktop/hugo/HUGO/warehouse.txt");
+        ds.setFileName("../../HUGO/warehouse.txt");
 
-        ds.setFileName("C:/Users/Johanna/Desktop/Hugo/HUGO");
+
         ds.readNet();
         
-        /*ds.setFileName1("/Users/CarolineAskerud/Desktop/test.txt");
-        ds.readNet1();*/
-        
-        /*ds.setFileName1("/home/itn/Dokument/orderfil.txt");
-        ds.readNet1();*/
+ 
 
         cui = new ControlUI(ds);
         cui.setVisible(true);
         cui.showStatus();
-         
+        
         RobotRead r1 = new RobotRead (ds, cui);
         Thread t1 = new Thread(r1);
         GuiUpdate g1 = new GuiUpdate (ds,cui);
@@ -43,6 +42,9 @@ public class HUGO {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        // TODO code application logic here
+        
+        //PARTY PARTY 
 
         /* This is the "main" method what gets called when the application starts
          * All that is done here is to make an instance of the WarehouseControl class,
