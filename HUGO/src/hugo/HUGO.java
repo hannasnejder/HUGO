@@ -2,7 +2,7 @@ package hugo;
 
 /**
  *Den här klassen motsvarar warehouse klassen från labb 1 och 2 
- * 
+ * /Testar en sak
  */
 public class HUGO {
 
