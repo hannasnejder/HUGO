@@ -30,12 +30,11 @@ public class GuiUpdate implements Runnable{
                 while(ds.updateUIflag==false){
                     Thread.sleep(sleepTime / 20);
                 }
-                while (i<=40){
-                        Thread.sleep(sleepTime / 20);
-                        cui.appendStatus("Jag är tråd GuiUpdate! För " +i+ ":te gången. ");
+                while (i<=20){
+                         Thread.sleep(sleepTime / 20);
+                         cui.appendStatus("Jag är tråd GuiUpdate! För " +i+ ":te gången. ");
                         i++;  
                         ds.robotX=(i*10);
-                        ds.robotY=(i*15);
                         cui.repaint(); 
                 }
             

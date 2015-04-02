@@ -5,8 +5,12 @@
         <group>
             <file>file:/C:/Users/Johanna/Desktop/Hugo/HUGO/HUGO/src/hugo/MapPanel.java</file>
             <file>file:/C:/Users/Johanna/Desktop/Hugo/HUGO/HUGO/src/hugo/HUGO.java</file>
+<<<<<<< HEAD
             <file>file:/C:/Users/Johanna/Desktop/Hugo/HUGO/HUGO/src/hugo/OptPlan.java</file>
             <file>file:/C:/Users/Johanna/Desktop/Hugo/HUGO/HUGO/src/hugo/DataStore.java</file>
+=======
+            <file>file:/C:/Users/Johanna/Desktop/Hugo/HUGO/HUGO/src/hugo/GuiUpdate.java</file>
+>>>>>>> johannabranch
         </group>
     </open-files>
 </project-private>

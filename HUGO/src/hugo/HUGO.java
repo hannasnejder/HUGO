@@ -18,11 +18,19 @@ public class HUGO {
         
         ds.setFileName1("C:/Users/Johanna/Desktop/Hugo/HUGO/orderfil.txt");
         ds.readNet1();
+<<<<<<< HEAD
         
         ds.setFileName2("C:/Users/Johanna/Desktop/Hugo/HUGO/avstandsmatris.txt");
         ds.readNet2();
         
         cui = new ControlUI(ds);
+=======
+        
+        ds.setFileName2("C:/Users/Johanna/Desktop/Hugo/HUGO/avstandsmatris.txt");
+        ds.readNet2();
+
+         cui = new ControlUI(ds);
+>>>>>>> johannabranch
         cui.setVisible(true);
         cui.showStatus();
          
@@ -50,9 +58,4 @@ public class HUGO {
         */
         HUGO x = new HUGO();
     }
-
- //Kommentar kommentar kommnetar kommentar 
- //Test test test 
-    //Nytt test
-
 }

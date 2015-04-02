@@ -2,11 +2,12 @@ package hugo;
 
 import java.io.File;
 import java.util.Scanner;
-
+import java.util.Arrays;
 /**
  *
  * @author clary35
  */
+
 public class DataStore {
 
     String fileName = null;
@@ -34,7 +35,11 @@ public class DataStore {
     int [] slutpunkt;
     int [] avstand;
     int [] vilkanoder;
+    int [] startpunkt;
+    int [] slutpunkt;
+    int [] avstand;
     boolean networkRead1;
+    
     
 
     
@@ -48,10 +53,19 @@ public class DataStore {
         arcEnd = new int[1000];
         arcColor = new int[1000]; 
         nodeColor = new int[1000];
+<<<<<<< HEAD
         startpunkt = new int[1000];
         slutpunkt = new int[1000];
         avstand = new int[1000]; 
         vilkanoder = new int[1000];
+=======
+        vilkanoder = new int[1000];
+        startpunkt = new int[1000];
+        slutpunkt = new int[1000];
+        avstand =new int[1000];
+          
+        
+>>>>>>> johannabranch
         networkRead = false;
         updateUIflag = false; 
           
@@ -76,7 +90,11 @@ public class DataStore {
     public String getFileName2() {
         return fileName2;
     }
+<<<<<<< HEAD
 
+=======
+    
+>>>>>>> johannabranch
     public void readNet() {
         String line;
 
@@ -127,13 +145,15 @@ public class DataStore {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        //Ändra var robotpricken börjar, vid vilken position
-        robotX = nodeX[8];
-        robotY = nodeY[8];
-
+        robotX = nodeX[0];
+        robotY = nodeY[0];
     }
+<<<<<<< HEAD
     
 public void readNet1() {
+=======
+    public void readNet1() {
+>>>>>>> johannabranch
         String line1;
         besoknoder = " "; 
         
@@ -151,6 +171,13 @@ public void readNet1() {
             line1 = scanner1.nextLine();
             antalnoderfil = Integer.parseInt(line1.trim());
 
+<<<<<<< HEAD
+=======
+            for (int p=0; p < 1000; p++){
+                vilkanoder[p]=200;
+            }
+            
+>>>>>>> johannabranch
             vilkanoder[0] = startnod;
             
             for (int i = 1; i < (antalnoderfil+1); i++){
@@ -158,11 +185,21 @@ public void readNet1() {
                 
                 vilkanoder[i] = Integer.parseInt(line1.trim());
                 
+                Arrays.sort(vilkanoder);
                 besoknoder = besoknoder + " " + vilkanoder[i];
                 
                // System.out.println("Besöksnoder: " + besoknoder);
             }
+            // Arrays.sort(vilkanoder);
             
+<<<<<<< HEAD
+=======
+            System.out.println(Arrays.toString(vilkanoder));
+            
+            //Gör så att den åker tillbaka
+            vilkanoder[(antalnoderfil+1)]=startnod;
+            
+>>>>>>> johannabranch
                 networkRead1 = true;  // Indicate that all network data is in place in the DataStore
             System.out.println("Vi ska besöka noderna: " + besoknoder);
         }
@@ -171,6 +208,7 @@ public void readNet1() {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+<<<<<<< HEAD
     
         robotX = nodeX[8];
         robotY = nodeY[8];
@@ -179,6 +217,11 @@ public void readNet1() {
     public void readNet2() {
         String line2;
 
+=======
+    }
+    public void readNet2() {
+        String line2;
+>>>>>>> johannabranch
         
         if (fileName2 == null) {
             System.err.println("No file name set. Data read aborted.");
@@ -194,6 +237,7 @@ public void readNet1() {
             //Läsa in varje tal i raden, ett i taget
             // första talet = start, andra talet = slut, 3e talet = längd
         
+<<<<<<< HEAD
 
             for (int k = 0; k<98; k++){
                 line2 = (scanner2.nextLine());
@@ -211,4 +255,22 @@ public void readNet1() {
         }
     }
      
+=======
+            for (int k = 0; k<98; k++){
+                line2 = (scanner2.nextLine());
+                sline2 = line2.split(" ");
+                startpunkt[k] = Integer.parseInt(sline2[0].trim());
+                slutpunkt[k] = Integer.parseInt(sline2[1].trim());
+                avstand[k] = Integer.parseInt(sline2[2].trim());
+            }
+          
+        }
+        
+        catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+>>>>>>> johannabranch
 }
