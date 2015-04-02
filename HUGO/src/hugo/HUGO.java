@@ -23,13 +23,12 @@ public class HUGO {
         
         ds.setFileName1("../../HUGO/orderfil.txt");
         ds.readNet1();
-<<<<<<< HEAD
+
+      //  ds.setFileName2("C:/Users/Johanna/Desktop/Hugo/HUGO/avstandsmatris.txt");
+        //ds.readNet2();
         
-        ds.setFileName2("C:/Users/Johanna/Desktop/Hugo/HUGO/avstandsmatris.txt");
-        ds.readNet2();
-        
-        cui = new ControlUI(ds);
-=======
+      
+
         
         ds.setFileName2("../../HUGO/avstandsmatris.txt");
         ds.readNet2();
@@ -38,7 +37,7 @@ public class HUGO {
 
 
          cui = new ControlUI(ds);
->>>>>>> johannabranch
+
         cui.setVisible(true);
         cui.showStatus();
         
