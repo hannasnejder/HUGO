@@ -29,7 +29,7 @@ public class OptPlan {
         edges = new ArrayList<Edge>();
         int[] Order= new int[]{27, 28, 31};       
         
-        for(int k=0; k< 2; k++) {           
+        for(int k=0; k< 15; k++) {           
             
             // Set up network
         for (int i = 0; i < ds.nodes; i++) {
@@ -49,15 +49,14 @@ public class OptPlan {
         DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
 
         // Compute shortest path //här ska vi ändra om vi vill ändra vägarna!!!! :D 
-        dijkstra.execute(nodes.get(Order[k]));
-        LinkedList<Vertex> path = dijkstra.getPath(nodes.get(Order[k+1]));
+        dijkstra.execute(nodes.get(Order[k] - 1));
+        LinkedList<Vertex> path = dijkstra.getPath(nodes.get(Order[k+1] - 1));
         
-        // Get shortest path
-        for (int i = 0; i < path.size(); i++){
-        System.out.println(path.get(i));
-        ds.nodeColor[Integer.parseInt(path.get(i).getId())-1] = 1; 
-        
-        }
+            // Get shortest path
+            for (Vertex path1 : path) {
+                System.out.println(path1);
+                ds.nodeColor[Integer.parseInt(path1.getId()) - 1] = 1;
+            }
         
         // Undirected arcs in the shortest path
         for (int i = 0; i < path.size()-1; i++){
