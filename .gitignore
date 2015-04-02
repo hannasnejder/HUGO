@@ -14,6 +14,7 @@ hs_err_pid*
 #private xml file
 *private.xml
 <<<<<<< HEAD
+<<<<<<< HEAD
 /HUGO/build/
 
 =======
@@ -22,6 +23,11 @@ hs_err_pid*
 /HUGO/build/
 >>>>>>> 5ee75f035ea8c20d6b6c2f9e0cb502474adcc9a1
 >>>>>>> 3e565dc287652363cf5caaf8a6e7eab10d707f00
+=======
+
+/HUGO/build/
+
+>>>>>>> 42cd43014485c96dba885950c7a4ce714f6239eb
 
 #ant specific
 dist/
