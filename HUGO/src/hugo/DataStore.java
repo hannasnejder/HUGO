@@ -9,6 +9,8 @@ import java.util.Arrays;
  */
 
 public class DataStore {
+    
+  
 
     String fileName = null;
     String fileName1 = null;
@@ -31,10 +33,10 @@ public class DataStore {
     int forstanoden;
     int andranoden;
     int tredjenoden; 
-    int [] vilkanoder;
     int [] startpunkt;
     int [] slutpunkt;
     int [] avstand;
+    int [] vilkanoder;
     boolean networkRead1;
     
     
@@ -50,14 +52,19 @@ public class DataStore {
         arcEnd = new int[1000];
         arcColor = new int[1000]; 
         nodeColor = new int[1000];
+        startpunkt = new int[1000];
+        slutpunkt = new int[1000];
+        avstand = new int[1000]; 
+        vilkanoder = new int[1000];
         vilkanoder = new int[1000];
         startpunkt = new int[1000];
         slutpunkt = new int[1000];
         avstand =new int[1000];
           
-        
+
         networkRead = false;
         updateUIflag = false; 
+          
     }
 
     public void setFileName(String newFileName) {
@@ -79,7 +86,7 @@ public class DataStore {
     public String getFileName2() {
         return fileName2;
     }
-    
+
     public void readNet() {
         String line;
 
@@ -133,7 +140,9 @@ public class DataStore {
         robotX = nodeX[0];
         robotY = nodeY[0];
     }
+
     public void readNet1() {
+
         String line1;
         besoknoder = " "; 
         
@@ -156,6 +165,9 @@ public class DataStore {
             //}
             
             //vilkanoder[0] = startnod;
+
+           
+
             
             for (int i = 0; i < (antalnoderfil); i++){
                 line1 = (scanner1.nextLine());
@@ -164,14 +176,17 @@ public class DataStore {
                 
                 //Arrays.sort(vilkanoder);
                 besoknoder = besoknoder + " " + vilkanoder[i];
+                
+               // System.out.println("Besöksnoder: " + besoknoder);
             }
             // Arrays.sort(vilkanoder);
-            
+
             System.out.println(Arrays.toString(vilkanoder));
             
             //Gör så att den åker tillbaka
            // vilkanoder[(antalnoderfil+1)]=startnod;
             
+
                 networkRead1 = true;  // Indicate that all network data is in place in the DataStore
             System.out.println("Vi ska besöka noderna: " + besoknoder);
         }
@@ -180,7 +195,13 @@ public class DataStore {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+
+    
+        robotX = nodeX[8];
+        robotY = nodeY[8];
     }
+
+
     public void readNet2() {
         String line2;
         
@@ -197,7 +218,8 @@ public class DataStore {
             //Läsa av filen rad för rad
             //Läsa in varje tal i raden, ett i taget
             // första talet = start, andra talet = slut, 3e talet = längd
-        
+
+
             for (int k = 0; k<98; k++){
                 line2 = (scanner2.nextLine());
                 sline2 = line2.split(" ");
@@ -213,5 +235,6 @@ public class DataStore {
             e.printStackTrace();
         }
     }
+     
 
 }

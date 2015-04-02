@@ -13,7 +13,7 @@ public class ControlUI extends javax.swing.JFrame {
     
     DataStore ds; 
     private Timer timer;
-    ////1000 ms = 1 sekund
+    //1000 ms = 1 sekund
     public static final int delay = 1000;
     private String hms;
     private int clockTick;  
@@ -174,8 +174,6 @@ public class ControlUI extends javax.swing.JFrame {
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-
-        pack();
 
         pack();
  
@@ -378,10 +376,6 @@ public class ControlUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
-   
-
-    
-    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

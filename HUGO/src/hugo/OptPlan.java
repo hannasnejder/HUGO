@@ -8,7 +8,7 @@ package hugo;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import static javafx.beans.binding.Bindings.length;
+//import static javafx.beans.binding.Bindings.length;
 
 
 
@@ -31,7 +31,7 @@ public class OptPlan {
         int dist=0;
         System.out.println(ds.vilkanoder);
         
-        for(int k=0; k< 15; k++) {           
+        for(int k=0; k< (ds.antalnoderfil +3); k++) {           
             
             // Set up network
         for (int i = 0; i < ds.nodes; i++) {
@@ -87,7 +87,7 @@ public class OptPlan {
                     ds.arcEnd[j] == Integer.parseInt(path.get(i).getId()) && 
                     ds.arcStart[j] == Integer.parseInt(path.get(i+1).getId())){
      
-                        //System.out.println("Arc: "+j);
+                        System.out.println("Arc: "+j);
                         ds.arcColor[j]=1; 
                 }
 
