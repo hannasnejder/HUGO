@@ -119,7 +119,7 @@ public class DataStore {
         robotY = nodeY[8];
 
     }
-    /*public void readNet1() {
+    public void readNet1() {
         String line1;
         besoknoder = " "; 
         
@@ -157,7 +157,7 @@ public class DataStore {
         
         robotX = nodeX[8];
         robotY = nodeY[8];
-    }*/
+    }
 
      
 }

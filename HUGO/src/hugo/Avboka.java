@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package WarehouseControl;
+/*package hugo;
 
 //import static com.sun.javafx.Utils.contains;
 import java.io.BufferedReader;
@@ -97,4 +97,4 @@ public void run() {
         }
         catch (Exception e) { System.out.print(e.toString()); }
     }
-}
+}*/
