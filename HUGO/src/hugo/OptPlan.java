@@ -8,7 +8,7 @@ package hugo;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-//import static javafx.beans.binding.Bindings.length;
+import static javafx.beans.binding.Bindings.length;
 
 
 
@@ -27,7 +27,9 @@ public class OptPlan {
                 
         nodes = new ArrayList<Vertex>();
         edges = new ArrayList<Edge>();
-        int[] Order= new int[]{27, 28, 31};       
+        //int[] Order= new int[]{30, 34};        
+        int dist=0;
+        System.out.println(ds.vilkanoder);
         
         for(int k=0; k< 15; k++) {           
             
@@ -37,26 +39,45 @@ public class OptPlan {
         nodes.add(location);
         }
         
+        // Den sista parametern i "Edge" sätter längden på bågarna.
+       
         for (int i = 0; i < ds.arcs; i++) {
-        Edge lane = new Edge("" + (i + 1), nodes.get(ds.arcStart[i] -1), nodes.get(ds.arcEnd[i] - 1), 1);
+        
+            //Gör en fil med matris med första kolumnen startnod, andra kolumnen slutnod, sista kolumnen längden på tillhörande båge 
+            //For-loop rader
+            //for-loop kolumner
+            //if start noden kopplas till rätt slutnod, ta längden och sätt in i Edge
+            //Else, fortsätt loopa
+            
+           for (int m=0; m<98; m++){
+                if ((ds.startpunkt[m] == ds.arcStart[i]) && ds.slutpunkt[m]==ds.arcEnd[i]){
+                    //System.out.println("inne i if-satsen"); 
+                    dist = ds.avstand[m];
+                     break;
+                }
+            }    
+             
+        Edge lane = new Edge("" + (i + 1), nodes.get(ds.arcStart[i] -1), nodes.get(ds.arcEnd[i] - 1), dist);
         edges.add(lane);
         
-        Edge lane2 = new Edge("" + (i + 1), nodes.get(ds.arcEnd[i] -1), nodes.get(ds.arcStart[i] - 1), 1);
-        edges.add(lane2); }
+        Edge lane2 = new Edge("" + (i + 1), nodes.get(ds.arcEnd[i] -1), nodes.get(ds.arcStart[i] - 1), dist);
+        edges.add(lane2);
+        }
         
         Graph graph = new Graph(nodes, edges);
         
         DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
 
         // Compute shortest path //här ska vi ändra om vi vill ändra vägarna!!!! :D 
-        dijkstra.execute(nodes.get(Order[k] - 1));
-        LinkedList<Vertex> path = dijkstra.getPath(nodes.get(Order[k+1] - 1));
+        dijkstra.execute(nodes.get(ds.vilkanoder[k] -1));
+        LinkedList<Vertex> path = dijkstra.getPath(nodes.get(ds.vilkanoder[k+1] -1));
         
-            // Get shortest path
-            for (Vertex path1 : path) {
-                System.out.println(path1);
-                ds.nodeColor[Integer.parseInt(path1.getId()) - 1] = 1;
-            }
+        // Get shortest path
+        for (int i = 0; i < path.size(); i++){
+        System.out.println(path.get(i));
+        ds.nodeColor[Integer.parseInt(path.get(i).getId())-1] = 1; 
+        
+        }
         
         // Undirected arcs in the shortest path
         for (int i = 0; i < path.size()-1; i++){
