@@ -7,6 +7,13 @@
         <group/>
 =======
         <group>
+            <file>file:/C:/Users/HannaSnejder/Desktop/hugo/HUGO/HUGO/src/hugo/ControlUI.java</file>
+            <file>file:/C:/Users/HannaSnejder/Desktop/hugo/HUGO/HUGO/src/hugo/MapPanel.java</file>
+            <file>file:/C:/Users/HannaSnejder/Desktop/hugo/HUGO/HUGO/src/hugo/HUGO.java</file>
+            <file>file:/C:/Users/HannaSnejder/Desktop/hugo/HUGO/HUGO/src/hugo/DataStore.java</file>
+=======
+<<<<<<< HEAD
+        <group>
             <file>file:/C:/Users/Johanna/Desktop/Hugo/HUGO/HUGO/src/hugo/MapPanel.java</file>
             <file>file:/C:/Users/Johanna/Desktop/Hugo/HUGO/HUGO/src/hugo/HUGO.java</file>
 <<<<<<< HEAD
@@ -27,6 +34,7 @@
 >>>>>>> carolineBranch
 >>>>>>> 42cd43014485c96dba885950c7a4ce714f6239eb
 >>>>>>> johannabranch
+>>>>>>> hannaBranch
         </group>
 >>>>>>> 42cd43014485c96dba885950c7a4ce714f6239eb
     </open-files>
