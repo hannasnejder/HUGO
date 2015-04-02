@@ -31,7 +31,7 @@ public class OptPlan {
         int dist=0;
         System.out.println(ds.vilkanoder);
         
-        for(int k=0; k< 15; k++) {           
+        for(int k=0; k< (ds.antalnoderfil +3); k++) {           
             
             // Set up network
         for (int i = 0; i < ds.nodes; i++) {
