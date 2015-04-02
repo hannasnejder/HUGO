@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package hugo;
 
 import java.util.ArrayList;
@@ -21,15 +26,10 @@ public class OptPlan {
     public void createPlan(){
                 
         nodes = new ArrayList<Vertex>();
-<<<<<<< HEAD
-        edges = new ArrayList<Edge>();       
-        int dist=0;
-=======
         edges = new ArrayList<Edge>();
         //int[] Order= new int[]{30, 34};        
         int dist=0;
         System.out.println(ds.vilkanoder);
->>>>>>> johannabranch
         
         for(int k=0; k< 15; k++) {           
             
@@ -56,25 +56,16 @@ public class OptPlan {
                      break;
                 }
             }    
-
              
         Edge lane = new Edge("" + (i + 1), nodes.get(ds.arcStart[i] -1), nodes.get(ds.arcEnd[i] - 1), dist);
         edges.add(lane);
         
         Edge lane2 = new Edge("" + (i + 1), nodes.get(ds.arcEnd[i] -1), nodes.get(ds.arcStart[i] - 1), dist);
         edges.add(lane2);
-<<<<<<< HEAD
-        
-        //System.out.println("Avstånd: " + dist);
         }
-        
-=======
-        }
->>>>>>> johannabranch
         
         Graph graph = new Graph(nodes, edges);
         
-        //26/3 kl 11:36 Går inte in här
         DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
 
         // Compute shortest path //här ska vi ändra om vi vill ändra vägarna!!!! :D 
@@ -96,7 +87,7 @@ public class OptPlan {
                     ds.arcEnd[j] == Integer.parseInt(path.get(i).getId()) && 
                     ds.arcStart[j] == Integer.parseInt(path.get(i+1).getId())){
      
-                        //System.out.println("Arc: "+j);
+                        System.out.println("Arc: "+j);
                         ds.arcColor[j]=1; 
                 }
 

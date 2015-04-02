@@ -42,22 +42,17 @@ public class MapPanel extends JPanel {
             double xscale = 1.0 * width / xsize;
             double yscale = 1.0 * height / ysize;
             
-<<<<<<< HEAD
+
             //for (int i = 0; i < ds.nodes; i++) {
-=======
->>>>>>> johannabranch
             x = (int) ds.robotX;
             y = (int) ds.robotY;
             
              g.fillOval(x-((circlesize)/2), height - y- (circlesize) / 2, circlesize, circlesize); 
 
             g.setColor(DARK_COLOR);
-<<<<<<< HEAD
             
            // }
-=======
 
->>>>>>> johannabranch
             // Draw nodes as circles
             for (int i = 0; i < ds.nodes; i++) {
                 x = (int) (ds.nodeX[i] * xscale);
@@ -71,12 +66,11 @@ public class MapPanel extends JPanel {
                         break;
                      }
                 }*/
-<<<<<<< HEAD
+
                 
-                 if(ds.nodeColor[i] == 1){
-=======
+             
                 if(ds.nodeColor[i] == 1){
->>>>>>> johannabranch
+
                     g.setColor(RED_COLOR);
                 }
                 else
@@ -109,3 +103,4 @@ public class MapPanel extends JPanel {
         
     } // end paintComponent
 }
+
