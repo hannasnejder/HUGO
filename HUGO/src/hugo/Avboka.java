@@ -3,7 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+
 /*package hugo;
+=======
+package hugo;
+>>>>>>> 8287ca1f7fc333120d6d2e3dbc9eefa210c053d4
 
 //import static com.sun.javafx.Utils.contains;
 import java.io.BufferedReader;
