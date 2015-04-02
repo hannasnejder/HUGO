@@ -4,10 +4,9 @@
  * and open the template in the editor.
  */
 
-/*package hugo;
-=======
 package hugo;
->>>>>>> 8287ca1f7fc333120d6d2e3dbc9eefa210c053d4
+
+
 
 //import static com.sun.javafx.Utils.contains;
 import java.io.BufferedReader;
@@ -64,7 +63,7 @@ public void run() {
             
             
             Avboka http = new Avboka();
-            String url = "http://tnk111.n7.se/free.php?user=3&resource=" + x;
+            /*String url = "http://tnk111.n7.se/free.php?user=3&resource=" + x;
             URL urlobjekt = new URL(url);
             HttpURLConnection anslutning = (HttpURLConnection)
             urlobjekt.openConnection();
@@ -93,7 +92,7 @@ public void run() {
 
             inkommande.close();
             
-            System.out.println(inkommande_samlat.toString());
+            System.out.println(inkommande_samlat.toString());*/
             
            System.out.println("Länken är avbokad.");
            
@@ -101,4 +100,4 @@ public void run() {
         }
         catch (Exception e) { System.out.print(e.toString()); }
     }
-}*/
+}
