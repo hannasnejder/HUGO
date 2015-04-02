@@ -38,8 +38,18 @@ public class HUGO {
         GuiUpdate g1 = new GuiUpdate (ds,cui);
         Thread t2 = new Thread(g1); 
         
+        //Testar att skapa en tråd för att boka och avboka länkar
+        Boka b1 = new Boka();
+        Thread t3 = new Thread(b1);
+        
+        
+        Avboka b2 = new Avboka();
+        Thread t4 = new Thread(b2);
+
         t1.start();
         t2.start();
+        t3.start();
+        t4.start();
         
         OptPlan op = new OptPlan(ds);
         op.createPlan();
