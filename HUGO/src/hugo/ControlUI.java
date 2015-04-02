@@ -176,8 +176,6 @@ public class ControlUI extends javax.swing.JFrame {
         );
 
         pack();
-
-        pack();
  
        }// </editor-fold>
 
@@ -378,10 +376,6 @@ public class ControlUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton3ActionPerformed
 
-   
-
-    
-    
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
