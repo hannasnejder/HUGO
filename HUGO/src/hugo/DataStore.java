@@ -9,6 +9,8 @@ import java.util.Arrays;
  */
 
 public class DataStore {
+    
+  
 
     String fileName = null;
     String fileName1 = null;
@@ -139,7 +141,6 @@ public class DataStore {
         robotY = nodeY[0];
     }
 
-
     public void readNet1() {
 
         String line1;
@@ -196,6 +197,7 @@ public class DataStore {
         robotX = nodeX[8];
         robotY = nodeY[8];
     }
+
 
     public void readNet2() {
         String line2;
