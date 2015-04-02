@@ -13,7 +13,7 @@ public class ControlUI extends javax.swing.JFrame {
     
     DataStore ds; 
     private Timer timer;
-    ////1000 ms = 1 sekund
+    //1000 ms = 1 sekund
     public static final int delay = 1000;
     private String hms;
     private int clockTick;  

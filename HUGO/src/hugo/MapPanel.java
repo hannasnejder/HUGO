@@ -42,34 +42,35 @@ public class MapPanel extends JPanel {
             double xscale = 1.0 * width / xsize;
             double yscale = 1.0 * height / ysize;
             
-            for (int i = 0; i < ds.nodes; i++) {
+
+            //for (int i = 0; i < ds.nodes; i++) {
             x = (int) ds.robotX;
             y = (int) ds.robotY;
             
-            g.fillOval(x-((circlesize)/2), height - y- (circlesize) / 2, circlesize, circlesize); 
+             g.fillOval(x-((circlesize)/2), height - y- (circlesize) / 2, circlesize, circlesize); 
 
             g.setColor(DARK_COLOR);
             
-            }
+           // }
+
             // Draw nodes as circles
             for (int i = 0; i < ds.nodes; i++) {
                 x = (int) (ds.nodeX[i] * xscale);
                 y = (int) (ds.nodeY[i] * yscale);
+                             
+                /*g.setColor(DARK_COLOR);
                 
-                //Göra alla hyllplatser gröna
-                //prova att göra som i labb 1 - läs in fil
-                /*for( int k = 0; k < 12; k++){
-                    
-                    if ((k+27)== hyllplatser[k]){
-                        
-                        g.setColor(GREEN_COLOR);
-                        System.out.println("Grön färg");
+                for (int k = 0; k < ds.antalnoderfil; k++){
+                    if ((i+1)== ds.vilkanoder[k]){
+                        g.setColor(RED_COLOR);
                         break;
                      }
-                   
                 }*/
+
                 
+             
                 if(ds.nodeColor[i] == 1){
+
                     g.setColor(RED_COLOR);
                 }
                 else
@@ -77,7 +78,6 @@ public class MapPanel extends JPanel {
 
                 g.drawOval(x - (circlesize / 2), height - y - circlesize / 2, circlesize, circlesize);
             }
-
             // Draw arcs
             for (int i = 0; i < ds.arcs; i++) {
                 x1 = (int) (ds.nodeX[ds.arcStart[i] - 1] * xscale);
@@ -96,7 +96,11 @@ public class MapPanel extends JPanel {
                 // System.out.println("Arc "+i+": "+ds.arcStart[i]+" "+ds.arcEnd[i]);
 
             }
+            
+            
         }
-   
+       
+        
     } // end paintComponent
 }
+

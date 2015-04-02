@@ -2,7 +2,7 @@ package hugo;
 
 /*
  *Den här klassen motsvarar warehouse klassen från labb 1 och 2 
- * 
+ * /Testar en sak, en sak till
  */
 public class HUGO {
 
@@ -14,14 +14,22 @@ public class HUGO {
         ds = new DataStore();
         //slipper byta sökväg - förhoppningsvis 
        // ds.setFileName("/Users/HannaSnejder/Desktop/hugo/HUGO/warehouse.txt");
+        //ds.setFileName("../../HUGO/warehouse.txt");
+
+
+
         ds.setFileName("../../HUGO/warehouse.txt");
-
-
         ds.readNet();
         
- 
+        ds.setFileName1("../../HUGO/orderfil.txt");
+        ds.readNet1();
+
+        ds.setFileName2("../../HUGO/avstandsmatris.txt");
+        ds.readNet2();
+      
 
         cui = new ControlUI(ds);
+
         cui.setVisible(true);
         cui.showStatus();
         
@@ -52,9 +60,4 @@ public class HUGO {
         */
         HUGO x = new HUGO();
     }
-
- //Kommentar kommentar kommnetar kommentar 
- //Test test test 
-    //Nytt test
-
 }

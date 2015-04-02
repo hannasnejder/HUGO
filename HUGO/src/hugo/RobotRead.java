@@ -27,7 +27,7 @@ public class RobotRead implements Runnable {
             cui.appendStatus("RobotRead kommer att köra i " + sleepTime + " millisekunder.");
             
             int i=1;
-            while(i<=40){
+            while(i<=20){
                 
                 Thread.sleep(sleepTime/20);
                 cui.appendStatus("Jag är tråd RobotRead! För "+i+":te gången. ");
