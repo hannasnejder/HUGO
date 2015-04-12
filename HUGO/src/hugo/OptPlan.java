@@ -31,15 +31,57 @@ public class OptPlan {
         int dist=0;
         System.out.println(ds.vilkanoder);
         
+        //kom ihåg att ändra 3an sen
         for(int k=0; k< (ds.antalnoderfil +3); k++) {           
-            
-            // Set up network
+     
+        // Set up network
         for (int i = 0; i < ds.nodes; i++) {
         Vertex location = new Vertex("" + (i + 1), "Nod #" + (i + 1));
         nodes.add(location);
         }
         
-        // Den sista parametern i "Edge" sätter längden på bågarna.
+        /*
+        int nuvarande_langd = 10000; 
+        
+        for (int j = 0; j < ds.antalnoderfil; j++ )
+        { 
+        array[0] = ds.startnod; 
+        array[1] = ds.vilkanoder[j];
+        } 
+        Djikstrakoden ..... spara längden i en int "tot längd"... 
+        
+        if tot längd < nuvarande längd {
+                nuvarande_langd = totlängd 
+                annan_array[0]= startnod 
+                annan_array[1] = nuvarande nod
+                        }
+        
+        int nuvarande_langd = 100000; 
+        for (int g; bla bla )
+        { array[0] = annan_array[1]; 
+        array[1] = ds.vilkanoder[g];
+        } 
+        if ds.vilkanoder[g]!= array[0]
+                { kör djukstras.... spara längden i en int "tot längd"... 
+                if tot längd < nuvarande längd 
+                        nuvarande_langd = totlängd 
+                                annan_array[0]= startnod 
+                                        annan_array[1] = nuvarande nod 
+                                                }
+                */
+//måste kolla någonstans om arryen är tom 
+//dvs om ifsatsen inte uppfylls 
+// då skall arrayen förhoppningsvis vara fylld med alla hyllplatser som skall besökas 
+//lägg till startnoden igen på sista platsen i arrayen 
+// använd den färdiga arrayen "annan array" och optimera över denna
+        
+                                                
+                                                
+                                                
+                                                
+                                                
+        // Den sista parametern i "Edge" sätter längden på bågarna./ hyllorna borde ligga i den ordning som är snabbast att besöka } }
+     
        
         for (int i = 0; i < ds.arcs; i++) {
         
@@ -76,6 +118,7 @@ public class OptPlan {
         for (int i = 0; i < path.size(); i++){
         System.out.println(path.get(i));
         ds.nodeColor[Integer.parseInt(path.get(i).getId())-1] = 1; 
+        System.out.println(path);
         
         }
         
@@ -89,10 +132,9 @@ public class OptPlan {
      
                         System.out.println("Arc: "+j);
                         ds.arcColor[j]=1; 
+                    }
                 }
-
             }
-        }
         }
     }
 }
