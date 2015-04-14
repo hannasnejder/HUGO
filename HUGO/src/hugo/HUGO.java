@@ -17,7 +17,6 @@ public class HUGO {
 
         ds = new DataStore();
 
-
         ds.setFileName("../../HUGO/warehouse.txt");
         ds.readNet();
          
