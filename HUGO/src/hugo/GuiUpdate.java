@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package hugo;
 import java.util.Random;
-/**
- *
- * @author HannaSnejder
- */
+
 public class GuiUpdate implements Runnable{
         private int sleepTime;
         private static Random generator = new Random();
@@ -21,8 +14,7 @@ public class GuiUpdate implements Runnable{
             sleepTime = generator.nextInt(20000);
         }
         
-        @Override
-        
+        @Override 
         public void run(){
             try{
                 cui.appendStatus("GuiUpdate startar och kommer att köra i " + sleepTime + " millisekunder. ");
