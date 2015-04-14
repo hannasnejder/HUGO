@@ -3,15 +3,10 @@ package hugo;
 import java.io.File;
 import java.util.Scanner;
 import java.util.Arrays;
-/**
- *
- * @author clary35
- */
+
 
 public class DataStore {
     
-  
-
     String fileName = null;
     String fileName1 = null;
     String fileName2 = null;
@@ -38,14 +33,14 @@ public class DataStore {
     int [] avstand;
     int [] vilkanoder;
     boolean networkRead1;
+    //int resurser_boka[];
     
-    
-
     
     public DataStore() {
         // Initialize the datastore with fixed size arrays for storing the network data
         nodes = 0;
         arcs = 0;
+        //arcs = 38;
         nodeX = new double[1000];
         nodeY = new double[1000];
         arcStart = new int[1000];
@@ -60,8 +55,8 @@ public class DataStore {
         startpunkt = new int[1000];
         slutpunkt = new int[1000];
         avstand =new int[1000];
+        //resurser_boka = new int[1000];
           
-
         networkRead = false;
         updateUIflag = false; 
           
@@ -187,7 +182,7 @@ public class DataStore {
            // vilkanoder[(antalnoderfil+1)]=startnod;
             
 
-                networkRead1 = true;  // Indicate that all network data is in place in the DataStore
+            networkRead1 = true;  // Indicate that all network data is in place in the DataStore
             System.out.println("Vi ska besöka noderna: " + besoknoder);
         }
         

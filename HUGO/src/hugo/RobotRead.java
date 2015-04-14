@@ -6,10 +6,8 @@
 package hugo;
 
 import java.util.Random;
-/**
- *
- * @author HannaSnejder
- */
+
+
 public class RobotRead implements Runnable {
     private int sleepTime;
     private static Random generator = new Random();
@@ -39,6 +37,9 @@ public class RobotRead implements Runnable {
                 
             }
         }catch (InterruptedException exception){
+        }
+        catch(NullPointerException e){
+            System.out.println("NulPEXC: " + e);
         }
         cui.appendStatus("RobotRead är nu klar! ");
     }

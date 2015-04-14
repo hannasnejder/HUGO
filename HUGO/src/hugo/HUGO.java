@@ -8,19 +8,25 @@ public class HUGO {
 
     DataStore ds;
     ControlUI cui;
+    OptPlan opt;
+    //Boka b;
+    
+   
 
     HUGO(){
 
         ds = new DataStore();
+        opt = new OptPlan();
+        
+        //b = new Boka();
         //slipper byta sökväg - förhoppningsvis 
        // ds.setFileName("/Users/HannaSnejder/Desktop/hugo/HUGO/warehouse.txt");
         //ds.setFileName("../../HUGO/warehouse.txt");
 
 
-
         ds.setFileName("../../HUGO/warehouse.txt");
         ds.readNet();
-        
+         
         ds.setFileName1("../../HUGO/orderfil.txt");
         ds.readNet1();
 
@@ -33,7 +39,8 @@ public class HUGO {
         cui.setVisible(true);
         cui.showStatus();
         
-        RobotRead r1 = new RobotRead (ds, cui);
+
+        /*RobotRead r1 = new RobotRead (ds, cui);
         Thread t1 = new Thread(r1);
         GuiUpdate g1 = new GuiUpdate (ds,cui);
         Thread t2 = new Thread(g1); 
@@ -49,16 +56,14 @@ public class HUGO {
         t1.start();
         t2.start();
         t3.start();
-        t4.start();
-        
-        OptPlan op = new OptPlan(ds);
-        op.createPlan();
-        
+        //t4.start();*/
+
+       // OptPlan op = new OptPlan(ds);
+       // op.createPlan();
+
     }
+
     
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         // TODO code application logic here
         
