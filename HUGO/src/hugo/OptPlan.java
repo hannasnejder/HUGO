@@ -17,6 +17,8 @@ public class OptPlan {
     private List<Vertex> nodes;
     private List<Edge> edges;
     private DataStore ds;  
+    int[] resurser_boka;
+    int c = 0; 
     
     public OptPlan(DataStore ds) {
     this.ds = ds;
@@ -27,8 +29,9 @@ public class OptPlan {
                 
         nodes = new ArrayList<Vertex>();
         edges = new ArrayList<Edge>();
+        resurser_boka = new int [100]; 
         //int[] Order= new int[]{30, 34};        
-        int dist=0;
+        int dist=0; 
         System.out.println(ds.vilkanoder);
         
         for(int k=0; k< (ds.antalnoderfil +3); k++) {           
@@ -89,6 +92,9 @@ public class OptPlan {
      
                         System.out.println("Arc: "+j);
                         ds.arcColor[j]=1; 
+                        
+                        resurser_boka[c] = j;
+                        c = c+1; 
                 }
 
             }

@@ -28,21 +28,16 @@ public class HUGO {
         cui.setVisible(true);
         cui.showStatus();
         
-        
+//        
         OptPlan op = new OptPlan(ds);
         op.createPlan();
     }
 
     
     public static void main(String[] args) {
-        // TODO code application logic here
-        
+
         //PARTY PARTY 
 
-        /* This is the "main" method what gets called when the application starts
-         * All that is done here is to make an instance of the WarehouseControl class,
-         * and thereby, call the WarehouseControl constructor.
-        */
         HUGO x = new HUGO();
     }
 }

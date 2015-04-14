@@ -71,7 +71,7 @@ public void run() {
             urlobjekt.openConnection();
            
             
-            System.out.println("\nAnropar: " + url);
+            //System.out.println("\nAnropar: " + url);
             
             /*String url1 = "http://tnk111.n7.se/reserve.php?user=3&resource=36";
             URL urlobjekt1 = new URL(url1);
@@ -83,7 +83,7 @@ public void run() {
             
             int mottagen_status = anslutning.getResponseCode();
             
-            System.out.println("Statuskod: " + mottagen_status);
+           // System.out.println("Statuskod: " + mottagen_status);
             
             /*int mottagen_status1 = anslutning1.getResponseCode();
             
@@ -121,7 +121,7 @@ public void run() {
 
             inkommande.close();
             
-            System.out.println(inkommande_samlat.toString());
+           // System.out.println(inkommande_samlat.toString());
             
             /*int linecount1 = 0;
             //String line = null;
