@@ -9,7 +9,7 @@ public class HUGO {
     DataStore ds;
     ControlUI cui;
     OptPlan opt;
-    Boka b;
+    //Boka b;
     
    
 
@@ -58,8 +58,8 @@ public class HUGO {
         t3.start();
         //t4.start();*/
 
-        OptPlan op = new OptPlan(ds);
-        op.createPlan();
+       // OptPlan op = new OptPlan(ds);
+       // op.createPlan();
 
     }
 

@@ -40,6 +40,7 @@ public class DataStore {
         // Initialize the datastore with fixed size arrays for storing the network data
         nodes = 0;
         arcs = 0;
+        //arcs = 38;
         nodeX = new double[1000];
         nodeY = new double[1000];
         arcStart = new int[1000];

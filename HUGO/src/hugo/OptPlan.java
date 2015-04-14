@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Vector;
 //import static javafx.beans.binding.Bindings.length;
 
 
@@ -18,22 +19,25 @@ public class OptPlan {
     private List<Vertex> nodes;
     private List<Edge> edges;
     private DataStore ds;  
-    private Boka b;
+    public Boka b;
     //int boka = 0;
-    int resurser_boka[];
+    int [] resurser_boka = new int[10000];
+    //Vector<int> mVector;
     int c = 0;
     String boka;
 
     public OptPlan(){
-        
+    //resurser_boka = new int[100];
     }
     
-    public OptPlan(DataStore ds) {
+    public OptPlan(DataStore ds, OptPlan opt) {
     this.ds = ds;
+    ///mVector = new Vector<int>();
     }
     
     public OptPlan(Boka b) {
     this.b = b;
+  
     }
     
     
@@ -41,11 +45,10 @@ public class OptPlan {
                 
         nodes = new ArrayList<Vertex>();
         edges = new ArrayList<Edge>();
-        resurser_boka = new int[1000];
-      
+        //int [] resurser_boka = new int[100];
         //int[] Order= new int[]{30, 34};        
         int dist=0;
-        //int resurser_boka[];
+        //int resurser_boka
         //int c = 0;
         //Skapar en string för att kunna skriva ut innehållet i vilka noder
         String vilkanoder_skrivaut;
@@ -54,7 +57,9 @@ public class OptPlan {
         
         //System.out.println(vilkanoder_skrivaut);
         
-        for(int k=0; k< (ds.antalnoderfil +3); k++) {           
+        //this.resurser_boka = resurser_boka;
+        
+        for(int k=0; k< (ds.antalnoderfil) ; k++) {           
             
             //int h = 0;
             // Set up network
@@ -125,16 +130,27 @@ public class OptPlan {
                         //boka = b.resurser_boka[j];                        
                         
                         resurser_boka[c] = j;
+                        //System.out.println("Boka av c " +  resurser_boka[c]);
+
                         c = c+1;
-                        //System.out.println("c: " + resurser_boka);
+
                         //boka = Arrays.toString(resurser_boka);
+                        
+                        //System.out.println("Boka  " +  );
                 }
+               //System.out.println("TJOHO ");
 
             }
         }
         //System.out.println("Kollar om arrayen funkar " + c);
         //System.out.println("Test: " + boka);
         }
-    }
-        
+        for(int i = 0; i < 100; i++){
+            //System.out.println("Boka av c " +  resurser_boka[c]);
+
+        }
+        //boka = Arrays.toString(resurser_boka);
+        //System.out.println("Test: " + boka);
+
+    }      
 }
