@@ -38,6 +38,7 @@ public class DataStore {
     int [] avstand;
     int [] vilkanoder;
     boolean networkRead1;
+    //int resurser_boka[];
     
     
 
@@ -60,8 +61,8 @@ public class DataStore {
         startpunkt = new int[1000];
         slutpunkt = new int[1000];
         avstand =new int[1000];
+        //resurser_boka = new int[1000];
           
-
         networkRead = false;
         updateUIflag = false; 
           

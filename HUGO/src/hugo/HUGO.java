@@ -8,10 +8,17 @@ public class HUGO {
 
     DataStore ds;
     ControlUI cui;
+    OptPlan opt;
+    Boka b;
+    
+   
 
     HUGO(){
 
         ds = new DataStore();
+        opt = new OptPlan();
+        
+        //b = new Boka();
         //slipper byta sökväg - förhoppningsvis 
        // ds.setFileName("/Users/HannaSnejder/Desktop/hugo/HUGO/warehouse.txt");
         //ds.setFileName("../../HUGO/warehouse.txt");
@@ -24,7 +31,7 @@ public class HUGO {
         ds.setFileName1("../../HUGO/orderfil.txt");
         ds.readNet1();
 
-      //  ds.setFileName2("C:/Users/Johanna/Desktop/Hugo/HUGO/avstandsmatris.txt");
+        //ds.setFileName2("C:/Users/Johanna/Desktop/Hugo/HUGO/avstandsmatris.txt");
         //ds.readNet2();
         
       
@@ -57,11 +64,13 @@ public class HUGO {
         t1.start();
         t2.start();
         t3.start();
-        t4.start();
+        //t4.start();
         
+       
         OptPlan op = new OptPlan(ds);
         op.createPlan();
         
+ 
     }
     
     /**

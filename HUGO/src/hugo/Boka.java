@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.Random;
+import javax.swing.*;
 
 public class Boka implements Runnable{
     
@@ -23,36 +24,53 @@ public class Boka implements Runnable{
     private int sleepTime;
     private static Random generator = new Random();
     //private ControlUI cui;
-    private DataStore ds;
-    //private OptPlan opt;
+    //private DataStore ds;
+    //public OptPlan op;
+    public OptPlan opt;
     int x;
+    String test;
+
+   
     
     //En array för att testa att boka de resurser vi vill
-    int [] s = {34, 35, 37};
-
-
-public Boka() {
-    //this.cui = cui;
+    //int s[] = {34, 35, 37, 41};
+    
+public Boka(){
     sleepTime = generator.nextInt(20000);
 }
 
 
+public Boka(OptPlan opt) {
+    this.opt = opt;
+    sleepTime = generator.nextInt(20000);
+    opt.createPlan();  
+
+    //Boka b1 = new Boka(this.opt);
+}
+
 
     @Override
 public void run() {
+    test = opt.boka;
+    
     try {
         int i;
         int k;
-        
+        int j = 0;
+        //resurser_boka = new int[1000];
+        //resurser_boka = new int[100];
+
   
         //Thread.sleep(sleepTime/20);
         //char bokaresurser[] = ds.besoknoder.toCharArray();
         
-        System.out.println("Går in i första for ");
+       //System.out.println("K " + op.resurser_boka);
         
+ 
+                
         
-        for(i = 0; i <= 2; i++){
-
+        for(i = 0; i <= 3; i++){
+            //for(j = 0; j <= 4; j++){
             //k = s[i];
            // System.out.println(k);
             //System.out.println("Går inte in i If ");
@@ -62,9 +80,18 @@ public void run() {
             //while( x == s[i]){
             
             //Hur löser vi resursnummer??
-            x = s[i] +38;
-                
-            Boka http = new Boka();
+                //Boolean på resurser_boka????????????
+            
+            //Försöker hämta stringen boka från optplan
+            //test = opt.boka;
+            //System.out.println("Test: " + test);
+            x = opt.resurser_boka[i];
+            //x = s[i];
+            
+            
+            
+           //Boka b1 = new Boka();
+            //Boka http = new Boka();
             String url = "http://tnk111.n7.se/reserve.php?user=3&resource=" + x;
             URL urlobjekt = new URL(url);
             HttpURLConnection anslutning = (HttpURLConnection)
@@ -153,7 +180,11 @@ public void run() {
                    
             //}
         }
+    //}
     }
-        catch (Exception e) { System.out.print(e.toString()); }
+        catch (Exception e) { System.out.print("det här är e" + e.toString());
+     
+        //catch (Exception e) { System.out.print("Här är e" + e); }
     }
+}
 }
