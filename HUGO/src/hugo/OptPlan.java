@@ -6,8 +6,10 @@
 package hugo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Vector;
 //import static javafx.beans.binding.Bindings.length;
 
 
@@ -17,26 +19,57 @@ public class OptPlan {
     private List<Vertex> nodes;
     private List<Edge> edges;
     private DataStore ds;  
+    public Boka b;
+    //int boka = 0;
+    int [] resurser_boka = new int[10000];
+    //Vector<int> mVector;
+    int c = 0;
+    String boka;
+
+    public OptPlan(){
+    //resurser_boka = new int[100];
+    }
     
-    public OptPlan(DataStore ds) {
+    public OptPlan(DataStore ds, OptPlan opt) {
     this.ds = ds;
+    ///mVector = new Vector<int>();
+    }
+    
+    public OptPlan(Boka b) {
+    this.b = b;
+  
     }
     
     
-    public void createPlan(){
+    public  void createPlan(){
                 
         nodes = new ArrayList<Vertex>();
         edges = new ArrayList<Edge>();
+        //int [] resurser_boka = new int[100];
         //int[] Order= new int[]{30, 34};        
         int dist=0;
-        System.out.println(ds.vilkanoder);
+        //int resurser_boka
+        //int c = 0;
+        //Skapar en string för att kunna skriva ut innehållet i vilka noder
+        String vilkanoder_skrivaut;
         
-        for(int k=0; k< (ds.antalnoderfil +3); k++) {           
+        vilkanoder_skrivaut = Arrays.toString(ds.vilkanoder);
+        
+        //System.out.println(vilkanoder_skrivaut);
+        
+        //this.resurser_boka = resurser_boka;
+        
+        for(int k=0; k< (ds.antalnoderfil) ; k++) {           
             
+            //int h = 0;
             // Set up network
         for (int i = 0; i < ds.nodes; i++) {
         Vertex location = new Vertex("" + (i + 1), "Nod #" + (i + 1));
         nodes.add(location);
+        
+        //b.resurser_boka[h] = i;
+        //h++;
+        
         }
         
         // Den sista parametern i "Edge" sätter längden på bågarna.
@@ -79,6 +112,9 @@ public class OptPlan {
         
         }
         
+
+        //Räknare för att veta vilken resurs som ska bokas
+        //int c = 0;
         // Undirected arcs in the shortest path
         for (int i = 0; i < path.size()-1; i++){
             for (int j = 0; j < ds.arcs; j++){
@@ -86,13 +122,35 @@ public class OptPlan {
                     ds.arcEnd[j] == Integer.parseInt(path.get(i+1).getId()) ||
                     ds.arcEnd[j] == Integer.parseInt(path.get(i).getId()) && 
                     ds.arcStart[j] == Integer.parseInt(path.get(i+1).getId())){
-     
+                        
                         System.out.println("Arc: "+j);
                         ds.arcColor[j]=1; 
+                        
+                        //Mickes boolean ide?????????????????
+                        //boka = b.resurser_boka[j];                        
+                        
+                        resurser_boka[c] = j;
+                        //System.out.println("Boka av c " +  resurser_boka[c]);
+
+                        c = c+1;
+
+                        //boka = Arrays.toString(resurser_boka);
+                        
+                        //System.out.println("Boka  " +  );
                 }
+               //System.out.println("TJOHO ");
 
             }
         }
+        //System.out.println("Kollar om arrayen funkar " + c);
+        //System.out.println("Test: " + boka);
         }
-    }
+        for(int i = 0; i < 100; i++){
+            //System.out.println("Boka av c " +  resurser_boka[c]);
+
+        }
+        //boka = Arrays.toString(resurser_boka);
+        //System.out.println("Test: " + boka);
+
+    }      
 }
