@@ -24,31 +24,23 @@ public class HUGO {
         //ds.setFileName("../../HUGO/warehouse.txt");
 
 
-
         ds.setFileName("../../HUGO/warehouse.txt");
         ds.readNet();
-        
+         
         ds.setFileName1("../../HUGO/orderfil.txt");
         ds.readNet1();
 
-        //ds.setFileName2("C:/Users/Johanna/Desktop/Hugo/HUGO/avstandsmatris.txt");
-        //ds.readNet2();
-        
-      
-
-        
         ds.setFileName2("../../HUGO/avstandsmatris.txt");
         ds.readNet2();
       
- 
-
 
         cui = new ControlUI(ds);
 
         cui.setVisible(true);
         cui.showStatus();
         
-        RobotRead r1 = new RobotRead (ds, cui);
+
+        /*RobotRead r1 = new RobotRead (ds, cui);
         Thread t1 = new Thread(r1);
         GuiUpdate g1 = new GuiUpdate (ds,cui);
         Thread t2 = new Thread(g1); 
@@ -64,18 +56,14 @@ public class HUGO {
         t1.start();
         t2.start();
         t3.start();
-        //t4.start();
-        
-       
+        //t4.start();*/
+
         OptPlan op = new OptPlan(ds);
         op.createPlan();
-        
- 
+
     }
+
     
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
         // TODO code application logic here
         
