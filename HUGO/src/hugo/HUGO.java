@@ -16,7 +16,7 @@ public class HUGO {
     HUGO(){
 
         ds = new DataStore();
-        opt = new OptPlan();
+        //opt = new OptPlan();
         
         //b = new Boka();
         //slipper byta sökväg - förhoppningsvis 

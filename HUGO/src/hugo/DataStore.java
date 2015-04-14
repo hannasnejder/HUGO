@@ -55,8 +55,7 @@ public class DataStore {
         startpunkt = new int[1000];
         slutpunkt = new int[1000];
         avstand =new int[1000];
-        //resurser_boka = new int[1000];
-          
+
         networkRead = false;
         updateUIflag = false; 
           
@@ -174,7 +173,6 @@ public class DataStore {
                 
                // System.out.println("Besöksnoder: " + besoknoder);
             }
-            // Arrays.sort(vilkanoder);
 
             System.out.println(Arrays.toString(vilkanoder));
             
@@ -190,7 +188,6 @@ public class DataStore {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
     
         robotX = nodeX[8];
         robotY = nodeY[8];
@@ -213,8 +210,6 @@ public class DataStore {
             //Läsa av filen rad för rad
             //Läsa in varje tal i raden, ett i taget
             // första talet = start, andra talet = slut, 3e talet = längd
-
-
             for (int k = 0; k<98; k++){
                 line2 = (scanner2.nextLine());
                 sline2 = line2.split(" ");
@@ -230,6 +225,4 @@ public class DataStore {
             e.printStackTrace();
         }
     }
-     
-
 }
