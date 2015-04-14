@@ -94,7 +94,7 @@ public void run() {
             
             System.out.println(inkommande_samlat.toString());
             
-           System.out.println("Länken är avbokad.");
+           //System.out.println("Länken är avbokad.");
            
             }
         }

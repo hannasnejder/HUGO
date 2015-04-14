@@ -66,12 +66,12 @@ public void run() {
             HttpURLConnection anslutning = (HttpURLConnection)
             urlobjekt.openConnection();
            
-            
             System.out.println("\nAnropar: " + url);
    
             int mottagen_status = anslutning.getResponseCode();
             
             System.out.println("Statuskod: " + mottagen_status);
+
 
             BufferedReader inkommande = new BufferedReader(new
             InputStreamReader(anslutning.getInputStream()));
@@ -98,7 +98,7 @@ public void run() {
 
             inkommande.close();
             
-            System.out.println(inkommande_samlat.toString());
+           // System.out.println(inkommande_samlat.toString());
             
         }
     }

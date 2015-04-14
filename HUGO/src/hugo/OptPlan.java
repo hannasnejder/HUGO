@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hugo;
 
 import java.util.ArrayList;
@@ -16,9 +11,7 @@ public class OptPlan {
     private List<Edge> edges;
     private DataStore ds;
     public Boka b;
-    //int boka = 0;
     int[] resurser_boka = new int[10000];
-    //Vector<int> mVector;
     int c = 0;
     String boka;
 
@@ -35,8 +28,12 @@ public class OptPlan {
 
         nodes = new ArrayList<Vertex>();
         edges = new ArrayList<Edge>();
+        resurser_boka = new int [100]; 
         //int[] Order= new int[]{30, 34};        
+
         int dist = 0;
+
+        System.out.println(ds.vilkanoder);
 
         // Set up network
         for (int i = 0; i < ds.nodes; i++) {
@@ -131,12 +128,7 @@ public class OptPlan {
                         //System.out.println("rutten är"+snabbaste_rutten[p+1]);
                         System.out.println("Det kortaste avståndet är" + kortast_avstand);
                         System.out.println("Den närmsta noden är" + narmaste_nod);
-                        //Färglägg den kortaste vägen
-               /* for (int i = 0; i < path.size(); i++){
-                         System.out.println("Nod # " + path.get(i));
-                         ds.nodeColor[Integer.parseInt(path.get(i).getId())-1] = 1; 
-        
-                         }*/
+
                     }
                 }
             }
