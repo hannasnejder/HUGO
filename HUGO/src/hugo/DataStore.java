@@ -4,9 +4,8 @@ import java.io.File;
 import java.util.Scanner;
 import java.util.Arrays;
 
-
 public class DataStore {
-    
+
     String fileName = null;
     String fileName1 = null;
     String fileName2 = null;
@@ -18,24 +17,22 @@ public class DataStore {
     int[] arcStart;
     int[] arcEnd;
     boolean networkRead;
-    boolean updateUIflag; 
+    boolean updateUIflag;
     double robotX;
     double robotY;
     int[] arcColor;
-    int[] nodeColor; 
+    int[] nodeColor;
     int startnod;
     int antalnoderfil;
     int forstanoden;
     int andranoden;
-    int tredjenoden; 
-    int [] startpunkt;
-    int [] slutpunkt;
-    int [] avstand;
-    int [] vilkanoder;
+    int tredjenoden;
+    int[] startpunkt;
+    int[] slutpunkt;
+    int[] avstand;
+    int[] vilkanoder;
     boolean networkRead1;
-    //int resurser_boka[];
-    
-    
+
     public DataStore() {
         // Initialize the datastore with fixed size arrays for storing the network data
         nodes = 0;
@@ -45,34 +42,38 @@ public class DataStore {
         nodeY = new double[1000];
         arcStart = new int[1000];
         arcEnd = new int[1000];
-        arcColor = new int[1000]; 
+        arcColor = new int[1000];
         nodeColor = new int[1000];
         startpunkt = new int[1000];
         slutpunkt = new int[1000];
-        avstand = new int[1000]; 
+        avstand = new int[1000];
         vilkanoder = new int[1000];
-          
+
         networkRead = false;
-        updateUIflag = false; 
-          
+        updateUIflag = false;
+
     }
 
     public void setFileName(String newFileName) {
         this.fileName = newFileName;
     }
+
     public void setFileName1(String newFileName1) {
         this.fileName1 = newFileName1;
     }
+
     public void setFileName2(String newFileName2) {
         this.fileName2 = newFileName2;
     }
- 
+
     public String getFileName() {
         return fileName;
     }
+
     public String getFileName1() {
         return fileName1;
     }
+
     public String getFileName2() {
         return fileName2;
     }
@@ -98,9 +99,8 @@ public class DataStore {
             // Debug printout: network size data
             // System.out.println("Nodes: "+nodes);
             // System.out.println("Arcs: "+arcs);
-            
             // Read nodes as number, x, y
-            for (int i=0; i < nodes; i++){
+            for (int i = 0; i < nodes; i++) {
                 line = scanner.nextLine();
                 //split space separated data on line
                 sline = line.split(" ");
@@ -110,19 +110,17 @@ public class DataStore {
 
             // Debug printout: print data for node 1
             // System.out.println("Node 1: "+nodeX[0]+" "+nodeY[0]);
-
             // Read arc list as start node number, end node number
-            for (int i=0; i < arcs; i++){
+            for (int i = 0; i < arcs; i++) {
                 line = scanner.nextLine();
                 //split space separated data on line
                 sline = line.split(" ");
                 arcStart[i] = Integer.parseInt(sline[1].trim());
                 arcEnd[i] = Integer.parseInt(sline[2].trim());
             }
-            
 
             networkRead = true;  // Indicate that all network data is in place in the DataStore
-            
+
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -134,8 +132,8 @@ public class DataStore {
     public void readNet1() {
 
         String line1;
-        besoknoder = " "; 
-        
+        besoknoder = " ";
+
         if (fileName1 == null) {
             System.err.println("No file name set. Data read aborted.");
             return;
@@ -150,48 +148,42 @@ public class DataStore {
             line1 = scanner1.nextLine();
             antalnoderfil = Integer.parseInt(line1.trim());
 
-            for (int p=0; p < 1000; p++){
-                vilkanoder[p]=200;
+            for (int p = 0; p < 1000; p++) {
+                vilkanoder[p] = 200;
             }
 
             vilkanoder[0] = startnod;
-            
-            for (int i = 1; i < (antalnoderfil+1); i++){
+
+            for (int i = 1; i < (antalnoderfil + 1); i++) {
                 line1 = (scanner1.nextLine());
-                
+
                 vilkanoder[i] = Integer.parseInt(line1.trim());
-                
+
                 Arrays.sort(vilkanoder);
                 besoknoder = besoknoder + " " + vilkanoder[i];
-                
-               // System.out.println("Besöksnoder: " + besoknoder);
+
+                // System.out.println("Besöksnoder: " + besoknoder);
             }
-            // Arrays.sort(vilkanoder);
 
             System.out.println(Arrays.toString(vilkanoder));
-            
+
             //Gör så att den åker tillbaka
-            vilkanoder[(antalnoderfil+1)]=startnod;
-            
+            vilkanoder[(antalnoderfil + 1)] = startnod;
 
             networkRead1 = true;  // Indicate that all network data is in place in the DataStore
             System.out.println("Vi ska besöka noderna: " + besoknoder);
-        }
-        
-        catch (Exception e) {
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-
-    
+        
         robotX = nodeX[8];
         robotY = nodeY[8];
     }
 
-
     public void readNet2() {
         String line2;
-        
+
         if (fileName2 == null) {
             System.err.println("No file name set. Data read aborted.");
             return;
@@ -199,29 +191,25 @@ public class DataStore {
         try {
             File file2 = new File(fileName2);
             Scanner scanner2 = new Scanner(file2, "iso-8859-1");
-             String[] sline2;
-              
+            String[] sline2;
+
             // Read number of nodes
             //Läsa av filen rad för rad
             //Läsa in varje tal i raden, ett i taget
             // första talet = start, andra talet = slut, 3e talet = längd
+       for (int k = 0; k<98; k++){
 
-
-            for (int k = 0; k<98; k++){
                 line2 = (scanner2.nextLine());
                 sline2 = line2.split(" ");
                 startpunkt[k] = Integer.parseInt(sline2[0].trim());
                 slutpunkt[k] = Integer.parseInt(sline2[1].trim());
                 avstand[k] = Integer.parseInt(sline2[2].trim());
             }
-          
-        }
-        
-        catch (Exception e) {
+
+        } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
     }
-     
 
 }
