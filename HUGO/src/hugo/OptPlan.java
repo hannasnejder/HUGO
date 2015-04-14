@@ -10,6 +10,8 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Vector;
+import java.util.*;
+import java.lang.*;
 //import static javafx.beans.binding.Bindings.length;
 
 
@@ -20,14 +22,15 @@ public class OptPlan {
     private List<Edge> edges;
     private DataStore ds;  
     public Boka b;
-    //int boka = 0;
-    int [] resurser_boka = new int[10000];
-    //Vector<int> mVector;
+    int [] länkar_boka = new int[10000];
+    int [] noder_boka = new int[10000];
+    int [] resurser_boka = new int[1000];
     int c = 0;
+    int z = 0;
     String boka;
 
     public OptPlan(){
-    //resurser_boka = new int[100];
+    //länkar_boka = new int[100];
     }
     
     public OptPlan(DataStore ds, OptPlan opt) {
@@ -45,10 +48,9 @@ public class OptPlan {
                 
         nodes = new ArrayList<Vertex>();
         edges = new ArrayList<Edge>();
-        //int [] resurser_boka = new int[100];
-        //int[] Order= new int[]{30, 34};        
+       
         int dist=0;
-        //int resurser_boka
+        //int länkar_boka
         //int c = 0;
         //Skapar en string för att kunna skriva ut innehållet i vilka noder
         String vilkanoder_skrivaut;
@@ -57,19 +59,14 @@ public class OptPlan {
         
         //System.out.println(vilkanoder_skrivaut);
         
-        //this.resurser_boka = resurser_boka;
-        
         for(int k=0; k< (ds.antalnoderfil) ; k++) {           
-            
-            //int h = 0;
-            // Set up network
+
+         // Set up network
         for (int i = 0; i < ds.nodes; i++) {
         Vertex location = new Vertex("" + (i + 1), "Nod #" + (i + 1));
         nodes.add(location);
-        
-        //b.resurser_boka[h] = i;
-        //h++;
-        
+ 
+       
         }
         
         // Den sista parametern i "Edge" sätter längden på bågarna.
@@ -110,6 +107,9 @@ public class OptPlan {
         System.out.println(path.get(i));
         ds.nodeColor[Integer.parseInt(path.get(i).getId())-1] = 1; 
         
+        //Sparar de noder vi vill boka i en array
+        noder_boka[z] = Integer.parseInt(path.get(i).getId());
+        z = z+1;
         }
         
 
@@ -123,34 +123,33 @@ public class OptPlan {
                     ds.arcEnd[j] == Integer.parseInt(path.get(i).getId()) && 
                     ds.arcStart[j] == Integer.parseInt(path.get(i+1).getId())){
                         
-                        System.out.println("Arc: "+j);
+                       // System.out.println("Arc: "+j);
                         ds.arcColor[j]=1; 
-                        
-                        //Mickes boolean ide?????????????????
-                        //boka = b.resurser_boka[j];                        
-                        
-                        resurser_boka[c] = j;
-                        //System.out.println("Boka av c " +  resurser_boka[c]);
+                                  
+                        //Sparar de länkar vi vill boka i en array
+                        länkar_boka[c] = j + 38;
+                        //System.out.println("Boka av c " +  länkar_boka[c]);
 
                         c = c+1;
 
-                        //boka = Arrays.toString(resurser_boka);
-                        
-                        //System.out.println("Boka  " +  );
+                        //boka = Arrays.toString(länkar_boka);
                 }
-               //System.out.println("TJOHO ");
-
             }
-        }
-        //System.out.println("Kollar om arrayen funkar " + c);
-        //System.out.println("Test: " + boka);
-        }
-        for(int i = 0; i < 100; i++){
-            //System.out.println("Boka av c " +  resurser_boka[c]);
+         }
 
-        }
-        //boka = Arrays.toString(resurser_boka);
-        //System.out.println("Test: " + boka);
-
-    }      
+       }
+       
+        int j = 1;
+        int k = 0;
+       //Skapa en ny for-loop för att kombinera länkar och noder till resurser_boka
+       for(int i = 0; i < 100; i++){
+           resurser_boka[k] = noder_boka[i];
+           
+           resurser_boka[j] = länkar_boka[i];
+           k = k+2;
+           j = j+2;
+           
+        }  
+       //System.out.println("Resurser: " + Arrays.toString(resurser_boka));
+  }
 }

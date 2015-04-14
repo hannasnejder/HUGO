@@ -20,8 +20,8 @@ public class threads {
     Thread t2;
     Boka b1; 
     Thread t3; 
-    //Avboka b2; 
-    //Thread t4; 
+    Avboka b2; 
+    Thread t4; 
     
     threads(DataStore ds, ControlUI cui){
         
@@ -36,8 +36,8 @@ public class threads {
         t2 = new Thread(g1); 
         b1 = new Boka(opt);
         t3 = new Thread(b1);
-      //  b2 = new Avboka();
-      //  t4 = new Thread(b2);      
+        b2 = new Avboka();
+        t4 = new Thread(b2);      
         
         
     }
@@ -47,7 +47,7 @@ public class threads {
         t1.start();
         t2.start();
         t3.start();
-       // t4.start();
+        //t4.start();
     }
     
     //Gör det möjligt till att stoppa trådarna
