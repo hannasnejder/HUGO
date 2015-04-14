@@ -1,41 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
-<<<<<<< HEAD
         <group/>
-=======
-        <group>
-            <file>file:/C:/Users/HannaSnejder/Desktop/hugo/HUGO/HUGO/src/hugo/ControlUI.java</file>
-            <file>file:/C:/Users/HannaSnejder/Desktop/hugo/HUGO/HUGO/src/hugo/MapPanel.java</file>
-            <file>file:/C:/Users/HannaSnejder/Desktop/hugo/HUGO/HUGO/src/hugo/HUGO.java</file>
-            <file>file:/C:/Users/HannaSnejder/Desktop/hugo/HUGO/HUGO/src/hugo/DataStore.java</file>
-=======
-<<<<<<< HEAD
-        <group>
-            <file>file:/C:/Users/Johanna/Desktop/Hugo/HUGO/HUGO/src/hugo/MapPanel.java</file>
-            <file>file:/C:/Users/Johanna/Desktop/Hugo/HUGO/HUGO/src/hugo/HUGO.java</file>
-<<<<<<< HEAD
-            <file>file:/C:/Users/Johanna/Desktop/Hugo/HUGO/HUGO/src/hugo/OptPlan.java</file>
-            <file>file:/C:/Users/Johanna/Desktop/Hugo/HUGO/HUGO/src/hugo/DataStore.java</file>
-=======
-            <file>file:/C:/Users/Johanna/Desktop/Hugo/HUGO/HUGO/src/hugo/GuiUpdate.java</file>
-<<<<<<< HEAD
->>>>>>> johannabranch
-=======
->>>>>>> 5383fecdd5411c408391040a220dbce70fe68a16
-=======
-        <group name="Product">
-<<<<<<< HEAD
-            <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/OptPlan.java</file>
-=======
-            <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/HUGO.java</file>
->>>>>>> carolineBranch
->>>>>>> 42cd43014485c96dba885950c7a4ce714f6239eb
->>>>>>> johannabranch
->>>>>>> hannaBranch
-        </group>
->>>>>>> 42cd43014485c96dba885950c7a4ce714f6239eb
     </open-files>
 </project-private>
