@@ -31,7 +31,7 @@ public class Avboka implements Runnable{
     int x;
     
     //En array för att testa att boka de resurser vi vill
-    int [] s = {34, 35, 37};
+    int [] s = {34, 35, 37, 41};
 
 
 public Avboka() {
@@ -44,12 +44,12 @@ public void run() {
         int i;
         int k;
         
-        //Thread.sleep(sleepTime/20);
+        Thread.sleep(sleepTime/20);
         //char bokaresurser[] = ds.besoknoder.toCharArray();
         
         System.out.println("Går in i första for ");
         
-        for(i = 0; i <= 2; i++){
+        for(i = 0; i <= 3; i++){
 
             //k = s[i];
            // System.out.println(k);
@@ -63,7 +63,7 @@ public void run() {
             
             
             Avboka http = new Avboka();
-            /*String url = "http://tnk111.n7.se/free.php?user=3&resource=" + x;
+            String url = "http://tnk111.n7.se/free.php?user=3&resource=" + x;
             URL urlobjekt = new URL(url);
             HttpURLConnection anslutning = (HttpURLConnection)
             urlobjekt.openConnection();
@@ -92,7 +92,7 @@ public void run() {
 
             inkommande.close();
             
-            System.out.println(inkommande_samlat.toString());*/
+            System.out.println(inkommande_samlat.toString());
             
            //System.out.println("Länken är avbokad.");
            

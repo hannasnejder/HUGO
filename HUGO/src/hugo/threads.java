@@ -12,13 +12,14 @@ public class threads {
     
     DataStore ds;
     ControlUI cui;
+    OptPlan opt;
     
     RobotRead r1;
     Thread t1;
     GuiUpdate g1;
     Thread t2;
-    //Boka b1; 
-    //Thread t3; 
+    Boka b1; 
+    Thread t3; 
     //Avboka b2; 
     //Thread t4; 
     
@@ -26,13 +27,15 @@ public class threads {
         
         this.ds = ds;
         this.cui = cui;
+        opt = new OptPlan(this.ds, this.opt);
+        opt.createPlan();
         
         r1 = new RobotRead (this.ds, this.cui);
         t1 = new Thread(r1);
         g1 = new GuiUpdate (this.ds,this.cui);
         t2 = new Thread(g1); 
-      //  b1 = new Boka();
-      //  t3 = new Thread(b1);
+        b1 = new Boka(opt);
+        t3 = new Thread(b1);
       //  b2 = new Avboka();
       //  t4 = new Thread(b2);      
         
@@ -43,7 +46,7 @@ public class threads {
     public void startThreads(){
         t1.start();
         t2.start();
-       // t3.start();
+        t3.start();
        // t4.start();
     }
     

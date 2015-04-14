@@ -7,11 +7,16 @@ package hugo;
 public class HUGO {
 
     DataStore ds;
-    ControlUI cui;   
+    ControlUI cui;
+    OptPlan opt;
+    //Boka b;
+    
+   
 
-   HUGO(){
+    HUGO(){
 
-       ds = new DataStore();
+        ds = new DataStore();
+
 
         ds.setFileName("../../HUGO/warehouse.txt");
         ds.readNet();
@@ -28,9 +33,7 @@ public class HUGO {
         cui.setVisible(true);
         cui.showStatus();
         
-//        
-        OptPlan op = new OptPlan(ds);
-        op.createPlan();
+
     }
 
     
