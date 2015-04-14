@@ -22,7 +22,7 @@ public class OptPlan {
     int c = 0;
     String boka;
 
-    public OptPlan(DataStore ds) {
+    public OptPlan(DataStore ds, OptPlan opt) {
         this.ds = ds;
     }
 
@@ -134,12 +134,7 @@ public class OptPlan {
                         //System.out.println("rutten är"+snabbaste_rutten[p+1]);
                         System.out.println("Det kortaste avståndet är" + kortast_avstand);
                         System.out.println("Den närmsta noden är" + narmaste_nod);
-                        //Färglägg den kortaste vägen
-               /* for (int i = 0; i < path.size(); i++){
-                         System.out.println("Nod # " + path.get(i));
-                         ds.nodeColor[Integer.parseInt(path.get(i).getId())-1] = 1; 
-        
-                         }*/
+
                     }
                 }
             }
@@ -223,7 +218,7 @@ public class OptPlan {
 
                 }
             }
-        //System.out.println("Kollar om arrayen funkar " + c);
+            //System.out.println("Kollar om arrayen funkar " + c);
             //System.out.println("Test: " + boka);
         }
         for (int i = 0; i < 100; i++) {
