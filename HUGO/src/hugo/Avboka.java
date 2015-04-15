@@ -27,43 +27,38 @@ public class Avboka implements Runnable{
     private static Random generator = new Random();
     //private ControlUI cui;
     private DataStore ds;
-    //private OptPlan opt;
-    int x;
+    public OptPlan opt;
+    int y [];
     
     //En array för att testa att boka de resurser vi vill
-    int [] s = {34, 35, 37, 41};
+    //int [] s = {34, 35, 37, 41};
 
 
 public Avboka() {
     //this.cui = cui;
     sleepTime = generator.nextInt(20000);
 }
+
+public Avboka(OptPlan opt) {
+    this.opt = opt;
+    sleepTime = generator.nextInt(20000);
+    opt.createPlan();
+    y = opt.resurser_boka;
+}
     @Override
 public void run() {
     try {
         int i;
-        int k;
         
         Thread.sleep(sleepTime/20);
         //char bokaresurser[] = ds.besoknoder.toCharArray();
         
-        System.out.println("Går in i första for ");
-        
         for(i = 0; i <= 3; i++){
 
-            //k = s[i];
-           // System.out.println(k);
-            //System.out.println("Går inte in i If ");
+            //y = s[i];
             
-            //if(x == k){
-            //while( x == s[i]){
-            
-            //Hur löser vi resursnummer??
-            x = s[i] + 38;
-            
-            
-            Avboka http = new Avboka();
-            String url = "http://tnk111.n7.se/free.php?user=3&resource=" + x;
+            //Avboka http = new Avboka();
+            String url = "http://tnk111.n7.se/free.php?user=3&resource=" + y[i];
             URL urlobjekt = new URL(url);
             HttpURLConnection anslutning = (HttpURLConnection)
             urlobjekt.openConnection();

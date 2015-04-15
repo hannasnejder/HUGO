@@ -48,10 +48,7 @@ public class DataStore {
         slutpunkt = new int[1000];
         avstand = new int[1000];
         vilkanoder = new int[1000];
-        vilkanoder = new int[1000];
-        startpunkt = new int[1000];
-        slutpunkt = new int[1000];
-        avstand = new int[1000];
+
         networkRead = false;
         updateUIflag = false;
 

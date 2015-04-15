@@ -23,6 +23,7 @@ public class HUGO {
        // ds.setFileName("/Users/HannaSnejder/Desktop/hugo/HUGO/warehouse.txt");
         //ds.setFileName("../../HUGO/warehouse.txt");
 
+
         ds.setFileName("../../HUGO/warehouse.txt");
         ds.readNet();
          

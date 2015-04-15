@@ -29,6 +29,7 @@ public class Boka implements Runnable{
     //public OptPlan op;
     public OptPlan opt;
     int x [];
+
     String test;
 
     //En array för att testa att boka de resurser vi vill
@@ -56,10 +57,11 @@ public void run() {
         //Behövs fördröjnng till bokningen??
         //Thread.sleep(sleepTime/20);
 
-        for(i = 0; i <= 3; i++){
+        for(i = 0; i <= 10; i++){
 
         //Hur löser vi resursnummer??
         //x = s[i];
+        
 
             String url = "http://tnk111.n7.se/reserve.php?user=3&resource=" + x[i];
             URL urlobjekt = new URL(url);
