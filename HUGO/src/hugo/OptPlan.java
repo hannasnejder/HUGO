@@ -33,7 +33,7 @@ public class OptPlan {
 
         int dist = 0;
 
-        System.out.println(ds.vilkanoder);
+        //System.out.println(ds.vilkanoder);
 
         // Set up network
         for (int i = 0; i < ds.nodes; i++) {
@@ -70,7 +70,7 @@ public class OptPlan {
         Graph graph = new Graph(nodes, edges);
         DijkstraAlgorithm dij = new DijkstraAlgorithm(graph);
 
-        int nuvarande_langd = 0;
+        //int nuvarande_langd = 0;
         int kortast_avstand;
         int narmaste_nod = ds.startnod;
         int[] test_vag = new int[1000];
@@ -106,7 +106,7 @@ public class OptPlan {
 
                     //Loopar först igenom vägen(path) som fåtts från dijkstras för att se vilka noder som passeras
                     //loopar sedan igenom arrayerna med alla avstånd
-                    nuvarande_langd = 0;
+                    int nuvarande_langd = 0;
                     for (int b = 1; b < path.size(); b++) {
                         for (int m = 0; m < 98; m++) {
 
