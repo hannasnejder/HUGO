@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import static javafx.beans.binding.Bindings.length;
+import java.util.*;
+import java.lang.*;
 
 public class OptPlan {
 
@@ -11,9 +13,16 @@ public class OptPlan {
     private List<Edge> edges;
     private DataStore ds;
     public Boka b;
+    int[] länkar_boka = new int[10000];
+    int[] noder_boka = new int[10000];
     int[] resurser_boka = new int[10000];
     int c = 0;
+    int z = 0;
     String boka;
+
+    public OptPlan() {
+
+    }
 
     public OptPlan(DataStore ds, OptPlan opt) {
         this.ds = ds;
@@ -21,19 +30,15 @@ public class OptPlan {
 
     public OptPlan(Boka b) {
         this.b = b;
-
     }
 
     public void createPlan() {
 
         nodes = new ArrayList<Vertex>();
         edges = new ArrayList<Edge>();
-        resurser_boka = new int [100]; 
-        int[] Order= new int[]{30, 34};        
 
-        int dist=0; 
+        int dist = 0;
 
-                   
         // Set up network
         for (int i = 0; i < ds.nodes; i++) {
             Vertex location = new Vertex("" + (i + 1), "" + (i + 1));
@@ -79,7 +84,7 @@ public class OptPlan {
 
         for (int n = 0; n < ds.antalnoderfil; n++) {
             kvarvarande_hyllor[n] = ds.vilkanoder[n];
-            
+
         }
 
         for (int k = 0; k < ds.antalnoderfil; k++) {
@@ -88,19 +93,14 @@ public class OptPlan {
 
             for (int n = 0; n < kvarvarande_hyllor.length; n++) {
                 if (kvarvarande_hyllor[n] == narmaste_nod) {
-                kvarvarande_hyllor[n] = 0;
+                    kvarvarande_hyllor[n] = 0;
                 }
             }
 
-            for (int p = 0; p < ds.antalnoderfil; p++) {
+            for (int p = 0; p < ds.antalnoderfil + 1; p++) {
 
                 System.out.println("p är" + p);
-                System.out.println("Test_väg[0] = "+test_vag[0]);
-                
                 test_vag[1] = kvarvarande_hyllor[p];
-                System.out.println("Test_väg[1] = "+test_vag[1]);
-                //System.out.println("narmaste_nod är " + narmaste_nod);
-                //System.out.println("test_vag[1] är "+ test_vag[1]);
                 if ((test_vag[0] != test_vag[1]) && (test_vag[1] != 0)) {
                     dij.execute(nodes.get(test_vag[0] - 1));
                     System.out.println("Där vi startar " + test_vag[0]);
@@ -130,6 +130,7 @@ public class OptPlan {
                         snabbaste_rutten[k + 1] = narmaste_nod;
                         System.out.println("Det kortaste avståndet är" + kortast_avstand);
                         System.out.println("Den närmsta noden är" + narmaste_nod);
+
                     }
                 }
             }
@@ -142,11 +143,11 @@ public class OptPlan {
             System.out.println("Rutten är " + snabbaste_rutten[j]);
         }
 
-        for (int k = 0; k < (ds.antalnoderfil+1); k++) {
+        for (int k = 0; k < (ds.antalnoderfil + 1); k++) {
 
             // Set up network
             for (int i = 0; i < ds.nodes; i++) {
-                Vertex location = new Vertex("" + (i + 1), "Nod #" + (i + 1));
+                Vertex location = new Vertex("" + (i + 1), "Nod # " + (i + 1));
                 nodes.add(location);
             }
 
@@ -186,6 +187,10 @@ public class OptPlan {
                 System.out.println("Noder som ska passeras: " + path.get(i));
                 ds.nodeColor[Integer.parseInt(path.get(i).getId()) - 1] = 1;
 
+                //Sparar de noder vi vill boka i en array
+                noder_boka[z] = Integer.parseInt(path.get(i).getId());
+                z = z + 1;
+
             }
 
             // Undirected arcs in the shortest path
@@ -196,18 +201,33 @@ public class OptPlan {
                             || ds.arcEnd[j] == Integer.parseInt(path.get(i).getId())
                             && ds.arcStart[j] == Integer.parseInt(path.get(i + 1).getId())) {
 
-                        System.out.println("Arc: " + j);
+                        //System.out.println("Arc: " + j);
                         ds.arcColor[j] = 1;
-                       
-                        resurser_boka[c] = j;
+
+                        //Sparar de länkar vi vill boka i en array
+                        länkar_boka[c] = j + 38;
+                        //System.out.println("Boka av c " +  länkar_boka[c]);
+
                         c = c + 1;
+
+                        //boka = Arrays.toString(länkar_boka);
                     }
-                    
+
                 }
             }
- 
         }
-        
+        int j = 1;
+        int k = 0;
+        //Skapa en ny for-loop för att kombinera länkar och noder till resurser_boka
+        for (int i = 0; i < 100; i++) {
+            resurser_boka[k] = noder_boka[i];
+
+            resurser_boka[j] = länkar_boka[i];
+
+            k = k + 2;
+            j = j + 2;
+
+        }
 
     }
 

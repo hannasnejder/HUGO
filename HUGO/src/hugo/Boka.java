@@ -52,14 +52,16 @@ public Boka(OptPlan opt) {
     @Override
 public void run() {
  //System.out.println(Arrays.toString(x));
+    
     try {
         int i;
+        
         //Behövs fördröjnng till bokningen??
         //Thread.sleep(sleepTime/20);
 
         for(i = 0; i <= 3; i++){
 
-        //Hur löser vi resursnummer??
+
         //x = s[i];
         
 
@@ -91,9 +93,9 @@ public void run() {
                 int indexfound = inkommande_text.indexOf(OK);
                 
                 if(indexfound> -1){
-                System.out.println("Denna båge är okej att boka");
+                System.out.println("Denna båge är okej att boka ");
                 }else{
-                    System.out.println("Bågen är upptagen, försök igen!");
+                    System.out.println("Bågen är upptagen, försök igen! ");
                 } 
                 
             }
