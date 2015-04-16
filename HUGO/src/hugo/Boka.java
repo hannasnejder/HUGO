@@ -57,7 +57,7 @@ public void run() {
         //Behövs fördröjnng till bokningen??
         //Thread.sleep(sleepTime/20);
 
-        for(i = 0; i <= 10; i++){
+        for(i = 0; i <= 5; i++){
 
         //Hur löser vi resursnummer??
         //x = s[i];

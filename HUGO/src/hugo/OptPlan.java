@@ -59,7 +59,7 @@ public class OptPlan {
         
         //System.out.println(vilkanoder_skrivaut);
         
-        for(int k=0; k< (ds.antalnoderfil) ; k++) {           
+        for(int k=0; k< (ds.antalnoderfil+1) ; k++) {           //kolla om det funkar med +1 för boka
 
          // Set up network
         for (int i = 0; i < ds.nodes; i++) {
@@ -127,7 +127,7 @@ public class OptPlan {
                         ds.arcColor[j]=1; 
                                   
                         //Sparar de länkar vi vill boka i en array
-                        länkar_boka[c] = j + 38;
+                        länkar_boka[c] = j + 39;
                         //System.out.println("Boka av c " +  länkar_boka[c]);
 
                         c = c+1;
