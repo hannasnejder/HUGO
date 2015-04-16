@@ -88,6 +88,7 @@ public class ControlUI extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.setPreferredSize(new java.awt.Dimension(700, 350));
         jPanel1.addContainerListener(new java.awt.event.ContainerAdapter() {
+           
             public void componentAdded(java.awt.event.ContainerEvent evt) {
                 jPanel1ComponentAdded(evt);
             }
@@ -128,6 +129,8 @@ public class ControlUI extends javax.swing.JFrame {
         jButton2.setForeground(new java.awt.Color(102, 0, 51));
         jButton2.setText("Stop");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
+         
+            
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }

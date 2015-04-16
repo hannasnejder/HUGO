@@ -148,30 +148,23 @@ public class DataStore {
             line1 = scanner1.nextLine();
             antalnoderfil = Integer.parseInt(line1.trim());
 
-            for (int p = 0; p < 1000; p++) {
-                vilkanoder[p] = 200;
-            }
 
-            vilkanoder[0] = startnod;
-
-            for (int i = 1; i < (antalnoderfil + 1); i++) {
+            for (int i = 0; i < antalnoderfil; i++) {
                 line1 = (scanner1.nextLine());
 
                 vilkanoder[i] = Integer.parseInt(line1.trim());
 
-                Arrays.sort(vilkanoder);
+              // Arrays.sort(vilkanoder);
                 besoknoder = besoknoder + " " + vilkanoder[i];
 
-                // System.out.println("Besöksnoder: " + besoknoder);
+                //System.out.println("Besöksnoder: " + besoknoder);
             }
 
-            System.out.println(Arrays.toString(vilkanoder));
+            //System.out.println(Arrays.toString(vilkanoder));
 
-            //Gör så att den åker tillbaka
-            vilkanoder[(antalnoderfil + 1)] = startnod;
 
             networkRead1 = true;  // Indicate that all network data is in place in the DataStore
-            System.out.println("Vi ska besöka noderna: " + besoknoder);
+          //  System.out.println("Vi ska besöka noderna: " + besoknoder);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
