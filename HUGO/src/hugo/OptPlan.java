@@ -59,11 +59,11 @@ public class OptPlan {
         
         //System.out.println(vilkanoder_skrivaut);
         
-        for(int k=0; k< (ds.antalnoderfil) ; k++) {           
+        for(int k=0; k< (ds.antalnoderfil+1) ; k++) {           
 
          // Set up network
         for (int i = 0; i < ds.nodes; i++) {
-        Vertex location = new Vertex("" + (i + 1), "Nod #" + (i + 1));
+        Vertex location = new Vertex("" + (i + 1), "" + (i + 1));
         nodes.add(location);
  
        
