@@ -1,16 +1,11 @@
 package hugo;
 
-/*
- *Den här klassen motsvarar warehouse klassen från labb 1 och 2 
- * /Testar en sak, en sak till
- */
+
 public class HUGO {
 
     DataStore ds;
     ControlUI cui;
     OptPlan opt;
-    //Boka b;
-    
    
 
     HUGO(){
@@ -32,7 +27,6 @@ public class HUGO {
 
         cui.setVisible(true);
         cui.showStatus();
-        
 
     }
 
