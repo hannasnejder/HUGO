@@ -14,6 +14,10 @@ hs_err_pid*
 #private xml file
 *private.xml
 
+/HUGO/build/
+
+
+
 #ant specific
 dist/
 build/
@@ -35,3 +39,4 @@ nbproject/*
 *.swp
 *.DS_Store
 *.lock
+
