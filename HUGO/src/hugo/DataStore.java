@@ -151,6 +151,7 @@ public class DataStore {
 
 
             for (int i = 0; i < (antalnoderfil); i++) {
+            line1 = (scanner1.nextLine());
             vilkanoder[i] = Integer.parseInt(line1.trim());
 
                 besoknoder = besoknoder + " " + vilkanoder[i];

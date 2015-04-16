@@ -99,17 +99,17 @@ public class OptPlan {
 
             for (int p = 0; p < ds.antalnoderfil +1; p++) {
 
-                System.out.println("p är " + p);
+               // System.out.println("p är " + p);
 
                 test_vag[1] = kvarvarande_hyllor[p];
                 //System.out.println("narmaste_nod är " + narmaste_nod);
                 //System.out.println("test_vag[1] är "+ test_vag[1]);
                 if (test_vag[0] != test_vag[1] && (test_vag[1] != 0)) {
                     dij.execute(nodes.get(test_vag[0] - 1));
-                  //  System.out.println("Där vi startar " + test_vag[0]);
+                    System.out.println("Där vi startar " + test_vag[0]);
                     
                     LinkedList<Vertex> path = dij.getPath(nodes.get(test_vag[1] - 1));
-                   // System.out.println("Hit vi vill gå " + test_vag[1]);
+                    System.out.println("Hit vi vill gå " + test_vag[1]);
 
                     //Loopar först igenom vägen(path) som fåtts från dijkstras för att se vilka noder som passeras
                     //loopar sedan igenom arrayerna med alla avstånd
