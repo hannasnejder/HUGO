@@ -16,12 +16,6 @@ public class HUGO {
     HUGO(){
 
         ds = new DataStore();
-        //opt = new OptPlan();
-        
-        //b = new Boka();
-        //slipper byta sökväg - förhoppningsvis 
-       // ds.setFileName("/Users/HannaSnejder/Desktop/hugo/HUGO/warehouse.txt");
-        //ds.setFileName("../../HUGO/warehouse.txt");
 
 
         ds.setFileName("../../HUGO/warehouse.txt");

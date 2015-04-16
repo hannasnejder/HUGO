@@ -32,7 +32,7 @@ public class MapPanel extends JPanel {
         final int ysize = 350;
         final int xsize = 700;
         
-        //int[] hyllplatser= new int[]{27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38};      
+        int[] hyllplatser= new int[]{27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38};      
 
         if (ds.networkRead == true) { // Only try to plot is data has been properly read from file
 
@@ -103,4 +103,5 @@ public class MapPanel extends JPanel {
         
     } // end paintComponent
 }
+
 
