@@ -14,6 +14,8 @@ import java.util.Random;
 import javax.swing.*;
 import java.util.*;
 
+//Länk för att kolla bokningarna http://tnk111.n7.se/list.php 
+
 public class Boka implements Runnable{
     
     //upprättar en anslutning till den server som beskrivs
@@ -31,6 +33,7 @@ public class Boka implements Runnable{
     int x [];
 
     String test;
+  
 
     //En array för att testa att boka de resurser vi vill
     //int s[] = {34, 35, 37, 41};
@@ -52,14 +55,16 @@ public Boka(OptPlan opt) {
     @Override
 public void run() {
  //System.out.println(Arrays.toString(x));
+    
     try {
         int i;
+        
         //Behövs fördröjnng till bokningen??
         //Thread.sleep(sleepTime/20);
 
-        for(i = 0; i <= 5; i++){
 
-        //Hur löser vi resursnummer??
+        for(i = 0; i <= 3; i++){
+
         //x = s[i];
         
 
@@ -91,9 +96,9 @@ public void run() {
                 int indexfound = inkommande_text.indexOf(OK);
                 
                 if(indexfound> -1){
-                System.out.println("Denna båge är okej att boka");
+                System.out.println("Denna båge är okej att boka ");
                 }else{
-                    System.out.println("Bågen är upptagen, försök igen!");
+                    System.out.println("Bågen är upptagen, försök igen! ");
                 } 
                 
             }

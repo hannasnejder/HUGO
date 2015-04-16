@@ -1,4 +1,3 @@
-
 package hugo;
 import java.util.Random;
 
@@ -32,7 +31,7 @@ public class GuiUpdate implements Runnable{
             
         }catch(InterruptedException exception){
         }
-        cui.appendStatus("GuiUpdate är nu klar!");
+        cui.appendStatus("GuiUpdate är nu klar! ");
         }
 }
 

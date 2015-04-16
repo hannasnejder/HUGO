@@ -82,7 +82,7 @@ public class DataStore {
         String line;
 
         if (fileName == null) {
-            System.err.println("No file name set. Data read aborted.");
+            System.err.println("No file name set. Data read aborted. ");
             return;
         }
         try {
@@ -122,7 +122,7 @@ public class DataStore {
             networkRead = true;  // Indicate that all network data is in place in the DataStore
 
         } catch (Exception e) {
-            // TODO Auto-generated catch block
+            
             e.printStackTrace();
         }
         robotX = nodeX[0];
@@ -148,18 +148,12 @@ public class DataStore {
             line1 = scanner1.nextLine();
             antalnoderfil = Integer.parseInt(line1.trim());
 
-            for (int p = 0; p < 1000; p++) {
-                vilkanoder[p] = 200;
-            }
 
-            vilkanoder[0] = startnod;
-
-            for (int i = 1; i < (antalnoderfil + 1); i++) {
+            for (int i = 0; i < (antalnoderfil); i++) {
                 line1 = (scanner1.nextLine());
 
                 vilkanoder[i] = Integer.parseInt(line1.trim());
 
-                Arrays.sort(vilkanoder);
                 besoknoder = besoknoder + " " + vilkanoder[i];
 
                 // System.out.println("Besöksnoder: " + besoknoder);
@@ -167,13 +161,11 @@ public class DataStore {
 
             System.out.println(Arrays.toString(vilkanoder));
 
-            //Gör så att den åker tillbaka
-            vilkanoder[(antalnoderfil + 1)] = startnod;
-
-            networkRead1 = true;  // Indicate that all network data is in place in the DataStore
+            // Indicate that all network data is in place in the DataStore
+            networkRead1 = true;  
             System.out.println("Vi ska besöka noderna: " + besoknoder);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
+            
             e.printStackTrace();
         }
         
@@ -207,7 +199,7 @@ public class DataStore {
             }
 
         } catch (Exception e) {
-            // TODO Auto-generated catch block
+            
             e.printStackTrace();
         }
     }
