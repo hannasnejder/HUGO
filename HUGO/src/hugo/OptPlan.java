@@ -114,7 +114,7 @@ public class OptPlan {
             kvarvarande_hyllor[n] = ds.vilkanoder[n];
         }
 
-        for (int k = 0; k < ds.antalnoderfil; k++) {
+        for (int k = 0; k < ds.antalnoderfil+1; k++) {
             test_vag[0] = narmaste_nod;
             kortast_avstand = 100000;
 
