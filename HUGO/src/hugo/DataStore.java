@@ -149,7 +149,7 @@ public class DataStore {
             antalnoderfil = Integer.parseInt(line1.trim());
 
  
-            for (int i = 1; i < (antalnoderfil + 1); i++) {
+            for (int i = 1; i < (antalnoderfil +1); i++) {
                 line1 = (scanner1.nextLine());
 
                 vilkanoder[i] = Integer.parseInt(line1.trim());
