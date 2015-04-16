@@ -22,6 +22,8 @@ public class RobotRead implements Runnable {
     @Override
     public void run(){
         try{
+            
+            
             cui.appendStatus("RobotRead kommer att köra i " + sleepTime + " millisekunder.");
             
             int i=1;

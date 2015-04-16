@@ -14,6 +14,8 @@ import java.util.Random;
 import javax.swing.*;
 import java.util.*;
 
+//Länk för att kolla bokningarna http://tnk111.n7.se/list.php 
+
 public class Boka implements Runnable{
     
     //upprättar en anslutning till den server som beskrivs
@@ -31,6 +33,7 @@ public class Boka implements Runnable{
     int x [];
 
     String test;
+  
 
     //En array för att testa att boka de resurser vi vill
     //int s[] = {34, 35, 37, 41};
@@ -57,7 +60,7 @@ public void run() {
         //Behövs fördröjnng till bokningen??
         //Thread.sleep(sleepTime/20);
 
-        for(i = 0; i <= 10; i++){
+        for(i = 0; i <= 5; i++){
 
         //Hur löser vi resursnummer??
         //x = s[i];

@@ -59,7 +59,7 @@ public class OptPlan {
         
         //System.out.println(vilkanoder_skrivaut);
         
-        for(int k=0; k< (ds.antalnoderfil) ; k++) {           
+        for(int k=0; k < (ds.antalnoderfil + 1)  ; k++) {           
 
          // Set up network
         for (int i = 0; i < ds.nodes; i++) {
@@ -123,11 +123,11 @@ public class OptPlan {
                     ds.arcEnd[j] == Integer.parseInt(path.get(i).getId()) && 
                     ds.arcStart[j] == Integer.parseInt(path.get(i+1).getId())){
                         
-                       // System.out.println("Arc: "+j);
+                        System.out.println("Arc: "+j);
                         ds.arcColor[j]=1; 
                                   
                         //Sparar de länkar vi vill boka i en array
-                        länkar_boka[c] = j + 38;
+                        länkar_boka[c] = j + 39;
                         //System.out.println("Boka av c " +  länkar_boka[c]);
 
                         c = c+1;
@@ -150,6 +150,6 @@ public class OptPlan {
            j = j+2;
            
         }  
-       //System.out.println("Resurser: " + Arrays.toString(resurser_boka));
+       System.out.println("Resurser: " + Arrays.toString(resurser_boka));
   }
 }
