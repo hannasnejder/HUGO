@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hugo;
 
     
@@ -69,7 +64,7 @@ public class DijkstraAlgorithm {
         return edge.getWeight();
       }
     }
-    throw new RuntimeException("Should not happen");
+    throw new RuntimeException("Should not happen ");
   }
 
   private List<Vertex> getNeighbors(Vertex node) {
@@ -117,6 +112,7 @@ public class DijkstraAlgorithm {
   public LinkedList<Vertex> getPath(Vertex target) {
     LinkedList<Vertex> path = new LinkedList<Vertex>();
     Vertex step = target;
+    
     // check if a path exists
     if (predecessors.get(step) == null) {
       return null;
@@ -126,6 +122,7 @@ public class DijkstraAlgorithm {
       step = predecessors.get(step);
       path.add(step);
     }
+    
     // Put it into the correct order
     Collections.reverse(path);
     return path;

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import static javafx.beans.binding.Bindings.length;
+import java.util.*;
+import java.lang.*;
 
 public class OptPlan {
 
@@ -11,32 +13,32 @@ public class OptPlan {
     private List<Edge> edges;
     private DataStore ds;
     public Boka b;
+    int[] länkar_boka = new int[10000];
+    int[] noder_boka = new int[10000]; 
     int[] resurser_boka = new int[10000];
     int c = 0;
+    int z = 0; 
     String boka;
+    
+    public OptPlan(){
+        
+    }
 
     public OptPlan(DataStore ds, OptPlan opt) {
         this.ds = ds;
     }
 
-    public OptPlan(Boka b) {
+   public OptPlan(Boka b) {
         this.b = b;
-
     }
 
     public void createPlan() {
 
         nodes = new ArrayList<Vertex>();
-        edges = new ArrayList<Edge>();
-        resurser_boka = new int [100]; 
-        //int[] Order= new int[]{30, 34};        
+        edges = new ArrayList<Edge>();      
 
         int dist=0; 
 
-       //System.out.println(ds.vilkanoder);
-
-        //loopar över så många platser som används i vilkanoder arrayen 
-        //  for(int k=0; k<(ds.antalnoderfil + 3); k++) {           
         // Set up network
         for (int i = 0; i < ds.nodes; i++) {
             Vertex location = new Vertex("" + (i + 1), "" + (i + 1));
@@ -94,8 +96,11 @@ public class OptPlan {
                 }
             }
 
-            for (int p = 0; p < ds.antalnoderfil; p++) {
-                //System.out.println("p är" + p);
+
+            for (int p = 0; p < ds.antalnoderfil +1; p++) {
+
+                System.out.println("p är " + p);
+
                 test_vag[1] = kvarvarande_hyllor[p];
                 //System.out.println("narmaste_nod är " + narmaste_nod);
                 //System.out.println("test_vag[1] är "+ test_vag[1]);
@@ -111,7 +116,7 @@ public class OptPlan {
                     nuvarande_langd = 0;
                     for (int b = 1; b < path.size(); b++) {
                         for (int m = 0; m < 98; m++) {
-
+                           
                             //Kollar igenom avståndet mellan noderna som passeras för att komma till hyllan
                             if ((ds.startpunkt[m] == Integer.parseInt(path.get(b - 1).getId())) && (ds.slutpunkt[m] == Integer.parseInt(path.get(b).getId()))) {
                                 nuvarande_langd = (nuvarande_langd + ds.avstand[m]);
@@ -128,8 +133,10 @@ public class OptPlan {
                         narmaste_nod = ds.vilkanoder[p];
                         snabbaste_rutten[k + 1] = narmaste_nod;
                         //System.out.println("rutten är"+snabbaste_rutten[p+1]);
-                        //System.out.println("Det kortaste avståndet är" + kortast_avstand);
-                        //System.out.println("Den närmsta noden är" + narmaste_nod);
+                        
+                        System.out.println("Det kortaste avståndet är " + kortast_avstand);
+                        System.out.println("Den närmsta noden är " + narmaste_nod);
+
                     }
                 }
             }
@@ -142,11 +149,11 @@ public class OptPlan {
             System.out.println("Rutten är " + snabbaste_rutten[j]);
         }
 
-        for (int k = 0; k < (ds.antalnoderfil + 1); k++) {
+        for (int k = 0; k < (ds.antalnoderfil); k++) {
 
             // Set up network
             for (int i = 0; i < ds.nodes; i++) {
-                Vertex location = new Vertex("" + (i + 1), "Nod #" + (i + 1));
+                Vertex location = new Vertex("" + (i + 1), "Nod # " + (i + 1));
                 nodes.add(location);
             }
 
@@ -185,44 +192,53 @@ public class OptPlan {
             for (int i = 0; i < path.size(); i++) {
                 System.out.println("Noder som ska passeras: " + path.get(i));
                 ds.nodeColor[Integer.parseInt(path.get(i).getId()) - 1] = 1;
+                
+                //Sparar de noder vi vill boka i en array
+                noder_boka[z] = Integer.parseInt(path.get(i).getId());
+                z = z+1; 
 
             }
 
             // Undirected arcs in the shortest path
-            for (int i = 0; i < path.size() -1 ; i++) {  
+            for (int i=0; i<path.size()-1; i++){
                 for (int j = 0; j < ds.arcs; j++) {
                     if (ds.arcStart[j] == Integer.parseInt(path.get(i).getId())
                             && ds.arcEnd[j] == Integer.parseInt(path.get(i + 1).getId())
                             || ds.arcEnd[j] == Integer.parseInt(path.get(i).getId())
                             && ds.arcStart[j] == Integer.parseInt(path.get(i + 1).getId())) {
 
-                        System.out.println("Arc: " + j);
+                        //System.out.println("Arc: " + j);
                         ds.arcColor[j] = 1;
 
-                        //Mickes boolean ide?????????????????
-                        //boka = b.resurser_boka[j];                        
-                        resurser_boka[c] = j;
-                        //System.out.println("Boka av c " +  resurser_boka[c]);
+                       //Sparar de länkar vi vill boka i en array
+                        länkar_boka[c] = j+38;
+                        //System.out.println("Boka av c " +  länkar_boka[c]);
 
                         c = c + 1;
 
-                        //boka = Arrays.toString(resurser_boka);
-                        //System.out.println("Boka  " +  );
+                        //boka = Arrays.toString(länkar_boka);
+                       
                     }
-                    //System.out.println("TJOHO ");
-
                 }
-            }
-        //System.out.println("Kollar om arrayen funkar " + c);
-            //System.out.println("Test: " + boka);
+                }
         }
-        for (int i = 0; i < 100; i++) {
-            //System.out.println("Boka av c " +  resurser_boka[c]);
-
+    
+            
+        
+        int j = 1;
+        int k = 0;
+        //Skapa en ny for-loop för att kombinera länkar och noder till resurser_boka       
+        for(int i = 0; i < 100; i++) {
+           resurser_boka[k] = noder_boka[i];
+           
+           resurser_boka[j] = länkar_boka[i];
+           
+           k = k+2;
+           j = j+2;
         }
-        //boka = Arrays.toString(resurser_boka);
-        //System.out.println("Test: " + boka);
-
+    }
+        //System.out.println("Resurser: " + Arrays.toString(resurser_boka));
     }
 
-}
+
+

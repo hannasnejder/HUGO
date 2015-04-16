@@ -333,7 +333,6 @@ public class ControlUI extends javax.swing.JFrame {
         //Startar trådarna 
         ts.startThreads();
          
- 
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

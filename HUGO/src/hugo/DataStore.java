@@ -82,7 +82,7 @@ public class DataStore {
         String line;
 
         if (fileName == null) {
-            System.err.println("No file name set. Data read aborted.");
+            System.err.println("No file name set. Data read aborted. ");
             return;
         }
         try {
@@ -122,7 +122,7 @@ public class DataStore {
             networkRead = true;  // Indicate that all network data is in place in the DataStore
 
         } catch (Exception e) {
-            // TODO Auto-generated catch block
+            
             e.printStackTrace();
         }
         robotX = nodeX[0];
@@ -149,24 +149,21 @@ public class DataStore {
             antalnoderfil = Integer.parseInt(line1.trim());
 
 
-            for (int i = 0; i < antalnoderfil; i++) {
-                line1 = (scanner1.nextLine());
 
-                vilkanoder[i] = Integer.parseInt(line1.trim());
+            for (int i = 0; i < (antalnoderfil); i++) {
+            vilkanoder[i] = Integer.parseInt(line1.trim());
 
-              // Arrays.sort(vilkanoder);
                 besoknoder = besoknoder + " " + vilkanoder[i];
 
                 //System.out.println("Besöksnoder: " + besoknoder);
             }
+        
+            // Indicate that all network data is in place in the DataStore
+            networkRead1 = true;  
+            System.out.println("Vi ska besöka noderna: " + besoknoder);
 
-            //System.out.println(Arrays.toString(vilkanoder));
-
-
-            networkRead1 = true;  // Indicate that all network data is in place in the DataStore
-          //  System.out.println("Vi ska besöka noderna: " + besoknoder);
         } catch (Exception e) {
-            // TODO Auto-generated catch block
+            
             e.printStackTrace();
         }
         
@@ -200,7 +197,7 @@ public class DataStore {
             }
 
         } catch (Exception e) {
-            // TODO Auto-generated catch block
+            
             e.printStackTrace();
         }
     }

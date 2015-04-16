@@ -36,8 +36,8 @@ public class threads {
         t2 = new Thread(g1); 
         b1 = new Boka(opt);
         t3 = new Thread(b1);
-        b2 = new Avboka();
-        t4 = new Thread(b2);      
+       // b2 = new Avboka();
+       // t4 = new Thread(b2);      
         
         
     }
