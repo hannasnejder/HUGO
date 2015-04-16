@@ -29,14 +29,11 @@ public class OptPlan {
         nodes = new ArrayList<Vertex>();
         edges = new ArrayList<Edge>();
         resurser_boka = new int [100]; 
-        //int[] Order= new int[]{30, 34};        
+        int[] Order= new int[]{30, 34};        
 
         int dist=0; 
 
-        System.out.println(ds.vilkanoder);
-
-        //loopar över så många platser som används i vilkanoder arrayen 
-        //  for(int k=0; k<(ds.antalnoderfil + 3); k++) {           
+                   
         // Set up network
         for (int i = 0; i < ds.nodes; i++) {
             Vertex location = new Vertex("" + (i + 1), "" + (i + 1));
@@ -82,6 +79,7 @@ public class OptPlan {
 
         for (int n = 0; n < ds.antalnoderfil; n++) {
             kvarvarande_hyllor[n] = ds.vilkanoder[n];
+            
         }
 
         for (int k = 0; k < ds.antalnoderfil; k++) {
@@ -90,17 +88,20 @@ public class OptPlan {
 
             for (int n = 0; n < kvarvarande_hyllor.length; n++) {
                 if (kvarvarande_hyllor[n] == narmaste_nod) {
-                    kvarvarande_hyllor[n] = 0;
+                kvarvarande_hyllor[n] = 0;
                 }
             }
 
             for (int p = 0; p < ds.antalnoderfil; p++) {
 
                 System.out.println("p är" + p);
+                System.out.println("Test_väg[0] = "+test_vag[0]);
+                
                 test_vag[1] = kvarvarande_hyllor[p];
+                System.out.println("Test_väg[1] = "+test_vag[1]);
                 //System.out.println("narmaste_nod är " + narmaste_nod);
                 //System.out.println("test_vag[1] är "+ test_vag[1]);
-                if (test_vag[0] != test_vag[1] && (test_vag[1] != 0)) {
+                if ((test_vag[0] != test_vag[1]) && (test_vag[1] != 0)) {
                     dij.execute(nodes.get(test_vag[0] - 1));
                     System.out.println("Där vi startar " + test_vag[0]);
                     LinkedList<Vertex> path = dij.getPath(nodes.get(test_vag[1] - 1));
@@ -127,7 +128,6 @@ public class OptPlan {
                         kortast_avstand = nuvarande_langd;
                         narmaste_nod = ds.vilkanoder[p];
                         snabbaste_rutten[k + 1] = narmaste_nod;
-                        //System.out.println("rutten är"+snabbaste_rutten[p+1]);
                         System.out.println("Det kortaste avståndet är" + kortast_avstand);
                         System.out.println("Den närmsta noden är" + narmaste_nod);
                     }
@@ -142,7 +142,7 @@ public class OptPlan {
             System.out.println("Rutten är " + snabbaste_rutten[j]);
         }
 
-        for (int k = 0; k < (ds.antalnoderfil + 1); k++) {
+        for (int k = 0; k < (ds.antalnoderfil+1); k++) {
 
             // Set up network
             for (int i = 0; i < ds.nodes; i++) {
@@ -198,30 +198,16 @@ public class OptPlan {
 
                         System.out.println("Arc: " + j);
                         ds.arcColor[j] = 1;
-
-                        //Mickes boolean ide?????????????????
-                        //boka = b.resurser_boka[j];                        
+                       
                         resurser_boka[c] = j;
-                        //System.out.println("Boka av c " +  resurser_boka[c]);
-
                         c = c + 1;
-
-                        //boka = Arrays.toString(resurser_boka);
-                        //System.out.println("Boka  " +  );
                     }
-                    //System.out.println("TJOHO ");
-
+                    
                 }
             }
-        //System.out.println("Kollar om arrayen funkar " + c);
-            //System.out.println("Test: " + boka);
+ 
         }
-        for (int i = 0; i < 100; i++) {
-            //System.out.println("Boka av c " +  resurser_boka[c]);
-
-        }
-        //boka = Arrays.toString(resurser_boka);
-        //System.out.println("Test: " + boka);
+        
 
     }
 

@@ -37,7 +37,6 @@ public class DataStore {
         // Initialize the datastore with fixed size arrays for storing the network data
         nodes = 0;
         arcs = 0;
-        //arcs = 38;
         nodeX = new double[1000];
         nodeY = new double[1000];
         arcStart = new int[1000];
@@ -148,27 +147,15 @@ public class DataStore {
             line1 = scanner1.nextLine();
             antalnoderfil = Integer.parseInt(line1.trim());
 
-            for (int p = 0; p < 1000; p++) {
-                vilkanoder[p] = 200;
-            }
 
-            vilkanoder[0] = startnod;
-
-            for (int i = 1; i < (antalnoderfil + 1); i++) {
+            for (int i = 0; i < (antalnoderfil); i++) {
                 line1 = (scanner1.nextLine());
-
+                
                 vilkanoder[i] = Integer.parseInt(line1.trim());
-
-                Arrays.sort(vilkanoder);
                 besoknoder = besoknoder + " " + vilkanoder[i];
-
-                // System.out.println("Besöksnoder: " + besoknoder);
             }
 
             System.out.println(Arrays.toString(vilkanoder));
-
-            //Gör så att den åker tillbaka
-            vilkanoder[(antalnoderfil + 1)] = startnod;
 
             networkRead1 = true;  // Indicate that all network data is in place in the DataStore
             System.out.println("Vi ska besöka noderna: " + besoknoder);
