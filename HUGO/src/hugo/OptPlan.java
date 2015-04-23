@@ -97,7 +97,7 @@ public class OptPlan {
                 }
             }
 
-            for (int p = 0; p < ds.antalnoderfil + 1; p++) {
+            for (int p = 0; p < ds.antalnoderfil; p++) {
 
                 System.out.println("p är" + p);
                 test_vag[1] = kvarvarande_hyllor[p];
