@@ -39,6 +39,7 @@ public class OptPlan {
 
         int dist = 0;
 
+
         // Set up network
         for (int i = 0; i < ds.nodes; i++) {
             Vertex location = new Vertex("" + (i + 1), "" + (i + 1));
@@ -142,7 +143,7 @@ public class OptPlan {
         for (int j = 0; j < ds.antalnoderfil + 2; j++) {
             System.out.println("Rutten är " + snabbaste_rutten[j]);
         }
-
+//Kolla om det ska vara +1 eller inte!!!
         for (int k = 0; k < (ds.antalnoderfil + 1); k++) {
 
             // Set up network
@@ -150,30 +151,30 @@ public class OptPlan {
                 Vertex location = new Vertex("" + (i + 1), "Nod # " + (i + 1));
                 nodes.add(location);
             }
-
+            
             // Den sista parametern i "Edge" sätter längden på bågarna.
-            for (int i = 0; i < ds.arcs; i++) {
+        for (int i = 0; i < ds.arcs; i++) {
 
-                //Gör en fil med matris med första kolumnen startnod, andra kolumnen slutnod, sista kolumnen längden på tillhörande båge 
-                //For-loop rader
-                //for-loop kolumner
-                //if start noden kopplas till rätt slutnod, ta längden och sätt in i Edge
-                //Else, fortsätt loopa
-                for (int m = 0; m < 98; m++) {
-                    if ((ds.startpunkt[m] == ds.arcStart[i]) && ds.slutpunkt[m] == ds.arcEnd[i]) {
-                        //System.out.println("inne i if-satsen"); 
-                        dist = ds.avstand[m];
-                        break;
-                    }
+            //Gör en fil med matris med första kolumnen startnod, andra kolumnen slutnod, sista kolumnen längden på tillhörande båge 
+            //For-loop rader
+            //for-loop kolumner
+            //if start noden kopplas till rätt slutnod, ta längden och sätt in i Edge
+            //Else, fortsätt loopa
+            for (int m = 0; m < 98; m++) {
+                if ((ds.startpunkt[m] == ds.arcStart[i]) && ds.slutpunkt[m] == ds.arcEnd[i]) {
+                    //System.out.println("inne i if-satsen"); 
+                    dist = ds.avstand[m];
+                    break;
                 }
-
-                Edge lane = new Edge("" + (i + 1), nodes.get(ds.arcStart[i] - 1), nodes.get(ds.arcEnd[i] - 1), dist);
-                edges.add(lane);
-
-                Edge lane2 = new Edge("" + (i + 1), nodes.get(ds.arcEnd[i] - 1), nodes.get(ds.arcStart[i] - 1), dist);
-                edges.add(lane2);
             }
 
+            Edge lane = new Edge("" + (i + 1), nodes.get(ds.arcStart[i] - 1), nodes.get(ds.arcEnd[i] - 1), dist);
+            edges.add(lane);
+
+            Edge lane2 = new Edge("" + (i + 1), nodes.get(ds.arcEnd[i] - 1), nodes.get(ds.arcStart[i] - 1), dist);
+            edges.add(lane2);
+        }
+           
             Graph gra = new Graph(nodes, edges);
 
             DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(gra);
@@ -206,6 +207,7 @@ public class OptPlan {
 
                         //Sparar de länkar vi vill boka i en array
                         länkar_boka[c] = j + 38;
+
                         //System.out.println("Boka av c " +  länkar_boka[c]);
 
                         c = c + 1;
@@ -216,10 +218,12 @@ public class OptPlan {
                 }
             }
         }
+        
         int j = 1;
         int k = 0;
         //Skapa en ny for-loop för att kombinera länkar och noder till resurser_boka
         for (int i = 0; i < 100; i++) {
+
             resurser_boka[k] = noder_boka[i];
 
             resurser_boka[j] = länkar_boka[i];
@@ -232,3 +236,4 @@ public class OptPlan {
     }
 
 }
+
