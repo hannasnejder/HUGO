@@ -48,7 +48,7 @@ public class OptOnline implements Runnable {
 
                 //Om inte båda två går att boka
             } else {
-                System.out.println("Inne i andra if-satsen");
+                //System.out.println("Inne i andra if-satsen");
                 ds.kopiaAvstand = ds.avstand;
                 for (int m = 0; m < 98; m++) {
 

@@ -113,10 +113,6 @@ public class OptPlan {
                 if ((test_vag[0] != test_vag[1]) && (test_vag[1] != 0)) {
                     dij.execute(nodes.get(test_vag[0] - 1));
 
-                    System.out.println("Där vi startar " + test_vag[0]);
-
-                    //System.out.println("Där vi startar " + test_vag[0]);
-
                     LinkedList<Vertex> path = dij.getPath(nodes.get(test_vag[1] - 1));
                     //System.out.println("Hit vi vill gå " + test_vag[1]);
 
@@ -141,15 +137,6 @@ public class OptPlan {
                         kortast_avstand = nuvarande_langd;
                         narmaste_nod = ds.vilkanoder[p];
                         snabbaste_rutten[k + 1] = narmaste_nod;
-
-                        //System.out.println("rutten är"+snabbaste_rutten[p+1]);
-                        
-                        System.out.println("Det kortaste avståndet är " + kortast_avstand);
-                        System.out.println("Den närmsta noden är " + narmaste_nod);
-
-                        //System.out.println("Det kortaste avståndet är" + kortast_avstand);
-                        //System.out.println("Den närmsta noden är" + narmaste_nod);
-
 
                     }
                 }
