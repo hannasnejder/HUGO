@@ -20,7 +20,7 @@ public class HUGO {
         ds.setFileName2("../../HUGO/avstandsmatris.txt");
         ds.readNet2();
 
-        cui = new ControlUI(ds);//, boka);
+        cui = new ControlUI(ds);
 
         cui.setVisible(true);
         cui.showStatus();
