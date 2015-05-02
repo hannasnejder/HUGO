@@ -2,6 +2,9 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
+        <group/>
+=======
         <group>
             <file>file:/C:/Users/HannaSnejder/Desktop/hugo/HUGO/HUGO/src/hugo/ControlUI.java</file>
             <file>file:/C:/Users/HannaSnejder/Desktop/hugo/HUGO/HUGO/src/hugo/Boka.java</file>
@@ -13,5 +16,6 @@
             <file>file:/C:/Users/HannaSnejder/Desktop/hugo/HUGO/HUGO/src/hugo/RobotRead.java</file>
             <file>file:/C:/Users/HannaSnejder/Desktop/hugo/HUGO/HUGO/src/hugo/DataStore.java</file>
         </group>
+>>>>>>> cb3efdc6f4ffde6d2c6f7fd3f2cc993e5c4430ba
     </open-files>
 </project-private>
