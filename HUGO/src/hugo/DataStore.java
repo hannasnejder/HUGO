@@ -32,6 +32,8 @@ public class DataStore {
     int[] avstand;
     int[] vilkanoder;
     boolean networkRead1;
+    double startnodX=0;        // För att spara startplatsens x-koordinat
+    double startnodY=0;        //För att spara startnodens y-koordinat
 
     public DataStore() {
         // Initialize the datastore with fixed size arrays for storing the network data
@@ -147,8 +149,10 @@ public class DataStore {
             startnod = Integer.parseInt(line1.trim());
             line1 = scanner1.nextLine();
             antalnoderfil = Integer.parseInt(line1.trim());
-
-
+            
+            //För att spara koordinaterna till startplatsen
+            startnodX=nodeX[startnod-1]; //sparar x-koordinaten till startnoden
+            startnodY=nodeY[startnod-1]; //sparar y-koordinaten till startnoden
 
             for (int i = 0; i < (antalnoderfil); i++) {
             line1 = (scanner1.nextLine());

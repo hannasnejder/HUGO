@@ -29,8 +29,12 @@ public class Boka implements Runnable{
     //public OptPlan op;
     public OptPlan opt;
     int x [];
+    int [] ok=new int[1000];
+    int y=0;
 
     String test;
+    int indexfound; 
+ 
 
     //En array för att testa att boka de resurser vi vill
     //int s[] = {34, 35, 37, 41};
@@ -94,10 +98,12 @@ public void run() {
                 
                 if(indexfound> -1){
                 System.out.println("Denna båge är okej att boka ");
+                ok[y]=0;
                 }else{
                     System.out.println("Bågen är upptagen, försök igen! ");
+                    ok[y]=0;
                 } 
-                
+               y=y+1; 
             }
 
             inkommande.close();

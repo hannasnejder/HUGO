@@ -44,7 +44,7 @@ public void run() {
     try {
         int i;
         
-        Thread.sleep(sleepTime/20);
+         Thread.sleep(8000);
         //char bokaresurser[] = ds.besoknoder.toCharArray();
         
         for(i = 0; i <= 3; i++){
