@@ -10,6 +10,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.Arrays;
+import java.util.StringTokenizer;
 import javax.microedition.io.*;
 import javax.bluetooth.*;
 
@@ -18,9 +19,10 @@ public class RobotRead implements Runnable {
     private static Random generator = new Random();
     private ControlUI cui;
     private DataStore ds;
-    //char l = 'l';
-    //char r = 'r';
-    int [] körorder = {2, 3, 4, 7};
+    String körorder = "23, r, 55, l";
+    
+    //Påhittad array med bekräftad körorder från robot
+    int [] från_robot = {40, 5, 49, 11};
     
     public RobotRead(DataStore ds, ControlUI cui){
         this.cui=cui;
@@ -32,7 +34,9 @@ public class RobotRead implements Runnable {
         try{
             cui.appendStatus("RobotRead kommer att köra i " + sleepTime + " millisekunder.");
             
-            //Skapar anslutning. Siffrorna är mottagarens, fås via browse.
+          
+            
+            /*//Skapar anslutning. Siffrorna är mottagarens, fås via browse.
             //Siffran efter kolon är kanalen som används. 
             StreamConnection anslutning = (StreamConnection)
             Connector.open("btspp://00809824156D:8");
@@ -45,26 +49,30 @@ public class RobotRead implements Runnable {
             int i=1;
             while(i == 1){
                 if(anslutning == null || körorder == null){
-                    cui.appendStatus("Kopplin saknas eller körorder är tom");
+                    cui.appendStatus("Koppling saknas eller körorder är tom");
                     break;
                 }else{
                     Thread.sleep(sleepTime/20);
                     ds.updateUIflag=true; 
                     
+                    StringTokenizer st = new StringTokenizer(körorder, " ");
+                    
                     //Det vi skickar till roboten
-                    for(int k = 0; k <= körorder.length; k++){
-                        bluetooth_ut.println(körorder[k]);
+                    while(st.hasMoreTokens()){
+                        bluetooth_ut.println(st.nextToken());
                         
                         //Mottaget meddelande från robot
-                        String meddelande_in = bluetooth_in.readLine();
-                        System.out.println("Mottaget: " + meddelande_in);
+                        //String meddelande_in = bluetooth_in.readLine();
+                        //System.out.println("Mottaget: " + meddelande_in);
                     }
                     
-                 cui.appendStatus("Körinstruktioner: " + Arrays.toString(körorder));
+                 cui.appendStatus("Körinstruktioner: " + körorder);
                  anslutning.close();
                  i++;
                 }               
-            }
+            }*/
+            
+            ds.updateUIflag=true;
         }catch(Exception e) {  System.out.print(e.toString());   
         }
         

@@ -7,10 +7,13 @@ import javax.swing.JPanel;
 public class MapPanel extends JPanel {
 
     DataStore ds;
+    ControlUI cui;
+    
 
-    MapPanel(DataStore ds) {
+    public MapPanel(DataStore ds) {
         this.ds = ds;
     }
+    
 
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -43,7 +46,7 @@ public class MapPanel extends JPanel {
             x = (int) ds.robotX;
             y = (int) ds.robotY;
             
-             g.fillOval(x-((circlesize)/2), height - y- (circlesize) / 2, circlesize, circlesize); 
+            g.fillOval(x-((circlesize)/2), height - y- (circlesize) / 2, circlesize, circlesize); 
 
             g.setColor(DARK_COLOR);
             
@@ -92,11 +95,9 @@ public class MapPanel extends JPanel {
                 // System.out.println("Arc "+i+": "+ds.arcStart[i]+" "+ds.arcEnd[i]);
 
             }
-            
-            
+        
         }
        
-        
     } // end paintComponent
 }
 

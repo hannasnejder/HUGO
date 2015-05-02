@@ -6,6 +6,8 @@ public class HUGO {
     DataStore ds;
     ControlUI cui;
     OptPlan opt;
+    MapPanel map;
+    //GuiUpdate gui;
    
 
     HUGO(){
