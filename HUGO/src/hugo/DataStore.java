@@ -129,7 +129,7 @@ public class DataStore {
 
             e.printStackTrace();
         }
-        robotX = nodeX[0];
+        robotX = nodeX[22];
         robotY = nodeY[0];
     }
 
@@ -177,7 +177,9 @@ public class DataStore {
 
             e.printStackTrace();
         }
-
+        
+        robotX = nodeX[22];
+        robotY = nodeY[0];
     }
 
     public void readNet2() {

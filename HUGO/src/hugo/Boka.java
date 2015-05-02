@@ -21,33 +21,29 @@ public class Boka implements Runnable {
     private static Random generator = new Random();
     private DataStore ds;
     public OptPlan opt;
-
+    public drive dr;
     public Avboka avboka;
 
-    public drive dr;
-    int x[];
-
-    //ArrayList<Integer> bokningar;
+    //int x [];
+    int x [] = {42, 6};
     ArrayList<Integer> bokningar = new ArrayList();
 
     String test;
-
-    int[] okej = new int[4];
-    int[] ejokej = new int[4];
-    int[] vill_avboka = new int[4];
+    
+    int [] okej = new int[2];
+    int [] ejokej = new int[2];
+    int [] vill_avboka = new int[2];
     int indexfound;
-    // Arraylist okejavboka = new int[4];
-
+    
+    //Räknar antal gånger något gick att boka
     int j = 0;
 
-    //En array för att testa att boka de resurser vi vill
-    //int s[] = {34, 35, 37, 41};
-    public Boka() {
+    
+public Boka(){
+    sleepTime = generator.nextInt(20000);
+}
 
-        sleepTime = generator.nextInt(20000);
-    }
-
-    public Boka(OptPlan opt) {
+public Boka(OptPlan opt) {
         this.opt = opt;
         sleepTime = generator.nextInt(20000);
         opt.createPlan();
@@ -56,31 +52,43 @@ public class Boka implements Runnable {
         test = " ";
 
         dr = new drive();
-    }
+}
 
     @Override
-    public void run() {
-        //System.out.println(Arrays.toString(x));
-        try {
-            int i;
-            Thread.sleep(sleepTime / 20);
+public void run() {
+    
+    try {
+        int i;
+        //Vad ska vi ha för fördröjning så den kör efter optimeringen? 
+        Thread.sleep(sleepTime/20);
+        
+        String url = "http://tnk111.n7.se";
+        URL urlobjekt = new URL(url);
+        HttpURLConnection anslutning = (HttpURLConnection)
+        urlobjekt.openConnection();
+        //System.out.println(anslutning);
+        //System.out.println(urlobjekt);
+       
+        //Här fås svarsmeddelande från bokningsservern, här skiter det sig 
+        //om internet är av. Går till catch
+        int mottagen_status = anslutning.getResponseCode();
 
-        //Behövs fördröjnng till bokningen??
-            //Thread.sleep(sleepTime/20);
-            for (i = 0; i <= 3; i++) {
+        //Håller på och letar efter vad jag vill ha i if satsen
+        //Kanske ska vända den så den gör något om anslutning saknas, annars som vanligt
+        if(mottagen_status == 200  ){
+            for(i = 0; i < 2; i++){
 
-        //x = s[i];
-                String url = "http://tnk111.n7.se/reserve.php?user=3&resource=" + x[i];
-                URL urlobjekt = new URL(url);
-                HttpURLConnection anslutning = (HttpURLConnection) urlobjekt.openConnection();
-                
+                url = "http://tnk111.n7.se/reserve.php?user=3&resource=" + x[i];
+                URL urlobjekt1 = new URL(url);
+                HttpURLConnection anslutning1 = (HttpURLConnection)
+                urlobjekt1.openConnection();
+  
                 System.out.println("\nAnropar: " + url);
 
-                int mottagen_status = anslutning.getResponseCode();
-
+                BufferedReader inkommande = new BufferedReader(new
+                InputStreamReader(anslutning1.getInputStream()));
+                
                 System.out.println("Statuskod: " + mottagen_status);
-
-                BufferedReader inkommande = new BufferedReader(new InputStreamReader(anslutning.getInputStream()));
 
                 String inkommande_text;
                 StringBuffer inkommande_samlat = new StringBuffer();
@@ -89,46 +97,48 @@ public class Boka implements Runnable {
                 String OK = "OK";
 
                 while ((inkommande_text = inkommande.readLine()) != null) {
-
+                
                     inkommande_samlat.append(inkommande_text);
                     linecount++;
-                    int indexfound = inkommande_text.indexOf(OK);
-
-                    if (indexfound > -1) {
+                    indexfound = inkommande_text.indexOf(OK);
+               
+                    if(indexfound> -1){
                         System.out.println("Denna båge är okej att boka ");
-                        bokningar.add(x[i]);
+                        bokningar.add(x[i]);                       
                         okej[i] = x[i];
                         j++;
-
-                    } else {
+                        
+                    }else{
                         System.out.println("Bågen är upptagen, försök igen! ");
                         ejokej[i] = x[i];
-                        //break;
-                    }
-                }
-
-                inkommande.close();
-
+                    }     
+                }  
+            inkommande.close();
             }
-            //Kollar om under 4 resurser gick att boka, avbokar de som gick
-            //att boka isåfall
-            if (j < 4) {
-                for (int m = 0; m < okej.length; m++) {
-
-                    vill_avboka[m] = okej[m];
-                }
+        }
+        
+        //Om anslutning saknas ska körinstrutionerna skickas utan bokning
+        //Har än så länge bara försökt få den att gå in om anslutning saknas
+        else{
+            System.out.println("Anslutning till bokningsservern saknas");
+         }
+        
+        //Kollar om under 2 resurser gick att boka, avbokar de som gick
+        //att boka isåfall
+        if(j < 2){
+            for(int m = 0; m < okej.length; m++){
+                vill_avboka[m] = okej[m]; 
             }
+        }
 
-            //test = " ";
-            for (int k = 0; k < bokningar.size(); k++) {
-                test = test + " " + bokningar.get(k).toString();
-            }
-            //System.out.println("Test: " + test);
-            System.out.println("Okej " + Arrays.toString(okej));
-            System.out.println("Inte okej " + Arrays.toString(ejokej));
+        test = " ";
+        for(int k = 0; k < bokningar.size(); k++ ){
+            test = test + " " + bokningar.get(k).toString();
+        }
+        System.out.println("\n" + "Okej " + Arrays.toString(okej));
+        System.out.println("Inte okej " + Arrays.toString(ejokej));
 
-        } catch (Exception e) {
-            System.out.print("det här är e " + e.toString());
+    }catch (Exception e) { System.out.print("det här är e " + e.toString());
 
         }
     }

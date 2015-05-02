@@ -5,6 +5,7 @@ public class threads {
     DataStore ds;
     ControlUI cui;
     OptPlan opt;
+    MapPanel map;
     Boka boka;
     RobotRead rr;
 
@@ -13,12 +14,13 @@ public class threads {
     GuiUpdate g1;
     Thread t2;
     Boka b1; 
-    Thread t3;
+
+    Thread t3; 
     Avboka avboka; 
-    Thread t4;
+    Thread t4; 
     OptOnline o1;
     Thread t5;
-   
+
     
     threads(DataStore ds, ControlUI cui){
         this.ds = ds;
@@ -38,6 +40,10 @@ public class threads {
         b1 = new Boka(opt);
         t3 = new Thread(b1);
         avboka = new Avboka(opt, r1, b1);
+        t4 = new Thread(avboka);      
+        
+        
+
         t4 = new Thread(avboka);
         o1 = new OptOnline(this.opt, this.boka, this.ds);
         t5 = new Thread(o1);
