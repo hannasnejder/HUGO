@@ -169,8 +169,6 @@ public class DataStore {
             e.printStackTrace();
         }
         
-        robotX = nodeX[8];
-        robotY = nodeY[8];
     }
 
     public void readNet2() {

@@ -144,7 +144,7 @@ public class OptPlan {
             System.out.println("Rutten är " + snabbaste_rutten[j]);
         }
 
-        for (int k = 0; k < (ds.antalnoderfil); k++) {
+        for (int k = 0; k < (ds.antalnoderfil+1); k++) {
 
             // Set up network
             for (int i = 0; i < ds.nodes; i++) {
@@ -214,7 +214,6 @@ public class OptPlan {
                         //boka = Arrays.toString(länkar_boka);
                        
                     }
-
                 }
             }
         }
@@ -230,6 +229,7 @@ public class OptPlan {
            j = j+2;
 
         }
+        
         //System.out.println("Resurser: " + Arrays.toString(resurser_boka));
     }
 

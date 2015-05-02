@@ -1,9 +1,3 @@
-/*
- *  
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hugo;
 
 
@@ -20,8 +14,10 @@ public class threads {
     Thread t2;
     Boka b1; 
     Thread t3; 
-    Avboka b2; 
-    Thread t4; 
+   // Avboka b2; 
+   // Thread t4; 
+    
+    
     
     threads(DataStore ds, ControlUI cui){
         

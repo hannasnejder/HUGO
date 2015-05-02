@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package hugo;
 
-//import static com.sun.javafx.Utils.contains;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -28,7 +23,11 @@ public class Boka implements Runnable{
     private DataStore ds;
     //public OptPlan op;
     public OptPlan opt;
+    public drive dr; 
     int x [];
+    //ArrayList<Integer> bokningar;
+    ArrayList<Integer> bokningar = new ArrayList(); 
+    
 
     String test;
 
@@ -40,18 +39,21 @@ public Boka(){
     sleepTime = generator.nextInt(20000);
 }
 
-
 public Boka(OptPlan opt) {
     this.opt = opt;
     sleepTime = generator.nextInt(20000);
     opt.createPlan();  
     x = opt.resurser_boka;
-
+    
+    dr = new drive(); 
 }
+
+
 
     @Override
 public void run() {
  //System.out.println(Arrays.toString(x));
+
     
     try {
         int i;
@@ -94,8 +96,18 @@ public void run() {
                 
                 if(indexfound> -1){
                 System.out.println("Denna båge är okej att boka ");
-                }else{
+                
+                //Lägger in de godkända bokningarna i arrayen
+                bokningar.add(x[i]);
+
+                }
+                else{
                     System.out.println("Bågen är upptagen, försök igen! ");
+                    
+                    //Avbryter loopen vid första failen 
+                    //break; 
+                    
+                    //KALLA PÅ EN FUNKTION I OPTPLAN ELLER BÖRJAOM PROCEDUR
                 } 
                 
             }
