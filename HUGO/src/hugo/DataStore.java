@@ -32,6 +32,8 @@ public class DataStore {
     int[] avstand;
     int[] vilkanoder;
     boolean networkRead1;
+    boolean robotflaga;
+    boolean bokaflag;
 
     public DataStore() {
         // Initialize the datastore with fixed size arrays for storing the network data
@@ -51,6 +53,7 @@ public class DataStore {
 
         networkRead = false;
         updateUIflag = false;
+        bokaflag = false;
 
     }
 

@@ -17,7 +17,9 @@ import java.util.*;
 //Länk för att kolla bokningarna http://tnk111.n7.se/list.php 
 
 public class Boka implements Runnable{
+    ArrayList<Integer> bokningar = new ArrayList();
     
+    //e = new Integer();
     //upprättar en anslutning till den server som beskrivs
     //av URL-strängen
     //Ett HTTPmeddelande skickas från klienten till servern,
@@ -30,8 +32,11 @@ public class Boka implements Runnable{
     private DataStore ds;
     //public OptPlan op;
     public OptPlan opt;
-    int x [];
-
+    int resurser [];
+    int okej [] = new int[2];
+    int ejokej [] = new int[2];
+    int vill_avboka [] = new int [2];
+  
     String test;
   
 
@@ -44,12 +49,14 @@ public Boka(){
 }
 
 
-public Boka(OptPlan opt) {
+public Boka(OptPlan opt, DataStore ds) {
     this.opt = opt;
+    this.ds = ds;
     sleepTime = generator.nextInt(20000);
     opt.createPlan();  
-    x = opt.resurser_boka;
-
+    resurser = opt.resurser_boka;
+    //ArrayList bokningar = new ArrayList();
+    
 }
 
     @Override
@@ -63,12 +70,9 @@ public void run() {
         //Thread.sleep(sleepTime/20);
 
 
-        for(i = 0; i <= 3; i++){
-
-        //x = s[i];
-        
-
-            String url = "http://tnk111.n7.se/reserve.php?user=3&resource=" + x[i];
+        for(i = 0; i < 2; i++){
+             
+            String url = "http://tnk111.n7.se/reserve.php?user=3&resource=" + resurser[i];
             URL urlobjekt = new URL(url);
             HttpURLConnection anslutning = (HttpURLConnection)
             urlobjekt.openConnection();
@@ -97,17 +101,36 @@ public void run() {
                 
                 if(indexfound> -1){
                 System.out.println("Denna båge är okej att boka ");
-                }else{
-                    System.out.println("Bågen är upptagen, försök igen! ");
+                bokningar.add(resurser[i]);            
+                okej [i] = resurser[i];
+                }
+                else{
+                    System.out.println("Bågen är upptagen, försök igen! "); 
+                    //okej [i] = 0; 
+                    ejokej [i] = resurser[i]; 
                 } 
                 
             }
-
+            
             inkommande.close();
             
-           // System.out.println(inkommande_samlat.toString());
-            
         }
+
+        if(bokningar.size() == 2){
+            ds.bokaflag = true;
+            System.out.println("Bokaflaga blir sann: " + bokningar.size());
+        }
+        
+        test = " ";
+        for(int k = 0; k < bokningar.size(); k++){
+                test = test + " " + bokningar.get(k).toString();
+            }
+        
+        
+        System.out.println("test är: " + test);
+        System.out.println("okej" + Arrays.toString(okej));
+        System.out.println("ejokej" + Arrays.toString(ejokej));
+        
     }
         catch (Exception e) { System.out.print("det här är e " + e.toString());
 
