@@ -238,7 +238,7 @@ public class OptPlan {
         }
     }
         //System.out.println("Resurser: " + Arrays.toString(resurser_boka));
-    }
+}
 
 
 
