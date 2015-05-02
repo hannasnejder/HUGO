@@ -23,6 +23,7 @@ public class DataStore {
     int[] arcColor;
     int[] nodeColor;
     int startnod;
+    int slutnod;
     int antalnoderfil;
     int forstanoden;
     int andranoden;
@@ -30,6 +31,7 @@ public class DataStore {
     int[] startpunkt;
     int[] slutpunkt;
     int[] avstand;
+    int[] kopiaAvstand;
     int[] vilkanoder;
     boolean networkRead1;
 
@@ -46,6 +48,7 @@ public class DataStore {
         startpunkt = new int[1000];
         slutpunkt = new int[1000];
         avstand = new int[1000];
+        kopiaAvstand = new int[1000];
         vilkanoder = new int[1000];
 
         networkRead = false;
@@ -144,6 +147,7 @@ public class DataStore {
             // Read number of nodes
             line1 = (scanner1.nextLine());
             startnod = Integer.parseInt(line1.trim());
+            slutnod = startnod;
             line1 = scanner1.nextLine();
             antalnoderfil = Integer.parseInt(line1.trim());
 
@@ -193,7 +197,7 @@ public class DataStore {
                 slutpunkt[k] = Integer.parseInt(sline2[1].trim());
                 avstand[k] = Integer.parseInt(sline2[2].trim());
             }
-
+            kopiaAvstand = avstand;
         } catch (Exception e) {
 
             e.printStackTrace();
