@@ -82,6 +82,13 @@ public class GuiUpdate implements Runnable{
                      //System.out.println("while går " + j + " varv");
                     j++;
                 }
+                /*while (i<=20){
+                         Thread.sleep(sleepTime / 20);
+                        // cui.appendStatus("Jag är tråd GuiUpdate! För " +i+ ":te gången. ");
+                        i++;  
+                        ds.robotX=(i*10);
+                        cui.repaint(); 
+                }*/
                 
                 int k = 23;
                 while(x[3] <= k && k <= x[6]){      //Gör vad?
