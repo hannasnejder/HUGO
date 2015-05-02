@@ -34,6 +34,8 @@ public class DataStore {
     int[] kopiaAvstand;
     int[] vilkanoder;
     boolean networkRead1;
+    double startnodX=0;        // För att spara startplatsens x-koordinat
+    double startnodY=0;        //För att spara startnodens y-koordinat
 
     public DataStore() {
         // Initialize the datastore with fixed size arrays for storing the network data
@@ -150,20 +152,27 @@ public class DataStore {
             slutnod = startnod;
             line1 = scanner1.nextLine();
             antalnoderfil = Integer.parseInt(line1.trim());
+            
+            //För att spara koordinaterna till startplatsen
+            startnodX=nodeX[startnod-1]; //sparar x-koordinaten till startnoden
+            startnodY=nodeY[startnod-1]; //sparar y-koordinaten till startnoden
+
 
             for (int i = 0; i < (antalnoderfil); i++) {
-                line1 = (scanner1.nextLine());
+            line1 = (scanner1.nextLine());
+            vilkanoder[i] = Integer.parseInt(line1.trim());
 
-                vilkanoder[i] = Integer.parseInt(line1.trim());
+            besoknoder = besoknoder + " " + vilkanoder[i];
 
-                besoknoder = besoknoder + " " + vilkanoder[i];
+
+                //System.out.println("Besöksnoder: " + besoknoder);
             }
-
-            System.out.println(Arrays.toString(vilkanoder));
-
-            networkRead1 = true;  // Indicate that all network data is in place in the DataStore
+        
+            // Indicate that all network data is in place in the DataStore
+            networkRead1 = true; 
 
             System.out.println("Vi ska besöka noderna: " + besoknoder);
+
         } catch (Exception e) {
 
             e.printStackTrace();
@@ -201,5 +210,4 @@ public class DataStore {
             e.printStackTrace();
         }
     }
-
 }

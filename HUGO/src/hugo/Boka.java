@@ -1,4 +1,3 @@
-
 package hugo;
 
 import java.io.BufferedReader;
@@ -24,19 +23,20 @@ public class Boka implements Runnable {
     public OptPlan opt;
 
     public Avboka avboka;
-    
-    public drive dr; 
-    int x [];
+
+    public drive dr;
+    int x[];
+
     //ArrayList<Integer> bokningar;
-    ArrayList<Integer> bokningar = new ArrayList(); 
-    
+    ArrayList<Integer> bokningar = new ArrayList();
+
     String test;
 
     int[] okej = new int[4];
     int[] ejokej = new int[4];
     int[] vill_avboka = new int[4];
     int indexfound;
-   // Arraylist okejavboka = new int[4];
+    // Arraylist okejavboka = new int[4];
 
     int j = 0;
 
@@ -47,33 +47,33 @@ public class Boka implements Runnable {
         sleepTime = generator.nextInt(20000);
     }
 
+    public Boka(OptPlan opt) {
+        this.opt = opt;
+        sleepTime = generator.nextInt(20000);
+        opt.createPlan();
+        x = opt.resurser_boka;
 
-public Boka(OptPlan opt) {
-    this.opt = opt;
-    sleepTime = generator.nextInt(20000);
-    opt.createPlan();  
-    x = opt.resurser_boka;
-    
-    test = " ";
-    
-    dr = new drive(); 
-}
+        test = " ";
+
+        dr = new drive();
+    }
 
     @Override
     public void run() {
- //System.out.println(Arrays.toString(x));
-
+        //System.out.println(Arrays.toString(x));
         try {
             int i;
-            //Behövs fördröjnng till bokningen??
             Thread.sleep(sleepTime / 20);
 
+        //Behövs fördröjnng till bokningen??
+            //Thread.sleep(sleepTime/20);
             for (i = 0; i <= 3; i++) {
 
+        //x = s[i];
                 String url = "http://tnk111.n7.se/reserve.php?user=3&resource=" + x[i];
                 URL urlobjekt = new URL(url);
                 HttpURLConnection anslutning = (HttpURLConnection) urlobjekt.openConnection();
-
+                
                 System.out.println("\nAnropar: " + url);
 
                 int mottagen_status = anslutning.getResponseCode();
@@ -92,7 +92,7 @@ public Boka(OptPlan opt) {
 
                     inkommande_samlat.append(inkommande_text);
                     linecount++;
-                    indexfound = inkommande_text.indexOf(OK);
+                    int indexfound = inkommande_text.indexOf(OK);
 
                     if (indexfound > -1) {
                         System.out.println("Denna båge är okej att boka ");
@@ -102,7 +102,6 @@ public Boka(OptPlan opt) {
 
                     } else {
                         System.out.println("Bågen är upptagen, försök igen! ");
-
                         ejokej[i] = x[i];
                         //break;
                     }
@@ -111,7 +110,7 @@ public Boka(OptPlan opt) {
                 inkommande.close();
 
             }
-        //Kollar om under 4 resurser gick att boka, avbokar de som gick
+            //Kollar om under 4 resurser gick att boka, avbokar de som gick
             //att boka isåfall
             if (j < 4) {
                 for (int m = 0; m < okej.length; m++) {

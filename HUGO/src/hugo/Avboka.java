@@ -48,13 +48,14 @@ public class Avboka implements Runnable {
     }
 
     @Override
-    public void run() {
+     public void run() {
         try {
             int i;
 
             //Thread.sleep(sleepTime/20);
             TimeUnit.SECONDS.sleep(5);
 
+            
         //char bokaresurser[] = ds.besoknoder.toCharArray();
             for (i = 0; i <= 3; i++) {
                 if (avbokningar_upptagna[i] != 0) {

@@ -37,7 +37,7 @@ public class OptPlan {
 
         nodes = new ArrayList<Vertex>();
         edges = new ArrayList<Edge>();
-
+        
         int dist = 0;
 
         // Sätter upp nätverket
@@ -84,7 +84,7 @@ public class OptPlan {
         Graph graph = new Graph(nodes, edges);
         DijkstraAlgorithm dij = new DijkstraAlgorithm(graph);
 
-        int nuvarande_langd = 0;
+        int nuvarande_langd;
         int kortast_avstand;
         int narmaste_nod = ds.startnod;
         int[] test_vag = new int[1000];
@@ -97,7 +97,7 @@ public class OptPlan {
 
         }
 
-        for (int k = 0; k < ds.antalnoderfil; k++) {
+        for (int k = 0; k < ds.antalnoderfil; k++) { 
             test_vag[0] = narmaste_nod;
             kortast_avstand = 100000;
 
@@ -107,13 +107,16 @@ public class OptPlan {
                 }
             }
 
-            for (int p = 0; p < ds.antalnoderfil; p++) {
+    for (int p = 0; p < ds.antalnoderfil; p++) {
 
-                //System.out.println("p är" + p);
                 test_vag[1] = kvarvarande_hyllor[p];
                 if ((test_vag[0] != test_vag[1]) && (test_vag[1] != 0)) {
                     dij.execute(nodes.get(test_vag[0] - 1));
+
+                    System.out.println("Där vi startar " + test_vag[0]);
+
                     //System.out.println("Där vi startar " + test_vag[0]);
+
                     LinkedList<Vertex> path = dij.getPath(nodes.get(test_vag[1] - 1));
                     //System.out.println("Hit vi vill gå " + test_vag[1]);
 
@@ -138,8 +141,15 @@ public class OptPlan {
                         kortast_avstand = nuvarande_langd;
                         narmaste_nod = ds.vilkanoder[p];
                         snabbaste_rutten[k + 1] = narmaste_nod;
+
+                        //System.out.println("rutten är"+snabbaste_rutten[p+1]);
+                        
+                        System.out.println("Det kortaste avståndet är " + kortast_avstand);
+                        System.out.println("Den närmsta noden är " + narmaste_nod);
+
                         //System.out.println("Det kortaste avståndet är" + kortast_avstand);
                         //System.out.println("Den närmsta noden är" + narmaste_nod);
+
 
                     }
                 }
@@ -206,6 +216,7 @@ public class OptPlan {
 
             // Undirected arcs in the shortest path
             for (int i = 0; i < path.size() - 1; i++) {
+
                 for (int j = 0; j < ds.arcs; j++) {
                     if (ds.arcStart[j] == Integer.parseInt(path.get(i).getId())
                             && ds.arcEnd[j] == Integer.parseInt(path.get(i + 1).getId())
@@ -224,10 +235,14 @@ public class OptPlan {
                         //boka = Arrays.toString(länkar_boka);
                     }
                 }
-            }
+                }
         }
+    
+            
+        
         int j = 1;
         int k = 0;
+
         //Skapa en ny for-loop för att kombinera länkar och noder till resurser_boka
         for (int i = 0; i < 100; i++) {
 
@@ -239,8 +254,7 @@ public class OptPlan {
             j = j + 2;
 
         }
-
     }
-
+        //System.out.println("Resurser: " + Arrays.toString(resurser_boka));
 }
 
