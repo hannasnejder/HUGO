@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hugo;
 
-//import static com.sun.javafx.Utils.contains;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -15,9 +9,8 @@ import javax.swing.*;
 import java.util.*;
 
 //Länk för att kolla bokningarna http://tnk111.n7.se/list.php 
+public class Boka implements Runnable {
 
-public class Boka implements Runnable{
-    
     //upprättar en anslutning till den server som beskrivs
     //av URL-strängen
     //Ett HTTPmeddelande skickas från klienten till servern,
@@ -28,6 +21,9 @@ public class Boka implements Runnable{
     private static Random generator = new Random();
     private DataStore ds;
     public OptPlan opt;
+    public drive dr;
+    public Avboka avboka;
+
     //int x [];
     int x [] = {42, 6};
     ArrayList<Integer> bokningar = new ArrayList();
@@ -48,10 +44,14 @@ public Boka(){
 }
 
 public Boka(OptPlan opt) {
-    this.opt = opt;
-    sleepTime = generator.nextInt(20000);
-    opt.createPlan();  
-    //x = opt.resurser_boka;
+        this.opt = opt;
+        sleepTime = generator.nextInt(20000);
+        opt.createPlan();
+        x = opt.resurser_boka;
+
+        test = " ";
+
+        dr = new drive();
 }
 
     @Override
@@ -140,6 +140,6 @@ public void run() {
 
     }catch (Exception e) { System.out.print("det här är e " + e.toString());
 
+        }
     }
-  }
 }

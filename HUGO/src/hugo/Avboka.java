@@ -10,13 +10,15 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-public class Avboka implements Runnable{
+
+public class Avboka implements Runnable {
     //upprättar en anslutning till den server som beskrivs
     //av URL-strängen
     //Ett HTTPmeddelande skickas från klienten till servern,
     //servern gör en tolkning av klientens meddelande, returnerar en statuskod
     //statuskod 200, den har förstått
     //överför den info som beskriver Lius webbsida
+
     private int sleepTime;
     private static Random generator = new Random();
     private DataStore ds;
@@ -79,5 +81,8 @@ public Avboka(OptPlan opt, RobotRead r1, Boka b1) {
         }
     }
         catch (Exception e) { System.out.print(e.toString()); }
+
     }
 }
+
+    
