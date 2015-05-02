@@ -155,6 +155,7 @@ public class OptPlan {
 
         for (int k = 0; k < (ds.antalnoderfil + 1); k++) {
 
+
             // Set up network
             for (int i = 0; i < ds.nodes; i++) {
                 Vertex location = new Vertex("" + (i + 1), "Nod # " + (i + 1));
@@ -222,7 +223,6 @@ public class OptPlan {
 
                         //boka = Arrays.toString(länkar_boka);
                     }
-
                 }
             }
         }
@@ -230,6 +230,7 @@ public class OptPlan {
         int k = 0;
         //Skapa en ny for-loop för att kombinera länkar och noder till resurser_boka
         for (int i = 0; i < 100; i++) {
+
             resurser_boka[k] = noder_boka[i];
 
             resurser_boka[j] = länkar_boka[i];
@@ -242,3 +243,4 @@ public class OptPlan {
     }
 
 }
+

@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package hugo;
 
-//import static com.sun.javafx.Utils.contains;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -27,11 +22,14 @@ public class Boka implements Runnable {
     private static Random generator = new Random();
     private DataStore ds;
     public OptPlan opt;
-    public Avboka avboka;
-    int x[];
-    // int x [] = {115, 125, 157, 159};
-    ArrayList<Integer> bokningar = new ArrayList();
 
+    public Avboka avboka;
+    
+    public drive dr; 
+    int x [];
+    //ArrayList<Integer> bokningar;
+    ArrayList<Integer> bokningar = new ArrayList(); 
+    
     String test;
 
     int[] okej = new int[4];
@@ -49,15 +47,17 @@ public class Boka implements Runnable {
         sleepTime = generator.nextInt(20000);
     }
 
-    public Boka(OptPlan opt) {
-        this.opt = opt;
-        sleepTime = generator.nextInt(20000);
-        opt.createPlan();
-        x = opt.resurser_boka;
 
-        test = " ";
-
-    }
+public Boka(OptPlan opt) {
+    this.opt = opt;
+    sleepTime = generator.nextInt(20000);
+    opt.createPlan();  
+    x = opt.resurser_boka;
+    
+    test = " ";
+    
+    dr = new drive(); 
+}
 
     @Override
     public void run() {
@@ -70,7 +70,6 @@ public class Boka implements Runnable {
 
             for (i = 0; i <= 3; i++) {
 
-        //x = s[i];
                 String url = "http://tnk111.n7.se/reserve.php?user=3&resource=" + x[i];
                 URL urlobjekt = new URL(url);
                 HttpURLConnection anslutning = (HttpURLConnection) urlobjekt.openConnection();
