@@ -28,7 +28,7 @@ public class threads {
         opt.createPlan();
 
         boka= new Boka(this.opt);
-        boka.run();        
+        //boka.run();        
         
         r1 = new RobotRead (this.ds, this.cui);
         t1 = new Thread(r1);
@@ -38,10 +38,6 @@ public class threads {
         t3 = new Thread(b1);
         avboka = new Avboka(opt, r1, b1);
         t4 = new Thread(avboka);      
-        
-        
-
-        t4 = new Thread(avboka);
         o1 = new OptOnline(this.opt, this.boka, this.ds);
         t5 = new Thread(o1);
     }

@@ -41,15 +41,14 @@ public Avboka(OptPlan opt, RobotRead r1, Boka b1) {
     public void run() {
     try {
         int i;
-        TimeUnit.SECONDS.sleep(5);
+        TimeUnit.SECONDS.sleep(4);
         
-      //  System.out.println("\n" + "Vi ska avboka " + Arrays.toString(avbokningar_upptagna));
+        System.out.println("\n" + "Vi ska avboka " + Arrays.toString(avbokningar_upptagna));
         
         for(i = 0; i < 2; i++){
             //If-sats som rensar bort de nollor som skickas med från Boka
             //Avbokar bara de positioner som inte innehåller noll
             if(avbokningar_upptagna[i] != 0){  
-                System.out.println("\n" + "Vi ska avboka " + Arrays.toString(avbokningar_upptagna));
                 
                 String url = "http://tnk111.n7.se/free.php?user=3&resource=" + avbokningar_upptagna[i];
                 URL urlobjekt = new URL(url);

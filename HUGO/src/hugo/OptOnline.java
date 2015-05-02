@@ -8,6 +8,7 @@ package hugo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class OptOnline implements Runnable {
 
@@ -33,8 +34,9 @@ public class OptOnline implements Runnable {
     public void run() {
         try {
             //Ändra hur tråden ska sova beroende på hur allt kopplas ihop
-            Thread.sleep(1000);
-
+            //Thread.sleep(1000);
+            TimeUnit.SECONDS.sleep(2);
+            
             //vi vill modifiera startnod, avstånd[] och orderfilen när roboten har passerat en hylla
             //ändra om värdena i avstånd[] så att den länken som inte går att boka får högt värde, t.ex 100000
             //kollar vilken nod som var okej att boka och sätter den till startnod
@@ -42,8 +44,9 @@ public class OptOnline implements Runnable {
             //position 0 och 2 är bågar
             //Denna måste göras om. Vet inte vad som ska ske i detta läge...  
             //ämdra villkor till 2 när boka ändras
-            if (boka.j == 4) {
-                ds.startnod = boka.okej[3];
+            System.out.println("J i opt= " + boka.j);
+            if (boka.j == 2) {
+                ds.startnod = boka.okej[1];
                 opt.createPlan();
 
                 //Om inte båda två går att boka
@@ -65,7 +68,7 @@ public class OptOnline implements Runnable {
 
             //Sedan vill vi omoptimera utefter vad roboten skickar
         } catch (Exception e) {
-            System.out.println("det här är e " + e.toString());
+            System.out.println("det här är e, OptOnline " + e.toString());
         }
     }
 }

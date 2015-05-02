@@ -119,7 +119,7 @@ public class OptPlan {
                     dij.execute(nodes.get(test_vag[0] - 1));
                     //System.out.println("Där vi startar " + test_vag[0]);
 
-                    System.out.println("Där vi startar " + test_vag[0]);
+                    //System.out.println("Där vi startar " + test_vag[0]);
 
                     //System.out.println("Där vi startar " + test_vag[0]);
 
@@ -152,8 +152,8 @@ public class OptPlan {
                         //System.out.println("Det kortaste avståndet är " + kortast_avstand);
                         //System.out.println("Den närmsta noden är " + narmaste_nod);
                         
-                        System.out.println("Det kortaste avståndet är " + kortast_avstand);
-                        System.out.println("Den närmsta noden är " + narmaste_nod);
+                        //System.out.println("Det kortaste avståndet är " + kortast_avstand);
+                        //System.out.println("Den närmsta noden är " + narmaste_nod);
 
                         //System.out.println("Det kortaste avståndet är" + kortast_avstand);
                         //System.out.println("Den närmsta noden är" + narmaste_nod);

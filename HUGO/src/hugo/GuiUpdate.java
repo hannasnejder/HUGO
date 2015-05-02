@@ -60,8 +60,8 @@ public class GuiUpdate implements Runnable{
                 }
       
             //startnodens koordinater finns sparade i startnodX och startnodY i DataStore
-               System.out.println("startnodX "+ds.startnodX);
-                System.out.println("startnodY "+ds.startnodY);
+               //System.out.println("startnodX "+ds.startnodX);
+                //System.out.println("startnodY "+ds.startnodY);
                 ds.robotX=ds.startnodX; //Nod 1s x-koordinat 
                 ds.robotY=ds.startnodY;
                 
