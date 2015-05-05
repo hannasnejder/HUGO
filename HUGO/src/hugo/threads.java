@@ -22,6 +22,7 @@ public class threads {
 
         this.ds = ds;
         this.cui = cui;
+        this.b1 = b1;
         opt = new OptPlan(this.ds, this.opt);
         opt.createPlan();
 
