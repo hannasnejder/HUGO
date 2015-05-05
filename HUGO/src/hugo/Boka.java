@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hugo;
 
-//import static com.sun.javafx.Utils.contains;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
@@ -13,6 +7,7 @@ import java.net.URL;
 import java.util.Random;
 import javax.swing.*;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 //Länk för att kolla bokningarna http://tnk111.n7.se/list.php 
 
@@ -20,6 +15,7 @@ public class Boka implements Runnable{
     ArrayList<Integer> bokningar = new ArrayList();
     
     //e = new Integer();
+
     //upprättar en anslutning till den server som beskrivs
     //av URL-strängen
     //Ett HTTPmeddelande skickas från klienten till servern,
@@ -28,23 +24,27 @@ public class Boka implements Runnable{
     //överför den info som beskriver Lius webbsida
     private int sleepTime;
     private static Random generator = new Random();
-    //private ControlUI cui;
     private DataStore ds;
-    //public OptPlan op;
     public OptPlan opt;
     int resurser [];
     int okej [] = new int[2];
     int ejokej [] = new int[2];
     int vill_avboka [] = new int [2];
-  
-    String test;
-  
 
-    //En array för att testa att boka de resurser vi vill
-    //int s[] = {34, 35, 37, 41};
+    public drive dr;
+    public Avboka avboka;
+
+    //int x [];
+    //int x [] = {39, 6};
+    String test;
+    
+    int indexfound;
+    
+    //Räknar antal gånger något gick att boka
+    int j = 0;
+
     
 public Boka(){
-    
     sleepTime = generator.nextInt(20000);
 }
 
@@ -55,17 +55,30 @@ public Boka(OptPlan opt, DataStore ds) {
     sleepTime = generator.nextInt(20000);
     opt.createPlan();  
     resurser = opt.resurser_boka;
+    dr = new drive();
     //ArrayList bokningar = new ArrayList();
-    
-}
+}   
+
+/*public Boka(OptPlan opt) {
+        this.opt = opt;
+        sleepTime = generator.nextInt(20000);
+        opt.createPlan();
+        x = opt.resurser_boka;
+
+        test = " ";
+
+        dr = new drive();
+}*/
 
     @Override
 public void run() {
- //System.out.println(Arrays.toString(x));
     
     try {
         int i;
+        //Vad ska vi ha för fördröjning så den kör efter optimeringen? 
+        TimeUnit.SECONDS.sleep(1);
         
+
         //Behövs fördröjnng till bokningen??
         //Thread.sleep(sleepTime/20);
 
@@ -84,43 +97,51 @@ public void run() {
             System.out.println("Statuskod: " + mottagen_status);
 
 
-            BufferedReader inkommande = new BufferedReader(new
-            InputStreamReader(anslutning.getInputStream()));
+                BufferedReader inkommande = new BufferedReader(new
+                InputStreamReader(anslutning.getInputStream()));
 
-            String inkommande_text;
-            StringBuffer inkommande_samlat = new StringBuffer();
 
-            int linecount = 0;
-            String OK = "OK";
+                String inkommande_text;
+                StringBuffer inkommande_samlat = new StringBuffer();
 
-            while ((inkommande_text = inkommande.readLine()) != null) {
+                int linecount = 0;
+                String OK = "OK";
+
+
+                while ((inkommande_text = inkommande.readLine()) != null) {
                 
-                inkommande_samlat.append(inkommande_text);
-                linecount++;
-                int indexfound = inkommande_text.indexOf(OK);
-                
-                if(indexfound> -1){
-                System.out.println("Denna båge är okej att boka ");
-                bokningar.add(resurser[i]);            
-                okej [i] = resurser[i];
-                }
-                else{
-                    System.out.println("Bågen är upptagen, försök igen! "); 
-                    //okej [i] = 0; 
-                    ejokej [i] = resurser[i]; 
-                } 
-                
-            }
-            
+                    inkommande_samlat.append(inkommande_text);
+                    linecount++;
+                    indexfound = inkommande_text.indexOf(OK);
+               
+                    if(indexfound> -1){
+                        System.out.println("Denna båge är okej att boka ");
+                        bokningar.add(resurser[i]);                       
+                        okej[i] = resurser[i];
+                        j++;
+                        
+                    }else{
+                        System.out.println("Bågen är upptagen, försök igen! ");
+                        ejokej[i] = resurser[i];
+                    }     
+                }  
             inkommande.close();
-            
-        }
+            }
+
 
         if(bokningar.size() == 2){
             ds.bokaflag = true;
             System.out.println("Bokaflaga blir sann: " + bokningar.size());
         }
         
+        if(j < 2){
+            for(int m = 0; m < okej.length; m++){
+                //J sätts till 0 varje varv, fixa!!!!!!!!!
+                vill_avboka[m] = okej[m]; 
+            }
+        }
+        System.out.println("J= " + j);
+         
         test = " ";
         for(int k = 0; k < bokningar.size(); k++){
                 test = test + " " + bokningar.get(k).toString();
@@ -130,10 +151,14 @@ public void run() {
         System.out.println("test är: " + test);
         System.out.println("okej" + Arrays.toString(okej));
         System.out.println("ejokej" + Arrays.toString(ejokej));
-        
-    }
-        catch (Exception e) { System.out.print("det här är e " + e.toString());
+               
+        //Om anslutning saknas ska körinstrutionerna skickas utan bokning
+        //Har än så länge bara försökt få den att gå in om anslutning saknas
+       /* else{
+            System.out.println("Anslutning till bokningsservern saknas");
+         }*/
+    }catch (Exception e) { System.out.print("det här är e, Boka " + e.toString());
 
+        }
     }
-  }
 }

@@ -44,17 +44,17 @@ public class RobotRead implements Runnable {
         //Det som behövs är att i threads säga att RobotRead behöver info även från boka
         //Det leder till fel vid körning av programet samt att ControlUI blir arg ibland
         //Detta behöver lösas på något sätt när körinstruktionerna från filen drive ska in.
-        /*b1.run();
-        körorder = b1.test;
-        System.out.println("kör: " + b1.test);*/
         
     }
  
     @Override
     public void run(){
         try{
+            
             cui.appendStatus("RobotRead kommer att köra i " + sleepTime + " millisekunder.");
             cui.appendStatus("Körorder är: " + körorder);
+            
+          
             
             //Skapar anslutning. Siffrorna är mottagarens, fås via browse.
             //Siffran efter kolon är kanalen som används. 
@@ -66,10 +66,10 @@ public class RobotRead implements Runnable {
             BufferedReader bluetooth_in = new BufferedReader(new
             InputStreamReader(anslutning.openInputStream()));
             
-            //int i=1;
+            
             while(ds.bokaflag == true){
                 if(anslutning == null || körorder == null){
-                    cui.appendStatus("Kopplin saknas eller körorder är tom");
+                    cui.appendStatus("Koppling saknas eller körorder är tom");
                     break;
                 }else 
                     Thread.sleep(sleepTime/20);
@@ -94,19 +94,22 @@ public class RobotRead implements Runnable {
                         
                         från_robot[k] = meddelande_in;
                         k = k +1;
-                        System.out.println(Arrays.toString(från_robot));
+                        
                         //ds.robotflaga = true;*/
                     }    
                     
-                    ds.robotflaga = true;
                     
+                    System.out.println(Arrays.toString(från_robot));
+
                  cui.appendStatus("Körinstruktioner: " + körorder);
                  anslutning.close();
                  //i++;
+                 ds.robotflaga = true;
                 }               
-                System.out.println("från_robot: " + Arrays.toString(från_robot));
+                //System.out.println("från_robot: " + Arrays.toString(från_robot));
             //ds.updateUIflag = true;
         }catch(Exception e) {  System.out.print("RobotRead" + e.toString());   
+
         }
         
     cui.appendStatus("RobotRead är nu klar");

@@ -43,10 +43,10 @@ public void run() {
     try {
         int i = 0;
         
-        while(ds.robotflaga == false)
+        /*while(ds.robotflaga == false)
             {
                 Thread.sleep(sleepTime/20);
-            }
+            }*/
                 
         while(ds.robotflaga == true){
             x = r1.från_robot;
