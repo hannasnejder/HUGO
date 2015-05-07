@@ -33,15 +33,22 @@ public class DataStore {
     int[] avstand;
     int[] kopiaAvstand;
     int[] vilkanoder;
+    int[] kopiaVilkanoder;
     boolean networkRead1;
+
+    boolean robotflaga;
+    boolean bokaflag;
+
     double startnodX=0;        // För att spara startplatsens x-koordinat
     double startnodY=0;        //För att spara startnodens y-koordinat
+
     int raknare = 0;
     int [] okej;
     int [] ejokej;
     int [] vill_avboka;
     int [] resurser_boka;
-    
+
+
     public DataStore() {
         // Initialize the datastore with fixed size arrays for storing the network data
         nodes = 0;
@@ -61,9 +68,12 @@ public class DataStore {
         ejokej = new int[2];
         vill_avboka = new int[2];
         resurser_boka = new int[1000];
+        vilkanoder = new int[100];
+        kopiaVilkanoder = new int[100];
 
         networkRead = false;
         updateUIflag = false;
+        bokaflag = false;
 
     }
 
@@ -74,21 +84,13 @@ public class DataStore {
     public void setFileName1(String newFileName1) {
         this.fileName1 = newFileName1;
     }
-
-    public void setFileName2(String newFileName2) {
-        this.fileName2 = newFileName2;
-    }
-
+    
     public String getFileName() {
         return fileName;
     }
 
     public String getFileName1() {
         return fileName1;
-    }
-
-    public String getFileName2() {
-        return fileName2;
     }
 
     public void readNet() {
@@ -109,9 +111,6 @@ public class DataStore {
             line = scanner.nextLine();
             arcs = Integer.parseInt(line.trim());
 
-            // Debug printout: network size data
-            // System.out.println("Nodes: "+nodes);
-            // System.out.println("Arcs: "+arcs);
             // Read nodes as number, x, y
             for (int i = 0; i < nodes; i++) {
                 line = scanner.nextLine();
@@ -121,8 +120,6 @@ public class DataStore {
                 nodeY[i] = Double.parseDouble(sline[2].trim());
             }
 
-            // Debug printout: print data for node 1
-            // System.out.println("Node 1: "+nodeX[0]+" "+nodeY[0]);
             // Read arc list as start node number, end node number
             for (int i = 0; i < arcs; i++) {
                 line = scanner.nextLine();
@@ -131,14 +128,31 @@ public class DataStore {
                 arcStart[i] = Integer.parseInt(sline[1].trim());
                 arcEnd[i] = Integer.parseInt(sline[2].trim());
             }
-
+            //Skapar vår "nya avståndsmatris"
+            startpunkt = arcStart;
+            slutpunkt = arcEnd;
+            
+            for(int j = arcs; j<(arcs*2); j++){
+                startpunkt[j] = arcEnd[j-arcs];
+                slutpunkt[j] = arcStart[j-arcs];
+            }
+            
+            //System.out.print("avstånden är ");
+            for (int j = 0; j<(arcs*2); j++){
+                //Gör om till int!!!
+                avstand[j]=(int) Math.abs((nodeX[startpunkt[j]-1] - nodeX[slutpunkt[j]-1])
+                        -(nodeY[startpunkt[j]-1]-nodeY[slutpunkt[j]-1]));
+               // System.out.print(avstand[j]+" ");
+            }
+            
+            kopiaAvstand = avstand;
             networkRead = true;  // Indicate that all network data is in place in the DataStore
 
         } catch (Exception e) {
 
             e.printStackTrace();
         }
-        robotX = nodeX[22];
+        robotX = nodeX[0];
         robotY = nodeY[0];
     }
 
@@ -172,10 +186,11 @@ public class DataStore {
             vilkanoder[i] = Integer.parseInt(line1.trim());
 
             besoknoder = besoknoder + " " + vilkanoder[i];
-
+            
 
                 //System.out.println("Besöksnoder: " + besoknoder);
             }
+            kopiaVilkanoder = vilkanoder;
         
             // Indicate that all network data is in place in the DataStore
             networkRead1 = true; 
@@ -186,39 +201,7 @@ public class DataStore {
 
             e.printStackTrace();
         }
-        
-        robotX = nodeX[22];
-        robotY = nodeY[0];
-    }
-
-    public void readNet2() {
-        String line2;
-
-        if (fileName2 == null) {
-            System.err.println("No file name set. Data read aborted.");
-            return;
-        }
-        try {
-            File file2 = new File(fileName2);
-            Scanner scanner2 = new Scanner(file2, "iso-8859-1");
-            String[] sline2;
-
-            // Read number of nodes
-            //Läsa av filen rad för rad
-            //Läsa in varje tal i raden, ett i taget
-            // första talet = start, andra talet = slut, 3e talet = längd
-            for (int k = 0; k < 98; k++) {
-
-                line2 = (scanner2.nextLine());
-                sline2 = line2.split(" ");
-                startpunkt[k] = Integer.parseInt(sline2[0].trim());
-                slutpunkt[k] = Integer.parseInt(sline2[1].trim());
-                avstand[k] = Integer.parseInt(sline2[2].trim());
-            }
-            kopiaAvstand = avstand;
-        } catch (Exception e) {
-
-            e.printStackTrace();
-        }
+        robotX = startnodX;
+        robotY = startnodY;
     }
 }

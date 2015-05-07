@@ -10,33 +10,21 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-public class OptOnline {//implements Runnable {
+public class OptOnline {
 
     //private int sleepTime;
     //private static Random generator = new Random();
     public OptPlan opt;
-   // public Boka boka;
     public DataStore ds;
-    //vägen som optimeras fram i optplan
-    //int resurser[];
 
     //int passerad hylla eller orderfilen som fås från roboten måste läggas till
     public OptOnline(OptPlan opt, DataStore ds) {
         this.opt = opt;
-        //this.boka = boka;
         this.ds = ds;
-     //   sleepTime = generator.nextInt(20000);
-        //Resursena från optplan sparas i "resurser"
-        //resurser = ds.resurser_boka;
-        //boka.run(); 
     }
 
-   // @Override
-    public void newOpt() {
+    public void newOpt(){
         try {
-            //Ändra hur tråden ska sova beroende på hur allt kopplas ihop
-            //Thread.sleep(1000);
-           // TimeUnit.SECONDS.sleep(2);
             
             //vi vill modifiera startnod, avstånd[] och orderfilen när roboten har passerat en hylla
             //ändra om värdena i avstånd[] så att den länken som inte går att boka får högt värde, t.ex 100000
@@ -45,10 +33,18 @@ public class OptOnline {//implements Runnable {
             //position 0 och 2 är bågar
             //Denna måste göras om. Vet inte vad som ska ske i detta läge...  
             //ämdra villkor till 2 när boka ändras
+
             System.out.println("J i opt= " + ds.raknare);
+
             if (ds.raknare == 2) {
                 ds.startnod = ds.okej[1];
                 opt.createPlan();
+                System.out.println("startnod är "+ds.startnod);
+                /*for (int k =0; k<ds.antalnoderfil; k++){
+                    if(ds.startnod == ds.kopiaVilkanoder[k]){
+                        ds.kopiaVilkanoder[k] = 0;
+                    }
+                }*/
 
                 //Om inte båda två går att boka
             } else {
@@ -59,14 +55,15 @@ public class OptOnline {//implements Runnable {
                     //Ändra ejokej[2] till ngt annat!!!
                     //Beror på om båge eller nod bokas först
                     if ((ds.startpunkt[m] == ds.startnod) && ds.slutpunkt[m] == ds.ejokej[2]) {
-                        ds.kopiaAvstand[m] = 100000;
-                        //break;
+                        //System.out.println("Inne i andra if-satsen");
+                        ds.kopiaAvstand = ds.avstand;
                     }
+                    //System.out.println("Startnod är "+ds.startnod);
+                    //System.out.println("boka.ejokej[1] är "+boka.ejokej[1]);
+
                 }
                 opt.createPlan();
-
             }
-
             //Sedan vill vi omoptimera utefter vad roboten skickar
         } catch (Exception e) {
             System.out.println("det här är e, OptOnline " + e.toString());

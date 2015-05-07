@@ -10,38 +10,20 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 //Länk för att kolla bokningarna http://tnk111.n7.se/list.php 
-public class Boka implements Runnable {
 
-    //upprättar en anslutning till den server som beskrivs
-    //av URL-strängen
-    //Ett HTTPmeddelande skickas från klienten till servern,
-    //servern gör en tolkning av klientens meddelande, returnerar en statuskod
-    //statuskod 200, den har förstått
-    //överför den info som beskriver Lius webbsida
+public class Boka implements Runnable{
+    ArrayList<Integer> bokningar = new ArrayList();
+
     public DataStore ds;
     public OptPlan opt;
     public drive dr;
-    //public Avboka avboka;
-    //private ControlUI cui;
     public OptOnline online;
 
-    //int resurser [] = {39, 28};
-    ArrayList<Integer> bokningar = new ArrayList();
-
     String test;
- 
-    int indexfound;
-    
-
-    
-    //Räknar antal gånger en resurs inte gick att boka
-    int v = 0;
     boolean kolla_anslutning;
-    
-/*public Boka(){
-    sleepTime = generator.nextInt(20000);
-}*/
 
+    int indexfound;
+  
 public Boka(OptPlan opt, DataStore ds, OptOnline online) {
         this.opt = opt;
         this.ds = ds;
@@ -50,6 +32,7 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online) {
 
         test = " ";
         dr = new drive();
+ 
 }
 
     @Override
@@ -57,14 +40,15 @@ public void run() {
     
     try {
         int i;
-            System.out.println("Vi vill boka: " + Arrays.toString(ds.resurser_boka));
+        TimeUnit.SECONDS.sleep(1);
+        System.out.println("Vi vill boka: " + Arrays.toString(ds.resurser_boka));
             
-            for(i = 0; i < 2; i++){
+        for(i = 0; i < 2; i++){
                 String url = "http://tnk111.n7.se/reserve.php?user=3&resource=" + ds.resurser_boka[i];
                 URL urlobjekt1 = new URL(url);
                 HttpURLConnection anslutning = (HttpURLConnection)
                 urlobjekt1.openConnection();
- 
+  
                 System.out.println("\nAnropar: " + url);
 
                 int mottagen_status = anslutning.getResponseCode();
@@ -78,6 +62,7 @@ public void run() {
 
                 int linecount = 0;
                 String OK = "OK";
+
 
                 while ((inkommande_text = inkommande.readLine()) != null) {
                 
@@ -94,7 +79,6 @@ public void run() {
                     }else{
                         System.out.println("Bågen är upptagen, försök igen! ");
                         ds.ejokej[i] = ds.resurser_boka[i];
-                        v++;
                     }     
                 }  
             inkommande.close();
@@ -106,27 +90,25 @@ public void run() {
         if(ds.raknare < 2){
             for(int m = 0; m < ds.okej.length; m++){
                 ds.vill_avboka[m] = ds.okej[m]; 
-            }
-        }
-        System.out.println("Vill inte gå till optonline");
-        online.newOpt();
- 
+             }
+            online.newOpt();
         
-         System.out.println("J= " + ds.raknare);
-         System.out.println("v= " + v);  
-         
-         /*if(v == 1){
-             vänta();
-         }*/
+        }else{
+            online.newOpt();
+        }
+        
+        
+        if(bokningar.size() == 2){
+            ds.bokaflag = true;
+            System.out.println("Bokaflaga blir sann: " + bokningar.size());
+        }
 
-        test = " ";
         for(int k = 0; k < bokningar.size(); k++ ){
             test = test + " " + bokningar.get(k).toString();
         }
         System.out.println("\n" + "Okej " + Arrays.toString(ds.okej));
         System.out.println("Inte okej " + Arrays.toString(ds.ejokej));
-  
-    
+
     }catch (Exception e) { System.out.print("det här är e, Boka " + e.toString());
 
         }
