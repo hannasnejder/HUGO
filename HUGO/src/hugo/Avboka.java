@@ -5,10 +5,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-import javax.swing.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -25,23 +21,21 @@ public class Avboka implements Runnable {
     private static Random generator = new Random();
     //private DataStore ds;
     public OptPlan opt;
+
     public Boka boka;
     int y [];
     int avbokningar_upptagna [];
     
-    //En array för att testa att boka de resurser vi vill
-    //int [] s = {1, 39, 5, 48};
 
-public Avboka() {
-    sleepTime = generator.nextInt(20000);
-}
 
-public Avboka(OptPlan opt, RobotRead rr, Boka boka) {
+
+public Avboka(OptPlan opt, Boka boka, DataStore ds) {
     this.opt = opt;
     this.boka = boka;
     sleepTime = generator.nextInt(20000);
     opt.createPlan();
-    avbokningar_upptagna = boka.vill_avboka; 
+    avbokningar_upptagna = ds.vill_avboka; 
+
 }
 
     @Override

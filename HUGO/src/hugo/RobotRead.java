@@ -1,9 +1,8 @@
 package hugo;
 
+
 import java.util.*;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
+import java.io.*;
 import javax.microedition.io.*;
 import javax.bluetooth.*;
 import java.lang.*; //objekt.org.springframework.util.StringUtils;
@@ -14,14 +13,20 @@ public class RobotRead implements Runnable {
     private static Random generator = new Random();
     private ControlUI cui;
     private DataStore ds;
+
     public Boka boka;
     ArrayList<Character> instruktioner; 
     ArrayList<Character> svarRobot = new ArrayList();
+
+
+    public Boka b1;
+
     String körorder = "w";
     char meddelande_in;
     int k = 0;
     
     int [] från_robot = new int [2];
+
     
     public RobotRead(DataStore ds, ControlUI cui){
         this.cui=cui;
@@ -38,11 +43,9 @@ public class RobotRead implements Runnable {
     public void run(){
         try{
             
-            cui.appendStatus("RobotRead kommer att köra i " + sleepTime + " millisekunder.");
+           // cui.appendStatus("RobotRead kommer att köra i " + sleepTime + " millisekunder.");
             cui.appendStatus("Körorder är: " + körorder);
-            
-          
-            
+
             //Skapar anslutning. Siffrorna är mottagarens, fås via browse.
             //Siffran efter kolon är kanalen som används. 
             StreamConnection anslutning = (StreamConnection)
@@ -104,9 +107,11 @@ public class RobotRead implements Runnable {
         }catch(Exception e) {  
             System.out.print("RobotRead" + e.toString());   
         }
+
         
         //Nödvändig kommentar?
         cui.appendStatus("RobotRead är nu klar");
+
     }
 
 }
