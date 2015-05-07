@@ -35,6 +35,10 @@ public class DataStore {
     int[] vilkanoder;
     int[] kopiaVilkanoder;
     boolean networkRead1;
+
+    boolean robotflaga;
+    boolean bokaflag;
+
     double startnodX=0;        // För att spara startplatsens x-koordinat
     double startnodY=0;        //För att spara startnodens y-koordinat
     int raknare =0;
@@ -62,6 +66,7 @@ public class DataStore {
 
         networkRead = false;
         updateUIflag = false;
+        bokaflag = false;
 
     }
 

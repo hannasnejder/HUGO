@@ -36,6 +36,7 @@ public class OptOnline {//implements Runnable {
             //position 0 och 2 är bågar
             //Denna måste göras om. Vet inte vad som ska ske i detta läge...  
             //ämdra villkor till 2 när boka ändras
+
             if (ds.raknare == 2) {
                 ds.startnod = ds.okej[1];
                 opt.createPlan();
@@ -51,11 +52,13 @@ public class OptOnline {//implements Runnable {
                 //System.out.println("Inne i andra if-satsen");
                 ds.kopiaAvstand = ds.avstand;
                 for (int m = 0; m < 98; m++) {
+
                     
                     //System.out.println("Startnod är "+ds.startnod);
                     //System.out.println("boka.ejokej[1] är "+boka.ejokej[1]);
                     
                     if ((ds.startpunkt[m] == ds.startnod) && ds.slutpunkt[m] == ds.ejokej[1]) {
+
                         ds.kopiaAvstand[m] = 100000;
                     }
                 }
@@ -65,7 +68,7 @@ public class OptOnline {//implements Runnable {
 
             //Sedan vill vi omoptimera utefter vad roboten skickar
         } catch (Exception e) {
-            System.out.println("det här är e " + e.toString());
+            System.out.println("det här är e, OptOnline " + e.toString());
         }
     }
 }

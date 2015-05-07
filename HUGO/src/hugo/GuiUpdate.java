@@ -18,7 +18,7 @@ public class GuiUpdate implements Runnable{
         x=opt.noder_boka;
         //kör=ds.resurser_boka;
         sleepTime = generator.nextInt(20000);
-        }
+    }
         
         @Override 
         public void run(){
@@ -26,6 +26,7 @@ public class GuiUpdate implements Runnable{
                // cui.appendStatus("GuiUpdate startar och kommer att köra i " + sleepTime + " millisekunder. ");
                 cui.appendStatus("Hyllplatser: " + ds.besoknoder);
                 cui.appendStatus("Resurser: " + Arrays.toString(ds.resurser_boka));
+
                 //System.out.println(Arrays.toString(x));
               
                 while(ds.updateUIflag==false){
@@ -60,12 +61,13 @@ public class GuiUpdate implements Runnable{
                 }
       
             //startnodens koordinater finns sparade i startnodX och startnodY i DataStore
-               System.out.println("startnodX "+ds.startnodX);
-                System.out.println("startnodY "+ds.startnodY);
+               //System.out.println("startnodX "+ds.startnodX);
+                //System.out.println("startnodY "+ds.startnodY);
                 ds.robotX=ds.startnodX; //Nod 1s x-koordinat 
                 ds.robotY=ds.startnodY;
                 
         }catch(InterruptedException exception){
+            
         }
         cui.appendStatus("GuiUpdate är nu klar! ");
         }

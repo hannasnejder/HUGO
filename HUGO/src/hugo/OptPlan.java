@@ -148,7 +148,7 @@ public class OptPlan {
                         kortast_avstand = nuvarande_langd;
                         narmaste_nod = ds.kopiaVilkanoder[p];
                         snabbaste_rutten[k + 1] = narmaste_nod;
-                                               
+
                     }
                 }
             }
@@ -169,6 +169,7 @@ public class OptPlan {
         }
 
         for (int k = 0; k < (order_kvar); k++) {
+
 
             // Set up network
             for (int i = 0; i < ds.nodes; i++) {
@@ -228,7 +229,7 @@ public class OptPlan {
 
                         //System.out.println("Arc: " + j);
                         ds.arcColor[j] = 1;
-                                         
+
                         //Sparar de länkar vi vill boka i en array
                         länkar_boka[c] = j + (ds.nodes + 1);
                         //System.out.println("Boka av c " +  länkar_boka[c]);

@@ -19,35 +19,37 @@ public class Avboka implements Runnable {
 
     private int sleepTime;
     private static Random generator = new Random();
-    private DataStore ds;
+    //private DataStore ds;
     public OptPlan opt;
-    private Boka boka;
-    int avbokningar_upptagna[];
 
-/*public Avboka() {
-    sleepTime = generator.nextInt(2000);
-}*/
+    public Boka boka;
+    int y [];
+    int avbokningar_upptagna [];
+    
 
-public Avboka(OptPlan opt, DataStore ds) {
+
+
+public Avboka(OptPlan opt, RobotRead rr, Boka boka) {
     this.opt = opt;
-    //this.boka = b1;
+    this.boka = boka;
     sleepTime = generator.nextInt(20000);
     opt.createPlan();
-    avbokningar_upptagna = ds.vill_avboka;
+    avbokningar_upptagna = boka.vill_avboka; 
+
 }
+
     @Override
     public void run() {
     try {
         int i;
         TimeUnit.SECONDS.sleep(4);
         
-      //  System.out.println("\n" + "Vi ska avboka " + Arrays.toString(avbokningar_upptagna));
+        System.out.println("\n" + "Vi ska avboka " + Arrays.toString(avbokningar_upptagna));
         
         for(i = 0; i < 2; i++){
             //If-sats som rensar bort de nollor som skickas med från Boka
             //Avbokar bara de positioner som inte innehåller noll
             if(avbokningar_upptagna[i] != 0){  
-                System.out.println("\n" + "Vi ska avboka " + Arrays.toString(avbokningar_upptagna));
                 
                 String url = "http://tnk111.n7.se/free.php?user=3&resource=" + avbokningar_upptagna[i];
                 URL urlobjekt = new URL(url);
