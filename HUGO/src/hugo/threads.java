@@ -5,40 +5,68 @@ public class threads {
     DataStore ds;
     ControlUI cui;
     OptPlan opt;
+    MapPanel map;
+    
     Boka boka;
-
+    RobotRead rr;
+    Avboka avboka; 
+    
     RobotRead r1;
-    Thread t1;
+    Thread t1; 
+    
     GuiUpdate g1;
-    Thread t2;
-    Boka b1;
+    Thread t2;   
+    
+    Boka b1; 
     Thread t3;
-    Avboka avboka;
+    
+    Avboka b2; 
     Thread t4;
+    
     OptOnline o1;
     Thread t5;
+    
+    AvbokaRobot b3;
+    Thread t6;
 
-    threads(DataStore ds, ControlUI cui) {
-
+    
+    threads(DataStore ds, ControlUI cui){
         this.ds = ds;
-        this.cui = cui;
-        this.b1 = b1;
+        this.cui = cui; 
+
         opt = new OptPlan(this.ds, this.opt);
         opt.createPlan();
 
-        boka = new Boka(this.opt);
-        boka.run();
+        boka = new Boka(opt, this.ds); 
+        //boka = new Boka(this.opt, this.ds );
+        boka.run();        
 
         r1 = new RobotRead(this.ds, this.cui);
+        //r1 = new RobotRead (this.ds, this.cui, this.b1); 
         t1 = new Thread(r1);
-        g1 = new GuiUpdate(this.ds, this.cui);
-        t2 = new Thread(g1);
-        b1 = new Boka(opt);
+        
+        g1 = new GuiUpdate (this.ds, this.cui, this.opt);
+        t2 = new Thread(g1); 
+        
+        //b1 = new Boka(opt, this.ds); 
+        b1 = new Boka (this.opt, this.ds); 
+        //b1 = new Boka(opt, ds);
+        //b1 = new Boka(opt, this.ds);
         t3 = new Thread(b1);
-        avboka = new Avboka(opt, r1, b1);
-        t4 = new Thread(avboka);
+
+        b2 = new Avboka(this.opt, rr, boka);
+        //b2 = new Avboka (opt, rr, boka);
+        //b2 = new Avboka (opt, r1, boka);
+        //b2 = new Avboka(opt, r1, b1);
+        //b2 = new Avboka (this.ds, this.opt);
+        t4 = new Thread(b2); 
+        
         o1 = new OptOnline(this.opt, this.boka, this.ds);
         t5 = new Thread(o1);
+        
+        //b3 = new AvbokaRobot(r1, ds);
+        b3 = new AvbokaRobot(rr, this.ds); 
+        t6 = new Thread(b3);
 
     }
 
@@ -49,6 +77,7 @@ public class threads {
         t3.start();
         t4.start();
         t5.start();
+        t6.start();
     }
 
     //Gör det möjligt till att stoppa trådarna
@@ -63,3 +92,4 @@ public class threads {
 
     }
 }
+

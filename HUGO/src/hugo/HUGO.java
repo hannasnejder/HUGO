@@ -5,6 +5,9 @@ public class HUGO {
     DataStore ds;
     ControlUI cui;
     OptPlan opt;
+    MapPanel map;
+    //GuiUpdate gui;
+
     Boka boka;
 
     HUGO() {
@@ -26,7 +29,7 @@ public class HUGO {
         cui.showStatus();
 
         opt = new OptPlan(ds, opt);
-        boka = new Boka(opt);
+        boka = new Boka(opt, ds);
 
     }
 

@@ -12,13 +12,16 @@ public class OptPlan {
     public List<Vertex> nodes;
     private List<Edge> edges;
     private DataStore ds;
+    private ControlUI cui;
     public Boka b;
-    int[] länkar_boka = new int[10000];
-    int[] noder_boka = new int[10000];
-    int[] resurser_boka = new int[10000];
+    int[] länkar_boka = new int[1000];
+    int[] noder_boka = new int[1000]; 
+    int[] resurser_boka = new int[1000];
+
     int c = 0;
     int z = 0;
     String boka;
+
 
     public OptPlan() {
 
@@ -37,7 +40,7 @@ public class OptPlan {
 
         nodes = new ArrayList<Vertex>();
         edges = new ArrayList<Edge>();
-
+        
         int dist = 0;
 
         // Sätter upp nätverket
@@ -84,7 +87,7 @@ public class OptPlan {
         Graph graph = new Graph(nodes, edges);
         DijkstraAlgorithm dij = new DijkstraAlgorithm(graph);
 
-        int nuvarande_langd = 0;
+        int nuvarande_langd;
         int kortast_avstand;
         int narmaste_nod = ds.startnod;
         int[] test_vag = new int[1000];
@@ -97,7 +100,7 @@ public class OptPlan {
 
         }
 
-        for (int k = 0; k < ds.antalnoderfil; k++) {
+        for (int k = 0; k < ds.antalnoderfil; k++) { 
             test_vag[0] = narmaste_nod;
             kortast_avstand = 100000;
 
@@ -107,13 +110,19 @@ public class OptPlan {
                 }
             }
 
-            for (int p = 0; p < ds.antalnoderfil; p++) {
+    for (int p = 0; p < ds.antalnoderfil; p++) {
 
-                //System.out.println("p är" + p);
+                //System.out.println("p är " + p);
                 test_vag[1] = kvarvarande_hyllor[p];
+                
                 if ((test_vag[0] != test_vag[1]) && (test_vag[1] != 0)) {
                     dij.execute(nodes.get(test_vag[0] - 1));
                     //System.out.println("Där vi startar " + test_vag[0]);
+
+                    //System.out.println("Där vi startar " + test_vag[0]);
+
+                    //System.out.println("Där vi startar " + test_vag[0]);
+
                     LinkedList<Vertex> path = dij.getPath(nodes.get(test_vag[1] - 1));
                     //System.out.println("Hit vi vill gå " + test_vag[1]);
 
@@ -138,9 +147,16 @@ public class OptPlan {
                         kortast_avstand = nuvarande_langd;
                         narmaste_nod = ds.vilkanoder[p];
                         snabbaste_rutten[k + 1] = narmaste_nod;
+
+                        //System.out.println("rutten är"+snabbaste_rutten[p+1]);
+                        //System.out.println("Det kortaste avståndet är " + kortast_avstand);
+                        //System.out.println("Den närmsta noden är " + narmaste_nod);
+                        
+                        //System.out.println("Det kortaste avståndet är " + kortast_avstand);
+                        //System.out.println("Den närmsta noden är " + narmaste_nod);
+
                         //System.out.println("Det kortaste avståndet är" + kortast_avstand);
                         //System.out.println("Den närmsta noden är" + narmaste_nod);
-
                     }
                 }
             }
@@ -150,7 +166,7 @@ public class OptPlan {
         snabbaste_rutten[ds.antalnoderfil + 1] = ds.slutnod;
 
         for (int j = 0; j < ds.antalnoderfil + 2; j++) {
-            System.out.println("Rutten är " + snabbaste_rutten[j]);
+            //System.out.println("Rutten är " + snabbaste_rutten[j]);
         }
 
         for (int k = 0; k < (ds.antalnoderfil + 1); k++) {
@@ -194,18 +210,18 @@ public class OptPlan {
             LinkedList<Vertex> path = dijkstra.getPath(nodes.get(snabbaste_rutten[k + 1] - 1));
 
             // Get shortest path
-            for (int i = 0; i < path.size(); i++) {
+            for (int i = 1; i < path.size(); i++) {
                 //System.out.println("Noder som ska passeras: " + path.get(i));
                 ds.nodeColor[Integer.parseInt(path.get(i).getId()) - 1] = 1;
 
                 //Sparar de noder vi vill boka i en array
                 noder_boka[z] = Integer.parseInt(path.get(i).getId());
                 z = z + 1;
-
             }
 
             // Undirected arcs in the shortest path
             for (int i = 0; i < path.size() - 1; i++) {
+
                 for (int j = 0; j < ds.arcs; j++) {
                     if (ds.arcStart[j] == Integer.parseInt(path.get(i).getId())
                             && ds.arcEnd[j] == Integer.parseInt(path.get(i + 1).getId())
@@ -214,7 +230,7 @@ public class OptPlan {
 
                         //System.out.println("Arc: " + j);
                         ds.arcColor[j] = 1;
-
+                       
                         //Sparar de länkar vi vill boka i en array
                         länkar_boka[c] = j + 38;
                         //System.out.println("Boka av c " +  länkar_boka[c]);
@@ -224,23 +240,20 @@ public class OptPlan {
                         //boka = Arrays.toString(länkar_boka);
                     }
                 }
-            }
+                }
         }
-        int j = 1;
-        int k = 0;
+      
+        int j = 0;
+        int k = 1;
         //Skapa en ny for-loop för att kombinera länkar och noder till resurser_boka
         for (int i = 0; i < 100; i++) {
-
+            resurser_boka[j] = länkar_boka[i];
+            
             resurser_boka[k] = noder_boka[i];
 
-            resurser_boka[j] = länkar_boka[i];
-
-            k = k + 2;
-            j = j + 2;
-
-        }
-
-    }
-
+           k = k+2;
+           j = j+2;
+           
+        }      
+  }   
 }
-
