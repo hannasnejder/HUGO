@@ -23,9 +23,9 @@ public class Avboka implements Runnable {
 
     private int sleepTime;
     private static Random generator = new Random();
-    private DataStore ds;
+    public DataStore ds;
     public OptPlan opt;
-    private Boka b1;
+    public Boka boka;
     int y [];
     int avbokningar_upptagna [];
     
@@ -36,12 +36,12 @@ public Avboka() {
     sleepTime = generator.nextInt(20000);
 }
 
-public Avboka(OptPlan opt, RobotRead r1, Boka b1) {
+public Avboka(OptPlan opt, Boka boka) {
     this.opt = opt;
-    this.b1 = b1;
+    this.boka = boka;
     sleepTime = generator.nextInt(20000);
     opt.createPlan();
-    avbokningar_upptagna = b1.vill_avboka;
+    avbokningar_upptagna = boka.vill_avboka;
 }
 
     @Override

@@ -18,17 +18,17 @@ public class AvbokaRobot implements Runnable{
     private int sleepTime;
     private static Random generator = new Random();
     private DataStore ds;   //borde inter behövas
-    public RobotRead r1;
+    public RobotRead rr;
     //public Boka b1;
-    int x [];
+    String x;
     //int avbokningar_upptagna [];
     
     public AvbokaRobot() {
     //this.cui = cui;
     sleepTime = generator.nextInt(20000);
 }
-    public AvbokaRobot(RobotRead r1, DataStore ds) {
-    this.r1 = r1;
+    public AvbokaRobot(RobotRead rr, DataStore ds) {
+    this.rr = rr;
     this.ds = ds;
     sleepTime = generator.nextInt(20000);
     //r1.run();
@@ -36,6 +36,7 @@ public class AvbokaRobot implements Runnable{
     //System.out.println("från robot i avbokarobot" + Arrays.toString(r1.från_robot));
     //System.out.println("x: " + Arrays.toString(x));
     //avbokningar_upptagna = b1.vill_avboka;
+    x = rr.från_robot;
 }
     
         @Override
@@ -49,7 +50,7 @@ public void run() {
             }*/
                 
         while(ds.robotflaga == true){
-            x = r1.från_robot;
+            //x = r1.från_robot;
         System.out.println("x avbokarobot: " + x);
         Thread.sleep(sleepTime/20);
         
@@ -59,7 +60,7 @@ public void run() {
 
             //Avboka http = new Avboka();
             
-            String url = "http://tnk111.n7.se/free.php?user=3&resource=" + x[i];
+            String url = "http://tnk111.n7.se/free.php?user=3&resource=" + 2;
             URL urlobjekt = new URL(url);
             HttpURLConnection anslutning = (HttpURLConnection)
             urlobjekt.openConnection();

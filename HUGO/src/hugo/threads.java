@@ -8,6 +8,7 @@ public class threads {
 
     MapPanel map;
     Boka boka;
+    RobotRead rr;
 
 
     RobotRead r1;
@@ -39,16 +40,16 @@ public class threads {
         boka= new Boka(this.opt, this.ds );
         //boka.run();        
         
-        r1 = new RobotRead (this.ds, this.cui/*, this.b1*/);
+        r1 = new RobotRead (this.ds, this.cui, this.boka);
         t1 = new Thread(r1);
-        g1 = new GuiUpdate (this.ds,this.cui, this.opt);
+        g1 = new GuiUpdate (this.ds, this.cui, this.opt);
         t2 = new Thread(g1); 
-        b1 = new Boka(opt, ds);
+        b1 = new Boka(opt, this.ds);
         t3 = new Thread(b1);
 
-        b2 = new Avboka(opt, r1, b1);
+        b2 = new Avboka(opt, boka);
         t4 = new Thread(b2); 
-        b3 = new AvbokaRobot(r1, ds);
+        b3 = new AvbokaRobot(r1, this.ds);
         t6 = new Thread(b3);
         o1 = new OptOnline(this.opt, this.boka, this.ds);
         t5 = new Thread(o1);

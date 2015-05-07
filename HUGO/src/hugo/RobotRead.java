@@ -10,19 +10,20 @@ import java.util.Random;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
-import java.util.Arrays;
-import java.util.StringTokenizer;
+import java.util.*;
+//import java.util.StringTokenizer;
 import javax.microedition.io.*;
 import javax.bluetooth.*;
 import java.lang.*; //objekt.org.springframework.util.StringUtils;
-import java.util.concurrent.TimeUnit;
+//import java.util.concurrent.TimeUnit;
 
 public class RobotRead implements Runnable {
     private int sleepTime;
     private static Random generator = new Random();
     private ControlUI cui;
     private DataStore ds;
-    public Boka b1;
+    public Boka boka;
+    ArrayList<Character>instruktioner;
     //char l = 'l';
     //char r = 'r';
     //int [] körorder = {2, 3, 4, 7};
@@ -31,14 +32,17 @@ public class RobotRead implements Runnable {
     //String körorder;
     char meddelande_in;
     int k = 0;
+    int [] avbokning_från_robot;
+    //String meddelande_in;
     
-    int [] från_robot = new int [2];
+    String från_robot = " ";
     
-    public RobotRead(DataStore ds, ControlUI cui/*, Boka b1*/){
+    public RobotRead(DataStore ds, ControlUI cui, Boka boka){
         this.cui=cui;
         this.ds=ds;
-        //this.b1 = b1;
+        this.boka = boka;
         sleepTime=generator.nextInt(20000);
+        instruktioner = new ArrayList<Character>();
         //Nedan är ett försök till att koppla och hämta info från boka
         //det blir fel och körordern är null om inte den hårdkodade används.
         //Det som behövs är att i threads säga att RobotRead behöver info även från boka
@@ -50,7 +54,6 @@ public class RobotRead implements Runnable {
     @Override
     public void run(){
         try{
-            
             cui.appendStatus("RobotRead kommer att köra i " + sleepTime + " millisekunder.");
             cui.appendStatus("Körorder är: " + körorder);
             
@@ -75,36 +78,53 @@ public class RobotRead implements Runnable {
                     Thread.sleep(sleepTime/20);
                     ds.updateUIflag=true; 
                     
-                    StringTokenizer st = new StringTokenizer(körorder, " ");
+                    
+                    for (int m = 0; m < instruktioner.size(); m++){
+                        bluetooth_ut.println(instruktioner.get(m));
+                    }
+                    /*StringTokenizer st = new StringTokenizer(körorder, " ");
                     //Det vi skickar till roboten
                     while (st.hasMoreTokens()){
                         //TimeUnit.SECONDS.sleep(2);
                         bluetooth_ut.println(st.nextToken());   
                         
-                        /*String meddelande_in = bluetooth_in.readLine();     //Mottaget meddelande när ubuntu används
-                        System.out.println("Mottaget: " + meddelande_in);*/
+                        /*meddelande_in = bluetooth_in.readLine();     //Mottaget meddelande när ubuntu används
+                        System.out.println("Mottaget: " + meddelande_in);
                         
                         //Mottaget meddelande från robot
-                    }    //char c = bluetooth_in.charAt(0);
+                    }*/  
                     int c;            //Använd då vi skickar med robot
                     while((c = bluetooth_in.read()) != -1){
                         meddelande_in = (char) c;
                         System.out.println("Mottaget: " + meddelande_in);
-                        
-                        
-                        från_robot[k] = meddelande_in;
-                        k = k +1;
-                        
-                        //ds.robotflaga = true;*/
-                    }    
+                        //från_robot = Character.toString(meddelande_in);
+                        k = k + 1; 
+                        System.out.println("k: " + k);
+                        break;
+                    } 
                     
-                    
-                    System.out.println(Arrays.toString(från_robot));
+                    /*for(int m = 0; m < körorder.length(); m++){
+                            från_robot = från_robot + " " + meddelande_in;
+                            System.out.println("från roboten kommer:" + från_robot);
+                        }
+                                       
+                    System.out.println("ute efter mottagande av meddelande");
+                    if(k == 2){
+                        System.out.println("inne i min if");
+                        for(int t = 0; t<=körorder.length(); t++){
+                            System.out.println("inne i for efter if");            
+                            avbokning_från_robot[t] = boka.resurser[t];
+                        
+                        }
+                        ds.robotflaga = true;
+                        System.out.println("Ute ur for och flagan har satts till true");
+                    } */
+                    //}
 
                  cui.appendStatus("Körinstruktioner: " + körorder);
                  anslutning.close();
                  //i++;
-                 ds.robotflaga = true;
+                 //ds.robotflaga = true;
                 }               
                 //System.out.println("från_robot: " + Arrays.toString(från_robot));
             //ds.updateUIflag = true;
