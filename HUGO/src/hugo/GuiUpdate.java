@@ -10,13 +10,11 @@ public class GuiUpdate implements Runnable{
         public OptPlan opt;
  
         int x [] = new int[10000];
-        int kör [];
         
     public GuiUpdate(DataStore ds, ControlUI cui, OptPlan opt){
         this.cui = cui;
         this.ds = ds;
         x=opt.noder_boka;
-        kör=opt.resurser_boka;
         sleepTime = generator.nextInt(20000);
     }
         
@@ -40,7 +38,7 @@ public class GuiUpdate implements Runnable{
                          Thread.sleep(sleepTime/20);
                             
                     ds.robotY = j*14.33;
-                    robotrörelse(); 
+                    robotrorelse(); 
                     
                     //System.out.println("while går " + j + " varv");
                     j++;
@@ -54,7 +52,7 @@ public class GuiUpdate implements Runnable{
                     // System.out.println("Går igenom while-loopen " + k);
         
                     ds.robotX = k*14;
-                    robotrörelse(); 
+                    robotrorelse(); 
                     //System.out.println("k " + k );
                     k++;    
                 }
@@ -72,7 +70,7 @@ public class GuiUpdate implements Runnable{
         }
 
      //Uppdaterar kartan med robotens position
-    public void robotrörelse(){
+    public void robotrorelse(){
         cui.repaint();
     }      
 }

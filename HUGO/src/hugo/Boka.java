@@ -13,18 +13,9 @@ import java.util.concurrent.TimeUnit;
 
 public class Boka implements Runnable{
     ArrayList<Integer> bokningar = new ArrayList();
-    
-    //e = new Integer();
-
-    //upprättar en anslutning till den server som beskrivs
-    //av URL-strängen
-    //Ett HTTPmeddelande skickas från klienten till servern,
-    //servern gör en tolkning av klientens meddelande, returnerar en statuskod
-    //statuskod 200, den har förstått
-    //överför den info som beskriver Lius webbsida
     private int sleepTime;
     private static Random generator = new Random();
-    private DataStore ds;
+    public DataStore ds;
     public OptPlan opt;
     int resurser [];
     int okej [] = new int[2];
@@ -45,18 +36,15 @@ public class Boka implements Runnable{
     int j = 0;
 
     
-/*public Boka(){
-    sleepTime = generator.nextInt(20000);
-}*/
 
-
-public Boka(OptPlan opt, DataStore ds) {
+public Boka(OptPlan opt, DataStore ds, drive dr) {
     this.opt = opt;
     this.ds = ds;
+    this.dr = dr;
     sleepTime = generator.nextInt(20000);
     opt.createPlan();  
     resurser = opt.resurser_boka;
-    dr = new drive();
+    //dr = new drive();
     //ArrayList bokningar = new ArrayList();
 }   
 
@@ -117,7 +105,7 @@ public void run() {
                
                     if(indexfound> -1){
                         System.out.println("Denna båge är okej att boka ");
-                        bokningar.add(resurser[i]);                       
+                        ds.bokningar.add(resurser[i]);                       
                         okej[i] = resurser[i];
                         j++;
                         
@@ -130,9 +118,9 @@ public void run() {
             }
 
 
-        if(bokningar.size() == 2){
+        if(ds.bokningar.size() == 2){
             ds.bokaflag = true;
-            System.out.println("Bokaflaga blir sann: " + bokningar.size());
+            System.out.println("Bokaflaga blir sann: " + ds.bokningar.size());
         }
         
         if(j < 2){
@@ -144,8 +132,8 @@ public void run() {
         System.out.println("J= " + j);
          
         test = " ";
-        for(int k = 0; k < bokningar.size(); k++){
-                test = test + " " + bokningar.get(k).toString();
+        for(int k = 0; k < ds.bokningar.size(); k++){
+                test = test + " " + ds.bokningar.get(k).toString();
             }
         
         

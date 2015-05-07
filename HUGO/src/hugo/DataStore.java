@@ -1,6 +1,7 @@
 package hugo;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Arrays;
 
@@ -40,6 +41,8 @@ public class DataStore {
 
     double startnodX=0;        // För att spara startplatsens x-koordinat
     double startnodY=0;        //För att spara startnodens y-koordinat
+    
+     ArrayList<Integer> bokningar = new ArrayList();
 
     public DataStore() {
         // Initialize the datastore with fixed size arrays for storing the network data
@@ -60,6 +63,7 @@ public class DataStore {
         networkRead = false;
         updateUIflag = false;
         bokaflag = false;
+        
 
     }
 

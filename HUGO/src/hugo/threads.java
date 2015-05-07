@@ -6,6 +6,7 @@ public class threads {
     ControlUI cui;
     OptPlan opt;
     MapPanel map;
+    drive dr;
     
     Boka boka;
     RobotRead rr;
@@ -37,7 +38,7 @@ public class threads {
         opt = new OptPlan(this.ds, this.opt);
         opt.createPlan();
 
-        boka = new Boka(opt, this.ds); 
+        boka = new Boka(opt, this.ds, this.dr); 
         //boka = new Boka(this.opt, this.ds );
         boka.run();        
 
@@ -49,7 +50,7 @@ public class threads {
         t2 = new Thread(g1); 
         
         //b1 = new Boka(opt, this.ds); 
-        b1 = new Boka (this.opt, this.ds); 
+        b1 = new Boka (this.opt, this.ds, this.dr); 
         //b1 = new Boka(opt, ds);
         //b1 = new Boka(opt, this.ds);
         t3 = new Thread(b1);

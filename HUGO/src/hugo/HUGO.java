@@ -28,8 +28,6 @@ public class HUGO {
         cui.setVisible(true);
         cui.showStatus();
 
-        opt = new OptPlan(ds, opt);
-        boka = new Boka(opt, ds);
 
     }
 
