@@ -19,10 +19,10 @@ public class RobotRead implements Runnable {
     private static Random generator = new Random();
     private ControlUI cui;
     private DataStore ds;
-    String körorder = "23, r, 55, l";
+    //String körorder = "23, r, 55, l";
     
     //Påhittad array med bekräftad körorder från robot
-    int [] från_robot = {40, 5, 49, 11};
+    //int [] från_robot = {40, 5, 49, 11};
     
     public RobotRead(DataStore ds, ControlUI cui){
         this.cui=cui;
@@ -32,11 +32,9 @@ public class RobotRead implements Runnable {
     @Override
     public void run(){
         try{
-            cui.appendStatus("RobotRead kommer att köra i " + sleepTime + " millisekunder.");
+            /*cui.appendStatus("RobotRead kommer att köra i " + sleepTime + " millisekunder.");
             
-          
-            
-            /*//Skapar anslutning. Siffrorna är mottagarens, fås via browse.
+            //Skapar anslutning. Siffrorna är mottagarens, fås via browse.
             //Siffran efter kolon är kanalen som används. 
             StreamConnection anslutning = (StreamConnection)
             Connector.open("btspp://00809824156D:8");

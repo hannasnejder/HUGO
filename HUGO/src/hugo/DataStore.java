@@ -36,7 +36,12 @@ public class DataStore {
     boolean networkRead1;
     double startnodX=0;        // För att spara startplatsens x-koordinat
     double startnodY=0;        //För att spara startnodens y-koordinat
-
+    int raknare = 0;
+    int [] okej;
+    int [] ejokej;
+    int [] vill_avboka;
+    int [] resurser_boka;
+    
     public DataStore() {
         // Initialize the datastore with fixed size arrays for storing the network data
         nodes = 0;
@@ -52,6 +57,10 @@ public class DataStore {
         avstand = new int[1000];
         kopiaAvstand = new int[1000];
         vilkanoder = new int[1000];
+        okej = new int[2];
+        ejokej = new int[2];
+        vill_avboka = new int[2];
+        resurser_boka = new int[1000];
 
         networkRead = false;
         updateUIflag = false;

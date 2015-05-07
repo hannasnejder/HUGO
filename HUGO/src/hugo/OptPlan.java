@@ -16,7 +16,6 @@ public class OptPlan {
     public Boka b;
     int[] länkar_boka = new int[1000];
     int[] noder_boka = new int[1000]; 
-    int[] resurser_boka = new int[1000];
 
     int c = 0;
     int z = 0;
@@ -231,15 +230,9 @@ public class OptPlan {
                         ds.arcColor[j] = 1;
                        
                        //Sparar de länkar vi vill boka i en array
-                        länkar_boka[c] = j+39;
+                        länkar_boka[c] = j+ (ds.nodes + 1);
 
                         c = c + 1;                      
-
-                        //Sparar de länkar vi vill boka i en array
-                        länkar_boka[c] = j + 38;
-                        //System.out.println("Boka av c " +  länkar_boka[c]);
-
-                        c = c + 1;
 
                         //boka = Arrays.toString(länkar_boka);
                     }
@@ -251,9 +244,9 @@ public class OptPlan {
         int k = 1;
         //Skapa en ny for-loop för att kombinera länkar och noder till resurser_boka
         for (int i = 0; i < 100; i++) {
-            resurser_boka[j] = länkar_boka[i];
+            ds.resurser_boka[j] = länkar_boka[i];
             
-            resurser_boka[k] = noder_boka[i];
+            ds.resurser_boka[k] = noder_boka[i];
 
            k = k+2;
            j = j+2;
