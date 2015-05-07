@@ -7,6 +7,7 @@ import java.net.URL;
 import java.util.Random;
 import javax.swing.*;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 //Länk för att kolla bokningarna http://tnk111.n7.se/list.php 
 public class Boka implements Runnable {
@@ -17,38 +18,28 @@ public class Boka implements Runnable {
     //servern gör en tolkning av klientens meddelande, returnerar en statuskod
     //statuskod 200, den har förstått
     //överför den info som beskriver Lius webbsida
-    private int sleepTime;
-    private static Random generator = new Random();
-    private DataStore ds;
+    //private int sleepTime;
+    //private static Random generator = new Random();
+    public DataStore ds;
     public OptPlan opt;
     public drive dr;
     public Avboka avboka;
+    public OptOnline online;
 
-    //int x [];
-    int x [] = {42, 6};
     ArrayList<Integer> bokningar = new ArrayList();
 
     String test;
     
-    int [] okej = new int[2];
-    int [] ejokej = new int[2];
-    int [] vill_avboka = new int[2];
+    //int [] vill_avboka = new int[2];
     int indexfound;
-    
-    //Räknar antal gånger något gick att boka
-    int j = 0;
-
-    
-public Boka(){
-    sleepTime = generator.nextInt(20000);
-}
-
-public Boka(OptPlan opt) {
+  
+public Boka(OptPlan opt, DataStore ds, OptOnline online) {
         this.opt = opt;
-        sleepTime = generator.nextInt(20000);
+        this.online = online;
+        this.ds = ds;
+       // sleepTime = generator.nextInt(20000);
         opt.createPlan();
-        x = opt.resurser_boka;
-
+       
         test = " ";
 
         dr = new drive();
@@ -60,25 +51,28 @@ public void run() {
     try {
         int i;
         //Vad ska vi ha för fördröjning så den kör efter optimeringen? 
-        Thread.sleep(sleepTime/20);
+       TimeUnit.SECONDS.sleep(1);
         
         String url = "http://tnk111.n7.se";
         URL urlobjekt = new URL(url);
         HttpURLConnection anslutning = (HttpURLConnection)
         urlobjekt.openConnection();
-        //System.out.println(anslutning);
-        //System.out.println(urlobjekt);
-       
+               
         //Här fås svarsmeddelande från bokningsservern, här skiter det sig 
         //om internet är av. Går till catch
         int mottagen_status = anslutning.getResponseCode();
 
+        System.out.print("Resurserna är:" );
+        for (int h = 0; h < ds.resurser_boka.length; h++){
+            
+            System.out.print(ds.resurser_boka[h]+ " ");
+        }
         //Håller på och letar efter vad jag vill ha i if satsen
         //Kanske ska vända den så den gör något om anslutning saknas, annars som vanligt
         if(mottagen_status == 200  ){
             for(i = 0; i < 2; i++){
 
-                url = "http://tnk111.n7.se/reserve.php?user=3&resource=" + x[i];
+                url = "http://tnk111.n7.se/reserve.php?user=3&resource=" + ds.resurser_boka[i];
                 URL urlobjekt1 = new URL(url);
                 HttpURLConnection anslutning1 = (HttpURLConnection)
                 urlobjekt1.openConnection();
@@ -104,13 +98,13 @@ public void run() {
                
                     if(indexfound> -1){
                         System.out.println("Denna båge är okej att boka ");
-                        bokningar.add(x[i]);                       
-                        okej[i] = x[i];
-                        j++;
+                        bokningar.add(ds.resurser_boka[i]);                       
+                        ds.okej[i] = ds.resurser_boka[i];
+                        ds.raknare++;
                         
                     }else{
                         System.out.println("Bågen är upptagen, försök igen! ");
-                        ejokej[i] = x[i];
+                        ds.ejokej[i] = ds.resurser_boka[i];
                     }     
                 }  
             inkommande.close();
@@ -125,18 +119,22 @@ public void run() {
         
         //Kollar om under 2 resurser gick att boka, avbokar de som gick
         //att boka isåfall
-        if(j < 2){
-            for(int m = 0; m < okej.length; m++){
-                vill_avboka[m] = okej[m]; 
+        if(ds.raknare < 2){
+            for(int m = 0; m < ds.okej.length; m++){
+                ds.vill_avboka[m] = ds.okej[m]; 
             }
+            online.newOpt();
+        
+        }else{
+            online.newOpt();
         }
 
         test = " ";
         for(int k = 0; k < bokningar.size(); k++ ){
             test = test + " " + bokningar.get(k).toString();
         }
-        System.out.println("\n" + "Okej " + Arrays.toString(okej));
-        System.out.println("Inte okej " + Arrays.toString(ejokej));
+        System.out.println("\n" + "Okej " + Arrays.toString(ds.okej));
+        System.out.println("Inte okej " + Arrays.toString(ds.ejokej));
 
     }catch (Exception e) { System.out.print("det här är e " + e.toString());
 

@@ -10,22 +10,22 @@ public class GuiUpdate implements Runnable{
         public OptPlan opt;
  
         int x [] = new int[10000];
-        int kör [];
+        //int kör [];
         
     public GuiUpdate(DataStore ds, ControlUI cui, OptPlan opt){
         this.cui = cui;
         this.ds = ds;
         x=opt.noder_boka;
-        kör=opt.resurser_boka;
+        //kör=ds.resurser_boka;
         sleepTime = generator.nextInt(20000);
         }
         
         @Override 
         public void run(){
             try{
-                cui.appendStatus("GuiUpdate startar och kommer att köra i " + sleepTime + " millisekunder. ");
+               // cui.appendStatus("GuiUpdate startar och kommer att köra i " + sleepTime + " millisekunder. ");
                 cui.appendStatus("Hyllplatser: " + ds.besoknoder);
-                cui.appendStatus("Resurser: " + Arrays.toString(kör));
+                cui.appendStatus("Resurser: " + Arrays.toString(ds.resurser_boka));
                 //System.out.println(Arrays.toString(x));
               
                 while(ds.updateUIflag==false){

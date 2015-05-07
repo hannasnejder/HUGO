@@ -6,11 +6,8 @@
 package hugo;
 
 import java.util.Random;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
-import java.util.Arrays;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 import javax.microedition.io.*;
 import javax.bluetooth.*;
 
@@ -19,10 +16,10 @@ public class RobotRead implements Runnable {
     private static Random generator = new Random();
     private ControlUI cui;
     private DataStore ds;
-    String körorder = "23, r, 55, l";
+   // String körorder = "23, r, 55, l";
     
     //Påhittad array med bekräftad körorder från robot
-    int [] från_robot = {40, 5, 49, 11};
+    //int [] från_robot = {40, 5, 49, 11};
     
     public RobotRead(DataStore ds, ControlUI cui){
         this.cui=cui;
@@ -32,7 +29,7 @@ public class RobotRead implements Runnable {
     @Override
     public void run(){
         try{
-            cui.appendStatus("RobotRead kommer att köra i " + sleepTime + " millisekunder.");
+            //cui.appendStatus("RobotRead kommer att köra i " + sleepTime + " millisekunder.");
             
           
             
@@ -76,7 +73,7 @@ public class RobotRead implements Runnable {
         }catch(Exception e) {  System.out.print(e.toString());   
         }
         
-    cui.appendStatus("RobotRead är nu klar");
+    //cui.appendStatus("RobotRead är nu klar");
     }
 
 }

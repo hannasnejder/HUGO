@@ -4,8 +4,9 @@ public class HUGO {
 
     DataStore ds;
     ControlUI cui;
-    OptPlan opt;
-    MapPanel map;
+    //OptPlan opt;
+    //MapPanel map;
+    //OptOnline online;
     //GuiUpdate gui;
 
     Boka boka;
@@ -20,16 +21,17 @@ public class HUGO {
         ds.setFileName1("../../HUGO/orderfil.txt");
         ds.readNet1();
 
-        ds.setFileName2("../../HUGO/avstandsmatris.txt");
-        ds.readNet2();
+       // ds.setFileName2("../../HUGO/avstandsmatris.txt");
+       // ds.readNet2();
 
         cui = new ControlUI(ds);
 
         cui.setVisible(true);
         cui.showStatus();
 
-        opt = new OptPlan(ds, opt);
-        boka = new Boka(opt);
+        //opt = new OptPlan(ds, opt);
+        //boka = new Boka(opt, online);
+        //online = new OptOnline(opt, ds);
 
     }
 
