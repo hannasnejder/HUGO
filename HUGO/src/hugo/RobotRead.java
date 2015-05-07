@@ -7,11 +7,8 @@ package hugo;
 
 
 import java.util.Random;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
+import java.io.*;
 import java.util.*;
-//import java.util.StringTokenizer;
 import javax.microedition.io.*;
 import javax.bluetooth.*;
 import java.lang.*; //objekt.org.springframework.util.StringUtils;
@@ -23,12 +20,14 @@ public class RobotRead implements Runnable {
     private ControlUI cui;
     private DataStore ds;
     public Boka boka;
-    ArrayList<Character>instruktioner;
+    public drive d;
+    //ArrayList<Character>instruktioner;
     //char l = 'l';
     //char r = 'r';
     //int [] körorder = {2, 3, 4, 7};
     //String körorder = "23 7 55 16";
-    String körorder = "w";
+
+    //String körorder = "w";
     //String körorder;
     char meddelande_in;
     int k = 0;
@@ -42,7 +41,7 @@ public class RobotRead implements Runnable {
         this.ds=ds;
         this.boka = boka;
         sleepTime=generator.nextInt(20000);
-        instruktioner = new ArrayList<Character>();
+        //instruktioner = d.instruktioner;
         //Nedan är ett försök till att koppla och hämta info från boka
         //det blir fel och körordern är null om inte den hårdkodade används.
         //Det som behövs är att i threads säga att RobotRead behöver info även från boka
@@ -54,11 +53,11 @@ public class RobotRead implements Runnable {
     @Override
     public void run(){
         try{
+
             cui.appendStatus("RobotRead kommer att köra i " + sleepTime + " millisekunder.");
-            cui.appendStatus("Körorder är: " + körorder);
-            
-          
-            
+
+            cui.appendStatus("Körorder är: " + d.instruktioner);
+
             //Skapar anslutning. Siffrorna är mottagarens, fås via browse.
             //Siffran efter kolon är kanalen som används. 
             StreamConnection anslutning = (StreamConnection)
@@ -71,16 +70,17 @@ public class RobotRead implements Runnable {
             
             
             while(ds.bokaflag == true){
-                if(anslutning == null || körorder == null){
+                if(anslutning == null || d.instruktioner == null){
                     cui.appendStatus("Koppling saknas eller körorder är tom");
                     break;
                 }else 
                     Thread.sleep(sleepTime/20);
                     ds.updateUIflag=true; 
                     
-                    
-                    for (int m = 0; m < instruktioner.size(); m++){
-                        bluetooth_ut.println(instruktioner.get(m));
+                    System.out.println("Instruktioner: " + d.instruktioner);
+                    for (int m = 0; m < d.instruktioner.size(); m++){
+                        bluetooth_ut.println(d.instruktioner.get(m));
+                        System.out.println("Instruktioner är: " + d.instruktioner);
                     }
                     /*StringTokenizer st = new StringTokenizer(körorder, " ");
                     //Det vi skickar till roboten
@@ -92,7 +92,7 @@ public class RobotRead implements Runnable {
                         System.out.println("Mottaget: " + meddelande_in);
                         
                         //Mottaget meddelande från robot
-                    }*/  
+                    }  */
                     int c;            //Använd då vi skickar med robot
                     while((c = bluetooth_in.read()) != -1){
                         meddelande_in = (char) c;
@@ -121,18 +121,20 @@ public class RobotRead implements Runnable {
                     } */
                     //}
 
-                 cui.appendStatus("Körinstruktioner: " + körorder);
+                 cui.appendStatus("Körinstruktioner: " + d.instruktioner);
                  anslutning.close();
                  //i++;
                  //ds.robotflaga = true;
                 }               
                 //System.out.println("från_robot: " + Arrays.toString(från_robot));
             //ds.updateUIflag = true;
-        }catch(Exception e) {  System.out.print("RobotRead" + e.toString());   
+        }catch(Exception e) {  
+            System.out.print("RobotRead" + e.toString());   
 
         }
-        
-    cui.appendStatus("RobotRead är nu klar");
+
+    //cui.appendStatus("RobotRead är nu klar");
+
     }
 
 }

@@ -5,10 +5,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Random;
-import javax.swing.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
@@ -26,22 +22,17 @@ public class Avboka implements Runnable {
     public DataStore ds;
     public OptPlan opt;
     public Boka boka;
-    int y [];
-    int avbokningar_upptagna [];
+    //int y [];
+    //int avbokningar_upptagna [];
     
-    //En array för att testa att boka de resurser vi vill
-    //int [] s = {1, 39, 5, 48};
 
-public Avboka() {
-    sleepTime = generator.nextInt(20000);
-}
 
-public Avboka(OptPlan opt, Boka boka) {
+public Avboka(OptPlan opt, Boka boka, DataStore ds) {
     this.opt = opt;
-    this.boka = boka;
+    //this.boka = boka;
+    this.ds = ds;
     sleepTime = generator.nextInt(20000);
     opt.createPlan();
-    avbokningar_upptagna = boka.vill_avboka;
 }
 
     @Override
@@ -50,14 +41,13 @@ public Avboka(OptPlan opt, Boka boka) {
         int i;
         TimeUnit.SECONDS.sleep(4);
         
-        System.out.println("\n" + "Vi ska avboka " + Arrays.toString(avbokningar_upptagna));
         
         for(i = 0; i < 2; i++){
             //If-sats som rensar bort de nollor som skickas med från Boka
             //Avbokar bara de positioner som inte innehåller noll
-            if(avbokningar_upptagna[i] != 0){  
+            if(ds.vill_avboka[i] != 0){  
                 
-                String url = "http://tnk111.n7.se/free.php?user=3&resource=" + avbokningar_upptagna[i];
+                String url = "http://tnk111.n7.se/free.php?user=3&resource=" + ds.vill_avboka[i];
                 URL urlobjekt = new URL(url);
                 HttpURLConnection anslutning = (HttpURLConnection)
                 urlobjekt.openConnection();

@@ -5,11 +5,21 @@ import java.util.*;
 public class drive {
 
     private DataStore ds;
-    private Boka b;
+    private Boka b1;
     ArrayList<Integer> bokningar;
     int riktning, kartaA, kartaB;
-    private double X1, Y1, X2, Y2, deltaX, deltaY, olddeltaX, olddeltaY;
-
+    private double X1, Y1, X2, Y2, X3, Y3, X4, Y4, deltaX, deltaY, olddeltaX, olddeltaY;
+    ArrayList<Character> instruktioner = new ArrayList();
+    char f, r, l, b, v, h, q, y; 
+    //f fram
+    //r höger
+    //l vänster
+    //b backa - används ej än
+    //v vända - används ej än
+    //h hyllplats
+    //q hemma vid start
+    //y hyllplats passerat 
+    
     //Default-konstruktor 
     public drive() {
         ds = new DataStore();
@@ -20,7 +30,6 @@ public class drive {
 
     }
 
-    //KVAR ATT GÖRA ÄR ATT SKICKA 
     //Robotens riktning vid start 
     public void startRiktning() {
 
@@ -62,29 +71,34 @@ public class drive {
                 if (deltaY > 0) {
                     if (olddeltaY > 0) {
                         riktning = 1;
+                        //fram
+                        instruktioner.add(f);
                     } else if (olddeltaY < 0) {
                         riktning = -1;
-                        //Skicka 
+                        //fram
+                        instruktioner.add(f); 
                     } else if (olddeltaX > 0) {
                         //vänster
-                        //Skicka
+                        instruktioner.add(l);
                     } else if (olddeltaX < 0) {
                         //höger
-                        //Skicka
+                        instruktioner.add(r); 
                     }
                 } else if (deltaY < 0) {
                     if (olddeltaY > 0) {
                         riktning = -1;
-                        //Skicka
+                        //fram
+                        instruktioner.add(f);
                     } else if (olddeltaY < 0) {
                         riktning = 1;
-                        //Skicka
+                        //fram
+                        instruktioner.add(f); 
                     } else if (olddeltaX > 0) {
                         //höger
-                        //Skicka
+                        instruktioner.add(r);
                     } else if (olddeltaX < 0) {
                         //vänster
-                        //Skicka 
+                        instruktioner.add(l); 
                     }
                 }
             }
@@ -94,33 +108,65 @@ public class drive {
                 if (deltaX > 0) {
                     if (olddeltaX > 0) {
                         riktning = 1;
-                        //Skicka
+                        //fram
+                        instruktioner.add(f);
                     } else if (olddeltaX < 0) {
                         riktning = -1;
+                        //fram
+                        instruktioner.add(f); 
                     } else if (olddeltaY > 0) {
                         //höger
-                        //Skicka
+                        instruktioner.add(r); 
                     } else if (olddeltaY < 0) {
                         //vänster
-                        //Skicka
+                        instruktioner.add(l); 
                     }
                 } else if (deltaX < 0) {
                     if (olddeltaX > 0) {
                         riktning = -1;
-                        //Skicka
+                        //fram
+                        instruktioner.add(f);
                     } else if (olddeltaX < 0) {
                         riktning = 1;
-                        //Skicka
+                        //fram
+                        instruktioner.add(f);
                     } else if (olddeltaY > 0) {
                         //vänster
-                        //Skicka
+                        instruktioner.add(l); 
                     } else if (olddeltaY < 0) {
                         //höger 
-                        //Skicka
+                        instruktioner.add(r); 
                     }
                 }
             }
+            
+            //Positioner på hyllplatser 
+            for (int n = 0; n < ds.nodes; n++) {
 
+                //Positionen på hyllplatsen vi vill besöka  
+                if(ds.vilkanoder[m] == n){ 
+                    
+                    X3 = ds.nodeX[n];
+                    Y3 = ds.nodeY[n];
+                    break;
+                }
+                //Position på hyllplatser som ska passeras
+                else 
+                    
+                    X4 = ds.nodeX[n];
+                    Y4 = ds.nodeY[n];
+            }
+            
+            //Kolla om hyllplatserna besöks
+            if(X2 == X3 && Y2 == Y3){
+                //framme vid hyllplats
+                instruktioner.add(h); 
+            }
+            else if(X2 == X4 && Y2 == Y4){
+                //åk förbi hyllplats
+                instruktioner.add(y);
+            }
+            
             //Uppdatera X1 och Y1
             X1 = X2;
             Y1 = Y2;
@@ -129,8 +175,9 @@ public class drive {
             olddeltaX = deltaX;
             olddeltaY = deltaY;
             
-            //KVAR ATT GÖRA ÄR ATT TA HÄNSYN TILL HYLLPLATSERNA 
-
+            //System.out.println("Instruktioner inne i for drive: " + instruktioner);
         }
+        
+        //System.out.println("Instruktioner från drive: " + instruktioner);
     }
 }

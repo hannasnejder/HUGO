@@ -14,61 +14,31 @@ import java.util.concurrent.TimeUnit;
 public class Boka implements Runnable{
     ArrayList<Integer> bokningar = new ArrayList();
     
-    //e = new Integer();
-
-    //upprättar en anslutning till den server som beskrivs
-    //av URL-strängen
-    //Ett HTTPmeddelande skickas från klienten till servern,
-    //servern gör en tolkning av klientens meddelande, returnerar en statuskod
-    //statuskod 200, den har förstått
-    //överför den info som beskriver Lius webbsida
-    private int sleepTime;
-    private static Random generator = new Random();
-    private DataStore ds;
+    public DataStore ds;
     public OptPlan opt;
-    int resurser [];
-    int okej [] = new int[2];
-    int ejokej [] = new int[2];
-    int vill_avboka [] = new int [2];
-
     public drive dr;
-    public Avboka avboka;
+    public OptOnline online;
 
-    //int x [];
-    //int x [] = {39, 6};
     String test;
+    boolean kolla_anslutning;
     
+    //int [] vill_avboka = new int[2];
     int indexfound;
-    
-    //Räknar antal gånger något gick att boka
-    int j = 0;
-
-    
-public Boka(){
-    sleepTime = generator.nextInt(20000);
-}
-
-
-public Boka(OptPlan opt, DataStore ds) {
+  
+public Boka(OptPlan opt, DataStore ds, OptOnline online) {
     this.opt = opt;
     this.ds = ds;
-    sleepTime = generator.nextInt(20000);
-    opt.createPlan();  
-    resurser = opt.resurser_boka;
+    this.online = online;
+    opt.createPlan();
+    //int x [];
+    //int x [] = {39, 6};
+    test = " ";
     dr = new drive();
-    //ArrayList bokningar = new ArrayList();
-}   
+    
+    // resurser = opt.resurser_boka;
+ 
+}
 
-/*public Boka(OptPlan opt) {
-        this.opt = opt;
-        sleepTime = generator.nextInt(20000);
-        opt.createPlan();
-        x = opt.resurser_boka;
-
-        test = " ";
-
-        dr = new drive();
-}*/
 
     @Override
 public void run() {
@@ -76,29 +46,23 @@ public void run() {
     try {
         int i;
         //Vad ska vi ha för fördröjning så den kör efter optimeringen? 
-        TimeUnit.SECONDS.sleep(1);
+
+       TimeUnit.SECONDS.sleep(1);
+       System.out.println("vi vill avboka");
         
+            for(i = 0; i < 2; i++){
 
-        //Behövs fördröjnng till bokningen??
-        //Thread.sleep(sleepTime/20);
+                String url = "http://tnk111.n7.se/reserve.php?user=3&resource=" + ds.resurser_boka[i];
+                URL urlobjekt1 = new URL(url);
+                HttpURLConnection anslutning = (HttpURLConnection)
+                urlobjekt1.openConnection();
+  
+                System.out.println("\nAnropar: " + url);
 
-
-        for(i = 0; i < 2; i++){
-             
-            String url = "http://tnk111.n7.se/reserve.php?user=3&resource=" + resurser[i];
-            URL urlobjekt = new URL(url);
-            HttpURLConnection anslutning = (HttpURLConnection)
-            urlobjekt.openConnection();
-           
-            System.out.println("\nAnropar: " + url);
-   
-            int mottagen_status = anslutning.getResponseCode();
-            
-            System.out.println("Statuskod: " + mottagen_status);
-
-
+                int mottagen_status = anslutning.getResponseCode();
                 BufferedReader inkommande = new BufferedReader(new
                 InputStreamReader(anslutning.getInputStream()));
+                System.out.println("Statuskod: ");
 
 
                 String inkommande_text;
@@ -116,13 +80,15 @@ public void run() {
                
                     if(indexfound> -1){
                         System.out.println("Denna båge är okej att boka ");
-                        bokningar.add(resurser[i]);                       
-                        okej[i] = resurser[i];
-                        j++;
-                        
+
+                        bokningar.add(ds.resurser_boka[i]);                       
+                        ds.okej[i] = ds.resurser_boka[i];
+                        ds.raknare++;
+                      
                     }else{
                         System.out.println("Bågen är upptagen, försök igen! ");
-                        ejokej[i] = resurser[i];
+                        ds.ejokej[i] = ds.resurser_boka[i];
+
                     }     
                 }  
             inkommande.close();
@@ -134,29 +100,34 @@ public void run() {
             System.out.println("Bokaflaga blir sann: " + bokningar.size());
         }
         
-        if(j < 2){
-            for(int m = 0; m < okej.length; m++){
-                //J sätts till 0 varje varv, fixa!!!!!!!!!
-                vill_avboka[m] = okej[m]; 
-            }
-        }
-        System.out.println("J= " + j);
-         
-        test = " ";
-        for(int k = 0; k < bokningar.size(); k++){
-                test = test + " " + bokningar.get(k).toString();
-            }
-        
-        
-        System.out.println("test är: " + test);
-        System.out.println("okej" + Arrays.toString(okej));
-        System.out.println("ejokej" + Arrays.toString(ejokej));
-               
         //Om anslutning saknas ska körinstrutionerna skickas utan bokning
         //Har än så länge bara försökt få den att gå in om anslutning saknas
-       /* else{
+        /*else{
             System.out.println("Anslutning till bokningsservern saknas");
          }*/
+        
+        //Kollar om under 2 resurser gick att boka, avbokar de som gick
+        //att boka isåfall
+        System.out.println("\n" + "Räknare: " + ds.raknare);
+        if(ds.raknare < 2){
+            for(int m = 0; m < ds.okej.length; m++){
+                ds.vill_avboka[m] = ds.okej[m]; 
+
+            }
+            online.newOpt();
+        
+        }else{
+            online.newOpt();
+        }
+              
+        test = " ";
+
+        for(int k = 0; k < bokningar.size(); k++ ){
+            test = test + " " + bokningar.get(k).toString();
+        }
+        System.out.println("\n" + "Okej " + Arrays.toString(ds.okej));
+        System.out.println("Inte okej " + Arrays.toString(ds.ejokej));
+
     }catch (Exception e) { System.out.print("det här är e, Boka " + e.toString());
 
         }
