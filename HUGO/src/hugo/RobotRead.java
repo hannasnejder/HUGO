@@ -20,8 +20,8 @@ public class RobotRead implements Runnable {
     private ControlUI cui;
     private DataStore ds;
     public Boka boka;
-    public drive d;
-    //ArrayList<Character>instruktioner;
+    public drive dr;
+    ArrayList<Character>instruktioner;
     //char l = 'l';
     //char r = 'r';
     //int [] körorder = {2, 3, 4, 7};
@@ -32,6 +32,7 @@ public class RobotRead implements Runnable {
     char meddelande_in;
     int k = 0;
     int [] avbokning_från_robot;
+    String lek;
     //String meddelande_in;
     
     String från_robot = " ";
@@ -41,23 +42,28 @@ public class RobotRead implements Runnable {
         this.ds=ds;
         this.boka = boka;
         sleepTime=generator.nextInt(20000);
-        //instruktioner = d.instruktioner;
+        //instruktioner = dr.instruktioner;
         //Nedan är ett försök till att koppla och hämta info från boka
         //det blir fel och körordern är null om inte den hårdkodade används.
         //Det som behövs är att i threads säga att RobotRead behöver info även från boka
         //Det leder till fel vid körning av programet samt att ControlUI blir arg ibland
-        //Detta behöver lösas på något sätt när körinstruktionerna från filen drive ska in.
-        
+        //Detta behöver lösas på något sätt när körinstruktionerna från filen drive ska in.  
     }
- 
+  
     @Override
     public void run(){
         try{
 
             cui.appendStatus("RobotRead kommer att köra i " + sleepTime + " millisekunder.");
 
-            cui.appendStatus("Körorder är: " + d.instruktioner);
-
+            cui.appendStatus("Körorder är: " + instruktioner);
+            
+            /*lek = " ";
+            for(int k = 0; k < dr.instruktioner.size(); k++ ){
+            lek = lek + " " + dr.instruktioner.get(k).toString();
+            }
+            System.out.println("lek blir efter for" + lek);*/
+            
             //Skapar anslutning. Siffrorna är mottagarens, fås via browse.
             //Siffran efter kolon är kanalen som används. 
             StreamConnection anslutning = (StreamConnection)
@@ -69,20 +75,20 @@ public class RobotRead implements Runnable {
             InputStreamReader(anslutning.openInputStream()));
             
             
-            while(ds.bokaflag == true){
-                if(anslutning == null || d.instruktioner == null){
+            while(ds.robotskickaflaga == true){
+                if(anslutning == null || instruktioner == null){
                     cui.appendStatus("Koppling saknas eller körorder är tom");
                     break;
                 }else 
                     Thread.sleep(sleepTime/20);
                     ds.updateUIflag=true; 
                     
-                    System.out.println("Instruktioner: " + d.instruktioner);
-                    for (int m = 0; m < d.instruktioner.size(); m++){
-                        bluetooth_ut.println(d.instruktioner.get(m));
-                        System.out.println("Instruktioner är: " + d.instruktioner);
+                    System.out.println("Instruktioner: " + instruktioner);
+                    for (int m = 0; m < instruktioner.size(); m++){
+                        bluetooth_ut.println(instruktioner.get(m));
+                        System.out.println("Instruktioner är: " + instruktioner);
                     }
-                    /*StringTokenizer st = new StringTokenizer(körorder, " ");
+                    /*StringTokenizer st = new StringTokenizer(lek, " ");
                     //Det vi skickar till roboten
                     while (st.hasMoreTokens()){
                         //TimeUnit.SECONDS.sleep(2);
@@ -121,7 +127,7 @@ public class RobotRead implements Runnable {
                     } */
                     //}
 
-                 cui.appendStatus("Körinstruktioner: " + d.instruktioner);
+                 cui.appendStatus("Körinstruktioner: " + lek);
                  anslutning.close();
                  //i++;
                  //ds.robotflaga = true;

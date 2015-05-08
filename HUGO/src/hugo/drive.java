@@ -11,6 +11,7 @@ public class drive {
     private double X1, Y1, X2, Y2, X3, Y3, X4, Y4, deltaX, deltaY, olddeltaX, olddeltaY;
     ArrayList<Character> instruktioner = new ArrayList();
     char f, r, l, b, v, h, q, y; 
+    public RobotRead rr;
     //f fram
     //r höger
     //l vänster
@@ -19,6 +20,7 @@ public class drive {
     //h hyllplats
     //q hemma vid start
     //y hyllplats passerat 
+    String lek;
     
     //Default-konstruktor 
     public drive() {
@@ -33,9 +35,9 @@ public class drive {
     //Robotens riktning vid start 
     public void startRiktning() {
 
-        //Österut
+        while(ds.bokaflag == true){ //Österut
         riktning = 1;
-
+        System.out.println("inne i drive efter flaga är san och riktning är 1");
         //Startnodens position 
         for (int i = 0; i < ds.nodes; i++) {
 
@@ -176,8 +178,13 @@ public class drive {
             olddeltaY = deltaY;
             
             //System.out.println("Instruktioner inne i for drive: " + instruktioner);
+            lek = " ";
+            for(int k = 0; k < instruktioner.size(); k++ ){
+            lek = lek + " " + instruktioner.get(k).toString();          
         }
-        
-        //System.out.println("Instruktioner från drive: " + instruktioner);
+            ds.robotskickaflaga = true;
+        }
+        }      
+        System.out.println("Instruktioner från drive: " + lek);
     }
 }

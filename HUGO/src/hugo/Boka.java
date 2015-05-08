@@ -48,7 +48,7 @@ public void run() {
         //Vad ska vi ha för fördröjning så den kör efter optimeringen? 
 
        TimeUnit.SECONDS.sleep(1);
-       System.out.println("vi vill avboka");
+       //System.out.println("vi vill avboka");
         
             for(i = 0; i < 2; i++){
 
@@ -93,7 +93,6 @@ public void run() {
                 }  
             inkommande.close();
             }
-
 
         if(bokningar.size() == 2){
             ds.bokaflag = true;
