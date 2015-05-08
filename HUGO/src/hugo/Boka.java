@@ -12,38 +12,36 @@ import java.util.concurrent.TimeUnit;
 //Länk för att kolla bokningarna http://tnk111.n7.se/list.php 
 
 public class Boka implements Runnable{
-    ArrayList<Integer> bokningar = new ArrayList();
-    
+
+
     public DataStore ds;
     public OptPlan opt;
+    int resurser [];
     public drive dr;
     public OptOnline online;
-
-    String test;
-    boolean kolla_anslutning;
     
-    //int [] vill_avboka = new int[2];
+    String test;
+
     int indexfound;
   
-public Boka(OptPlan opt, DataStore ds, OptOnline online) {
+
+public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr) {
+    this.online = online;
     this.opt = opt;
     this.ds = ds;
-    this.online = online;
-    opt.createPlan();
-    //int x [];
-    //int x [] = {39, 6};
-    test = " ";
-    dr = new drive();
+    this.dr = dr;
+
+    String test;
     
-    // resurser = opt.resurser_boka;
- 
-}
+    int indexfound;
+}   
+
 
 
     @Override
-public void run() {
+    public void run() {
     
-    try {
+     try {
         int i;
         //Vad ska vi ha för fördröjning så den kör efter optimeringen? 
 
@@ -80,8 +78,7 @@ public void run() {
                
                     if(indexfound> -1){
                         System.out.println("Denna båge är okej att boka ");
-
-                        bokningar.add(ds.resurser_boka[i]);                       
+                        ds.bokningar.add(ds.resurser_boka[i]);                       
                         ds.okej[i] = ds.resurser_boka[i];
                         ds.raknare++;
                       
@@ -94,23 +91,19 @@ public void run() {
             inkommande.close();
             }
 
-        if(bokningar.size() == 2){
+
+        if(ds.bokningar.size() == 2){
             ds.bokaflag = true;
-            System.out.println("Bokaflaga blir sann: " + bokningar.size());
+            System.out.println("Bokaflaga blir sann: " + ds.bokningar.size());
         }
-        
-        //Om anslutning saknas ska körinstrutionerna skickas utan bokning
-        //Har än så länge bara försökt få den att gå in om anslutning saknas
-        /*else{
-            System.out.println("Anslutning till bokningsservern saknas");
-         }*/
-        
+
         //Kollar om under 2 resurser gick att boka, avbokar de som gick
         //att boka isåfall
         System.out.println("\n" + "Räknare: " + ds.raknare);
         if(ds.raknare < 2){
             for(int m = 0; m < ds.okej.length; m++){
                 ds.vill_avboka[m] = ds.okej[m]; 
+                dr.startRiktning();
 
             }
             online.newOpt();
@@ -121,11 +114,9 @@ public void run() {
               
         test = " ";
 
-        for(int k = 0; k < bokningar.size(); k++ ){
-            test = test + " " + bokningar.get(k).toString();
+        for(int k = 0; k < ds.bokningar.size(); k++ ){
+            test = test + " " + ds.bokningar.get(k).toString();
         }
-        System.out.println("\n" + "Okej " + Arrays.toString(ds.okej));
-        System.out.println("Inte okej " + Arrays.toString(ds.ejokej));
 
     }catch (Exception e) { System.out.print("det här är e, Boka " + e.toString());
 

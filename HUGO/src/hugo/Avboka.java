@@ -23,7 +23,7 @@ public class Avboka implements Runnable {
     public OptPlan opt;
     public Boka boka;
     //int y [];
-    //int avbokningar_upptagna [];
+    int avbokningar_upptagna [];
     
 
 
@@ -33,6 +33,8 @@ public Avboka(OptPlan opt, Boka boka, DataStore ds) {
     this.ds = ds;
     sleepTime = generator.nextInt(20000);
     opt.createPlan();
+    avbokningar_upptagna = ds.vill_avboka; 
+
 }
 
     @Override

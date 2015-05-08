@@ -22,18 +22,9 @@ public class OptPlan {
     int z = 0;
     String boka;
 
-
-    public OptPlan() {
-
-    }
-
     public OptPlan(DataStore ds, OptPlan opt) {
         this.ds = ds;
 
-    }
-
-    public OptPlan(Boka b) {
-        this.b = b;
     }
 
     public void createPlan() {
