@@ -12,25 +12,19 @@ public class OptPlan {
     public List<Vertex> nodes;
     private List<Edge> edges;
     private DataStore ds;
+    private ControlUI cui;
     public Boka b;
-    int[] länkar_boka = new int[10000];
-    int[] noder_boka = new int[10000];
-    int[] resurser_boka = new int[10000];
+    int[] länkar_boka = new int[1000];
+    int[] noder_boka = new int[1000]; 
+    //int[] resurser_boka = new int[1000];
+    int order_kvar;
     int c = 0;
     int z = 0;
     String boka;
 
-    public OptPlan() {
-
-    }
-
     public OptPlan(DataStore ds, OptPlan opt) {
         this.ds = ds;
 
-    }
-
-    public OptPlan(Boka b) {
-        this.b = b;
     }
 
     public void createPlan() {
@@ -92,8 +86,13 @@ public class OptPlan {
         int[] snabbaste_rutten = new int[100];
         snabbaste_rutten[0] = ds.startnod;
 
+        //Se över detta!! Verkar inte funka som jag vill....
         for (int n = 0; n < ds.antalnoderfil; n++) {
-            kvarvarande_hyllor[n] = ds.vilkanoder[n];
+           // System.out.println("kopiaVilkanoder är "+ds.kopiaVilkanoder[n]);
+            if(ds.kopiaVilkanoder[n]!=0){
+            kvarvarande_hyllor[n] = ds.kopiaVilkanoder[n];
+           // System.out.println("kvarvarande_hyllor är "+kvarvarande_hyllor[n]+" och n är "+n);
+            }
 
         }
 
@@ -106,19 +105,18 @@ public class OptPlan {
                     kvarvarande_hyllor[n] = 0;
                 }
             }
-
+            order_kvar = 0;
     for (int p = 0; p < ds.antalnoderfil; p++) {
 
+                //System.out.println("p är " + p);
                 test_vag[1] = kvarvarande_hyllor[p];
+                
                 if ((test_vag[0] != test_vag[1]) && (test_vag[1] != 0)) {
                     dij.execute(nodes.get(test_vag[0] - 1));
-
-                    System.out.println("Där vi startar " + test_vag[0]);
-
                     //System.out.println("Där vi startar " + test_vag[0]);
 
                     LinkedList<Vertex> path = dij.getPath(nodes.get(test_vag[1] - 1));
-                    //System.out.println("Hit vi vill gå " + test_vag[1]);
+                   // System.out.println("Hit vi vill gå " + test_vag[1]);
 
                     //Loopar först igenom vägen(path) som fåtts från dijkstras för att se vilka noder som passeras
                     //loopar sedan igenom arrayerna med alla avstånd
@@ -139,31 +137,29 @@ public class OptPlan {
                     //så sparas det nuvarande avståndet som det kortaste avstånde och noden som gav avståndet
                     if (kortast_avstand > nuvarande_langd) {
                         kortast_avstand = nuvarande_langd;
-                        narmaste_nod = ds.vilkanoder[p];
+                        narmaste_nod = ds.kopiaVilkanoder[p];
                         snabbaste_rutten[k + 1] = narmaste_nod;
-
-                        //System.out.println("rutten är"+snabbaste_rutten[p+1]);
-                        
-                        System.out.println("Det kortaste avståndet är " + kortast_avstand);
-                        System.out.println("Den närmsta noden är " + narmaste_nod);
-
-                        //System.out.println("Det kortaste avståndet är" + kortast_avstand);
-                        //System.out.println("Den närmsta noden är" + narmaste_nod);
-
 
                     }
                 }
             }
 
         }
+        for (int p = 0; p < snabbaste_rutten.length; p++ ){
+            if (snabbaste_rutten[p]!= 0){
+            order_kvar = order_kvar +1;
+            //System.out.println("order kvar = "+order_kvar);
+        }
+        }
+        
         //Rita ut vägen för den snabbaste rutten
-        snabbaste_rutten[ds.antalnoderfil + 1] = ds.slutnod;
+        snabbaste_rutten[order_kvar] = ds.slutnod;
 
-        for (int j = 0; j < ds.antalnoderfil + 2; j++) {
-            System.out.println("Rutten är " + snabbaste_rutten[j]);
+        for (int j = 0; j < order_kvar + 1; j++) {
+            //System.out.println("Rutten är " + snabbaste_rutten[j]);
         }
 
-        for (int k = 0; k < (ds.antalnoderfil + 1); k++) {
+        for (int k = 0; k < (order_kvar); k++) {
 
 
             // Set up network
@@ -204,14 +200,13 @@ public class OptPlan {
             LinkedList<Vertex> path = dijkstra.getPath(nodes.get(snabbaste_rutten[k + 1] - 1));
 
             // Get shortest path
-            for (int i = 0; i < path.size(); i++) {
+            for (int i = 1; i < path.size(); i++) {
                 //System.out.println("Noder som ska passeras: " + path.get(i));
                 ds.nodeColor[Integer.parseInt(path.get(i).getId()) - 1] = 1;
 
                 //Sparar de noder vi vill boka i en array
                 noder_boka[z] = Integer.parseInt(path.get(i).getId());
                 z = z + 1;
-
             }
 
             // Undirected arcs in the shortest path
@@ -227,7 +222,7 @@ public class OptPlan {
                         ds.arcColor[j] = 1;
 
                         //Sparar de länkar vi vill boka i en array
-                        länkar_boka[c] = j + 38;
+                        länkar_boka[c] = j + (ds.nodes + 1);
                         //System.out.println("Boka av c " +  länkar_boka[c]);
 
                         c = c + 1;
@@ -237,24 +232,23 @@ public class OptPlan {
                 }
                 }
         }
-    
-            
-        
-        int j = 1;
-        int k = 0;
-
+      
+        int j = 0;
+        int k = 1;
         //Skapa en ny for-loop för att kombinera länkar och noder till resurser_boka
         for (int i = 0; i < 100; i++) {
+            ds.resurser_boka[j] = länkar_boka[i];
+            
+            ds.resurser_boka[k] = noder_boka[i];
 
-            resurser_boka[k] = noder_boka[i];
-
-            resurser_boka[j] = länkar_boka[i];
-
-            k = k + 2;
-            j = j + 2;
-
+           k = k+2;
+           j = j+2;
+           
         }
-    }
-        //System.out.println("Resurser: " + Arrays.toString(resurser_boka));
+        System.out.print("Resurserna är:" );
+        for (int h = 0; h < ds.resurser_boka.length; h++){
+            
+            System.out.print(ds.resurser_boka[h]+ " ");
+        }
+  }   
 }
-

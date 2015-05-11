@@ -7,80 +7,57 @@ import java.net.URL;
 import java.util.Random;
 import javax.swing.*;
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 //Länk för att kolla bokningarna http://tnk111.n7.se/list.php 
-public class Boka implements Runnable {
 
-    //upprättar en anslutning till den server som beskrivs
-    //av URL-strängen
-    //Ett HTTPmeddelande skickas från klienten till servern,
-    //servern gör en tolkning av klientens meddelande, returnerar en statuskod
-    //statuskod 200, den har förstått
-    //överför den info som beskriver Lius webbsida
-    private int sleepTime;
-    private static Random generator = new Random();
-    private DataStore ds;
+public class Boka implements Runnable{
+
+    public DataStore ds;
     public OptPlan opt;
-
-    public Avboka avboka;
-
+    int resurser [];
     public drive dr;
-    int x[];
-
-    //ArrayList<Integer> bokningar;
-    ArrayList<Integer> bokningar = new ArrayList();
-
+    public OptOnline online;
+    
     String test;
 
-    int[] okej = new int[4];
-    int[] ejokej = new int[4];
-    int[] vill_avboka = new int[4];
     int indexfound;
-    // Arraylist okejavboka = new int[4];
+  
+public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr) {
+    this.online = online;
+    this.opt = opt;
+    this.ds = ds;
+    this.dr = dr;
 
-    int j = 0;
+    String test;
+    
+    int indexfound;
+}   
 
-    //En array för att testa att boka de resurser vi vill
-    //int s[] = {34, 35, 37, 41};
-    public Boka() {
 
-        sleepTime = generator.nextInt(20000);
-    }
-
-    public Boka(OptPlan opt) {
-        this.opt = opt;
-        sleepTime = generator.nextInt(20000);
-        opt.createPlan();
-        x = opt.resurser_boka;
-
-        test = " ";
-
-        dr = new drive();
-    }
 
     @Override
     public void run() {
-        //System.out.println(Arrays.toString(x));
-        try {
-            int i;
-            Thread.sleep(sleepTime / 20);
+    
+     try {
+        int i;
+        //Vad ska vi ha för fördröjning så den kör efter optimeringen? 
 
-        //Behövs fördröjnng till bokningen??
-            //Thread.sleep(sleepTime/20);
-            for (i = 0; i <= 3; i++) {
+       TimeUnit.SECONDS.sleep(1);
+        
+            for(i = 0; i < 2; i++){
 
-        //x = s[i];
-                String url = "http://tnk111.n7.se/reserve.php?user=3&resource=" + x[i];
-                URL urlobjekt = new URL(url);
-                HttpURLConnection anslutning = (HttpURLConnection) urlobjekt.openConnection();
-                
+                String url = "http://tnk111.n7.se/reserve.php?user=3&resource=" + ds.resurser_boka[i];
+                URL urlobjekt1 = new URL(url);
+                HttpURLConnection anslutning = (HttpURLConnection)
+                urlobjekt1.openConnection();
+  
                 System.out.println("\nAnropar: " + url);
 
-                int mottagen_status = anslutning.getResponseCode();
 
-                System.out.println("Statuskod: " + mottagen_status);
+                BufferedReader inkommande = new BufferedReader(new
+                InputStreamReader(anslutning.getInputStream()));
 
-                BufferedReader inkommande = new BufferedReader(new InputStreamReader(anslutning.getInputStream()));
 
                 String inkommande_text;
                 StringBuffer inkommande_samlat = new StringBuffer();
@@ -88,47 +65,55 @@ public class Boka implements Runnable {
                 int linecount = 0;
                 String OK = "OK";
 
-                while ((inkommande_text = inkommande.readLine()) != null) {
 
+                while ((inkommande_text = inkommande.readLine()) != null) {
+                
                     inkommande_samlat.append(inkommande_text);
                     linecount++;
-                    int indexfound = inkommande_text.indexOf(OK);
-
-                    if (indexfound > -1) {
+                    indexfound = inkommande_text.indexOf(OK);
+               
+                    if(indexfound> -1){
                         System.out.println("Denna båge är okej att boka ");
-                        bokningar.add(x[i]);
-                        okej[i] = x[i];
-                        j++;
-
-                    } else {
+                        ds.bokningar.add(ds.resurser_boka[i]);                       
+                        ds.okej[i] = ds.resurser_boka[i];
+                        ds.raknare++;
+                      
+                    }else{
                         System.out.println("Bågen är upptagen, försök igen! ");
-                        ejokej[i] = x[i];
-                        //break;
-                    }
-                }
+                        ds.ejokej[i] = ds.resurser_boka[i];
 
-                inkommande.close();
-
-            }
-            //Kollar om under 4 resurser gick att boka, avbokar de som gick
-            //att boka isåfall
-            if (j < 4) {
-                for (int m = 0; m < okej.length; m++) {
-
-                    vill_avboka[m] = okej[m];
-                }
+                    }     
+                }  
+            inkommande.close();
             }
 
-            //test = " ";
-            for (int k = 0; k < bokningar.size(); k++) {
-                test = test + " " + bokningar.get(k).toString();
-            }
-            //System.out.println("Test: " + test);
-            System.out.println("Okej " + Arrays.toString(okej));
-            System.out.println("Inte okej " + Arrays.toString(ejokej));
 
-        } catch (Exception e) {
-            System.out.print("det här är e " + e.toString());
+        if(ds.bokningar.size() == 2){
+            ds.bokaflag = true;
+            System.out.println("Bokaflaga blir sann: " + ds.bokningar.size());
+        }
+
+        //Kollar om under 2 resurser gick att boka, avbokar de som gick
+        //att boka isåfall
+        if(ds.raknare < 2){
+            for(int m = 0; m < ds.okej.length; m++){
+                ds.vill_avboka[m] = ds.okej[m]; 
+                dr.startRiktning();
+
+            }
+            online.newOpt();
+        
+        }else{
+            online.newOpt();
+        }
+              
+        test = " ";
+
+        for(int k = 0; k < ds.bokningar.size(); k++ ){
+            test = test + " " + ds.bokningar.get(k).toString();
+        }
+
+    }catch (Exception e) { System.out.print("det här är e, Boka " + e.toString());
 
         }
     }
