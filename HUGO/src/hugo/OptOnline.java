@@ -6,6 +6,7 @@
 package hugo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -50,13 +51,20 @@ public class OptOnline {
             } else {
                 System.out.println("Inne i optOnline, else");
                 ds.kopiaAvstand = ds.avstand;
+                    
                 for (int m = 0; m < 98; m++) {
+                    //System.out.println("Inne i optOnline, for");
 
                     //Ändra ejokej[2] till ngt annat!!!
                     //Beror på om båge eller nod bokas först
-                    if ((ds.startpunkt[m] == ds.startnod) && ds.slutpunkt[m] == ds.ejokej[2]) {
-                        //System.out.println("Inne i andra if-satsen");
-                        ds.kopiaAvstand = ds.avstand;
+                    if((ds.startpunkt[m] == ds.startnod) && ds.slutpunkt[m] == ds.okej[1]) {
+                        //System.out.println("Inne i första if i else");
+                        ds.kopiaAvstand[m] = 100000;
+                    } 
+                    
+                    else if((ds.startpunkt[m] == ds.startnod) && ds.slutpunkt[m] == ds.ejokej[1]) {
+                        //System.out.println("Inne i andra if-satsen i else");
+                        ds.kopiaAvstand[m] = 100000;
                     }
                     //System.out.println("Startnod är "+ds.startnod);
                     //System.out.println("boka.ejokej[1] är "+boka.ejokej[1]);
@@ -65,8 +73,10 @@ public class OptOnline {
                 opt.createPlan();
             }
             //Sedan vill vi omoptimera utefter vad roboten skickar
+            
         } catch (Exception e) {
             System.out.println("det här är e, OptOnline " + e.toString());
+            ds.bokaFlag = false;
         }
     }
 }

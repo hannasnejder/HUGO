@@ -4,13 +4,14 @@ import java.util.*;
 
 public class drive {
 
-    private DataStore ds;
-    private Boka b1;
+    public DataStore ds;
+    public Boka boka;
     ArrayList<Integer> bokningar;
     int riktning, kartaA, kartaB;
     private double X1, Y1, X2, Y2, X3, Y3, X4, Y4, deltaX, deltaY, olddeltaX, olddeltaY;
     ArrayList<Character> instruktioner = new ArrayList();
     char f, r, l, b, v, h, q, y; 
+    //int [] bokningar = {39, 27, 42, 2};
     //f fram
     //r höger
     //l vänster
@@ -21,8 +22,8 @@ public class drive {
     //y hyllplats passerat 
     
     //Default-konstruktor 
-    public drive() {
-        ds = new DataStore();
+    public drive(DataStore ds) {
+        this.ds = ds;
         bokningar = new ArrayList<Integer>();
         riktning = 0;
         kartaA = 0;
@@ -33,8 +34,11 @@ public class drive {
     //Robotens riktning vid start 
     public void startRiktning() {
 
+        System.out.println("Hej drive");
         //Österut
         riktning = 1;
+        
+        
 
         //Startnodens position 
         for (int i = 0; i < ds.nodes; i++) {
@@ -176,5 +180,11 @@ public class drive {
             olddeltaY = deltaY;
 
         }
+        String Körorder = " ";
+        for(int k = 0; k < instruktioner.size(); k++ ){
+        Körorder = Körorder + " " + instruktioner.get(k).toString();
+        }
+        System.out.println("Körorder: " + Körorder); 
     }
+    
 }

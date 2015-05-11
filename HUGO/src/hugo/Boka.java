@@ -8,6 +8,7 @@ import java.util.Random;
 import javax.swing.*;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import javax.swing.Timer;
 
 //Länk för att kolla bokningarna http://tnk111.n7.se/list.php 
 
@@ -18,20 +19,28 @@ public class Boka implements Runnable{
     public OptPlan opt;
     public drive dr;
     public OptOnline online;
-
+    public Avboka avboka;
+    
+    private Timer timer;
+    public static final int delay = 1000;
+    
     String test;
     boolean kolla_anslutning;
 
     int indexfound;
+
   
-public Boka(OptPlan opt, DataStore ds, OptOnline online) {
+public Boka(OptPlan opt, DataStore ds, OptOnline online, Avboka avboka, drive dr) {
         this.opt = opt;
         this.ds = ds;
         this.online = online;
+        this.avboka = avboka;
         opt.createPlan();
 
         test = " ";
-        dr = new drive();
+        //dr = new drive();
+        this.dr = dr;
+        ds.bokaFlag = true;
  
 }
 
@@ -40,8 +49,13 @@ public void run() {
     
     try {
         int i;
-        TimeUnit.SECONDS.sleep(1);
-        System.out.println("Vi vill boka: " + Arrays.toString(ds.resurser_boka));
+        TimeUnit.SECONDS.sleep(1);        
+        
+        while(ds.bokaFlag == true){
+        ds.raknare = 0;
+        ds.okej = new int[2];
+        ds.ejokej = new int[2];
+      
             
         for(i = 0; i < 2; i++){
                 String url = "http://tnk111.n7.se/reserve.php?user=3&resource=" + ds.resurser_boka[i];
@@ -74,6 +88,7 @@ public void run() {
                         System.out.println("Denna båge är okej att boka ");
                         bokningar.add(ds.resurser_boka[i]);                       
                         ds.okej[i] = ds.resurser_boka[i];
+                        
                         ds.raknare++;
                         
                     }else{
@@ -84,33 +99,55 @@ public void run() {
             inkommande.close();
             }        
         
+        System.out.println("\n" + "Okej " + Arrays.toString(ds.okej));
+        System.out.println("Inte okej " + Arrays.toString(ds.ejokej));
+        
         //Kollar om under 2 resurser gick att boka, avbokar de som gick
         //att boka isåfall
         System.out.println("\n" + "Räknare: " + ds.raknare);
         if(ds.raknare < 2){
             for(int m = 0; m < ds.okej.length; m++){
-                ds.vill_avboka[m] = ds.okej[m]; 
+                ds.vill_avboka[m] = ds.okej[m];              
              }
-            online.newOpt();
-        
-        }else{
-            online.newOpt();
+            ds.vill_vanta++;
+            avboka.avbokning();
+        }
+        System.out.println("Räknare 2: " + ds.vill_vanta);
+
+        //Skickar bokade resurser till drive om två gick att boka
+        if(ds.raknare == 2){
+            dr.startRiktning();
         }
         
+        //Räknaren vill_vänta avgör om vi ska vänta eller omoptimera
+        //Vill vänta första gången och omoptimera andra gången, nollställs varje 
+        //gång den blir två
+        if(ds.vill_vanta == 1){
+            vanta();
+        }
         
-        if(bokningar.size() == 2){
-            ds.bokaflag = true;
-            System.out.println("Bokaflaga blir sann: " + bokningar.size());
+        if(ds.vill_vanta == 2){
+        System.out.println("Vi ska omoptimera");
+        online.newOpt();
+        ds.vill_vanta = 0;
         }
 
-        for(int k = 0; k < bokningar.size(); k++ ){
-            test = test + " " + bokningar.get(k).toString();
+        //ds.vill_avboka = ds.okej;
+        //avboka.avbokning();
+        
         }
-        System.out.println("\n" + "Okej " + Arrays.toString(ds.okej));
-        System.out.println("Inte okej " + Arrays.toString(ds.ejokej));
-
     }catch (Exception e) { System.out.print("det här är e, Boka " + e.toString());
-
-        }
+            ds.bokaFlag = false;
+        }         
     }
+
+//Metod som anropas när vi vill vänta, tråden sover valfri tid, ska vara 3s
+public void vanta() {
+    try{
+     System.out.println("Avvakta i 10 sekunder");
+     TimeUnit.SECONDS.sleep(10);
+    }catch (Exception e) {System.out.print("det här är e, vänta" + e.toString());
+}
+        
+}
 }

@@ -9,7 +9,7 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 
 
-public class Avboka implements Runnable {
+public class Avboka {
     //upprättar en anslutning till den server som beskrivs
     //av URL-strängen
     //Ett HTTPmeddelande skickas från klienten till servern,
@@ -17,34 +17,25 @@ public class Avboka implements Runnable {
     //statuskod 200, den har förstått
     //överför den info som beskriver Lius webbsida
 
-    private int sleepTime;
-    private static Random generator = new Random();
     public DataStore ds;
     public OptPlan opt;
-    public Boka boka;
 
 
-public Avboka(OptPlan opt, Boka boka, DataStore ds) {
+public Avboka(OptPlan opt, DataStore ds) {
     this.opt = opt;
-    //this.boka = boka;
-    this.ds = ds;
-    sleepTime = generator.nextInt(20000);
-    opt.createPlan();
+    this.ds = ds;   
 }
 
-    @Override
-    public void run() {
+    public void avbokning() {
     try {
         int i;
-        TimeUnit.SECONDS.sleep(4);
  
         for(i = 0; i < 2; i++){
             //If-sats som rensar bort de nollor som skickas med från Boka
             //Avbokar bara de positioner som inte innehåller noll
-            if(ds.vill_avboka[i] != 0){  
-                System.out.println("\n" + "Vi ska avboka: " +( ds.vill_avboka[i])); 
-                
-                String url = "http://tnk111.n7.se/free.php?user=3&resource=" + ds.vill_avboka[i];
+                if(ds.vill_avboka[i] != 0){
+                System.out.println("\n" + "Vi ska avboka: " + Arrays.toString(ds.vill_avboka));//(ds.vill_avboka[i])); 
+                String url = "http://tnk111.n7.se/free.php?user=3&resource=" + ds.vill_avboka[i];//ds.vill_avboka[i];
                 URL urlobjekt = new URL(url);
                 HttpURLConnection anslutning = (HttpURLConnection)
                 urlobjekt.openConnection();
@@ -76,6 +67,5 @@ public Avboka(OptPlan opt, Boka boka, DataStore ds) {
         catch (Exception e) { System.out.print(e.toString()); }
 
     }
-}
 
-    
+}

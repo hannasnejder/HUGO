@@ -25,8 +25,7 @@ public class RobotRead implements Runnable {
     //String körorder;
     char meddelande_in;
     int k = 0;
-    int [] från_robot = new int[1000];
-    
+ 
     
     public RobotRead(DataStore ds, ControlUI cui/*, Boka b1*/){
         this.cui=cui;

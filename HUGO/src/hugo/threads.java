@@ -11,6 +11,7 @@ public class threads {
     RobotRead rr;
     OptOnline online;
     Avboka avboka;
+    drive dr;
 
     //Trådar
     RobotRead r1;
@@ -33,17 +34,19 @@ public class threads {
         this.cui = cui;
         
         opt = new OptPlan(this.ds, this.opt);
-        boka= new Boka(this.opt, this.ds, this.online); 
+        boka= new Boka(this.opt, this.ds, this.online, this.avboka, this.dr); 
         online = new OptOnline(this.opt, this.ds);
+        avboka = new Avboka(this.opt, this.ds);
+        dr = new drive(this.ds);
  
         r1 = new RobotRead (this.ds, this.cui);
         t1 = new Thread(r1);
         g1 = new GuiUpdate (this.ds,this.cui, this.opt);
         t2 = new Thread(g1); 
-        b1 = new Boka(this.opt, this.ds, this.online);
+        b1 = new Boka(this.opt, this.ds, this.online, this.avboka, this.dr);
         t3 = new Thread(b1);;
-        b2 = new Avboka(this.opt, this.boka, this.ds);
-        t4 = new Thread(b2);      
+        //b2 = new Avboka(this.opt, this.ds);
+        //t4 = new Thread(b2);      
         b3 = new AvbokaRobot(rr, this.ds); 
         t5 = new Thread(b3);
     }
@@ -53,7 +56,7 @@ public class threads {
         t1.start();
         t2.start();
         t3.start();
-        t4.start();
+        //t4.start();
         t5.start();
 
     }

@@ -17,8 +17,8 @@ public class OptPlan {
     int[] länkar_boka = new int[1000];
     int[] noder_boka = new int[1000]; 
     int order_kvar;
-    int c = 0;
-    int z = 0;
+    int c;
+    int z;
     String boka;
 
     public OptPlan(DataStore ds, OptPlan opt) {
@@ -32,6 +32,8 @@ public class OptPlan {
         edges = new ArrayList<Edge>();
         
         int dist = 0;
+        int c = 0;
+        int z = 0;
 
         // Sätter upp nätverket
         for (int i = 0; i < ds.nodes; i++) {
@@ -86,11 +88,12 @@ public class OptPlan {
         snabbaste_rutten[0] = ds.startnod;
 
         //Se över detta!! Verkar inte funka som jag vill....
-        for (int n = 0; n < ds.antalnoderfil; n++) {
+        for (int n = 0, k= 0; n < ds.antalnoderfil; n++) {
            // System.out.println("kopiaVilkanoder är "+ds.kopiaVilkanoder[n]);
             if(ds.kopiaVilkanoder[n]!=0){
-            kvarvarande_hyllor[n] = ds.kopiaVilkanoder[n];
-           // System.out.println("kvarvarande_hyllor är "+kvarvarande_hyllor[n]+" och n är "+n);
+            kvarvarande_hyllor[k] = ds.kopiaVilkanoder[n];
+            k++;
+            System.out.println("kvarvarande_hyllor är "+kvarvarande_hyllor[n]+" och n är "+n);
             }
 
         }
@@ -243,10 +246,7 @@ public class OptPlan {
            j = j+2;
            
         }
-        System.out.print("Resurserna är:" );
-        for (int h = 0; h < ds.resurser_boka.length; h++){
-            
-            System.out.print(ds.resurser_boka[h]+ " ");
-        }
+        System.out.println("Vi vill boka: " + Arrays.toString(ds.resurser_boka));
+
   }   
 }
