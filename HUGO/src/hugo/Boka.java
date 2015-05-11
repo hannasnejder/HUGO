@@ -1,6 +1,7 @@
 package hugo;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -20,34 +21,25 @@ public class Boka implements Runnable{
     public drive dr;
     public OptOnline online;
     public Avboka avboka;
-    
-    private Timer timer;
-    public static final int delay = 1000;
-    
-    String test;
-    boolean kolla_anslutning;
-
-    int indexfound;
-
-  
-public Boka(OptPlan opt, DataStore ds, OptOnline online, Avboka avboka, drive dr) {
-        this.opt = opt;
-        this.ds = ds;
-        this.online = online;
-        this.avboka = avboka;
-        opt.createPlan();
-
-        test = " ";
-        //dr = new drive();
-        this.dr = dr;
-        ds.bokaFlag = true;
  
-}
+    int indexfound;
+    boolean kolla_anslutning;
+  
+public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr, Avboka avboka) {
+    this.online = online;
+    this.opt = opt;
+    this.ds = ds;
+    this.dr = dr;
+    this.avboka = avboka;
+    
+    opt.createPlan();
+    ds.bokaFlag = true;
+}  
 
     @Override
-public void run() {
+    public void run() {
     
-    try {
+     try {
         int i;
         TimeUnit.SECONDS.sleep(1);        
         
@@ -87,6 +79,8 @@ public void run() {
                     if(indexfound> -1){
                         System.out.println("Denna båge är okej att boka ");
                         bokningar.add(ds.resurser_boka[i]);                       
+                        ds.bokningar.add(ds.resurser_boka[i]);                       
+
                         ds.okej[i] = ds.resurser_boka[i];
                         
                         ds.raknare++;
@@ -131,12 +125,12 @@ public void run() {
         online.newOpt();
         ds.vill_vanta = 0;
         }
-
+  
         //ds.vill_avboka = ds.okej;
         //avboka.avbokning();
         
         }
-    }catch (Exception e) { System.out.print("det här är e, Boka " + e.toString());
+    }catch (InterruptedException | IOException e) { System.out.print("det här är e, Boka " + e.toString());
             ds.bokaFlag = false;
         }         
     }

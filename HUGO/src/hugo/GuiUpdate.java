@@ -10,6 +10,7 @@ public class GuiUpdate implements Runnable{
         public OptPlan opt;
  
         int x [] = new int[10000];
+
         
     public GuiUpdate(DataStore ds, ControlUI cui, OptPlan opt){
         this.cui = cui;

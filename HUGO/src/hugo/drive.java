@@ -7,12 +7,15 @@ public class drive {
     public DataStore ds;
     public Boka boka;
     ArrayList<Integer> bokningar;
+
     int riktning, kartaA, kartaB;
     private double X1, Y1, X2, Y2, X3, Y3, X4, Y4, deltaX, deltaY, olddeltaX, olddeltaY;
     ArrayList<Character> instruktioner = new ArrayList();
     char f, r, l, b, v, h, q, y; 
+
     //int [] bokningar = {39, 27, 42, 2};
     //f fram
+    //f framArrayList<Character> instruktioner = new ArrayList();
     //r höger
     //l vänster
     //b backa - används ej än
@@ -25,6 +28,7 @@ public class drive {
     public drive(DataStore ds) {
         this.ds = ds;
         bokningar = new ArrayList<Integer>();
+        //bokningar = new ArrayList<Integer>();
         riktning = 0;
         kartaA = 0;
         kartaB = 0;
@@ -52,12 +56,12 @@ public class drive {
         }
 
         //Ger körinstruktionen 
-        for (int m = 0; m < bokningar.size(); m++) {
+        for (int m = 0; m < ds.bokningar.size(); m++) {
 
             //Positionen på noden vi vill besöka  
             for (int k = 0; k < ds.nodes; k++) {
 
-                if (bokningar.get(m) == k) {
+                if (ds.bokningar.get(m) == k) {
 
                     X2 = ds.nodeX[k];
                     Y2 = ds.nodeY[k];

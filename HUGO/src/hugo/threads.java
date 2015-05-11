@@ -7,11 +7,11 @@ public class threads {
     ControlUI cui;
     OptPlan opt;
     MapPanel map;   
+    drive dr;
     Boka boka;
     RobotRead rr;
     OptOnline online;
     Avboka avboka;
-    drive dr;
 
     //Trådar
     RobotRead r1;
@@ -34,16 +34,16 @@ public class threads {
         this.cui = cui;
         
         opt = new OptPlan(this.ds, this.opt);
-        boka= new Boka(this.opt, this.ds, this.online, this.avboka, this.dr); 
+        boka= new Boka(this.opt, this.ds, this.online, this.dr, this.avboka); 
         online = new OptOnline(this.opt, this.ds);
         avboka = new Avboka(this.opt, this.ds);
         dr = new drive(this.ds);
- 
+
         r1 = new RobotRead (this.ds, this.cui);
         t1 = new Thread(r1);
         g1 = new GuiUpdate (this.ds,this.cui, this.opt);
         t2 = new Thread(g1); 
-        b1 = new Boka(this.opt, this.ds, this.online, this.avboka, this.dr);
+        b1 = new Boka(this.opt, this.ds, this.online, this.dr, this.avboka);
         t3 = new Thread(b1);;
         //b2 = new Avboka(this.opt, this.ds);
         //t4 = new Thread(b2);      

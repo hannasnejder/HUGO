@@ -1,6 +1,7 @@
 package hugo;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Arrays;
 
@@ -49,7 +50,8 @@ public class DataStore {
     int [] ejokej;
     int [] vill_avboka;
     int [] resurser_boka;
-
+    
+     ArrayList<Integer> bokningar = new ArrayList();
 
     public DataStore() {
         // Initialize the datastore with fixed size arrays for storing the network data
@@ -75,9 +77,8 @@ public class DataStore {
 
         networkRead = false;
         updateUIflag = false;
-        //bokaflag = false;
-        //bokaFlag = false;
-
+        bokaflag = false;
+        
     }
 
     public void setFileName(String newFileName) {

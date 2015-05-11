@@ -20,11 +20,10 @@ public class Avboka {
     public DataStore ds;
     public OptPlan opt;
 
-
-public Avboka(OptPlan opt, DataStore ds) {
+    public Avboka(OptPlan opt, DataStore ds) {
     this.opt = opt;
     this.ds = ds;   
-}
+    }
 
     public void avbokning() {
     try {
