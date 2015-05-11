@@ -185,7 +185,7 @@ public class OptPlan {
                 //for-loop kolumner
                 //if start noden kopplas till rätt slutnod, ta längden och sätt in i Edge
                 //Else, fortsätt loopa
-                for (int m = 0; m < 98; m++) {
+                for (int m = 0; m < ds.arcs*2; m++) {
                     if ((ds.startpunkt[m] == ds.arcStart[i]) && ds.slutpunkt[m] == ds.arcEnd[i]) {
                         //System.out.println("inne i if-satsen"); 
                         dist = ds.avstand[m];
@@ -212,7 +212,13 @@ public class OptPlan {
             for (int i = 1; i < path.size(); i++) {
                 //System.out.println("Noder som ska passeras: " + path.get(i));
                 ds.nodeColor[Integer.parseInt(path.get(i).getId()) - 1] = 1;
-
+                
+                  for (int f = 0; f < ds.antalnoderfil; f++) {      //Kopia för att sätta färgen grön
+                            
+                            ds.nodeColor[ds.vilkanoder[f]-1] = 2; //gör så att hyllplatsen blir grön
+                        }
+                ds.nodeColor[ds.slutnod-1]=3;   //gör så att startnoden blir gul
+                
                 //Sparar de noder vi vill boka i en array
                 noder_boka[z] = Integer.parseInt(path.get(i).getId());
                 z = z + 1;
@@ -231,15 +237,9 @@ public class OptPlan {
                         ds.arcColor[j] = 1;
                        
                        //Sparar de länkar vi vill boka i en array
-                        länkar_boka[c] = j+39;
-
+                        länkar_boka[c] = j+ds.nodes+1;
+                                           
                         c = c + 1;                      
-
-                        //Sparar de länkar vi vill boka i en array
-                        länkar_boka[c] = j + 38;
-                        //System.out.println("Boka av c " +  länkar_boka[c]);
-
-                        c = c + 1;
 
                         //boka = Arrays.toString(länkar_boka);
                     }

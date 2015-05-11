@@ -20,9 +20,6 @@ public class HUGO {
         ds.setFileName1("../../HUGO/orderfil.txt");
         ds.readNet1();
 
-        ds.setFileName2("../../HUGO/avstandsmatris.txt");
-        ds.readNet2();
-
         cui = new ControlUI(ds);//, boka);
 
         cui.setVisible(true);
