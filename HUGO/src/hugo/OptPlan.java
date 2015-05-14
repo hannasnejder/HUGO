@@ -16,6 +16,7 @@ public class OptPlan {
     public Boka b;
     int[] länkar_boka = new int[1000];
     int[] noder_boka = new int[1000]; 
+    int dummafel;
     int order_kvar;
     int c;
     int z;
@@ -59,7 +60,7 @@ public class OptPlan {
             //sista kolumnen längden på tillhörande båge 
             //if start noden kopplas till rätt slutnod, ta längden och sätt in i Edge
             //Else, fortsätt loopa
-            for (int m = 0; m < 98; m++) {
+            for (int m = 0; m < ds.arcs*2; m++) {
                 if ((ds.startpunkt[m] == ds.arcStart[i]) && ds.slutpunkt[m] == ds.arcEnd[i]) {
                     //System.out.println("inne i if-satsen"); 
                     dist = ds.kopiaAvstand[m];
@@ -89,26 +90,36 @@ public class OptPlan {
 
         //Se över detta!! Verkar inte funka som jag vill....
         for (int n = 0, k= 0; n < ds.antalnoderfil; n++) {
-           // System.out.println("kopiaVilkanoder är "+ds.kopiaVilkanoder[n]);
+            System.out.println("kopiaVilkanoder är "+ds.kopiaVilkanoder[n]);
             if(ds.kopiaVilkanoder[n]!=0){
             kvarvarande_hyllor[k] = ds.kopiaVilkanoder[n];
+            System.out.println("kvarvarande_hyllor är först "+kvarvarande_hyllor[k]+" och k är "+k);
             k++;
-            System.out.println("kvarvarande_hyllor är "+kvarvarande_hyllor[n]+" och n är "+n);
+            }else{
+                //System.out.println("kvarvarande_hyllor är sen "+ kvarvarande_hyllor[n]+ " och n är "+n);
             }
-
         }
+        
+        dummafel = 0;
+        for (int q = 0; q < ds.antalnoderfil; q++){
+            if (kvarvarande_hyllor[q] != 0){
+                dummafel = dummafel+1;
+            }
+        }
+        System.out.println("dummafel är "+dummafel);
 
-        for (int k = 0; k < ds.antalnoderfil; k++) { 
+        for (int k = 0; k < dummafel; k++) { 
             test_vag[0] = narmaste_nod;
             kortast_avstand = 100000;
 
+            //används denna loop endast för att rita ut kartan? Kan jag ändra på det ?
             for (int n = 0; n < kvarvarande_hyllor.length; n++) {
                 if (kvarvarande_hyllor[n] == narmaste_nod) {
                     kvarvarande_hyllor[n] = 0;
                 }
             }
             order_kvar = 0;
-    for (int p = 0; p < ds.antalnoderfil; p++) {
+    for (int p = 0; p < dummafel; p++) {
 
                 //System.out.println("p är " + p);
                 test_vag[1] = kvarvarande_hyllor[p];

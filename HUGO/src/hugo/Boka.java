@@ -98,7 +98,7 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr, Avboka avboka
         
         //Kollar om under 2 resurser gick att boka, avbokar de som gick
         //att boka isåfall
-        System.out.println("\n" + "Räknare: " + ds.raknare);
+       // System.out.println("\n" + "Räknare: " + ds.raknare);
         if(ds.raknare < 2){
             for(int m = 0; m < ds.okej.length; m++){
                 ds.vill_avboka[m] = ds.okej[m];              
@@ -106,7 +106,7 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr, Avboka avboka
             ds.vill_vanta++;
             avboka.avbokning();
         }
-        System.out.println("Räknare 2: " + ds.vill_vanta);
+       // System.out.println("Räknare 2: " + ds.vill_vanta);
 
         //Skickar bokade resurser till drive om två gick att boka
         if(ds.raknare == 2){
@@ -117,9 +117,10 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr, Avboka avboka
         //Räknaren vill_vänta avgör om vi ska vänta eller omoptimera
         //Vill vänta första gången och omoptimera andra gången, nollställs varje 
         //gång den blir två
-        if(ds.vill_vanta == 1){
-            vanta();
-        }
+        
+        //if(ds.vill_vanta == 1){
+        //    vanta();
+        //}
         
         if(ds.vill_vanta == 2){
         System.out.println("Vi ska omoptimera");
@@ -127,8 +128,8 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr, Avboka avboka
         ds.vill_vanta = 0;
         }
   
-        //ds.vill_avboka = ds.okej;
-        //avboka.avbokning();
+        ds.vill_avboka = ds.okej;
+        avboka.avbokning();
         
        
         }
