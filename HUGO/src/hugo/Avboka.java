@@ -8,7 +8,8 @@ import java.net.URL;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 
-public class Avboka{// implements Runnable {
+
+public class Avboka {
     //upprättar en anslutning till den server som beskrivs
     //av URL-strängen
     //Ett HTTPmeddelande skickas från klienten till servern,
@@ -16,68 +17,108 @@ public class Avboka{// implements Runnable {
     //statuskod 200, den har förstått
     //överför den info som beskriver Lius webbsida
 
-   // private int sleepTime;
-    //private static Random generator = new Random();
     public DataStore ds;
     public OptPlan opt;
 
-    //public Boka boka;
-    int y[];
-    int avbokningar_upptagna[];
-
     public Avboka(OptPlan opt, DataStore ds) {
-        this.opt = opt;
-        //this.boka = boka;
-        this.ds = ds;
-
-      //  sleepTime = generator.nextInt(20000);
-       // opt.createPlan();
-        //avbokningar_upptagna = ds.vill_avboka;
-
+    this.opt = opt;
+    this.ds = ds;   
     }
 
-    //@Override
+    //Avbokar när allt vi vill boka inte gick
     public void avbokning() {
-        try {
-            int i;
-            //TimeUnit.SECONDS.sleep(5);
-
-            System.out.println("\n" + "Vi ska avboka " + Arrays.toString(ds.vill_avboka));
-
-            for (i = 0; i < 2; i++) {
+    try {
+        int i;
+ 
+        for(i = 0; i < 2; i++){
             //If-sats som rensar bort de nollor som skickas med från Boka
-                //Avbokar bara de positioner som inte innehåller noll
-                if (ds.vill_avboka[i] != 0) {
+            //Avbokar bara de positioner som inte innehåller noll
+                if(ds.vill_avboka[i] != 0){
+                System.out.println("\n" + "Vi ska avboka: " + Arrays.toString(ds.vill_avboka));//(ds.vill_avboka[i])); 
+                String url = "http://tnk111.n7.se/free.php?user=3&resource=" + ds.vill_avboka[i];//ds.vill_avboka[i];
+                URL urlobjekt = new URL(url);
+                HttpURLConnection anslutning = (HttpURLConnection)
+                urlobjekt.openConnection();
+           
+                System.out.println("\nAnropar: " + url);
+            
+                int mottagen_status = anslutning.getResponseCode();
+            
+                System.out.println("Statuskod: " + mottagen_status);
+           
+                BufferedReader inkommande = new BufferedReader(new
+                InputStreamReader(anslutning.getInputStream()));
 
-                    String url = "http://tnk111.n7.se/free.php?user=3&resource=" + ds.vill_avboka[i];
-                    URL urlobjekt = new URL(url);
-                    HttpURLConnection anslutning = (HttpURLConnection) urlobjekt.openConnection();
-
-                    System.out.println("\nAnropar: " + url);
-
-                    int mottagen_status = anslutning.getResponseCode();
-
-                    System.out.println("Statuskod: " + mottagen_status);
-
-                    BufferedReader inkommande = new BufferedReader(new InputStreamReader(anslutning.getInputStream()));
-
-                    String inkommande_text;
-                    StringBuffer inkommande_samlat = new StringBuffer();
-
-                    while ((inkommande_text = inkommande.readLine()) != null) {
-
-                        inkommande_samlat.append(inkommande_text);
-                    }
-
-                    inkommande.close();
-
-                    System.out.println(inkommande_samlat.toString());
-
-                }
+                String inkommande_text;
+                StringBuffer inkommande_samlat = new StringBuffer();
+                       
+            while ((inkommande_text = inkommande.readLine()) != null) {
+                
+                inkommande_samlat.append(inkommande_text);  
             }
-        } catch (Exception e) {
-            System.out.print(e.toString());
+            
+            inkommande.close();
+            
+            System.out.println(inkommande_samlat.toString());
+            
+          }
         }
+    }
+        catch (Exception e) { System.out.print(e.toString()); }
 
     }
+    
+    //Avbokar när roboten passerat en resurs
+    public void avbokaRobot(){
+    try {
+        int i = 0;
+         
+        while(ds.robotflaga == true){  
+        //x = rr.från_robot; 
+        
+        System.out.println("x avbokarobot: " + Arrays.toString(ds.från_robot));
+        
+        System.out.println("inne i avbokarobot, efter thread sleep");
+        
+        for(i = 0; i <= 3; i++){
+            //Avboka http = new Avboka();
+            String url = "http://tnk111.n7.se/free.php?user=3&resource=" + ds.från_robot[i];
+            URL urlobjekt = new URL(url);
+            HttpURLConnection anslutning = (HttpURLConnection)
+            urlobjekt.openConnection();
+           
+            System.out.println("\nAnropar: " + url);
+            
+            
+            int mottagen_status = anslutning.getResponseCode();
+            
+            System.out.println("Statuskod: " + mottagen_status);
+           
+            BufferedReader inkommande = new BufferedReader(new
+            InputStreamReader(anslutning.getInputStream()));
+
+            String inkommande_text;
+            StringBuffer inkommande_samlat = new StringBuffer();
+            
+           
+
+            while ((inkommande_text = inkommande.readLine()) != null) {
+                
+                inkommande_samlat.append(inkommande_text);
+               
+            }
+            
+
+            inkommande.close();
+            
+            System.out.println(inkommande_samlat.toString());
+            
+           //System.out.println("Länken är avbokad.");
+           
+            }
+        }
+        }
+        catch (Exception e) { System.out.print("AvbokaRobot" + e.toString()); }
+    }
+
 }
