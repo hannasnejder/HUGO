@@ -37,7 +37,7 @@ public class DataStore {
     int[] kopiaVilkanoder;
     
     boolean networkRead1;
-    boolean robotflaga;
+    boolean robotflag;
     boolean bokaflag;
     boolean bokaFlag;
 
@@ -50,6 +50,7 @@ public class DataStore {
     int [] ejokej;
     int [] vill_avboka;
     int [] resurser_boka;
+    int [] från_robot;
     
      ArrayList<Integer> bokningar = new ArrayList();
 
@@ -77,7 +78,8 @@ public class DataStore {
 
         networkRead = false;
         updateUIflag = false;
-        bokaflag = false;
+        bokaflag = true;
+        robotflag = false;
         
     }
 

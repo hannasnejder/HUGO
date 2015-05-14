@@ -27,12 +27,7 @@ public class drive {
     //Default-konstruktor 
     public drive(DataStore ds) {
         this.ds = ds;
-        bokningar = new ArrayList<Integer>();
-        //bokningar = new ArrayList<Integer>();
         riktning = 0;
-        kartaA = 0;
-        kartaB = 0;
-
     }
 
     //Robotens riktning vid start 

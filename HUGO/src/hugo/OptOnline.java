@@ -41,11 +41,16 @@ public class OptOnline {
                 ds.startnod = ds.okej[1];
                 opt.createPlan();
                 System.out.println("startnod är "+ds.startnod);
-                /*for (int k =0; k<ds.antalnoderfil; k++){
+                
+                for (int k =0; k<ds.antalnoderfil; k++){
+                    //System.out.println("Startnod är " + ds.startnod);
+                    System.out.println("KopiaVilkanoder " + Arrays.toString(ds.kopiaVilkanoder));
+                    
                     if(ds.startnod == ds.kopiaVilkanoder[k]){
                         ds.kopiaVilkanoder[k] = 0;
+                        System.out.println("Kopian är detta i optonline " + ds.kopiaVilkanoder[k]);
                     }
-                }*/
+                }
 
                 //Om inte båda två går att boka
             } else {

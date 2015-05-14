@@ -6,13 +6,16 @@ import java.io.*;
 import javax.microedition.io.*;
 import javax.bluetooth.*;
 import java.lang.*; //objekt.org.springframework.util.StringUtils;
+import java.util.concurrent.TimeUnit;
 
 
 public class RobotRead implements Runnable {
     private int sleepTime;
     private static Random generator = new Random();
-    private ControlUI cui;
-    private DataStore ds;
+    public ControlUI cui;
+    public DataStore ds;
+    public Avboka avboka;
+    public translate tr;
 
     public Boka boka;
     ArrayList<Character> instruktioner; 
@@ -25,20 +28,28 @@ public class RobotRead implements Runnable {
     int k = 0;
  
     
-    public RobotRead(DataStore ds, ControlUI cui){
+    public RobotRead(DataStore ds, ControlUI cui, translate tr){
         this.cui=cui;
         this.ds=ds;
-
+        this.tr = tr;
         instruktioner = new ArrayList<Character>();
 
-        //this.b1 = b1;
         sleepTime=generator.nextInt(20000);
+        //ds.robotflag = false;
 
     }
  
     @Override
     public void run(){
         try{
+            TimeUnit.SECONDS.sleep(2); 
+            while(ds.robotflag == true){
+                System.out.println("RobotRead flaggan blir sann");
+                
+            //När vi har något från robot anropar vi translate för att översätta
+            tr.interpret();
+            System.out.println("Lyckades anropa translate");
+            
             /*cui.appendStatus("RobotRead kommer att köra i " + sleepTime + " millisekunder.");
             
             
@@ -99,6 +110,8 @@ public class RobotRead implements Runnable {
                         
                         från_robot[k] = meddelande_in;
                         k = k +1;
+                        //Anropa avboka.avbokaRobot(); när vi vill avboka
+                        //Kanske ska göras från translate
                         
                         //ds.robotflaga = true;
                     }    
@@ -113,14 +126,18 @@ public class RobotRead implements Runnable {
 
                 //System.out.println("från_robot: " + Arrays.toString(från_robot));*/
             ds.updateUIflag = true;
-
+            
+            //Bokaflag sätts till true för att gå tillbaka till boka
+            ds.bokaflag = true;
+            System.out.println("Bokaflaggan blir sann");
+            }
         }catch(Exception e) {  
-            System.out.print("RobotRead" + e.toString());   
+            System.out.print("Det här är e, RobotRead" + "\n" + e.toString());   
         }
 
         
         //Nödvändig kommentar?
-        cui.appendStatus("RobotRead är nu klar");
+        //cui.appendStatus("RobotRead är nu klar");
 
     }
 

@@ -25,6 +25,7 @@ public class Avboka {
     this.ds = ds;   
     }
 
+    //Avbokar när allt vi vill boka inte gick
     public void avbokning() {
     try {
         int i;
@@ -43,7 +44,7 @@ public class Avboka {
             
                 int mottagen_status = anslutning.getResponseCode();
             
-                System.out.println("Statuskod: " + mottagen_status);
+                System.out.println("Statuskod: " + mottagen_status + "\n");
            
                 BufferedReader inkommande = new BufferedReader(new
                 InputStreamReader(anslutning.getInputStream()));
@@ -65,6 +66,59 @@ public class Avboka {
     }
         catch (Exception e) { System.out.print(e.toString()); }
 
+    }
+    
+    //Avbokar när roboten passerat en resurs
+    public void avbokaRobot(){
+    try {
+        int i = 0;
+ 
+        //System.out.println("x avbokarobot: " + Arrays.toString(ds.okej));
+        
+        //System.out.println("inne i avbokarobot, efter thread sleep");
+        
+        for(i = 0; i < 2; i++){
+            if(ds.okej[i] != 0){
+            String url = "http://tnk111.n7.se/free.php?user=3&resource=" + ds.okej[i];
+            URL urlobjekt = new URL(url);
+            HttpURLConnection anslutning = (HttpURLConnection)
+            urlobjekt.openConnection();
+           
+            System.out.println("\nAnropar: " + url);
+            
+            
+            int mottagen_status = anslutning.getResponseCode();
+            
+            System.out.println("Statuskod: " + mottagen_status + "\n");
+           
+            BufferedReader inkommande = new BufferedReader(new
+            InputStreamReader(anslutning.getInputStream()));
+
+            String inkommande_text;
+            StringBuffer inkommande_samlat = new StringBuffer();
+            
+           
+
+            while ((inkommande_text = inkommande.readLine()) != null) {
+                
+                inkommande_samlat.append(inkommande_text);
+               
+            }
+            
+
+            inkommande.close();
+            
+            System.out.println(inkommande_samlat.toString());
+            
+           System.out.println(ds.okej[i] + " är avbokad " + "\n");
+           
+            }
+        }
+        //Bokas flagga sätts till true för att gå tillbaka till boka
+        ds.bokaflag = true;
+       
+       
+        }catch (Exception e) { System.out.print("Det här är e, AvbokaRobot" + e.toString()); }
     }
 
 }

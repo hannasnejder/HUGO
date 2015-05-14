@@ -158,7 +158,7 @@ public class OptPlan {
         snabbaste_rutten[order_kvar] = ds.slutnod;
 
         for (int j = 0; j < order_kvar + 1; j++) {
-            //System.out.println("Rutten är " + snabbaste_rutten[j]);
+            System.out.println("Rutten är " + snabbaste_rutten[j]);
         }
 
         for (int k = 0; k < (order_kvar); k++) {
