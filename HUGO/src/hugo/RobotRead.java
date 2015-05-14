@@ -3,8 +3,8 @@ package hugo;
 
 import java.util.*;
 import java.io.*;
-import javax.microedition.io.*;
-import javax.bluetooth.*;
+//import javax.microedition.io.*;
+//import javax.bluetooth.*;
 import java.lang.*; //objekt.org.springframework.util.StringUtils;
 
 
