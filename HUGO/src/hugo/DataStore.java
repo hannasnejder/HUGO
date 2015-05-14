@@ -1,6 +1,7 @@
 package hugo;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Arrays;
 
@@ -38,14 +39,18 @@ public class DataStore {
 
     boolean robotflaga;
     boolean bokaflag;
+     boolean bokaFlag;
 
-    double startnodX=0;        // För att spara startplatsens x-koordinat
-    double startnodY=0;        //För att spara startnodens y-koordinat
-    int raknare =0;
-    int [] okej = new int[2];
-    int [] ejokej = new int[2];
-    int [] vill_avboka = new int[2];
-    int [] resurser_boka = new int [1000];
+    double startnodX = 0;        // För att spara startplatsens x-koordinat
+    double startnodY = 0;        //För att spara startnodens y-koordinat
+    int raknare = 0;
+    int[] okej = new int[2];
+    int[] ejokej = new int[2];
+    int[] vill_avboka = new int[2];
+    int[] resurser_boka = new int[1000];
+    int[] kvarvarande_hyllor = new int[100];
+    
+    ArrayList<Integer> bokningar = new ArrayList();
 
     public DataStore() {
         // Initialize the datastore with fixed size arrays for storing the network data
@@ -77,7 +82,7 @@ public class DataStore {
     public void setFileName1(String newFileName1) {
         this.fileName1 = newFileName1;
     }
-    
+
     public String getFileName() {
         return fileName;
     }
@@ -124,20 +129,20 @@ public class DataStore {
             //Skapar vår "nya avståndsmatris"
             startpunkt = arcStart;
             slutpunkt = arcEnd;
-            
-            for(int j = arcs; j<(arcs*2); j++){
-                startpunkt[j] = arcEnd[j-arcs];
-                slutpunkt[j] = arcStart[j-arcs];
+
+            for (int j = arcs; j < (arcs * 2); j++) {
+                startpunkt[j] = arcEnd[j - arcs];
+                slutpunkt[j] = arcStart[j - arcs];
             }
-            
+
             //System.out.print("avstånden är ");
-            for (int j = 0; j<(arcs*2); j++){
+            for (int j = 0; j < (arcs * 2); j++) {
                 //Gör om till int!!!
-                avstand[j]=(int) Math.abs((nodeX[startpunkt[j]-1] - nodeX[slutpunkt[j]-1])
-                        -(nodeY[startpunkt[j]-1]-nodeY[slutpunkt[j]-1]));
-               // System.out.print(avstand[j]+" ");
+                avstand[j] = (int) Math.abs((nodeX[startpunkt[j] - 1] - nodeX[slutpunkt[j] - 1])
+                        - (nodeY[startpunkt[j] - 1] - nodeY[slutpunkt[j] - 1]));
+                // System.out.print(avstand[j]+" ");
             }
-            
+
             kopiaAvstand = avstand;
             networkRead = true;  // Indicate that all network data is in place in the DataStore
 
@@ -168,25 +173,23 @@ public class DataStore {
             slutnod = startnod;
             line1 = scanner1.nextLine();
             antalnoderfil = Integer.parseInt(line1.trim());
-            
-            //För att spara koordinaterna till startplatsen
-            startnodX=nodeX[startnod-1]; //sparar x-koordinaten till startnoden
-            startnodY=nodeY[startnod-1]; //sparar y-koordinaten till startnoden
 
+            //För att spara koordinaterna till startplatsen
+            startnodX = nodeX[startnod - 1]; //sparar x-koordinaten till startnoden
+            startnodY = nodeY[startnod - 1]; //sparar y-koordinaten till startnoden
 
             for (int i = 0; i < (antalnoderfil); i++) {
-            line1 = (scanner1.nextLine());
-            vilkanoder[i] = Integer.parseInt(line1.trim());
+                line1 = (scanner1.nextLine());
+                vilkanoder[i] = Integer.parseInt(line1.trim());
 
-            besoknoder = besoknoder + " " + vilkanoder[i];
-            
+                besoknoder = besoknoder + " " + vilkanoder[i];
 
                 //System.out.println("Besöksnoder: " + besoknoder);
             }
             kopiaVilkanoder = vilkanoder;
-        
+
             // Indicate that all network data is in place in the DataStore
-            networkRead1 = true; 
+            networkRead1 = true;
 
             System.out.println("Vi ska besöka noderna: " + besoknoder);
 
@@ -194,7 +197,7 @@ public class DataStore {
 
             e.printStackTrace();
         }
-        
+
         robotX = startnodX;
         robotY = startnodY;
     }

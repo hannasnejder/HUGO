@@ -26,9 +26,9 @@ public class OptOnline {//implements Runnable {
         this.ds = ds;
     }
 
-    public void newOpt(){
+    public void newOpt() {
         try {
-            
+            System.out.println("Nu sker en omoptimering");
             //vi vill modifiera startnod, avstånd[] och orderfilen när roboten har passerat en hylla
             //ändra om värdena i avstånd[] så att den länken som inte går att boka får högt värde, t.ex 100000
             //kollar vilken nod som var okej att boka och sätter den till startnod
@@ -40,12 +40,16 @@ public class OptOnline {//implements Runnable {
             if (ds.raknare == 2) {
                 ds.startnod = ds.okej[1];
                 opt.createPlan();
-                System.out.println("startnod är "+ds.startnod);
-                /*for (int k =0; k<ds.antalnoderfil; k++){
-                    if(ds.startnod == ds.kopiaVilkanoder[k]){
+                System.out.println("startnod är " + ds.startnod);
+                //Öppna denna om det blir problm senare
+                for (int k = 0; k < ds.antalnoderfil; k++) {
+                    System.out.println("startnod är" + (ds.startnod));
+                    System.out.println("ds.kopiaVilkanoder är " + ds.kopiaVilkanoder[k]);
+                    if (ds.startnod == ds.kopiaVilkanoder[k]) {
                         ds.kopiaVilkanoder[k] = 0;
+                        System.out.println("kopian är detta i optonlie " + ds.kopiaVilkanoder[k]);
                     }
-                }*/
+                }
 
                 //Om inte båda två går att boka
             } else {
@@ -53,22 +57,23 @@ public class OptOnline {//implements Runnable {
                 ds.kopiaAvstand = ds.avstand;
                 for (int m = 0; m < 98; m++) {
 
-                    
                     //System.out.println("Startnod är "+ds.startnod);
                     //System.out.println("boka.ejokej[1] är "+boka.ejokej[1]);
-                    
                     if ((ds.startpunkt[m] == ds.startnod) && ds.slutpunkt[m] == ds.ejokej[1]) {
 
+                        ds.kopiaAvstand[m] = 100000;
+
+                    } else if ((ds.startpunkt[m] == ds.startnod) && ds.slutpunkt[m] == ds.okej[1]) {
                         ds.kopiaAvstand[m] = 100000;
                     }
                 }
                 opt.createPlan();
-
             }
 
             //Sedan vill vi omoptimera utefter vad roboten skickar
         } catch (Exception e) {
             System.out.println("det här är e, OptOnline " + e.toString());
+            ds.bokaFlag = false;
         }
     }
 }
