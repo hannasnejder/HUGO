@@ -3,8 +3,8 @@ package hugo;
 
 import java.util.*;
 import java.io.*;
-import javax.microedition.io.*;
-import javax.bluetooth.*;
+//import javax.microedition.io.*;
+//import javax.bluetooth.*;
 import java.lang.*; //objekt.org.springframework.util.StringUtils;
 import java.util.concurrent.TimeUnit;
 
@@ -32,6 +32,7 @@ public class RobotRead implements Runnable {
         this.cui=cui;
         this.ds=ds;
         this.tr = tr;
+
         instruktioner = new ArrayList<Character>();
 
         sleepTime=generator.nextInt(20000);

@@ -48,31 +48,31 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr, Avboka avboka
         
         while(ds.bokaFlag == true && k <= 4){
            
-        ds.raknare = 0;
-        ds.okej = new int[2];
-        ds.ejokej = new int[2];
+            ds.raknare = 0;
+            ds.okej = new int[2];
+            ds.ejokej = new int[2];
         
             
-        for(i = 0; i < 2; i++){
-            if(ds.resurser_boka[i] != 0){
-                String url = "http://tnk111.n7.se/reserve.php?user=3&resource=" + ds.resurser_boka[i];
-                URL urlobjekt1 = new URL(url);
-                HttpURLConnection anslutning = (HttpURLConnection)
-                urlobjekt1.openConnection();
+            for(i = 0; i < 2; i++){
+                if(ds.resurser_boka[i] != 0){
+                    String url = "http://tnk111.n7.se/reserve.php?user=3&resource=" + ds.resurser_boka[i];
+                    URL urlobjekt1 = new URL(url);
+                    HttpURLConnection anslutning = (HttpURLConnection)
+                    urlobjekt1.openConnection();
   
-                System.out.println("\nAnropar: " + url);
+                    System.out.println("\nAnropar: " + url);
 
-                int mottagen_status = anslutning.getResponseCode();
-                BufferedReader inkommande = new BufferedReader(new
-                InputStreamReader(anslutning.getInputStream()));
-                //mottagen_status = anslutning.getResponseCode();
-                System.out.println("Statuskod: " + mottagen_status);
+                    int mottagen_status = anslutning.getResponseCode();
+                    BufferedReader inkommande = new BufferedReader(new
+                    InputStreamReader(anslutning.getInputStream()));
+                    //mottagen_status = anslutning.getResponseCode();
+                    System.out.println("Statuskod: " + mottagen_status);
 
-                String inkommande_text;
-                StringBuffer inkommande_samlat = new StringBuffer();
+                    String inkommande_text;
+                    StringBuffer inkommande_samlat = new StringBuffer();
 
-                int linecount = 0;
-                String OK = "OK";
+                    int linecount = 0;
+                    String OK = "OK";
 
 
                 while ((inkommande_text = inkommande.readLine()) != null) {
@@ -101,7 +101,7 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr, Avboka avboka
         
         //Kollar om under 2 resurser gick att boka, avbokar de som gick
         //att boka isåfall
-        System.out.println("\n" + "Räknare: " + ds.raknare);
+       // System.out.println("\n" + "Räknare: " + ds.raknare);
         if(ds.raknare < 2){
             for(int m = 0; m < ds.okej.length; m++){
                 ds.vill_avboka[m] = ds.okej[m];              
@@ -109,21 +109,20 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr, Avboka avboka
             ds.vill_vanta++;
             avboka.avbokning();
         }
-        System.out.println("Räknare 2: " + ds.vill_vanta);
+       // System.out.println("Räknare 2: " + ds.vill_vanta);
 
         //Skickar bokade resurser till drive om två gick att boka
         if(ds.raknare == 2){
             //k++;
             dr.startRiktning();           
             online.newOpt();
-            //tr.interpret();
-         
+            //tr.interpret();         
         }
         //System.out.println("K är " + k);
         
         //Räknaren vill_vänta avgör om vi ska vänta eller omoptimera
         //Vill vänta första gången och omoptimera andra gången, nollställs varje 
-        //gång den blir två
+        //gång den blir två       
         if(ds.vill_vanta == 1){
             vanta();
         }
@@ -133,12 +132,13 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr, Avboka avboka
         online.newOpt();
         ds.vill_vanta = 0;
         }
-  
+
         //Ändrar flaggorna för att gå till RobotRead
         ds.robotflag = true;
         ds.bokaflag = false;
-       
-        
+
+        ds.vill_avboka = ds.okej;
+        avboka.avbokning();
        
         }
     }catch (InterruptedException | IOException e) { System.out.print("det här är e, Boka " + e.toString());
