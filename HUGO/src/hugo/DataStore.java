@@ -35,22 +35,24 @@ public class DataStore {
     int[] kopiaAvstand;
     int[] vilkanoder;
     int[] kopiaVilkanoder;
+    
     boolean networkRead1;
-
-    boolean robotflaga;
+    boolean robotflag;
     boolean bokaflag;
+    boolean bokaFlag;
 
     double startnodX=0;        // För att spara startplatsens x-koordinat
     double startnodY=0;        //För att spara startnodens y-koordinat
+
+    int raknare = 0;
+    int vill_vanta = 0;
+    int [] okej;
+    int [] ejokej;
+    int [] vill_avboka;
+    int [] resurser_boka;
+    int [] från_robot;
     
      ArrayList<Integer> bokningar = new ArrayList();
-
-    int raknare =0;
-    int [] okej = new int[2];
-    int [] ejokej = new int[2];
-    int [] vill_avboka = new int[2];
-    int [] resurser_boka = new int [1000];
-
 
     public DataStore() {
         // Initialize the datastore with fixed size arrays for storing the network data
@@ -66,14 +68,19 @@ public class DataStore {
         slutpunkt = new int[1000];
         avstand = new int[1000];
         kopiaAvstand = new int[1000];
+        vilkanoder = new int[1000];
+        okej = new int[2];
+        ejokej = new int[2];
+        vill_avboka = new int[2];
+        resurser_boka = new int[1000];
         vilkanoder = new int[100];
         kopiaVilkanoder = new int[100];
 
         networkRead = false;
         updateUIflag = false;
-        bokaflag = false;
+        bokaflag = true;
+        robotflag = false;
         
-
     }
 
     public void setFileName(String newFileName) {
@@ -200,7 +207,6 @@ public class DataStore {
 
             e.printStackTrace();
         }
-        
         robotX = startnodX;
         robotY = startnodY;
     }

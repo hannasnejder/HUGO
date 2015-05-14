@@ -23,11 +23,7 @@ public class AvbokaRobot implements Runnable{
     //public Boka b1;
     int x [];
     //int avbokningar_upptagna [];
-    
-    public AvbokaRobot() {
-    //this.cui = cui;
-    sleepTime = generator.nextInt(20000);
-}
+
     public AvbokaRobot(RobotRead rr, DataStore ds) {
     this.rr = rr; 
     this.ds = ds;
@@ -42,18 +38,17 @@ public class AvbokaRobot implements Runnable{
         @Override
 public void run() {
     try {
-        int i = 0;
+        //int i = 0;
         
         /*while(ds.robotflaga == false)
             {
                 Thread.sleep(sleepTime/20);
             }*/
                 
-        while(ds.robotflaga == true){
+      /*  while(ds.robotflag == true){
             
-        x = rr.från_robot; 
         
-        System.out.println("x avbokarobot: " + x);
+        //System.out.println("x avbokarobot: " + x);
         Thread.sleep(sleepTime/20);
         
         System.out.println("inne i avbokarobot, efter thread sleep");
@@ -96,9 +91,10 @@ public void run() {
            //System.out.println("Länken är avbokad.");
            
             }
-        }
+        }*/
         }
         catch (Exception e) { System.out.print("AvbokaRobot" + e.toString()); }
     }
     
 }
+

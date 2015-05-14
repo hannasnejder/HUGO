@@ -4,9 +4,10 @@ import java.util.*;
 
 public class drive {
 
-    private DataStore ds;
-    //ArrayList<Integer> bokningar;
+    DataStore ds; 
     int riktning;
+    public Boka boka;
+    ArrayList<Integer> bokningar;
     private double X1, Y1, X2, Y2, X3, Y3, X4, Y4, deltaX, deltaY, olddeltaX, olddeltaY;
     ArrayList instruktioner = new ArrayList();
     char f, r, l, b, v, h, q, y; 
@@ -21,18 +22,18 @@ public class drive {
     
     //Default-konstruktor 
     public drive(DataStore ds) {
-        //ds = new DataStore();
-        //bokningar = new ArrayList<Integer>();
         this.ds= ds; 
         riktning = 0;
- 
     }
 
     //Robotens riktning vid start 
     public void startRiktning() {
 
+        System.out.println("Hej drive");
         //Österut
         riktning = 1;
+        
+        
 
         //Sätta olddeltaX och olddeltaY 
         //Hårdkodat --> måste hitta en vettigare lösning
@@ -222,7 +223,7 @@ public class drive {
 
         }
 
- 
-
+        
     }
+    
 }

@@ -4,12 +4,7 @@ public class HUGO {
 
     DataStore ds;
     ControlUI cui;
-    //OptPlan opt;
-    //MapPanel map;
-    //OptOnline online;
-    //GuiUpdate gui;
 
-    Boka boka;
 
     HUGO() {
 
@@ -28,7 +23,6 @@ public class HUGO {
 
         cui.setVisible(true);
         cui.showStatus();
-
 
     }
 
