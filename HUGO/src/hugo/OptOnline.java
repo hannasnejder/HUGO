@@ -51,7 +51,7 @@ public class OptOnline {//implements Runnable {
             } else {
                 //System.out.println("Inne i andra if-satsen");
                 ds.kopiaAvstand = ds.avstand;
-                for (int m = 0; m < 98; m++) {
+                for (int m = 0; m < ds.arcs*2; m++) {
 
                     
                     //System.out.println("Startnod är "+ds.startnod);

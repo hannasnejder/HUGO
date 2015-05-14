@@ -9,6 +9,7 @@ public class GuiUpdate implements Runnable{
         private DataStore ds;
         public OptPlan opt;
  
+ 
         int x [] = new int[10000];
 
         

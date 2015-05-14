@@ -113,7 +113,8 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr) {
             test = test + " " + ds.bokningar.get(k).toString();
         }
 
-    }catch (Exception e) { System.out.print("det här är e, Boka " + e.toString());
+    }catch (Exception e) {
+        //System.out.print("det här är e, Boka " + e.toString());
 
         }
     }

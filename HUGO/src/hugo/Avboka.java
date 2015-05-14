@@ -80,7 +80,8 @@ public Avboka(OptPlan opt, Boka boka, DataStore ds) {
           }
         }
     }
-        catch (Exception e) { System.out.print(e.toString()); }
+        catch (Exception e) { System.out.print(e.toString()); 
+        }
 
     }
 }
