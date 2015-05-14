@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package hugo;
 
 import java.util.ArrayList;
@@ -61,11 +57,14 @@ public class OptOnline {//implements Runnable {
 
                         ds.kopiaAvstand[m] = 100000;
                     }
+                    else if((ds.startpunkt[m]== ds.startnod) && ds.slutpunkt[m] == ds.ejokej[1]){
+                        ds.kopiaAvstand[m] = 100000;
+                    }
                 }
                 opt.createPlan();
 
             }
-
+            
             //Sedan vill vi omoptimera utefter vad roboten skickar
         } catch (Exception e) {
             System.out.println("det här är e, OptOnline " + e.toString());

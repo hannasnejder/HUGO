@@ -88,32 +88,30 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr) {
             }
 
 
-        if(ds.bokningar.size() == 2){
-            ds.bokaflag = true;
-            System.out.println("Bokaflaga blir sann: " + ds.bokningar.size());
-        }
-
         //Kollar om under 2 resurser gick att boka, avbokar de som gick
         //att boka isåfall
+        //System.out.println(ds.raknare);
         if(ds.raknare < 2){
             for(int m = 0; m < ds.okej.length; m++){
                 ds.vill_avboka[m] = ds.okej[m]; 
-                dr.startRiktning();
-
+ 
             }
-            online.newOpt();
+        }
         
-        }else{
-            online.newOpt();
+        if(ds.raknare == 2){
+            dr.startRiktning(); 
         }
-              
-        test = " ";
+        
+        online.newOpt();
+        
+        //test = " ";
+       // for(int k = 0; k < ds.bokningar.size(); k++ ){
+       //     test = test + " " + ds.bokningar.get(k).toString();
+       // }
+       // System.out.println("halllå");
 
-        for(int k = 0; k < ds.bokningar.size(); k++ ){
-            test = test + " " + ds.bokningar.get(k).toString();
-        }
-
-    }catch (Exception e) { System.out.print("det här är e, Boka " + e.toString());
+    }catch (Exception e) { 
+        System.out.print("det här är e, Boka " + e.toString());
 
         }
     }

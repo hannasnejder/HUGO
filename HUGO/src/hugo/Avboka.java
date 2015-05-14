@@ -44,7 +44,7 @@ public Avboka(OptPlan opt, Boka boka, DataStore ds) {
         int i;
         TimeUnit.SECONDS.sleep(4);
         
-        System.out.println("\n" + "Vi ska avboka " + Arrays.toString(avbokningar_upptagna));
+        //System.out.println("\n" + "Vi ska avboka " + Arrays.toString(avbokningar_upptagna));
         
         for(i = 0; i < 2; i++){
             //If-sats som rensar bort de nollor som skickas med från Boka

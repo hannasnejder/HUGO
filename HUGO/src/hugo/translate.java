@@ -13,12 +13,7 @@ public class translate {
     public translate(RobotRead rr){
         this.rr=rr;
         ds = new DataStore();
-        
-        //Vet inte om de här behövs....
-        bokningar = new ArrayList<Integer>();
-        instruktioner = new ArrayList<Character>();
-        svar = new ArrayList<Character>(); 
-        
+
     }
     
     //Här ska vi tolka vad roboten faktisk säger

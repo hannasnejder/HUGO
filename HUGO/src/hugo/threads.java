@@ -39,6 +39,7 @@ public class threads {
 
         opt = new OptPlan(this.ds, this.opt);
         online = new OptOnline(this.opt, this.ds);
+        dr = new drive(this.ds);
 
         boka= new Boka(this.opt, this.ds, this.online, this.dr);
   

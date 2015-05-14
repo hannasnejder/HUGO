@@ -84,7 +84,8 @@ public class OptPlan {
         int[] test_vag = new int[1000];
         int[] kvarvarande_hyllor = new int[100];
         int[] snabbaste_rutten = new int[100];
-        snabbaste_rutten[0] = ds.startnod;
+        snabbaste_rutten[0] = ds.startnod
+                ;
 
         //Se över detta!! Verkar inte funka som jag vill....
         for (int n = 0; n < ds.antalnoderfil; n++) {
