@@ -17,7 +17,6 @@ public class GuiUpdate implements Runnable{
         this.cui = cui;
         this.ds = ds;
         x=opt.noder_boka;
-        
         sleepTime = generator.nextInt(20000);
     }
         

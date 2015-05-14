@@ -23,11 +23,7 @@ public class AvbokaRobot implements Runnable{
     //public Boka b1;
     int x [];
     //int avbokningar_upptagna [];
-    
-    public AvbokaRobot() {
-    //this.cui = cui;
-    sleepTime = generator.nextInt(20000);
-}
+
     public AvbokaRobot(RobotRead rr, DataStore ds) {
     this.rr = rr; 
     this.ds = ds;
@@ -51,7 +47,7 @@ public void run() {
                 
         while(ds.robotflaga == true){
             
-        x = rr.från_robot; 
+        //x = rr.från_robot; 
         
         System.out.println("x avbokarobot: " + x);
         Thread.sleep(sleepTime/20);

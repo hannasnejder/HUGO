@@ -3,38 +3,34 @@ package hugo;
 
 import java.util.*;
 import java.io.*;
-import javax.microedition.io.*;
-import javax.bluetooth.*;
+//import javax.microedition.io.*;
+//import javax.bluetooth.*;
 import java.lang.*; //objekt.org.springframework.util.StringUtils;
 
 
 public class RobotRead implements Runnable {
     private int sleepTime;
     private static Random generator = new Random();
-    private ControlUI cui;
-    private DataStore ds;
+    public ControlUI cui;
+    public DataStore ds;
+    public Avboka avboka;
 
     public Boka boka;
     ArrayList<Character> instruktioner; 
     ArrayList<Character> svarRobot = new ArrayList();
-
 
     public Boka b1;
 
     String körorder = "w";
     char meddelande_in;
     int k = 0;
-    
-    int [] från_robot = new int [2];
-
+ 
     
     public RobotRead(DataStore ds, ControlUI cui){
         this.cui=cui;
         this.ds=ds;
-
         instruktioner = new ArrayList<Character>();
 
-        //this.b1 = b1;
         sleepTime=generator.nextInt(20000);
 
     }
@@ -42,6 +38,8 @@ public class RobotRead implements Runnable {
     @Override
     public void run(){
         try{
+            /*cui.appendStatus("RobotRead kommer att köra i " + sleepTime + " millisekunder.");
+            
             
            // cui.appendStatus("RobotRead kommer att köra i " + sleepTime + " millisekunder.");
             cui.appendStatus("Körorder är: " + körorder);
@@ -75,6 +73,13 @@ public class RobotRead implements Runnable {
                  //       bluetooth_ut.println(st.nextToken());   
                         
                         
+                        String meddelande_in = bluetooth_in.readLine();     //Mottaget meddelande när ubuntu används
+                        System.out.println("Mottaget: " + meddelande_in);
+                        
+                        //Mottaget meddelande från robot
+                        //char c = bluetooth_in.charAt(0);
+                    int c;            //Använd då vi skickar med robot
+
                         //Mottaget meddelande när ubuntu används
                         /*String meddelande_in = bluetooth_in.readLine();     
                         System.out.println("Mottaget: " + meddelande_in);*/
@@ -83,9 +88,10 @@ public class RobotRead implements Runnable {
                   //  }  
                     
                     //char c = bluetooth_in.charAt(0);
-                    int c;     
+                   /* int c;     
                     
                     //Det vi får av roboten när vi skickar till robot
+
                     while((c = bluetooth_in.read()) != -1){
                         meddelande_in = (char) c;
                         System.out.println("Mottaget: " + meddelande_in);
@@ -93,8 +99,10 @@ public class RobotRead implements Runnable {
                         
                         från_robot[k] = meddelande_in;
                         k = k +1;
+                        //Anropa avboka.avbokaRobot(); när vi vill avboka
+                        //Kanske ska göras från translate
                         
-                        //ds.robotflaga = true;*/
+                        //ds.robotflaga = true;
                     }    
                     
                     
@@ -104,6 +112,9 @@ public class RobotRead implements Runnable {
                     anslutning.close();
                     ds.robotflaga = true;
                 }               
+
+                //System.out.println("från_robot: " + Arrays.toString(från_robot));*/
+            ds.updateUIflag = true;
 
         }catch(Exception e) {  
             System.out.print("RobotRead" + e.toString());   

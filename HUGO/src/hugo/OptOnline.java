@@ -6,19 +6,17 @@
 package hugo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-public class OptOnline {//implements Runnable {
+public class OptOnline {
 
     //private int sleepTime;
     //private static Random generator = new Random();
     public OptPlan opt;
-    //public Boka boka;
     public DataStore ds;
-    //vägen som optimeras fram i optplan
-    int resurser[];
 
     //int passerad hylla eller orderfilen som fås från roboten måste läggas till
     public OptOnline(OptPlan opt, DataStore ds) {
@@ -37,38 +35,53 @@ public class OptOnline {//implements Runnable {
             //Denna måste göras om. Vet inte vad som ska ske i detta läge...  
             //ämdra villkor till 2 när boka ändras
 
+            System.out.println("J i opt= " + ds.raknare);
+
             if (ds.raknare == 2) {
                 ds.startnod = ds.okej[1];
                 opt.createPlan();
                 System.out.println("startnod är "+ds.startnod);
-                /*for (int k =0; k<ds.antalnoderfil; k++){
+                
+                for (int k =0; k<ds.antalnoderfil; k++){
+                    //System.out.println("Startnod är " + ds.startnod);
+                    System.out.println("KopiaVilkanoder " + ds.kopiaVilkanoder);
+                    
                     if(ds.startnod == ds.kopiaVilkanoder[k]){
                         ds.kopiaVilkanoder[k] = 0;
+                        System.out.println("Kopian är detta i optonline " + ds.kopiaVilkanoder[k]);
                     }
-                }*/
+                }
 
                 //Om inte båda två går att boka
             } else {
-                //System.out.println("Inne i andra if-satsen");
+                System.out.println("Inne i optOnline, else");
                 ds.kopiaAvstand = ds.avstand;
+
                 for (int m = 0; m < ds.arcs*2; m++) {
 
-                    
-                    //System.out.println("Startnod är "+ds.startnod);
-                    //System.out.println("boka.ejokej[1] är "+boka.ejokej[1]);
-                    
-                    if ((ds.startpunkt[m] == ds.startnod) && ds.slutpunkt[m] == ds.ejokej[1]) {
 
+                    //Ändra ejokej[2] till ngt annat!!!
+                    //Beror på om båge eller nod bokas först
+                    if((ds.startpunkt[m] == ds.startnod) && ds.slutpunkt[m] == ds.okej[1]) {
+                        //System.out.println("Inne i första if i else");
+                        ds.kopiaAvstand[m] = 100000;
+                    } 
+                    
+                    else if((ds.startpunkt[m] == ds.startnod) && ds.slutpunkt[m] == ds.ejokej[1]) {
+                        //System.out.println("Inne i andra if-satsen i else");
                         ds.kopiaAvstand[m] = 100000;
                     }
+                    //System.out.println("Startnod är "+ds.startnod);
+                    //System.out.println("boka.ejokej[1] är "+boka.ejokej[1]);
+
                 }
                 opt.createPlan();
-
             }
-
             //Sedan vill vi omoptimera utefter vad roboten skickar
+            
         } catch (Exception e) {
             System.out.println("det här är e, OptOnline " + e.toString());
+            ds.bokaFlag = false;
         }
     }
 }
