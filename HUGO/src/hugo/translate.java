@@ -15,12 +15,7 @@ public class translate {
         this.rr=rr;
         this.avboka = avboka;
         ds = new DataStore();
-        
-        //Vet inte om de här behövs....
-        bokningar = new ArrayList<Integer>();
-        instruktioner = new ArrayList<Character>();
-        svar = new ArrayList<Character>(); 
-        
+
     }
     
     //Här ska vi tolka vad roboten faktisk säger
@@ -28,6 +23,10 @@ public class translate {
     //Säkerhetsstopp?
     public void interpret(){
         
+        System.out.println("Går in i translate");
+        
+        //När vi har översatt och vill avboka
+        avboka.avbokaRobot();
     }
     
 }

@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package hugo;
 
 import java.util.ArrayList;
@@ -44,6 +40,8 @@ public class OptOnline {
                 
                 for (int k =0; k<ds.antalnoderfil; k++){
                     //System.out.println("Startnod är " + ds.startnod);
+                    System.out.println("KopiaVilkanoder " + Arrays.toString(ds.kopiaVilkanoder));
+
                     System.out.println("KopiaVilkanoder " + ds.kopiaVilkanoder[k]);
                     
                     if(ds.startnod == ds.kopiaVilkanoder[k]){
@@ -69,14 +67,15 @@ public class OptOnline {
                     }
                     //System.out.println("Startnod är "+ds.startnod);
                     //System.out.println("boka.ejokej[1] är "+boka.ejokej[1]);
-
                 }
                 opt.createPlan();
             }
             
+
             if(opt.dummafel == 0 && ds.okej[1]==ds.slutnod){
                System.out.println("Nu är vi klara med ordern!! :D"); 
             }
+
             //Sedan vill vi omoptimera utefter vad roboten skickar
             
         } catch (Exception e) {

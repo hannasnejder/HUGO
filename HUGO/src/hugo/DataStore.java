@@ -37,7 +37,7 @@ public class DataStore {
     int[] kopiaVilkanoder;
     
     boolean networkRead1;
-    boolean robotflaga;
+    boolean robotflag;
     boolean bokaflag;
     boolean bokaFlag;
 
@@ -78,7 +78,8 @@ public class DataStore {
 
         networkRead = false;
         updateUIflag = false;
-        bokaflag = false;
+        bokaflag = true;
+        robotflag = false;
         
     }
 
