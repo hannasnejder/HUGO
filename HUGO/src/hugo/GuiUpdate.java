@@ -11,30 +11,26 @@ public class GuiUpdate implements Runnable{
         public OptPlan opt;
         public drive dr;
  
-        int x [] = new int[10000];
-        double startX, startY, nextX, nextY;
-        double kopiaX1, kopiaX2, Y1, Y2;
+        double kopiaX1, kopiaY1, X2, Y2;
         
     public GuiUpdate(DataStore ds, ControlUI cui, OptPlan opt, drive dr){
         this.cui = cui;
         this.ds = ds;
         this.dr=dr;
-        this.opt=opt;
-        //sleepTime = generator.nextInt(20000);
-    }
+        this.opt=opt;    
+    } 
         
+    
+        //I drive anropas run(). Vill att allt nedanför run() ska köras då
         @Override 
         public void run(){
             try{
                // cui.appendStatus("GuiUpdate startar och kommer att köra i " + sleepTime + " millisekunder. ");
                 cui.appendStatus("Hyllplatser: " + ds.besoknoder);
                 cui.appendStatus("Resurser: " + Arrays.toString(ds.resurser_boka));
-
-                //System.out.println(Arrays.toString(x));
-              
+          
                 while(ds.updateUIflag==false){
-                    TimeUnit.SECONDS.sleep(1);
-                   // Thread.sleep(sleepTime / 20); 
+                    TimeUnit.SECONDS.sleep(3);      //FÖRDRÖJNING? 1? 3?
                 }
         
             //drive: kopiaX1 och kopiaY1 är startnodens koordinater
@@ -42,55 +38,50 @@ public class GuiUpdate implements Runnable{
             System.out.println("Inne i GuiUpdate");
             
             //while(en flagga i drive har satts till true)
-            
-            startX = dr.kopiaX1;   //startnoden som uppdateras i drive
-            startY = dr.kopiaY1;   //startnoden som uppdateras i drive
-            nextX = dr.X2;
-            nextY = dr.Y2;
 
-            //åk till vänster på kartan
-             while (startX >= nextX) {
-                //Thread.sleep(sleepTime / 20);
-                TimeUnit.SECONDS.sleep(1);
-                ds.robotX = startX;
-                startX = startX - 10;
-                robotrorelse();
+             //åk till vänster på kartan
+             while (kopiaX1 > X2) {
+                TimeUnit.SECONDS.sleep(3);      //Hur länge ska tråden sova?
+                ds.robotX = kopiaX1;
+                kopiaX1 = kopiaX1 - 10;         //Öka 10 för att pricken ska åka snabbare. Gäller även för resterande while-looparna
+                robotrorelse();                
+                break;
             }
 
            //åk till höger på kartan
-            while (startX <= nextX) {
-               // Thread.sleep(sleepTime / 20);
-                TimeUnit.SECONDS.sleep(1);
-                ds.robotX = startX;
-                startX = startX + 10;
+            while (kopiaX1 < X2) {
+                TimeUnit.SECONDS.sleep(3);
+                ds.robotX = kopiaX1;
+                kopiaX1 = kopiaX1 + 10;
                 robotrorelse();
+                break;
             }
 
             //åk neråt på kartan
-             while (startY >= nextY) {
-                //Thread.sleep(sleepTime / 20);
-                TimeUnit.SECONDS.sleep(1);
-                ds.robotY = nextY;
-                startY = startY - 10;
+             while (kopiaY1 > Y2) {
+                TimeUnit.SECONDS.sleep(3);
+                System.out.println("KOM IN HÄR");
+                ds.robotY = kopiaY1;
+                kopiaY1 = kopiaY1 - 10;
                 robotrorelse();
+                break;
             }
 
             //åk uppåt på kartan          
-         while (startY <= nextY) {
-                //Thread.sleep(sleepTime / 20);
-                TimeUnit.SECONDS.sleep(1);
-                ds.robotY = startY;
-                startY = startY + 10;
+         while (kopiaY1 < Y2) {
+                TimeUnit.SECONDS.sleep(3);
+                ds.robotY = kopiaY1;
+                kopiaY1 = kopiaY1 + 10;
                 robotrorelse();
+               break;
             }
 
        
             
            // System.out.println("Flaggan i GuiUpdate är sann");
 
-           
+          
           // } //stäng loopen
-         
         } catch (InterruptedException exception) {
         }
         cui.appendStatus("GuiUpdate är nu klar! ");
@@ -98,8 +89,7 @@ public class GuiUpdate implements Runnable{
 
     //Uppdaterar kartan med robotens position
 
-    public void robotrorelse() {
+   public void robotrorelse() {
         cui.repaint();
     }
 }
-

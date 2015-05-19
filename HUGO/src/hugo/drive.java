@@ -10,6 +10,8 @@ public class drive {
 
     int riktning, kartaA, kartaB;
     private double X1, Y1, X2, Y2, X3, Y3, X4, Y4, deltaX, deltaY, olddeltaX, olddeltaY;
+    public double kopiaX1, kopiaY1;
+    public GuiUpdate gui;
     ArrayList<Character> instruktioner = new ArrayList();
     char f, r, l, b, v, h, q, y; 
 
@@ -25,8 +27,9 @@ public class drive {
     //y hyllplats passerat 
     
     //Default-konstruktor 
-    public drive(DataStore ds) {
+    public drive(DataStore ds, GuiUpdate gui) {
         this.ds = ds;
+        this.gui=gui;
         riktning = 0;
     }
 
@@ -46,6 +49,8 @@ public class drive {
 
                 X1 = ds.nodeX[i];
                 Y1 = ds.nodeY[i];
+                kopiaX1=X1;
+                kopiaY1=Y1;
                 break;
             }
         }
@@ -184,6 +189,11 @@ public class drive {
         Körorder = Körorder + " " + instruktioner.get(k).toString();
         }
         System.out.println("Körorder: " + Körorder); 
+        
+        //Vill anropa GuiUpdate, run(), så att metoden körs och positionen på pricken uppdateras
+        System.out.println("Kör guiUpdate");
+        gui.run();
+        System.out.println("Efter GuiUpdate");               
     }
     
 }

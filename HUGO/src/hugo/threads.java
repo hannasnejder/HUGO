@@ -38,7 +38,7 @@ public class threads {
         boka= new Boka(this.opt, this.ds, this.online, this.dr, this.avboka, this.tr); 
         online = new OptOnline(this.opt, this.ds);
         avboka = new Avboka(this.opt, this.ds);
-        dr = new drive(this.ds);
+        dr = new drive(this.ds, this.g1);
         tr = new translate(this.rr, this.avboka);
         r1 = new RobotRead (this.ds, this.cui, this.tr);
         t1 = new Thread(r1);

@@ -23,7 +23,7 @@ public class translate {
     //Säkerhetsstopp?
     public void interpret(){
         
-        System.out.println("Går in i translate");
+        //System.out.println("Går in i translate");
         
         //När vi har översatt och vill avboka
         avboka.avbokaRobot();
