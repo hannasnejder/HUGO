@@ -29,7 +29,7 @@ public class Avboka {
     public void avbokning() {
     try {
         int i;
- 
+
         for(i = 0; i < 2; i++){
             //If-sats som rensar bort de nollor som skickas med från Boka
             //Avbokar bara de positioner som inte innehåller noll
@@ -64,7 +64,8 @@ public class Avboka {
           }
         }
     }
-        catch (Exception e) { System.out.print(e.toString()); }
+        catch (Exception e) { System.out.print(e.toString()); 
+        }
 
     }
     
@@ -119,5 +120,3 @@ public class Avboka {
            
     }
 }
-
- 

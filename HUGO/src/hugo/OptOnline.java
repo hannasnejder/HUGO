@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package hugo;
 
 import java.util.ArrayList;
@@ -57,8 +53,9 @@ public class OptOnline {
                 //Om inte båda två går att boka
             } else {
                 ds.kopiaAvstand = ds.avstand;
-                    
-                for (int m = 0; m < 98; m++) {
+
+                for (int m = 0; m < ds.arcs*2; m++) {
+
 
                     //Ändra ejokej[2] till ngt annat!!!
                     //Beror på om båge eller nod bokas först
@@ -71,14 +68,15 @@ public class OptOnline {
                     }
                     //System.out.println("Startnod är "+ds.startnod);
                     //System.out.println("boka.ejokej[1] är "+boka.ejokej[1]);
-
                 }
                 opt.createPlan();
             }
             
+
             if(opt.dummafel == 0 && ds.okej[1]==ds.slutnod){
                System.out.println("Nu är vi klara med ordern!! :D"); 
             }
+
             //Sedan vill vi omoptimera utefter vad roboten skickar
             
         } catch (Exception e) {

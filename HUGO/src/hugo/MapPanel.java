@@ -22,6 +22,7 @@ public class MapPanel extends JPanel {
         final Color RED_COLOR = new Color(255, 0, 0);
         final Color BLUE_COLOR = new Color(20, 0, 247);
         final Color GREEN_COLOR = new Color(14, 163, 16);
+        final Color YELLOW_COLOR= new Color(255, 215, 0);
         
         int x, y;
         int x1, y1;
@@ -30,8 +31,7 @@ public class MapPanel extends JPanel {
         final int circlesize = 20;
         final int ysize = 350;
         final int xsize = 700;
-        
-        int[] hyllplatser= new int[]{27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38};      
+            
 
         if (ds.networkRead == true) { // Only try to plot is data has been properly read from file
 
@@ -56,24 +56,23 @@ public class MapPanel extends JPanel {
             for (int i = 0; i < ds.nodes; i++) {
                 x = (int) (ds.nodeX[i] * xscale);
                 y = (int) (ds.nodeY[i] * yscale);
-                             
-                /*g.setColor(DARK_COLOR);
-                
-                for (int k = 0; k < ds.antalnoderfil; k++){
-                    if ((i+1)== ds.vilkanoder[k]){
-                        g.setColor(RED_COLOR);
-                        break;
-                     }
-                }*/
 
                 
-             
-                if(ds.nodeColor[i] == 1){
-
+                 if (ds.nodeColor[i] == 1) {
                     g.setColor(RED_COLOR);
+                }   
+                 
+                else if(ds.nodeColor[i]==2){
+                    g.setColor(GREEN_COLOR);
                 }
-                else
+                   
+                else if(ds.nodeColor[i]==3){
+                    g.setColor(YELLOW_COLOR);
+                }
+                    
+                    else {
                     g.setColor(BLUE_COLOR);
+                }
 
                 g.drawOval(x - (circlesize / 2), height - y - circlesize / 2, circlesize, circlesize);
             }
@@ -96,8 +95,7 @@ public class MapPanel extends JPanel {
 
             }
         
-        }
-       
+        }     
     } // end paintComponent
 }
 

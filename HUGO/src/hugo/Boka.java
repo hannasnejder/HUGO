@@ -74,7 +74,6 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr, Avboka avboka
                     int linecount = 0;
                     String OK = "OK";
 
-
                 while ((inkommande_text = inkommande.readLine()) != null) {
                 
                     inkommande_samlat.append(inkommande_text);
