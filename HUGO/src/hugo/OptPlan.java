@@ -59,7 +59,7 @@ public class OptPlan {
             //sista kolumnen längden på tillhörande båge 
             //if start noden kopplas till rätt slutnod, ta längden och sätt in i Edge
             //Else, fortsätt loopa
-            for (int m = 0; m < 98; m++) {
+            for (int m = 0; m < (ds.arcs*2); m++) {
                 if ((ds.startpunkt[m] == ds.arcStart[i]) && ds.slutpunkt[m] == ds.arcEnd[i]) {
                     //System.out.println("inne i if-satsen"); 
                     dist = ds.kopiaAvstand[m];
@@ -124,7 +124,7 @@ public class OptPlan {
                     //loopar sedan igenom arrayerna med alla avstånd
                     nuvarande_langd = 0;
                     for (int b = 1; b < path.size(); b++) {
-                        for (int m = 0; m < 98; m++) {
+                        for (int m = 0; m < (ds.arcs*2); m++) {
 
                             //Kollar igenom avståndet mellan noderna som passeras för att komma till hyllan
                             if ((ds.startpunkt[m] == Integer.parseInt(path.get(b - 1).getId())) && (ds.slutpunkt[m] == Integer.parseInt(path.get(b).getId()))) {
@@ -162,7 +162,7 @@ public class OptPlan {
             System.out.println("Rutten är " + snabbaste_rutten[j]);
         }
 
-        for (int k = 0; k < (order_kvar); k++) {
+        for (int k = 0; k < order_kvar; k++) {
 
 
             // Set up network

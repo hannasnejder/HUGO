@@ -41,7 +41,7 @@ public class threads {
 
         r1 = new RobotRead (this.ds, this.cui);
         t1 = new Thread(r1);
-        g1 = new GuiUpdate (this.ds,this.cui, this.opt);
+        g1 = new GuiUpdate (this.ds,this.cui, this.opt, this.dr);
         t2 = new Thread(g1); 
         b1 = new Boka(this.opt, this.ds, this.online, this.dr, this.avboka);
         t3 = new Thread(b1);;

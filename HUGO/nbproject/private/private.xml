@@ -2,21 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-<<<<<<< HEAD
         <group name="Product">
             <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/GuiUpdate.java</file>
             <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/Boka.java</file>
             <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/OptPlan.java</file>
             <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/RobotRead.java</file>
-=======
-        <group>
-            <file>file:/C:/Users/Paulin/Desktop/Hugo/HUGO/HUGO/src/hugo/OptOnline.java</file>
-            <file>file:/C:/Users/Paulin/Desktop/Hugo/HUGO/HUGO/src/hugo/AvbokaRobot.java</file>
-            <file>file:/C:/Users/Paulin/Desktop/Hugo/HUGO/HUGO/src/hugo/threads.java</file>
-            <file>file:/C:/Users/Paulin/Desktop/Hugo/HUGO/HUGO/src/hugo/HUGO.java</file>
-            <file>file:/C:/Users/Paulin/Desktop/Hugo/HUGO/HUGO/src/hugo/OptPlan.java</file>
-            <file>file:/C:/Users/Paulin/Desktop/Hugo/HUGO/HUGO/src/hugo/Boka.java</file>
->>>>>>> 0e7576f549072f3234a77f185828a3d5e6feba48
         </group>
         <group/>
     </open-files>

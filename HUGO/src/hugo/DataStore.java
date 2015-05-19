@@ -23,7 +23,7 @@ public class DataStore {
     double robotY;
     int[] arcColor;
     int[] nodeColor;
-    int startnod;
+    int startnod, start;
     int slutnod;
     int antalnoderfil;
     int forstanoden;
@@ -177,13 +177,14 @@ public class DataStore {
             // Read number of nodes
             line1 = (scanner1.nextLine());
             startnod = Integer.parseInt(line1.trim());
+            start=startnod;
             slutnod = startnod;
             line1 = scanner1.nextLine();
             antalnoderfil = Integer.parseInt(line1.trim());
             
             //För att spara koordinaterna till startplatsen
-            startnodX=nodeX[startnod-1]; //sparar x-koordinaten till startnoden
-            startnodY=nodeY[startnod-1]; //sparar y-koordinaten till startnoden
+            startnodX=nodeX[start-1]; //sparar x-koordinaten till startnoden
+            startnodY=nodeY[start-1]; //sparar y-koordinaten till startnoden
 
 
             for (int i = 0; i < (antalnoderfil); i++) {

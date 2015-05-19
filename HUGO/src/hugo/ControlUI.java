@@ -82,7 +82,7 @@ public class ControlUI extends javax.swing.JFrame {
         jPanel1 = map;
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(700, 350));
+        setMinimumSize(new java.awt.Dimension(740, 350));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
