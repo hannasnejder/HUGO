@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package hugo;
 
 import java.util.ArrayList;
@@ -34,8 +30,8 @@ public class OptOnline {
             //position 0 och 2 är bågar
             //Denna måste göras om. Vet inte vad som ska ske i detta läge...  
             //ämdra villkor till 2 när boka ändras
-
-            System.out.println("J i opt= " + ds.raknare);
+            
+            //ds.kopiaAvstand = ds.avstand;
 
             if (ds.raknare == 2) {
                 ds.startnod = ds.okej[1];
@@ -44,7 +40,9 @@ public class OptOnline {
                 
                 for (int k =0; k<ds.antalnoderfil; k++){
                     //System.out.println("Startnod är " + ds.startnod);
-                    System.out.println("KopiaVilkanoder " + ds.kopiaVilkanoder);
+                    System.out.println("KopiaVilkanoder " + Arrays.toString(ds.kopiaVilkanoder));
+
+                    System.out.println("KopiaVilkanoder " + ds.kopiaVilkanoder[k]);
                     
                     if(ds.startnod == ds.kopiaVilkanoder[k]){
                         ds.kopiaVilkanoder[k] = 0;
@@ -54,7 +52,6 @@ public class OptOnline {
 
                 //Om inte båda två går att boka
             } else {
-                System.out.println("Inne i optOnline, else");
                 ds.kopiaAvstand = ds.avstand;
 
                 for (int m = 0; m < ds.arcs*2; m++) {
@@ -63,20 +60,23 @@ public class OptOnline {
                     //Ändra ejokej[2] till ngt annat!!!
                     //Beror på om båge eller nod bokas först
                     if((ds.startpunkt[m] == ds.startnod) && ds.slutpunkt[m] == ds.okej[1]) {
-                        //System.out.println("Inne i första if i else");
                         ds.kopiaAvstand[m] = 100000;
                     } 
                     
                     else if((ds.startpunkt[m] == ds.startnod) && ds.slutpunkt[m] == ds.ejokej[1]) {
-                        //System.out.println("Inne i andra if-satsen i else");
                         ds.kopiaAvstand[m] = 100000;
                     }
                     //System.out.println("Startnod är "+ds.startnod);
                     //System.out.println("boka.ejokej[1] är "+boka.ejokej[1]);
-
                 }
                 opt.createPlan();
             }
+            
+
+            if(opt.dummafel == 0 && ds.okej[1]==ds.slutnod){
+               System.out.println("Nu är vi klara med ordern!! :D"); 
+            }
+
             //Sedan vill vi omoptimera utefter vad roboten skickar
             
         } catch (Exception e) {

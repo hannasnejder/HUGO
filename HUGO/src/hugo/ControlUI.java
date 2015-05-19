@@ -57,10 +57,10 @@ public class ControlUI extends javax.swing.JFrame {
     
 
     public void showStatus(){
-        System.out.println("--- System status ---");
-        System.out.println("Grupp 3");
-        System.out.println("Nodes: "+ds.nodes);
-        System.out.println("Arcs: "+ds.arcs);
+        //System.out.println("--- System status ---");
+        //System.out.println("Grupp 3");
+        //System.out.println("Nodes: "+ds.nodes);
+        //System.out.println("Arcs: "+ds.arcs);
     }
     
     public void appendStatus(String text){

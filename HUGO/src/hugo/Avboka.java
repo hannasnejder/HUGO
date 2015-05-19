@@ -29,7 +29,7 @@ public class Avboka {
     public void avbokning() {
     try {
         int i;
- 
+
         for(i = 0; i < 2; i++){
             //If-sats som rensar bort de nollor som skickas med från Boka
             //Avbokar bara de positioner som inte innehåller noll
@@ -44,7 +44,7 @@ public class Avboka {
             
                 int mottagen_status = anslutning.getResponseCode();
             
-                System.out.println("Statuskod: " + mottagen_status);
+                System.out.println("Statuskod: " + mottagen_status + "\n");
            
                 BufferedReader inkommande = new BufferedReader(new
                 InputStreamReader(anslutning.getInputStream()));
@@ -73,26 +73,25 @@ public class Avboka {
     public void avbokaRobot(){
     try {
         int i = 0;
+ 
+        //System.out.println("x avbokarobot: " + Arrays.toString(ds.okej));
+        
+        //System.out.println("inne i avbokarobot, efter thread sleep");
+        
+        for(i = 0; i < 2; i++){
+            if(ds.okej[i] != 0){
+            String url = "http://tnk111.n7.se/free.php?user=3&resource=" + ds.okej[i];
          
-        while(ds.robotflaga == true){  
-        //x = rr.från_robot; 
-        
-        System.out.println("x avbokarobot: " + Arrays.toString(ds.från_robot));
-        
-        System.out.println("inne i avbokarobot, efter thread sleep");
-        
-        for(i = 0; i <= 3; i++){
-            //Avboka http = new Avboka();
-            String url = "http://tnk111.n7.se/free.php?user=3&resource=" + ds.från_robot[i];
             URL urlobjekt = new URL(url);
             HttpURLConnection anslutning = (HttpURLConnection)
             urlobjekt.openConnection();
            
             System.out.println("\nAnropar: " + url);
-            
-            
+                        
             int mottagen_status = anslutning.getResponseCode();
-            
+
+            System.out.println("Statuskod: " + mottagen_status + "\n");
+
             System.out.println("Statuskod: " + mottagen_status);
            
             BufferedReader inkommande = new BufferedReader(new
@@ -100,8 +99,6 @@ public class Avboka {
 
             String inkommande_text;
             StringBuffer inkommande_samlat = new StringBuffer();
-            
-           
 
             while ((inkommande_text = inkommande.readLine()) != null) {
                 
@@ -109,17 +106,19 @@ public class Avboka {
                
             }
             
-
             inkommande.close();
             
             System.out.println(inkommande_samlat.toString());
             
-           //System.out.println("Länken är avbokad.");
+            System.out.println(ds.okej[i] + " är avbokad " + "\n");
            
             }
         }
-        }
-        catch (Exception e) { System.out.print("AvbokaRobot" + e.toString()); }
+        //Bokas flagga sätts till true för att gå tillbaka till boka
+        ds.bokaflag = true;
+       
+       
+        }catch (Exception e) { System.out.print("Det här är e, AvbokaRobot" + e.toString()); }
+           
     }
-
 }
