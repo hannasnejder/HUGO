@@ -1,82 +1,179 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package hugo;
 
-import java.util.Random;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
-import java.util.Arrays;
-import java.util.StringTokenizer;
-import javax.microedition.io.*;
-import javax.bluetooth.*;
+
+import java.util.*;
+import java.io.*;
+//import javax.microedition.io.*;
+//import javax.bluetooth.*;
+import java.lang.*; //objekt.org.springframework.util.StringUtils;
+import java.util.concurrent.TimeUnit;
+
 
 public class RobotRead implements Runnable {
     private int sleepTime;
     private static Random generator = new Random();
-    private ControlUI cui;
-    private DataStore ds;
-    String körorder = "23, r, 55, l";
+    public ControlUI cui;
+    public DataStore ds;
+    public Avboka avboka;
+    public translate tr;
+    ArrayList<Character> instruktioner; 
+    ArrayList<Character> svarRobot = new ArrayList();
+
+    int [] från_robot = new int [2];
+    char meddelande_in;
+ 
     
-    //Påhittad array med bekräftad körorder från robot
-    int [] från_robot = {40, 5, 49, 11};
-    
-    public RobotRead(DataStore ds, ControlUI cui){
+    public RobotRead(DataStore ds, ControlUI cui, translate tr){
         this.cui=cui;
         this.ds=ds;
+        this.tr = tr;
+
+        instruktioner = new ArrayList<Character>();
+
         sleepTime=generator.nextInt(20000);
+        //ds.robotflag = false;
+
     }
+    
+   // public void sendRobot(){
+        
+   // }
+    
+   // public void RobotSend(){
+        
+   // }
+ 
     @Override
     public void run(){
         try{
-            cui.appendStatus("RobotRead kommer att köra i " + sleepTime + " millisekunder.");
+            TimeUnit.SECONDS.sleep(2); 
+            while(ds.robotflag == true){
+                System.out.println("RobotRead flaggan blir sann");
+                
+            //När vi har något från robot anropar vi translate för att översätta
+            tr.interpret();
+            System.out.println("Lyckades anropa translate");
             
-          
+            /*cui.appendStatus("RobotRead kommer att köra i " + sleepTime + " millisekunder.");
             
-            /*//Skapar anslutning. Siffrorna är mottagarens, fås via browse.
-            //Siffran efter kolon är kanalen som används. 
-            StreamConnection anslutning = (StreamConnection)
-            Connector.open("btspp://00809824156D:8");
+            
+           // Kör i kommandofönstret
+           // cui.appendStatus("RobotRead kommer att köra i " + sleepTime + " millisekunder.");
+           // cui.appendStatus("Körorder är: " + körorder);
 
-            PrintStream bluetooth_ut = new PrintStream(anslutning.openOutputStream());
-        
-            BufferedReader bluetooth_in = new BufferedReader(new
-            InputStreamReader(anslutning.openInputStream()));
+            //Skapar anslutning. Siffrorna är mottagarens, fås via browse.
+            //Siffran efter kolon är kanalen som används. 
+          
+            //StreamConnection anslutning = (StreamConnection)
+            //Connector.open("btspp://C0F8DAE35DC6:1");       
+            //Roboten 98D331902C27
+
             
-            int i=1;
-            while(i == 1){
-                if(anslutning == null || körorder == null){
-                    cui.appendStatus("Koppling saknas eller körorder är tom");
-                    break;
-                }else{
-                    Thread.sleep(sleepTime/20);
-                    ds.updateUIflag=true; 
+            // PrintStream bluetooth_ut = new PrintStream(anslutning.openOutputStream());
+        
+            // BufferedReader bluetooth_in = new BufferedReader(new
+            // InputStreamReader(anslutning.openInputStream()));
+            
+            
+            //while(ds.bokaflag == true){
+
+                   // Thread.sleep(sleepTime/20);
+                   // ds.updateUIflag=true; 
                     
-                    StringTokenizer st = new StringTokenizer(körorder, " ");
+                   // for (int m = 0; m < instruktioner.size(); m++){
+                  //      bluetooth_ut.println(instruktioner.get(m));
+                 //   }
                     
+                 //   StringTokenizer st = new StringTokenizer(körorder, " ");
                     //Det vi skickar till roboten
-                    while(st.hasMoreTokens()){
-                        bluetooth_ut.println(st.nextToken());
+                 //  while (st.hasMoreTokens()){
+                        //TimeUnit.SECONDS.sleep(2);
+                 //       bluetooth_ut.println(st.nextToken());   
+                        
+                        
+                        String meddelande_in = bluetooth_in.readLine();     //Mottaget meddelande när ubuntu används
+                        System.out.println("Mottaget: " + meddelande_in);
                         
                         //Mottaget meddelande från robot
-                        //String meddelande_in = bluetooth_in.readLine();
+                        //char c = bluetooth_in.charAt(0);
+                    int c;            //Använd då vi skickar med robot
+
+                        //Mottaget meddelande när ubuntu används
+                        //String meddelande_in = bluetooth_in.readLine();     
                         //System.out.println("Mottaget: " + meddelande_in);
-                    }
+                        
+                        //Mottaget meddelande från robot
+                  //  }  
                     
-                 cui.appendStatus("Körinstruktioner: " + körorder);
-                 anslutning.close();
-                 i++;
-                }               
-            }*/
-            
-            ds.updateUIflag=true;
-        }catch(Exception e) {  System.out.print(e.toString());   
-        }
+<<<<<<< HEAD
+                   // int c;     
+                     
+                    //Det roboten skickar till oss
+                    //while((c = bluetooth_in.read()) != -1){
+=======
+                    //char c = bluetooth_in.charAt(0);
+                   /* int c;     
+                    
+                    //Det vi får av roboten när vi skickar till robot
+
+                    while((c = bluetooth_in.read()) != -1){
+                        meddelande_in = (char) c;
+                        System.out.println("Mottaget: " + meddelande_in);
+>>>>>>> 96d1afe3df7a271adf9facddcca479107390a5c2
+                        
+                        //Gör om det vi får till en char
+                   //     meddelande_in = (char) c;
+                        
+<<<<<<< HEAD
+                        //Läser in det vi får i en ArrayList som char
+                 //       svarRobot.add(meddelande_in);
+                        
+
+                        //System.out.println("Mottaget: " + meddelande_in);
+                        
+                        //från_robot[k] = meddelande_in;
+                        //k = k +1;
+                //    }    
+=======
+                        från_robot[k] = meddelande_in;
+                        k = k +1;
+                        //Anropa avboka.avbokaRobot(); när vi vill avboka
+                        //Kanske ska göras från translate
+                        
+                        //ds.robotflaga = true;
+                    }    
+>>>>>>> 96d1afe3df7a271adf9facddcca479107390a5c2
+                    
+                    
+                //    System.out.println(Arrays.toString(från_robot));
+
+<<<<<<< HEAD
+                //    cui.appendStatus("Körinstruktioner: " + körorder);
+                //    anslutning.close();
+                //   ds.robotflaga = true;
+                //}             
         
-    cui.appendStatus("RobotRead är nu klar");
+            ds.updateUIflag = true; 
+            
+        }catch(Exception e) {  
+    
+            System.out.print("RobotRead" + e.toString());   
+=======
+                //System.out.println("från_robot: " + Arrays.toString(från_robot));*/
+            ds.updateUIflag = true;
+            
+            //Bokaflag sätts till true för att gå tillbaka till boka
+            ds.bokaflag = true;
+            System.out.println("Bokaflaggan blir sann");
+            }
+        }catch(Exception e) {  
+            System.out.print("Det här är e, RobotRead" + "\n" + e.toString());   
+        }
+
+        
+        //Nödvändig kommentar?
+        //cui.appendStatus("RobotRead är nu klar");
+
     }
 
 }

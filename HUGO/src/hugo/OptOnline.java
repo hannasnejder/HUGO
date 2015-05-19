@@ -1,41 +1,27 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package hugo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-public class OptOnline implements Runnable {
+public class OptOnline {
 
-    private int sleepTime;
-    private static Random generator = new Random();
+    //private int sleepTime;
+    //private static Random generator = new Random();
     public OptPlan opt;
-    public Boka boka;
     public DataStore ds;
-    //vägen som optimeras fram i optplan
-    int resurser[];
 
     //int passerad hylla eller orderfilen som fås från roboten måste läggas till
-    public OptOnline(OptPlan opt, Boka boka, DataStore ds) {
+    public OptOnline(OptPlan opt, DataStore ds) {
         this.opt = opt;
-        this.boka = boka;
         this.ds = ds;
-        sleepTime = generator.nextInt(20000);
-        //Resursena från optplan sparas i "resurser"
-        resurser = opt.resurser_boka;
     }
 
-    @Override
-    public void run() {
+    public void newOpt(){
         try {
-            //Ändra hur tråden ska sova beroende på hur allt kopplas ihop
-            //Thread.sleep(1000);
-            TimeUnit.SECONDS.sleep(2);
             
             //vi vill modifiera startnod, avstånd[] och orderfilen när roboten har passerat en hylla
             //ändra om värdena i avstånd[] så att den länken som inte går att boka får högt värde, t.ex 100000
@@ -44,31 +30,58 @@ public class OptOnline implements Runnable {
             //position 0 och 2 är bågar
             //Denna måste göras om. Vet inte vad som ska ske i detta läge...  
             //ämdra villkor till 2 när boka ändras
-            System.out.println("J i opt= " + boka.j);
-            if (boka.j == 2) {
-                ds.startnod = boka.okej[1];
+            
+            //ds.kopiaAvstand = ds.avstand;
+
+            if (ds.raknare == 2) {
+                ds.startnod = ds.okej[1];
                 opt.createPlan();
+                System.out.println("startnod är "+ds.startnod);
+                
+                for (int k =0; k<ds.antalnoderfil; k++){
+                    //System.out.println("Startnod är " + ds.startnod);
+                    System.out.println("KopiaVilkanoder " + Arrays.toString(ds.kopiaVilkanoder));
+
+                    System.out.println("KopiaVilkanoder " + ds.kopiaVilkanoder[k]);
+                    
+                    if(ds.startnod == ds.kopiaVilkanoder[k]){
+                        ds.kopiaVilkanoder[k] = 0;
+                        System.out.println("Kopian är detta i optonline " + ds.kopiaVilkanoder[k]);
+                    }
+                }
 
                 //Om inte båda två går att boka
             } else {
-                System.out.println("Inne i andra if-satsen");
                 ds.kopiaAvstand = ds.avstand;
-                for (int m = 0; m < 98; m++) {
+
+                for (int m = 0; m < ds.arcs*2; m++) {
+
 
                     //Ändra ejokej[2] till ngt annat!!!
                     //Beror på om båge eller nod bokas först
-                    if ((ds.startpunkt[m] == ds.startnod) && ds.slutpunkt[m] == boka.ejokej[2]) {
+                    if((ds.startpunkt[m] == ds.startnod) && ds.slutpunkt[m] == ds.okej[1]) {
                         ds.kopiaAvstand[m] = 100000;
-                        //break;
+                    } 
+                    
+                    else if((ds.startpunkt[m] == ds.startnod) && ds.slutpunkt[m] == ds.ejokej[1]) {
+                        ds.kopiaAvstand[m] = 100000;
                     }
+                    //System.out.println("Startnod är "+ds.startnod);
+                    //System.out.println("boka.ejokej[1] är "+boka.ejokej[1]);
                 }
                 opt.createPlan();
+            }
+            
 
+            if(opt.dummafel == 0 && ds.okej[1]==ds.slutnod){
+               System.out.println("Nu är vi klara med ordern!! :D"); 
             }
 
             //Sedan vill vi omoptimera utefter vad roboten skickar
+            
         } catch (Exception e) {
             System.out.println("det här är e, OptOnline " + e.toString());
+            ds.bokaFlag = false;
         }
     }
 }

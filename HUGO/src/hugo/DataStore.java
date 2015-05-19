@@ -1,6 +1,7 @@
 package hugo;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Arrays;
 
@@ -22,7 +23,7 @@ public class DataStore {
     double robotY;
     int[] arcColor;
     int[] nodeColor;
-    int startnod;
+    int startnod, start;
     int slutnod;
     int antalnoderfil;
     int forstanoden;
@@ -33,12 +34,27 @@ public class DataStore {
     int[] avstand;
     int[] kopiaAvstand;
     int[] vilkanoder;
+    int[] kopiaVilkanoder;
+    
     boolean networkRead1;
+    boolean robotflag;
+    boolean bokaflag;
+    boolean bokaFlag;
+
     double startnodX=0;        // För att spara startplatsens x-koordinat
     double startnodY=0;        //För att spara startnodens y-koordinat
-    int nodx;
-    int nody;
     
+    int raknare = 0;
+    int vill_vanta = 0;
+    int [] okej;
+    int [] ejokej;
+    int [] vill_avboka;
+    int [] resurser_boka;
+    int [] från_robot;
+    
+     ArrayList<Integer> bokningar = new ArrayList();
+
+
     public DataStore() {
         // Initialize the datastore with fixed size arrays for storing the network data
         nodes = 0;
@@ -54,10 +70,18 @@ public class DataStore {
         avstand = new int[1000];
         kopiaAvstand = new int[1000];
         vilkanoder = new int[1000];
+        okej = new int[2];
+        ejokej = new int[2];
+        vill_avboka = new int[2];
+        resurser_boka = new int[1000];
+        vilkanoder = new int[100];
+        kopiaVilkanoder = new int[100];
 
         networkRead = false;
         updateUIflag = false;
-
+        bokaflag = true;
+        robotflag = false;
+        
     }
 
     public void setFileName(String newFileName) {
@@ -93,10 +117,8 @@ public class DataStore {
             nodes = Integer.parseInt(line.trim());
             line = scanner.nextLine();
             arcs = Integer.parseInt(line.trim());
-
-            // Debug printout: network size data
-            // System.out.println("Nodes: "+nodes);
-            // System.out.println("Arcs: "+arcs);
+            
+            // Read nodes as number, x, y
             for (int i = 0; i < nodes; i++) {
                 line = scanner.nextLine();
                 //split space separated data on line
@@ -105,8 +127,7 @@ public class DataStore {
                 nodeY[i] = Double.parseDouble(sline[2].trim());
             }
 
-
-            // System.out.println("Node 1: "+nodeX[0]+" "+nodeY[0]);
+            // Read arc list as start node number, end node number
             for (int i = 0; i < arcs; i++) {
                 line = scanner.nextLine();
                 //split space separated data on line
@@ -131,7 +152,25 @@ public class DataStore {
             }
 
             kopiaAvstand = avstand;
+
+            //Skapar vår "nya avståndsmatris"
+            startpunkt = arcStart;
+            slutpunkt = arcEnd;
             
+            for(int j = arcs; j<(arcs*2); j++){
+                startpunkt[j] = arcEnd[j-arcs];
+                slutpunkt[j] = arcStart[j-arcs];
+            }
+            
+            //System.out.print("avstånden är ");
+            for (int j = 0; j<(arcs*2); j++){
+                //Gör om till int!!!
+                avstand[j]=(int) Math.abs((nodeX[startpunkt[j]-1] - nodeX[slutpunkt[j]-1])
+                        -(nodeY[startpunkt[j]-1]-nodeY[slutpunkt[j]-1]));
+               // System.out.print(avstand[j]+" ");
+            }
+            
+            kopiaAvstand = avstand;
             networkRead = true;  // Indicate that all network data is in place in the DataStore
 
         } catch (Exception e) {
@@ -158,22 +197,23 @@ public class DataStore {
             // Read number of nodes
             line1 = (scanner1.nextLine());
             startnod = Integer.parseInt(line1.trim());
+            start=startnod;
             slutnod = startnod;
             line1 = scanner1.nextLine();
             antalnoderfil = Integer.parseInt(line1.trim());
             
             //För att spara koordinaterna till startplatsen
-            startnodX=nodeX[startnod-1]; //sparar x-koordinaten till startnoden
-            startnodY=nodeY[startnod-1]; //sparar y-koordinaten till startnoden
+            startnodX=nodeX[start-1]; //sparar x-koordinaten till startnoden
+            startnodY=nodeY[start-1]; //sparar y-koordinaten till startnoden
 
 
             for (int i = 0; i < (antalnoderfil); i++) {
             line1 = (scanner1.nextLine());
             vilkanoder[i] = Integer.parseInt(line1.trim());
             besoknoder = besoknoder + " " + vilkanoder[i];
-
                 //System.out.println("Besöksnoder: " + besoknoder);
             }
+            kopiaVilkanoder = vilkanoder;
         
             // Indicate that all network data is in place in the DataStore
             networkRead1 = true; 
@@ -184,7 +224,6 @@ public class DataStore {
 
             e.printStackTrace();
         }
-        
         robotX = startnodX;
         robotY = startnodY;
     }
