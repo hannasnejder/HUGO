@@ -35,7 +35,7 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr, Avboka avboka
     this.tr = tr;
     
     opt.createPlan();
-    ds.bokaFlag = true;
+    //ds.bokaflag = true;
 }  
 
     @Override
@@ -46,7 +46,7 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr, Avboka avboka
        
         TimeUnit.SECONDS.sleep(1);        
         
-        while(ds.bokaFlag == true && k <= 4){
+        while(ds.bokaflag == true && k <= 4){
            
             ds.raknare = 0;
             ds.okej = new int[2];
@@ -107,7 +107,7 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr, Avboka avboka
                 ds.vill_avboka[m] = ds.okej[m];              
              }
             ds.vill_vanta++;
-            avboka.avbokning();
+            //avboka.avbokning();
         }
        // System.out.println("Räknare 2: " + ds.vill_vanta);
 
@@ -137,12 +137,12 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr, Avboka avboka
         ds.robotflag = true;
         ds.bokaflag = false;
 
-        ds.vill_avboka = ds.okej;
-        avboka.avbokning();
+        //ds.vill_avboka = ds.okej;
+        //avboka.avbokning();
        
         }
     }catch (InterruptedException | IOException e) { System.out.print("det här är e, Boka " + e.toString());
-            ds.bokaFlag = false;
+            ds.bokaflag = false;
         }         
     }
 

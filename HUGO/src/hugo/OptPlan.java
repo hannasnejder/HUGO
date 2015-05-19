@@ -90,7 +90,7 @@ public class OptPlan {
 
         //Se över detta!! Verkar inte funka som jag vill....
         for (int n = 0, k= 0; n < ds.antalnoderfil; n++) {
-            System.out.println("kopiaVilkanoder är "+ds.kopiaVilkanoder[n]);
+            //System.out.println("kopiaVilkanoder är "+ds.kopiaVilkanoder[n]);
             if(ds.kopiaVilkanoder[n]!=0){
             kvarvarande_hyllor[k] = ds.kopiaVilkanoder[n];
             System.out.println("kvarvarande_hyllor är först "+kvarvarande_hyllor[k]+" och k är "+k);
@@ -106,7 +106,7 @@ public class OptPlan {
                 dummafel = dummafel+1;
             }
         }
-        System.out.println("dummafel är "+dummafel);
+        //System.out.println("dummafel är "+dummafel);
 
         for (int k = 0; k < dummafel; k++) { 
             test_vag[0] = narmaste_nod;

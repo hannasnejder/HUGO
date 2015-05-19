@@ -39,7 +39,6 @@ public class DataStore {
     boolean networkRead1;
     boolean robotflag;
     boolean bokaflag;
-    boolean bokaFlag;
 
     double startnodX=0;        // För att spara startplatsens x-koordinat
     double startnodY=0;        //För att spara startnodens y-koordinat

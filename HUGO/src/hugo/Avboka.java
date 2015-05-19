@@ -90,8 +90,6 @@ public class Avboka {
             int mottagen_status = anslutning.getResponseCode();
 
             System.out.println("Statuskod: " + mottagen_status + "\n");
-
-            System.out.println("Statuskod: " + mottagen_status);
            
             BufferedReader inkommande = new BufferedReader(new
             InputStreamReader(anslutning.getInputStream()));

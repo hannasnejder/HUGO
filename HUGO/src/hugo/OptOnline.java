@@ -44,13 +44,13 @@ public class OptOnline {
                 
                 for (int k =0; k<ds.antalnoderfil; k++){
                     //System.out.println("Startnod är " + ds.startnod);
-                    System.out.println("KopiaVilkanoder " + Arrays.toString(ds.kopiaVilkanoder));
+                    //System.out.println("KopiaVilkanoder " + Arrays.toString(ds.kopiaVilkanoder));
 
-                    System.out.println("KopiaVilkanoder " + ds.kopiaVilkanoder[k]);
+                    //System.out.println("KopiaVilkanoder " + ds.kopiaVilkanoder[k]);
                     
                     if(ds.startnod == ds.kopiaVilkanoder[k]){
                         ds.kopiaVilkanoder[k] = 0;
-                        System.out.println("Kopian är detta i optonline " + ds.kopiaVilkanoder[k]);
+                        //System.out.println("Kopian är detta i optonline " + ds.kopiaVilkanoder[k]);
                     }
                 }
 
@@ -83,7 +83,7 @@ public class OptOnline {
             
         } catch (Exception e) {
             System.out.println("det här är e, OptOnline " + e.toString());
-            ds.bokaFlag = false;
+            ds.bokaflag = false;
         }
     }
 }
