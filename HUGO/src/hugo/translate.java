@@ -27,9 +27,10 @@ public class translate {
         
         //Om vi får in något fråm robot, sätt till 1
         ds.bokaom = 1;
-        
+
         //När vi har översatt och vill avboka
         avboka.avbokaRobot();
+       
     }
     
 }
