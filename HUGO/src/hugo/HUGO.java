@@ -28,8 +28,6 @@ public class HUGO {
 
         //PARTY PARTY 
         HUGO x = new HUGO();
-        System.out.println("Main");
-        
     
     }
 }
