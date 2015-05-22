@@ -1,15 +1,22 @@
 package hugo;
 
 import java.util.*;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class drive {
 
-    DataStore ds; 
-    int riktning;
+    public ControlUI cui;
+    public DataStore ds;
     public Boka boka;
-    ArrayList<Integer> bokningar;
-    ArrayList<Character> instruktioner; 
+  
+    int riktning;
     private double X1, Y1, X2, Y2, X3, Y3, X4, Y4, deltaX, deltaY, olddeltaX, olddeltaY;
+    public double kopiaX1, kopiaY1, kopiaX2, kopiaY2;
+    ArrayList<Integer> bokningar;
+    ArrayList instruktioner;
+    //ArrayList <Character> instruktioner; 
 
     char f, r, l, b, v, h, q, y; 
     //f fram
@@ -21,22 +28,20 @@ public class drive {
     //q hemma vid start
     //y hyllplats passerat 
     
-    //
-    //ArrayList instruktioner = new ArrayList();
     
     //Default-konstruktor 
     public drive(DataStore ds) {
-        this.ds= ds; 
+
+        this.ds = ds;
         riktning = 0;
+        
     }
 
     //Robotens riktning vid start 
     public void startRiktning() {
-
+        
         //Österut
         riktning = 1;
-        
-        
 
         //Sätta olddeltaX och olddeltaY 
         //Hårdkodat --> måste hitta en vettigare lösning
@@ -51,26 +56,31 @@ public class drive {
         
         //Startnodens position 
         for (int i = 0; i < ds.nodes-1; i++) {
-
             if (ds.startnod-1 == i) {
-
-                X1 = ds.nodeX[i];
-                Y1 = ds.nodeY[i];
+             
+                X1=ds.nodeX[i];
+                Y1=ds.nodeY[i];
+                
+                kopiaX1=X1;
+                kopiaY1=Y1;
                 break;
             }
         }
 
         //Ger körinstruktionen 
         for (int m = 0; m < ds.bokningar.size(); m++) {
-
             //Positionen på noden vi vill besöka  
             for (int k = 0; k < ds.nodes; k++) {
-                
-                if (ds.bokningar.get(1)-1 == k) {
+
+                if (ds.bokningar.get(m)-1 == k) {
+
                     X2 = ds.nodeX[k];
                     Y2 = ds.nodeY[k];
+                    
+                    kopiaX2=X2;
+                    kopiaY2=Y2;
+                    
                     break;
-
                 }
             }
         
@@ -212,7 +222,6 @@ public class drive {
                 }
             }
             
-            
             //Uppdatera X1 och Y1
             X1 = X2;
             Y1 = Y2;
@@ -220,13 +229,37 @@ public class drive {
            //Spara de gamla värdena för X och Y    
             olddeltaX = deltaX;
             olddeltaY = deltaY;
-            
 
-            break;
 
         }
+       
+                //åk till vänster på kartan
+                 while (kopiaX1 > kopiaX2) {
+                    ds.robotX = kopiaX1;
+                    kopiaX1 = kopiaX1 - 5; //Ändra femman till typ 10 för att pricken ska åka snabbare
+                   cui.repaint();
+                }
 
-        
-    }
-    
+               //åk till höger på kartan
+                while (kopiaX1 < kopiaX2) { 
+                    ds.robotX = kopiaX1;
+                    kopiaX1 = kopiaX1 + 5;
+                    cui.repaint();
+                }
+
+                //åk neråt på kartan
+                 while (kopiaY1 > kopiaY2) {
+                    ds.robotY = kopiaY1;
+                    kopiaY1 = kopiaY1 - 5;
+                    cui.repaint();
+                }
+
+                //åk uppåt på kartan          
+             while (kopiaY1 < kopiaY2) {
+                    ds.robotY = kopiaY1;
+                    kopiaY1 = kopiaY1 + 5;
+                    cui.repaint();
+                }
+    } 
 }
+
