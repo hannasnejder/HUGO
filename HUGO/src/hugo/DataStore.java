@@ -50,9 +50,10 @@ public class DataStore {
     int [] vill_avboka;
     int [] resurser_boka;
     int [] från_robot;
-    
-    ArrayList<Integer> bokningar = new ArrayList();
-    ArrayList<Character> instruktioner = new ArrayList();
+
+
+     ArrayList<Integer> bokningar = new ArrayList();
+     ArrayList instruktioner = new ArrayList();
 
 
     public DataStore() {
