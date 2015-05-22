@@ -134,6 +134,13 @@ public class Boka implements Runnable {
 
         //ds.vill_avboka = ds.okej;
                 //avboka.avbokning();
+                for (int k =0, j=0; k<4; k++){
+                    if(ds.bokade_resurser[k] == 0){
+                        ds.bokade_resurser[k]= ds.okej[j];
+                        j++;
+                    }
+                }
+                
             }
         } catch (InterruptedException | IOException e) {
             System.out.print("det här är e, Boka " + e.toString());

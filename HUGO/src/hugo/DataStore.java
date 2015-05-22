@@ -35,6 +35,8 @@ public class DataStore {
     int[] kopiaAvstand;
     int[] vilkanoder;
     int[] kopiaVilkanoder;
+    int[] bokade_resurser;
+    int[] avboka_resurser_robot;
     
     boolean networkRead1;
     boolean robotflag;
@@ -75,6 +77,8 @@ public class DataStore {
         resurser_boka = new int[1000];
         vilkanoder = new int[100];
         kopiaVilkanoder = new int[100];
+        bokade_resurser = new int [4];
+        avboka_resurser_robot = new int[2];
 
         networkRead = false;
         updateUIflag = false;

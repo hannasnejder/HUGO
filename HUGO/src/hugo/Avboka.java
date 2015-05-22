@@ -23,6 +23,7 @@ public class Avboka {
     public Avboka(OptPlan opt, DataStore ds) {
     this.opt = opt;
     this.ds = ds;   
+   
     }
 
     //Avbokar när allt vi vill boka inte gick
@@ -78,8 +79,8 @@ public class Avboka {
         //System.out.println("inne i avbokarobot, efter thread sleep");
         
         for(i = 0; i < 2; i++){
-            if(ds.okej[i] != 0){
-            String url = "http://tnk111.n7.se/free.php?user=3&resource=" + ds.okej[i];
+            if(ds.avboka_resurser_robot[i] != 0){
+            String url = "http://tnk111.n7.se/free.php?user=3&resource=" + ds.avboka_resurser_robot[i];
          
             URL urlobjekt = new URL(url);
             HttpURLConnection anslutning = (HttpURLConnection)
@@ -109,7 +110,7 @@ public class Avboka {
             
             System.out.println(inkommande_samlat.toString());
             
-            System.out.println(ds.okej[i] + " är avbokad " + "\n");
+            System.out.println(ds.avboka_resurser_robot[i] + " är avbokad " + "\n");
            
             }
         }

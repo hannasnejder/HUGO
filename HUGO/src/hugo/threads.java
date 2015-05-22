@@ -39,7 +39,7 @@ public class threads {
         online = new OptOnline(this.opt, this.ds);
         avboka = new Avboka(this.opt, this.ds);
         dr = new drive(this.ds);
-        tr = new translate(this.rr, this.avboka);
+        tr = new translate(this.rr, this.avboka, this.ds);
         r1 = new RobotRead (this.ds, this.cui, this.tr);
         t1 = new Thread(r1);
         g1 = new GuiUpdate (this.ds,this.cui, this.opt);
