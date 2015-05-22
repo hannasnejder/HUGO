@@ -47,14 +47,15 @@ public class DataStore {
     
     int raknare = 0;
     int vill_vanta = 0;
+    int bokaom = 1;
     int [] okej;
     int [] ejokej;
     int [] vill_avboka;
     int [] resurser_boka;
     int [] från_robot;
     
-     ArrayList<Integer> bokningar = new ArrayList();
-     ArrayList<Character> instruktioner = new ArrayList();
+    ArrayList<Integer> bokningar = new ArrayList();
+    ArrayList<Character> instruktioner = new ArrayList();
 
 
     public DataStore() {

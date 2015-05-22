@@ -58,7 +58,10 @@ public class translate {
                 
             }
         }*/
+        System.out.println("Går in i translate");
         
+        //Om vi får in något fråm robot, sätt till 1
+        ds.bokaom = 1;        
        
     }
     

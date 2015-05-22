@@ -8,17 +8,17 @@
             <file>file:/C:/Users/Paulin/Desktop/Hugo/HUGO/HUGO/src/hugo/OptPlan.java</file>
 =======
         <group name="Product">
-            <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/GuiUpdate.java</file>
+            <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/translate.java</file>
+            <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/threads.java</file>
             <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/Boka.java</file>
+            <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/DataStore.java</file>
             <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/OptPlan.java</file>
-<<<<<<< HEAD
             <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/OptOnline.java</file>
             <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/Avboka.java</file>
-=======
->>>>>>> 66cb5e605a5ae7d0acb31493f95a5f1deedb46bb
+            <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/drive.java</file>
+            <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/HUGO.java</file>
             <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/RobotRead.java</file>
 >>>>>>> 16a6ed7f4c4b0ff35d6e9bdd06654c33a3ff85b8
         </group>
-        <group/>
     </open-files>
 </project-private>

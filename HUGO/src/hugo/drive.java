@@ -191,9 +191,11 @@ public class drive {
         System.out.println("Körorder: " + Körorder); 
         
         //Vill anropa GuiUpdate, run(), så att metoden körs och positionen på pricken uppdateras
-        System.out.println("Kör guiUpdate");
-        gui.run();
-        System.out.println("Efter GuiUpdate");               
+        //System.out.println("Kör guiUpdate");
+       // gui.run();
+        //System.out.println("Efter GuiUpdate");   
+        System.out.println("Anropar RobotRead från drive");
+          ds.robotflag = true;
     }
     
 }

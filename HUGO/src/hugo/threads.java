@@ -40,10 +40,10 @@ public class threads {
         online = new OptOnline(this.opt, this.ds);
         avboka = new Avboka(this.opt, this.ds);
         gui = new GuiUpdate(this.ds, this.cui, this.opt, this.dr);
-        
-        dr = new drive(this.ds, this.gui);
+        //dr = new drive(this.ds, this.gui);
+        dr = new drive(this.ds, this.g1);
         tr = new translate(this.rr, this.avboka, this.ds);
-        r1 = new RobotRead (this.ds, this.cui, this.tr);
+        r1 = new RobotRead (this.ds, this.cui, this.tr, this);
         t1 = new Thread(r1);
         g1 = new GuiUpdate (this.ds,this.cui, this.opt, this.dr);
         t2 = new Thread(g1); 
@@ -56,7 +56,7 @@ public class threads {
     }
 
     //Gör det möjligt till att starta trådarna
-    public void startThreads() {
+    public void startThreads(){
         t1.start();
         t2.start();
         t3.start();

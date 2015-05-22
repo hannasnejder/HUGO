@@ -35,7 +35,7 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr, Avboka avboka
     this.tr = tr;
     
     opt.createPlan();
-    //ds.bokaflag = true;
+    ds.bokaflag = true;
 }  
 
     @Override
@@ -43,10 +43,17 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr, Avboka avboka
     
      try {
         int i;
-       
-        TimeUnit.SECONDS.sleep(1);        
+        int p = 1;
+        //TimeUnit.SECONDS.sleep(1);        
+        System.out.println("Går den in i boka igen");
         
-        while(ds.bokaflag == true && k <= 4){
+        boolean run = true;
+        while(run){
+        //while(p == 1){
+        //while(ds.bokaflag == true){
+        TimeUnit.SECONDS.sleep(1); 
+        
+        //if(ds.bokaom == 1){
            
             ds.raknare = 0;
             ds.okej = new int[2];
@@ -106,7 +113,7 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr, Avboka avboka
                 ds.vill_avboka[m] = ds.okej[m];              
              }
             ds.vill_vanta++;
-            //avboka.avbokning();
+            avboka.avbokning();
         }
        // System.out.println("Räknare 2: " + ds.vill_vanta);
 
@@ -134,9 +141,12 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr, Avboka avboka
 
         //Ändrar flaggorna för att gå till RobotRead
         ds.robotflag = true;
-        ds.bokaflag = false;
+        //ds.bokaflag = false;
+        
+        //ds.bokaflag = true;
 
         //ds.vill_avboka = ds.okej;
+
 
                 //avboka.avbokning();
                /* for (int k =0, j=0; k<4; k++){
@@ -145,9 +155,13 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr, Avboka avboka
                         j++;
                     }
                 }*/
-                
             }
         
+        //avboka.avbokning();
+        //}
+        ds.bokaom = 0;        
+        //}
+
     }catch (InterruptedException | IOException e) { System.out.print("det här är e, Boka " + e.toString());
             ds.bokaflag = false;
         }         
