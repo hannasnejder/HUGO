@@ -25,6 +25,7 @@ public class ControlUI extends javax.swing.JFrame {
     public ControlUI(DataStore ds) {
         
         this.ds = ds;
+        //this.ts = ts;
         
         map = new MapPanel(this.ds);  
         myinitComponents();

@@ -53,7 +53,7 @@ public class threads {
     public void startThreads() {
         t1.start();
         t3.start();
-        //t4.start();
+        notify();
         //t5.start();
 
     }
@@ -62,8 +62,15 @@ public class threads {
     //GÅ IN OCH LÄS FÖR ATT SE OM DU KAN LÖSA DETTA MED TYP SLEEEP!
     public void stopThreads() {
         //t1.stop();
-        //t2.stop(); 
-        //t3.wait();
+        //t2.stop();
+        try {
+            System.out.println("väntar på att bli startad igen...");
+            t1.wait();
+            t3.wait();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        
     }
 
     //Gör det möjligt till nollställa 
