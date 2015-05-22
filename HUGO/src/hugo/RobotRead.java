@@ -1,6 +1,5 @@
 package hugo;
 
-
 import java.util.*;
 import java.io.*;
 //import javax.microedition.io.*;
