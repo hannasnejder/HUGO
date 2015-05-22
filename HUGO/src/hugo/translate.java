@@ -31,10 +31,10 @@ public class translate {
     //Säkerhetsstopp?
     public void interpret() {
         System.out.println("meddelande fårn rr: " + rr.meddelande_in);
-
+         System.out.println("Går in i translate");
         for (int r = 0; r < rr.v.size(); r++) {
             if (rr.v.contains('h')) {
-                testa = rr.svarRobot.get(r + 1);
+                testa = rr.v.get(r + 1);
 
                 //Utförligare kommentarer längst ner i filen
                 //för över de resurser som vi ska avboka till arrayen som avbokar
@@ -57,11 +57,13 @@ public class translate {
                 }
 
             }
+            ds.bokaom = 1;
         }
 
         //System.out.println("Går in i translate");
         //När vi har översatt och vill avboka
         avboka.avbokaRobot();
+       
     }
 
 }

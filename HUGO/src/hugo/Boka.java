@@ -46,11 +46,17 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr, Avboka avboka
     
      try {
         int i;
-        int p = 1;
-       
-        //TimeUnit.SECONDS.sleep(1);        
         
-        while(ds.bokaflag == true && k <= 4){
+        //TimeUnit.SECONDS.sleep(1);        
+        System.out.println("Går den in i boka igen");
+        
+        boolean run = true;
+        while(run){
+        //while(p == 1){
+        //while(ds.bokaflag == true){
+        TimeUnit.SECONDS.sleep(1); 
+        
+       // if(ds.bokaom == 1){
            
             ds.raknare = 0;
             ds.okej = new int[2];
@@ -147,12 +153,18 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr, Avboka avboka
         //Ändrar flaggorna för att gå till RobotRead
         ds.robotflag = true;
         //ds.bokaflag = false;
+        
+        //ds.bokaflag = true;
 
         //ds.vill_avboka = ds.okej;
         //avboka.avbokning();
-       ds.bokaom = 0;
+       
+        //}
+        ds.bokaom = 0;
         }
-    }catch (IOException e) { System.out.print("det här är e, Boka " + e.toString());
+        
+        //}
+    }catch (InterruptedException | IOException e) { System.out.print("det här är e, Boka " + e.toString());
             ds.bokaflag = false;
         }         
     }
@@ -163,7 +175,8 @@ public void vanta() {
      System.out.println("Avvakta i 4 sekunder");
      TimeUnit.SECONDS.sleep(4);
     }catch (Exception e) {System.out.print("det här är e, vänta" + e.toString());
-}
+            }
         
-}
+
+    }
 }

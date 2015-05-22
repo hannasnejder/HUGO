@@ -1,4 +1,7 @@
-package hugo;
+//GuiUpdate behövs inte längre!
+
+
+/*package hugo;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -18,8 +21,7 @@ public class GuiUpdate implements Runnable{
         this.ds = ds;
         this.dr=dr;
         this.opt=opt;    
-    } 
-        
+    }         
     
         //I drive anropas run(). Vill att allt nedanför run() ska köras då
         @Override 
@@ -92,4 +94,4 @@ public class GuiUpdate implements Runnable{
    public void robotrorelse() {
         cui.repaint();
     }
-}
+}*/

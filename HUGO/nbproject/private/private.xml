@@ -4,6 +4,7 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
 <<<<<<< HEAD
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Sara/Desktop/hugo/HUGO/HUGO/src/hugo/OptOnline.java</file>
             <file>file:/C:/Users/Sara/Desktop/hugo/HUGO/HUGO/src/hugo/RobotRead.java</file>
             <file>file:/C:/Users/Sara/Desktop/hugo/HUGO/HUGO/src/hugo/drive.java</file>
@@ -12,18 +13,33 @@
             <file>file:/C:/Users/Sara/Desktop/hugo/HUGO/HUGO/src/hugo/threads.java</file>
             <file>file:/C:/Users/Sara/Desktop/hugo/HUGO/HUGO/src/hugo/Boka.java</file>
 =======
+            <file>file:/C:/Users/HannaSnejder/Desktop/hugo/HUGO/HUGO/src/hugo/translate.java</file>
+            <file>file:/C:/Users/HannaSnejder/Desktop/hugo/HUGO/HUGO/src/hugo/threads.java</file>
+            <file>file:/C:/Users/HannaSnejder/Desktop/hugo/HUGO/HUGO/src/hugo/HUGO.java</file>
+            <file>file:/C:/Users/HannaSnejder/Desktop/hugo/HUGO/HUGO/src/hugo/RobotRead.java</file>
+            <file>file:/C:/Users/HannaSnejder/Desktop/hugo/HUGO/HUGO/src/hugo/DataStore.java</file>
+>>>>>>> 78f1da22470dadde4be1abf51d918c81490105a2
+=======
         <group name="Product">
-            <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/GuiUpdate.java</file>
+            <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/translate.java</file>
+            <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/threads.java</file>
             <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/Boka.java</file>
+            <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/DataStore.java</file>
             <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/OptPlan.java</file>
-<<<<<<< HEAD
             <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/OptOnline.java</file>
             <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/Avboka.java</file>
-=======
->>>>>>> 66cb5e605a5ae7d0acb31493f95a5f1deedb46bb
+            <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/drive.java</file>
+            <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/HUGO.java</file>
             <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/RobotRead.java</file>
+<<<<<<< HEAD
 >>>>>>> 16a6ed7f4c4b0ff35d6e9bdd06654c33a3ff85b8
+=======
+<<<<<<< HEAD
+>>>>>>> 875239a69dbe42fd3bf9b88227fed9ba973eb546
+=======
+>>>>>>> a1c6d72b9d40a505755f295c7c912d2b99c7cf94
+>>>>>>> hannaBranch
+>>>>>>> 78f1da22470dadde4be1abf51d918c81490105a2
         </group>
-        <group/>
     </open-files>
 </project-private>

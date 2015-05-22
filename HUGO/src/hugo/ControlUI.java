@@ -5,6 +5,8 @@ import java.awt.EventQueue;
 import java.awt.event.ActionListener;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*; 
 
 
@@ -330,10 +332,7 @@ public class ControlUI extends javax.swing.JFrame {
         jButton3.setBackground(new java.awt.Color(255, 204, 0));
         jButton3.setForeground(new java.awt.Color(204, 102, 0));
         
-        //Startar trådarna 
         ts.startThreads();
-         
-        
     }//GEN-LAST:event_jButton1ActionPerformed
 
     //Funktioner för stop

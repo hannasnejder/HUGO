@@ -4,6 +4,8 @@ public class HUGO {
 
     DataStore ds;
     ControlUI cui;
+    threads th;
+   
 
 
     HUGO() {
@@ -26,5 +28,6 @@ public class HUGO {
 
         //PARTY PARTY 
         HUGO x = new HUGO();
+    
     }
 }

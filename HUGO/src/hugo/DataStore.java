@@ -3,7 +3,6 @@ package hugo;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Arrays;
 
 public class DataStore {
 
@@ -55,8 +54,10 @@ public class DataStore {
     int [] vill_avboka;
     int [] resurser_boka;
     int [] från_robot;
-    
+
+
      ArrayList<Integer> bokningar = new ArrayList();
+     ArrayList instruktioner = new ArrayList();
 
 
     public DataStore() {

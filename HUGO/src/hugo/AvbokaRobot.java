@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package hugo;
+/*package hugo;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -92,9 +92,10 @@ public void run() {
            
             }
         }*/
-        }
+/*        }
         catch (Exception e) { System.out.print("AvbokaRobot" + e.toString()); }
     }
     
 }
 
+*/
