@@ -184,11 +184,8 @@ public class drive {
             olddeltaX = deltaX;
             olddeltaY = deltaY;
         }
-        String Körorder = " ";
         
-        for(int k = 0; k < instruktioner.size(); k++ ){
-            Körorder = Körorder + " " + instruktioner.get(k).toString();
-        }
+
             
             //åk till vänster på kartan
              while (kopiaX1 > kopiaX2) {
