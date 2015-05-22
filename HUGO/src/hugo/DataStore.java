@@ -3,7 +3,6 @@ package hugo;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Arrays;
 
 public class DataStore {
 
@@ -23,7 +22,7 @@ public class DataStore {
     double robotY;
     int[] arcColor;
     int[] nodeColor;
-    int startnod;
+    int startnod, start;
     int slutnod;
     int antalnoderfil;
     int forstanoden;
@@ -39,21 +38,23 @@ public class DataStore {
     boolean networkRead1;
     boolean robotflag;
     boolean bokaflag;
-    boolean bokaFlag;
 
     double startnodX=0;        // För att spara startplatsens x-koordinat
     double startnodY=0;        //För att spara startnodens y-koordinat
-
+    
     int raknare = 0;
     int vill_vanta = 0;
+    int bokaom = 1;
     int [] okej;
     int [] ejokej;
     int [] vill_avboka;
     int [] resurser_boka;
     int [] från_robot;
     
+
      ArrayList<Integer> bokningar = new ArrayList();
      ArrayList instruktioner = new ArrayList();
+
 
     public DataStore() {
         // Initialize the datastore with fixed size arrays for storing the network data
@@ -91,7 +92,7 @@ public class DataStore {
     public void setFileName1(String newFileName1) {
         this.fileName1 = newFileName1;
     }
-    
+
     public String getFileName() {
         return fileName;
     }
@@ -117,7 +118,7 @@ public class DataStore {
             nodes = Integer.parseInt(line.trim());
             line = scanner.nextLine();
             arcs = Integer.parseInt(line.trim());
-
+            
             // Read nodes as number, x, y
             for (int i = 0; i < nodes; i++) {
                 line = scanner.nextLine();
@@ -135,6 +136,24 @@ public class DataStore {
                 arcStart[i] = Integer.parseInt(sline[1].trim());
                 arcEnd[i] = Integer.parseInt(sline[2].trim());
             }
+
+            
+            startpunkt=arcStart;
+            slutpunkt=arcEnd;
+            
+            for(int j=arcs; j<(arcs*2);j++){
+                startpunkt[j]=arcEnd[j-arcs];
+                slutpunkt[j]=arcStart[j-arcs];                            
+                
+            }
+            
+            for(int j=0; j<(arcs*2); j++){
+                avstand[j]=(int) Math.abs((nodeX[startpunkt[j]-1]-nodeX[slutpunkt[j]-1])
+                +(nodeY[startpunkt[j]-1] -nodeY[slutpunkt[j]-1]));               
+            }
+
+            kopiaAvstand = avstand;
+
             //Skapar vår "nya avståndsmatris"
             startpunkt = arcStart;
             slutpunkt = arcEnd;
@@ -179,22 +198,20 @@ public class DataStore {
             // Read number of nodes
             line1 = (scanner1.nextLine());
             startnod = Integer.parseInt(line1.trim());
+            start=startnod;
             slutnod = startnod;
             line1 = scanner1.nextLine();
             antalnoderfil = Integer.parseInt(line1.trim());
             
             //För att spara koordinaterna till startplatsen
-            startnodX=nodeX[startnod-1]; //sparar x-koordinaten till startnoden
-            startnodY=nodeY[startnod-1]; //sparar y-koordinaten till startnoden
+            startnodX=nodeX[start-1]; //sparar x-koordinaten till startnoden
+            startnodY=nodeY[start-1]; //sparar y-koordinaten till startnoden
 
 
             for (int i = 0; i < (antalnoderfil); i++) {
             line1 = (scanner1.nextLine());
             vilkanoder[i] = Integer.parseInt(line1.trim());
-
             besoknoder = besoknoder + " " + vilkanoder[i];
-            
-
                 //System.out.println("Besöksnoder: " + besoknoder);
             }
             kopiaVilkanoder = vilkanoder;

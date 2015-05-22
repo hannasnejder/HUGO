@@ -58,23 +58,30 @@ public class RobotRead implements Runnable {
     @Override
     public void run(){
         try{
-            //Skicka till roboten första gången            
-            sendRobot();
- 
-            //Tar emot data från robot efter första gången instruktioner sänds till robot
             
-            //slutkommandot ska avbryta skickande
-            //while(c = bluetooth_in.read() != slutkommando)
-            int c;
-            while(true){
-                //behövs inte med slutkommandot
-                c = bluetooth_in.read();
+            boolean run = true; 
+            while(run){
                 
-                meddelande_in = (char) c;
-                v.addElement(meddelande_in);
+                TimeUnit.SECONDS.sleep(1);
+           
+            //Skicka till roboten första gången            
                 sendRobot();
+
+                //Tar emot data från robot efter första gången instruktioner sänds till robot
+
+                //slutkommandot ska avbryta skickande
+                //while(c = bluetooth_in.read() != slutkommando)
+                int c;
+                while(true){
+                    //behövs inte med slutkommandot
+                    c = bluetooth_in.read();
+
+                    meddelande_in = (char) c;
+                    v.addElement(meddelande_in);
+                    sendRobot();
+                    tr.interpret();
+                }
             }
-            
             //ds.robotflag==true;
             //tr.interpret();
 

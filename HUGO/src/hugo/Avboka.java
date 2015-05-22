@@ -64,7 +64,8 @@ public class Avboka {
           }
         }
     }
-        catch (Exception e) { System.out.print(e.toString()); }
+        catch (Exception e) { System.out.print(e.toString()); 
+        }
 
     }
     
@@ -90,8 +91,6 @@ public class Avboka {
             int mottagen_status = anslutning.getResponseCode();
 
             System.out.println("Statuskod: " + mottagen_status + "\n");
-
-            System.out.println("Statuskod: " + mottagen_status);
            
             BufferedReader inkommande = new BufferedReader(new
             InputStreamReader(anslutning.getInputStream()));
@@ -121,5 +120,3 @@ public class Avboka {
            
     }
 }
-
- 

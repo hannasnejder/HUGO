@@ -1,4 +1,3 @@
-
 package hugo;
 
 import java.util.ArrayList;
@@ -40,21 +39,22 @@ public class OptOnline {
                 
                 for (int k =0; k<ds.antalnoderfil; k++){
                     //System.out.println("Startnod är " + ds.startnod);
-                    System.out.println("KopiaVilkanoder " + Arrays.toString(ds.kopiaVilkanoder));
+                    //System.out.println("KopiaVilkanoder " + Arrays.toString(ds.kopiaVilkanoder));
 
-                    System.out.println("KopiaVilkanoder " + ds.kopiaVilkanoder[k]);
+                    //System.out.println("KopiaVilkanoder " + ds.kopiaVilkanoder[k]);
                     
                     if(ds.startnod == ds.kopiaVilkanoder[k]){
                         ds.kopiaVilkanoder[k] = 0;
-                        System.out.println("Kopian är detta i optonline " + ds.kopiaVilkanoder[k]);
+                        //System.out.println("Kopian är detta i optonline " + ds.kopiaVilkanoder[k]);
                     }
                 }
 
                 //Om inte båda två går att boka
             } else {
                 ds.kopiaAvstand = ds.avstand;
-                    
-                for (int m = 0; m < 98; m++) {
+
+                for (int m = 0; m < ds.arcs*2; m++) {
+
 
                     //Ändra ejokej[2] till ngt annat!!!
                     //Beror på om båge eller nod bokas först
@@ -80,7 +80,7 @@ public class OptOnline {
             
         } catch (Exception e) {
             System.out.println("det här är e, OptOnline " + e.toString());
-            ds.bokaFlag = false;
+            ds.bokaflag = false;
         }
     }
 }
