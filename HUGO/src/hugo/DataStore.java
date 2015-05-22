@@ -53,6 +53,7 @@ public class DataStore {
     int [] från_robot;
     
      ArrayList<Integer> bokningar = new ArrayList();
+     ArrayList instruktioner = new ArrayList();
 
     public DataStore() {
         // Initialize the datastore with fixed size arrays for storing the network data
