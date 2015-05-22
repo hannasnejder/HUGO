@@ -31,9 +31,9 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr) {
     this.ds = ds;
     this.dr = dr;
 
-    String test;
+    //String test;
     
-    int indexfound;
+    //int indexfound;
 }   
 
 
@@ -92,31 +92,43 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr) {
             }
 
 
-        if(ds.bokningar.size() == 2){
-            ds.bokaflag = true;
-            System.out.println("Bokaflaga blir sann: " + ds.bokningar.size());
-        }
 
         //Kollar om under 2 resurser gick att boka, avbokar de som gick
         //att boka isåfall
         System.out.println("\n" + "Räknare: " + ds.raknare);
         if(ds.raknare < 2){
             for(int m = 0; m < ds.okej.length; m++){
-                ds.vill_avboka[m] = ds.okej[m]; 
-                dr.startRiktning();
-
+                ds.vill_avboka[m] = ds.okej[m];                 
+                //dr.startRiktning();
             }
+            System.out.println("inne i if efter for och optonline borde startas");
             online.newOpt();
         
         }else{
             online.newOpt();
+            //dr.startRiktning();
         }
-              
-        test = " ";
+        
+         if(ds.raknare == 2){
+            //ds.bokaflag = true;
+            dr.startRiktning();
+            //System.out.println("Bokaflaga blir sann: " + ds.bokningar.size());
+        }
+        
+        for (int k =0, j=0; k<4; k++){
+                    if(ds.bokade_resurser[k] == 0){
+                        ds.bokade_resurser[k]= ds.okej[j];
+                        j++;
+                    }
+                }
+
+         
+        /*test = " ";
 
         for(int k = 0; k < ds.bokningar.size(); k++ ){
             test = test + " " + ds.bokningar.get(k).toString();
         }
+        System.out.println("Test i boka blir: ");*/
 
     }catch (Exception e) { System.out.print("det här är e, Boka " + e.toString());
 

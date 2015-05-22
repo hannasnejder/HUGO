@@ -5,10 +5,11 @@ import java.util.*;
 public class drive {
 
     private DataStore ds;
+    public Boka boka;
     //ArrayList<Integer> bokningar;
     int riktning, kartaA, kartaB;
     private double X1, Y1, X2, Y2, X3, Y3, X4, Y4, deltaX, deltaY, olddeltaX, olddeltaY;
-    ArrayList<Character> instruktioner = new ArrayList();
+    ArrayList/*<Character>*/ instruktioner = new ArrayList();
     char f, r, l, b, v, h, q, y; 
 
     //f framArrayList<Character> instruktioner = new ArrayList();
@@ -20,12 +21,12 @@ public class drive {
     //h hyllplats
     //q hemma vid start
     //y hyllplats passerat 
-    String lek;
     
     //Default-konstruktor 
     public drive(DataStore ds) {
-        ds = new DataStore();
+        //ds = new DataStore();
         //bokningar = new ArrayList<Integer>();
+        this.ds = ds;
         riktning = 0;
         kartaA = 0;
         kartaB = 0;
@@ -35,9 +36,8 @@ public class drive {
     //Robotens riktning vid start 
     public void startRiktning() {
 
-        while(ds.bokaflag == true){ //Österut
+         //Österut
         riktning = 1;
-        System.out.println("inne i drive efter flaga är san och riktning är 1");
         //Startnodens position 
         for (int i = 0; i < ds.nodes; i++) {
 
@@ -50,7 +50,7 @@ public class drive {
         }
 
         //Ger körinstruktionen 
-        for (int m = 0; m < ds.bokningar.size(); m++) {
+        /*for (int m = 0; m < ds.bokningar.size(); m++) {
 
             //Positionen på noden vi vill besöka  
             for (int k = 0; k < ds.nodes; k++) {
@@ -74,33 +74,33 @@ public class drive {
                     if (olddeltaY > 0) {
                         riktning = 1;
                         //fram
-                        instruktioner.add(f);
+                        instruktioner.add("f");
                     } else if (olddeltaY < 0) {
                         riktning = -1;
                         //fram
-                        instruktioner.add(f); 
+                        instruktioner.add("f"); 
                     } else if (olddeltaX > 0) {
                         //vänster
-                        instruktioner.add(l);
+                        instruktioner.add("l");
                     } else if (olddeltaX < 0) {
                         //höger
-                        instruktioner.add(r); 
+                        instruktioner.add("r"); 
                     }
                 } else if (deltaY < 0) {
                     if (olddeltaY > 0) {
                         riktning = -1;
                         //fram
-                        instruktioner.add(f);
+                        instruktioner.add("f");
                     } else if (olddeltaY < 0) {
                         riktning = 1;
                         //fram
-                        instruktioner.add(f); 
+                        instruktioner.add("f"); 
                     } else if (olddeltaX > 0) {
                         //höger
-                        instruktioner.add(r);
+                        instruktioner.add("r");
                     } else if (olddeltaX < 0) {
                         //vänster
-                        instruktioner.add(l); 
+                        instruktioner.add("l"); 
                     }
                 }
             }
@@ -111,33 +111,33 @@ public class drive {
                     if (olddeltaX > 0) {
                         riktning = 1;
                         //fram
-                        instruktioner.add(f);
+                        instruktioner.add("f");
                     } else if (olddeltaX < 0) {
                         riktning = -1;
                         //fram
-                        instruktioner.add(f); 
+                        instruktioner.add("f"); 
                     } else if (olddeltaY > 0) {
                         //höger
-                        instruktioner.add(r); 
+                        instruktioner.add("r"); 
                     } else if (olddeltaY < 0) {
                         //vänster
-                        instruktioner.add(l); 
+                        instruktioner.add("l"); 
                     }
                 } else if (deltaX < 0) {
                     if (olddeltaX > 0) {
                         riktning = -1;
                         //fram
-                        instruktioner.add(f);
+                        instruktioner.add("f");
                     } else if (olddeltaX < 0) {
                         riktning = 1;
                         //fram
-                        instruktioner.add(f);
+                        instruktioner.add("f");
                     } else if (olddeltaY > 0) {
                         //vänster
-                        instruktioner.add(l); 
+                        instruktioner.add("l"); 
                     } else if (olddeltaY < 0) {
                         //höger 
-                        instruktioner.add(r); 
+                        instruktioner.add("r"); 
                     }
                 }
             }
@@ -162,29 +162,39 @@ public class drive {
             //Kolla om hyllplatserna besöks
             if(X2 == X3 && Y2 == Y3){
                 //framme vid hyllplats
-                instruktioner.add(h); 
+                instruktioner.add("h"); 
             }
             else if(X2 == X4 && Y2 == Y4){
                 //åk förbi hyllplats
-                instruktioner.add(y);
+                instruktioner.add("y");
             }
-            
+                                    
             //Uppdatera X1 och Y1
             X1 = X2;
             Y1 = Y2;
 
             //Spara de gamla värdena för X och Y    
             olddeltaX = deltaX;
-            olddeltaY = deltaY;
+            olddeltaY = deltaY; 
             
-            //System.out.println("Instruktioner inne i for drive: " + instruktioner);
-            lek = " ";
-            for(int k = 0; k < instruktioner.size(); k++ ){
-            lek = lek + " " + instruktioner.get(k).toString();          
-        }
+            System.out.println("Storlek instruktioner: " + instruktioner.size());
+            System.out.println("Utskrift instruktioner:" + instruktioner);
+                    
+        }*/
+            instruktioner.add('h');
+            instruktioner.add('f');
+            instruktioner.add('f');
+            instruktioner.add('r');
+            
             ds.robotskickaflaga = true;
-        }
-        }      
-        System.out.println("Instruktioner från drive: " + lek);
+            
+            System.out.println("Utskrift instruktioner:" + instruktioner);
+            
+           
+            
+            
+        //System.out.println("Instruktioner i drive är: " + instruktioner);
+        //ds.robotskickaflaga = true;
+        //System.out.println("Instruktioner från drive: " + instruktioner);
     }
 }
