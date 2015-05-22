@@ -95,8 +95,7 @@ public class MapPanel extends JPanel {
 
             }
         
-        }
-       
+        }     
     } // end paintComponent
 }
 

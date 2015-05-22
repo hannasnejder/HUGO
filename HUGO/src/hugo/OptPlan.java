@@ -60,9 +60,7 @@ public class OptPlan {
             //sista kolumnen längden på tillhörande båge 
             //if start noden kopplas till rätt slutnod, ta längden och sätt in i Edge
             //Else, fortsätt loopa
-
-            for (int m = 0; m < (ds.arcs*2); m++) {
-
+            for (int m = 0; m < ds.arcs * 2; m++) {
                 if ((ds.startpunkt[m] == ds.arcStart[i]) && ds.slutpunkt[m] == ds.arcEnd[i]) {
                     //System.out.println("inne i if-satsen"); 
                     dist = ds.kopiaAvstand[m];
@@ -144,15 +142,14 @@ public class OptPlan {
                     //System.out.println("Hit vi vill gå " + test_vag[1]);
 
                     //Loopar först igenom vägen(path) som fåtts från dijkstras för att se vilka noder som passeras
+                        //loopar sedan igenom arrayerna med alla avstånd
+                        nuvarande_langd = 0;
+                        for (int b = 1; b < path.size(); b++) {
+                            for (int m = 0; m < 98; m++) {
 
-                    //loopar sedan igenom arrayerna med alla avstånd
-                    nuvarande_langd = 0;
-                    for (int b = 1; b < path.size(); b++) {
-                        for (int m = 0; m < (ds.arcs*2); m++) {
-
-                            //Kollar igenom avståndet mellan noderna som passeras för att komma till hyllan
-                            if ((ds.startpunkt[m] == Integer.parseInt(path.get(b - 1).getId())) && (ds.slutpunkt[m] == Integer.parseInt(path.get(b).getId()))) {
-                                nuvarande_langd = (nuvarande_langd + ds.avstand[m]);
+                                //Kollar igenom avståndet mellan noderna som passeras för att komma till hyllan
+                                if ((ds.startpunkt[m] == Integer.parseInt(path.get(b - 1).getId())) && (ds.slutpunkt[m] == Integer.parseInt(path.get(b).getId()))) {
+                                    nuvarande_langd = (nuvarande_langd + ds.avstand[m]);
                                 }
                             }
                         }
@@ -195,12 +192,11 @@ public class OptPlan {
         //Rita ut vägen för den snabbaste rutten
         snabbaste_rutten[order_kvar] = ds.slutnod;
 
-
         for (int j = 0; j < order_kvar + 1; j++) {
             System.out.println("Rutten är " + snabbaste_rutten[j]);
         }
 
-        for (int k = 0; k < order_kvar; k++) {
+        for (int k = 0; k < (order_kvar); k++) {
 
             // Set up network
             for (int i = 0; i < ds.nodes; i++) {
@@ -216,7 +212,7 @@ public class OptPlan {
                 //for-loop kolumner
                 //if start noden kopplas till rätt slutnod, ta längden och sätt in i Edge
                 //Else, fortsätt loopa
-                for (int m = 0; m <ds.arcs*2; m++) {
+                for (int m = 0; m < 98; m++) {
                     if ((ds.startpunkt[m] == ds.arcStart[i]) && ds.slutpunkt[m] == ds.arcEnd[i]) {
                         //System.out.println("inne i if-satsen"); 
                         dist = ds.avstand[m];
@@ -235,7 +231,7 @@ public class OptPlan {
 
             DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(gra);
 
-            // Compute shortest path //här ska vi ändra om vi vill ändra vägarna!!!! :D 
+            // Compute shortest path //här ska vi ändra om vi vill ändra vägarna!!!! Smiley grin 
             dijkstra.execute(nodes.get(snabbaste_rutten[k] - 1));
             LinkedList<Vertex> path = dijkstra.getPath(nodes.get(snabbaste_rutten[k + 1] - 1));
 
@@ -243,12 +239,6 @@ public class OptPlan {
             for (int i = 1; i < path.size(); i++) {
                 //System.out.println("Noder som ska passeras: " + path.get(i));
                 ds.nodeColor[Integer.parseInt(path.get(i).getId()) - 1] = 1;
-                
-                 for (int f = 0; f < ds.antalnoderfil; f++) {      //Kopia för att sätta färgen grön
-                            
-                            ds.nodeColor[ds.vilkanoder[f]-1] = 2;
-                        }
-                ds.nodeColor[ds.slutnod-1]=3;
 
                 //Sparar de noder vi vill boka i en array
                 noder_boka[z] = Integer.parseInt(path.get(i).getId());

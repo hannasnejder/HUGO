@@ -38,7 +38,7 @@ public class threads {
         avboka = new Avboka(this.opt, this.ds);
         dr = new drive(this.ds, this.cui);
         tr = new translate(this.rr, this.avboka);
-        r1 = new RobotRead (this.ds, this.cui, this.tr);
+        r1 = new RobotRead (this.ds, this.cui, this.tr, this);
         t1 = new Thread(r1);
         b1 = new Boka(this.opt, this.ds, this.online, this.dr, this.avboka, this.tr);
         t3 = new Thread(b1);
@@ -50,9 +50,7 @@ public class threads {
 
     //Gör det möjligt till att starta trådarna
     public void startThreads() {
-        System.out.println("t1 startar");
         t1.start();
-        System.out.println("t3 startar");
         t3.start();
         //t4.start();
         //t5.start();
