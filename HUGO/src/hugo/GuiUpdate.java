@@ -18,8 +18,7 @@ public class GuiUpdate implements Runnable{
         this.ds = ds;
         this.dr=dr;
         this.opt=opt;    
-    } 
-        
+    }         
     
         //I drive anropas run(). Vill att allt nedanför run() ska köras då
         @Override 

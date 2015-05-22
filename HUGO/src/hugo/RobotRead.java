@@ -16,6 +16,7 @@ public class RobotRead implements Runnable {
     public DataStore ds;
     public Avboka avboka;
     public translate tr;
+    public threads th;
     ArrayList<Character> instruktioner; 
     ArrayList<Character> svarRobot = new ArrayList();
 
@@ -23,11 +24,12 @@ public class RobotRead implements Runnable {
     char meddelande_in;
  
     
-    public RobotRead(DataStore ds, ControlUI cui, translate tr){
+    public RobotRead(DataStore ds, ControlUI cui, translate tr, threads th){
         this.cui=cui;
         this.ds=ds;
         this.tr = tr;
-
+        this.th = th;
+        
         instruktioner = new ArrayList<Character>();
 
         sleepTime=generator.nextInt(20000);
@@ -46,13 +48,17 @@ public class RobotRead implements Runnable {
     @Override
     public void run(){
         try{
-            TimeUnit.SECONDS.sleep(2); 
-            while(ds.robotflag == true){
+            //TimeUnit.SECONDS.sleep(2); 
+            
+            boolean run = true;
+            while(run){
+            TimeUnit.SECONDS.sleep(1); 
+           // while(ds.robotflag == true){
                 System.out.println("RobotRead flaggan blir sann");
                 
             //När vi har något från robot anropar vi translate för att översätta
             tr.interpret();
-            System.out.println("Lyckades anropa translate");
+            //System.out.println("Lyckades anropa translate");
             
             /*cui.appendStatus("RobotRead kommer att köra i " + sleepTime + " millisekunder.");
             
@@ -164,7 +170,9 @@ public class RobotRead implements Runnable {
             ds.robotflag = false;
             
             //Bokaflag sätts till true för att gå tillbaka till boka
-            ds.bokaflag = true;
+            //ds.bokaflag = true;
+            //th.startThreads();
+            
             System.out.println("Bokaflaggan blir sann");
             }
         }catch(Exception e) {  
