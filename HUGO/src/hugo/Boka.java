@@ -139,12 +139,12 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr, Avboka avboka
         //ds.vill_avboka = ds.okej;
 
                 //avboka.avbokning();
-                for (int k =0, j=0; k<4; k++){
+               /* for (int k =0, j=0; k<4; k++){
                     if(ds.bokade_resurser[k] == 0){
                         ds.bokade_resurser[k]= ds.okej[j];
                         j++;
                     }
-                }
+                }*/
                 
             }
         

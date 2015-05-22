@@ -54,6 +54,7 @@ public class DataStore {
     int [] från_robot;
     
      ArrayList<Integer> bokningar = new ArrayList();
+     ArrayList<Character> instruktioner = new ArrayList();
 
 
     public DataStore() {

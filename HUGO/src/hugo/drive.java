@@ -6,13 +6,13 @@ public class drive {
 
     public DataStore ds;
     public Boka boka;
-    ArrayList<Integer> bokningar;
+    //ArrayList<Integer> bokningar;
 
     int riktning, kartaA, kartaB;
     private double X1, Y1, X2, Y2, X3, Y3, X4, Y4, deltaX, deltaY, olddeltaX, olddeltaY;
     public double kopiaX1, kopiaY1;
     public GuiUpdate gui;
-    ArrayList<Character> instruktioner = new ArrayList();
+    //ArrayList<Character> instruktioner = new ArrayList();
     char f, r, l, b, v, h, q, y; 
 
     //int [] bokningar = {39, 27, 42, 2};
@@ -80,33 +80,33 @@ public class drive {
                     if (olddeltaY > 0) {
                         riktning = 1;
                         //fram
-                        instruktioner.add(f);
+                        ds.instruktioner.add(f);
                     } else if (olddeltaY < 0) {
                         riktning = -1;
                         //fram
-                        instruktioner.add(f); 
+                        ds.instruktioner.add(f); 
                     } else if (olddeltaX > 0) {
                         //vänster
-                        instruktioner.add(l);
+                        ds.instruktioner.add(l);
                     } else if (olddeltaX < 0) {
                         //höger
-                        instruktioner.add(r); 
+                        ds.instruktioner.add(r); 
                     }
                 } else if (deltaY < 0) {
                     if (olddeltaY > 0) {
                         riktning = -1;
                         //fram
-                        instruktioner.add(f);
+                        ds.instruktioner.add(f);
                     } else if (olddeltaY < 0) {
                         riktning = 1;
                         //fram
-                        instruktioner.add(f); 
+                        ds.instruktioner.add(f); 
                     } else if (olddeltaX > 0) {
                         //höger
-                        instruktioner.add(r);
+                        ds.instruktioner.add(r);
                     } else if (olddeltaX < 0) {
                         //vänster
-                        instruktioner.add(l); 
+                        ds.instruktioner.add(l); 
                     }
                 }
             }
@@ -117,33 +117,33 @@ public class drive {
                     if (olddeltaX > 0) {
                         riktning = 1;
                         //fram
-                        instruktioner.add(f);
+                        ds.instruktioner.add(f);
                     } else if (olddeltaX < 0) {
                         riktning = -1;
                         //fram
-                        instruktioner.add(f); 
+                        ds.instruktioner.add(f); 
                     } else if (olddeltaY > 0) {
                         //höger
-                        instruktioner.add(r); 
+                        ds.instruktioner.add(r); 
                     } else if (olddeltaY < 0) {
                         //vänster
-                        instruktioner.add(l); 
+                        ds.instruktioner.add(l); 
                     }
                 } else if (deltaX < 0) {
                     if (olddeltaX > 0) {
                         riktning = -1;
                         //fram
-                        instruktioner.add(f);
+                        ds.instruktioner.add(f);
                     } else if (olddeltaX < 0) {
                         riktning = 1;
                         //fram
-                        instruktioner.add(f);
+                        ds.instruktioner.add(f);
                     } else if (olddeltaY > 0) {
                         //vänster
-                        instruktioner.add(l); 
+                        ds.instruktioner.add(l); 
                     } else if (olddeltaY < 0) {
                         //höger 
-                        instruktioner.add(r); 
+                        ds.instruktioner.add(r); 
                     }
                 }
             }
@@ -168,11 +168,11 @@ public class drive {
             //Kolla om hyllplatserna besöks
             if(X2 == X3 && Y2 == Y3){
                 //framme vid hyllplats
-                instruktioner.add(h); 
+                ds.instruktioner.add(h); 
             }
             else if(X2 == X4 && Y2 == Y4){
                 //åk förbi hyllplats
-                instruktioner.add(y);
+                ds.instruktioner.add(y);
             }
             
             //Uppdatera X1 och Y1
@@ -185,8 +185,8 @@ public class drive {
 
         }
         String Körorder = " ";
-        for(int k = 0; k < instruktioner.size(); k++ ){
-        Körorder = Körorder + " " + instruktioner.get(k).toString();
+        for(int k = 0; k < ds.instruktioner.size(); k++ ){
+        Körorder = Körorder + " " + ds.instruktioner.get(k).toString();
         }
         System.out.println("Körorder: " + Körorder); 
         

@@ -70,6 +70,7 @@ public class threads {
     public void stopThreads() {
         //t1.stop();
         //t2.stop(); 
+        //t3.wait();
     }
 
     //Gör det möjligt till nollställa 

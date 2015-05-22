@@ -40,7 +40,7 @@ public class translate {
         // skriv det som du fixat
         
         //för över de resurser som vi ska avboka till arrayen som avbokar
-        for(int i = 0; i<2;i++){
+        /*for(int i = 0; i<2;i++){
         ds.avboka_resurser_robot[i] = ds.bokade_resurser[i];
                 }
         //när överföringen är klar, avboka och sätt värdet till noll
@@ -57,7 +57,7 @@ public class translate {
                 ds.bokade_resurser[k]= 0;
                 
             }
-        }
+        }*/
         
        
     }
