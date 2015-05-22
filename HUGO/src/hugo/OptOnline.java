@@ -71,10 +71,13 @@ public class OptOnline {
                 opt.createPlan();
             }
             
-
-            if(opt.dummafel == 0 && ds.okej[1]==ds.slutnod){
+            System.out.println("Nu är vi vid If-en"); 
+            if(opt.dummafel == 0 && ds.okej[1] == ds.slutnod){
                System.out.println("Nu är vi klara med ordern!! :D"); 
             }
+            //System.out.println(" dummafel= " + opt.dummafel + " vill ha 0"); 
+            //System.out.println("Noden= " + ds.okej[1]); 
+            //System.out.println("Slutnoden= " + ds.slutnod); 
 
             //Sedan vill vi omoptimera utefter vad roboten skickar
             

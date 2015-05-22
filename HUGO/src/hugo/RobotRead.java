@@ -165,8 +165,8 @@ public class RobotRead implements Runnable {
             System.out.print("RobotRead" + e.toString());   
 =======
                 //System.out.println("från_robot: " + Arrays.toString(från_robot));*/
-            ds.updateUIflag = true;
-            ds.robotflag = false;
+           // ds.updateUIflag = true;
+            //ds.robotflag = false;
             
             //Bokaflag sätts till true för att gå tillbaka till boka
             //ds.bokaflag = true;
