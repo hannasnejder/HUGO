@@ -1,17 +1,22 @@
 package hugo;
 
 import java.util.*;
+import java.util.Arrays;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class drive {
-
+    public ControlUI cui;
     public DataStore ds;
     public Boka boka;
-    //ArrayList<Integer> bokningar;
+  
+    ArrayList<Integer> bokningar;
 
     int riktning, kartaA, kartaB;
     private double X1, Y1, X2, Y2, X3, Y3, X4, Y4, deltaX, deltaY, olddeltaX, olddeltaY;
-    public double kopiaX1, kopiaY1;
-    public GuiUpdate gui;
+    public double kopiaX1, kopiaY1, kopiaX2, kopiaY2;
+    ArrayList<Character> instruktioner = new ArrayList();
+
     //ArrayList<Character> instruktioner = new ArrayList();
     char f, r, l, b, v, h, q, y; 
 
@@ -27,28 +32,25 @@ public class drive {
     //y hyllplats passerat 
     
     //Default-konstruktor 
-    public drive(DataStore ds, GuiUpdate gui) {
+    public drive(DataStore ds, ControlUI cui) {
         this.ds = ds;
-        this.gui=gui;
+        this.cui=cui;
         riktning = 0;
+        
     }
 
     //Robotens riktning vid start 
     public void startRiktning() {
-
-        System.out.println("Hej drive");
         //Österut
         riktning = 1;
         
-        
-
         //Startnodens position 
-        for (int i = 0; i < ds.nodes; i++) {
-
-            if (ds.startnod == i) {
-
-                X1 = ds.nodeX[i];
-                Y1 = ds.nodeY[i];
+        for (int i = 0; i < ds.nodes-1; i++) {
+            if (ds.startnod-1 == i) {
+                //X1 = ds.nodeX[i-1]; //?stämmer eller i-1
+                //Y1 = ds.nodeY[i-1];              
+                X1=ds.nodeX[i];
+                Y1=ds.nodeY[i];
                 kopiaX1=X1;
                 kopiaY1=Y1;
                 break;
@@ -57,16 +59,15 @@ public class drive {
 
         //Ger körinstruktionen 
         for (int m = 0; m < ds.bokningar.size(); m++) {
-
             //Positionen på noden vi vill besöka  
             for (int k = 0; k < ds.nodes; k++) {
-
-                if (ds.bokningar.get(m) == k) {
+                if (ds.bokningar.get(m)-1 == k) {
 
                     X2 = ds.nodeX[k];
                     Y2 = ds.nodeY[k];
+                    kopiaX2=X2;
+                    kopiaY2=Y2;
                     break;
-
                 }
             }
 
@@ -182,20 +183,39 @@ public class drive {
             //Spara de gamla värdena för X och Y    
             olddeltaX = deltaX;
             olddeltaY = deltaY;
-
         }
         String Körorder = " ";
-        for(int k = 0; k < ds.instruktioner.size(); k++ ){
-        Körorder = Körorder + " " + ds.instruktioner.get(k).toString();
-        }
-        System.out.println("Körorder: " + Körorder); 
         
-        //Vill anropa GuiUpdate, run(), så att metoden körs och positionen på pricken uppdateras
-        //System.out.println("Kör guiUpdate");
-       // gui.run();
-        //System.out.println("Efter GuiUpdate");   
-        System.out.println("Anropar RobotRead från drive");
-          ds.robotflag = true;
-    }
-    
+        for(int k = 0; k < instruktioner.size(); k++ ){
+            Körorder = Körorder + " " + instruktioner.get(k).toString();
+        }
+            
+            //åk till vänster på kartan
+             while (kopiaX1 > kopiaX2) {
+                ds.robotX = kopiaX1;
+                kopiaX1 = kopiaX1 - 5; //Ändra femman till typ 10 för att pricken ska åka snabbare
+               cui.repaint();
+            }
+
+           //åk till höger på kartan
+            while (kopiaX1 < kopiaX2) { 
+                ds.robotX = kopiaX1;
+                kopiaX1 = kopiaX1 + 5;
+                cui.repaint();
+            }
+
+            //åk neråt på kartan
+             while (kopiaY1 > kopiaY2) {
+                ds.robotY = kopiaY1;
+                kopiaY1 = kopiaY1 - 5;
+                cui.repaint();
+            }
+
+            //åk uppåt på kartan          
+         while (kopiaY1 < kopiaY2) {
+                ds.robotY = kopiaY1;
+                kopiaY1 = kopiaY1 + 5;
+                cui.repaint();
+            }
+    } 
 }

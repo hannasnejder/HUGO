@@ -25,7 +25,6 @@ public class OptPlan {
 
     public OptPlan(DataStore ds, OptPlan opt) {
         this.ds = ds;
-
     }
 
     public void createPlan() {

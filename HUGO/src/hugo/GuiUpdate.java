@@ -1,4 +1,7 @@
-package hugo;
+//GuiUpdate behövs inte längre!
+
+
+/*package hugo;
 import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
@@ -91,4 +94,4 @@ public class GuiUpdate implements Runnable{
    public void robotrorelse() {
         cui.repaint();
     }
-}
+}*/

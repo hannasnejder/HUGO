@@ -3,7 +3,6 @@ package hugo;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Arrays;
 
 public class DataStore {
 
