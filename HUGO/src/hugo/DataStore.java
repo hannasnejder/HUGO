@@ -38,20 +38,21 @@ public class DataStore {
     boolean networkRead1;
     boolean robotflag;
     boolean bokaflag;
-    boolean bokaFlag;
 
     double startnodX=0;        // För att spara startplatsens x-koordinat
     double startnodY=0;        //För att spara startnodens y-koordinat
     
     int raknare = 0;
     int vill_vanta = 0;
+    int bokaom = 1;
     int [] okej;
     int [] ejokej;
     int [] vill_avboka;
     int [] resurser_boka;
     int [] från_robot;
     
-     ArrayList<Integer> bokningar = new ArrayList();
+    ArrayList<Integer> bokningar = new ArrayList();
+    ArrayList<Character> instruktioner = new ArrayList();
 
 
     public DataStore() {
