@@ -61,7 +61,9 @@ public class OptPlan {
             //sista kolumnen längden på tillhörande båge 
             //if start noden kopplas till rätt slutnod, ta längden och sätt in i Edge
             //Else, fortsätt loopa
-            for (int m = 0; m < ds.arcs * 2; m++) {
+
+            for (int m = 0; m < (ds.arcs*2); m++) {
+
                 if ((ds.startpunkt[m] == ds.arcStart[i]) && ds.slutpunkt[m] == ds.arcEnd[i]) {
                     //System.out.println("inne i if-satsen"); 
                     dist = ds.kopiaAvstand[m];
@@ -91,13 +93,14 @@ public class OptPlan {
                 ;
 
         //Se över detta!! Verkar inte funka som jag vill....
-        for (int n = 0, k = 0; n < ds.antalnoderfil; n++) {
-            // System.out.println("kopiaVilkanoder är " + ds.kopiaVilkanoder[n]);
-            if (ds.kopiaVilkanoder[n] != 0) {
-                kvarvarande_hyllor[k] = ds.kopiaVilkanoder[n];
-                // System.out.println("kvarvarande_hyllor är först " + kvarvarande_hyllor[k] + " och k är " + k);
-                k++;
-            } else {
+        for (int n = 0, k= 0; n < ds.antalnoderfil; n++) {
+            //System.out.println("kopiaVilkanoder är "+ds.kopiaVilkanoder[n]);
+            if(ds.kopiaVilkanoder[n]!=0){
+            kvarvarande_hyllor[k] = ds.kopiaVilkanoder[n];
+            System.out.println("kvarvarande_hyllor är först "+kvarvarande_hyllor[k]+" och k är "+k);
+            k++;
+            }else{
+
                 //System.out.println("kvarvarande_hyllor är sen "+ kvarvarande_hyllor[n]+ " och n är "+n);
             }
         }
@@ -108,27 +111,20 @@ public class OptPlan {
                 dummafel = dummafel + 1;
             }
         }
+        //System.out.println("dummafel är "+dummafel);
+
+        for (int k = 0; k < dummafel; k++) { 
+            test_vag[0] = narmaste_nod;
+            kortast_avstand = 100000;
+
+            //används denna loop endast för att rita ut kartan? Kan jag ändra på det ?
+            for (int n = 0; n < kvarvarande_hyllor.length; n++) {
+                if (kvarvarande_hyllor[n] == narmaste_nod) {
+                    kvarvarande_hyllor[n] = 0;
         System.out.println("dummafel är " + dummafel);
 
         if (dummafel != 0) {
 
-            for (int k = 0; k < dummafel; k++) {
-                test_vag[0] = narmaste_nod;
-                kortast_avstand = 100000;
-            //System.out.println("kvarvarande_hyllor är detta i början av stora for "+kvarvarande_hyllor[k]);
-
-                //används denna loop endast för att rita ut kartan? Kan jag ändra på det ?
-                for (int n = 0; n < dummafel; n++) {
-                //System.out.println("kvarvarande hyllot är "+kvarvarande_hyllor[n]);
-                    //System.out.println("närmaste nod är "+narmaste_nod);
-                    if (kvarvarande_hyllor[n] == narmaste_nod) {
-                        kvarvarande_hyllor[n] = 0;
-                    //System.out.println("kvarvarande hyllot är "+kvarvarande_hyllor[n]);
-                        //System.out.println("närmaste nod är "+narmaste_nod);
-                        // System.out.println("n är "+n);
-                    }
-                    //System.out.println("kvarvarande_hyllor är detta i den konstiga loopen "+kvarvarande_hyllor[n]);
-                }
 
                 for (int p = 0; p < dummafel; p++) {
                // System.out.println("p är först"+p);
@@ -143,14 +139,15 @@ public class OptPlan {
                     //System.out.println("Hit vi vill gå " + test_vag[1]);
 
                     //Loopar först igenom vägen(path) som fåtts från dijkstras för att se vilka noder som passeras
-                        //loopar sedan igenom arrayerna med alla avstånd
-                        nuvarande_langd = 0;
-                        for (int b = 1; b < path.size(); b++) {
-                            for (int m = 0; m < 98; m++) {
 
-                                //Kollar igenom avståndet mellan noderna som passeras för att komma till hyllan
-                                if ((ds.startpunkt[m] == Integer.parseInt(path.get(b - 1).getId())) && (ds.slutpunkt[m] == Integer.parseInt(path.get(b).getId()))) {
-                                    nuvarande_langd = (nuvarande_langd + ds.avstand[m]);
+                    //loopar sedan igenom arrayerna med alla avstånd
+                    nuvarande_langd = 0;
+                    for (int b = 1; b < path.size(); b++) {
+                        for (int m = 0; m < (ds.arcs*2); m++) {
+
+                            //Kollar igenom avståndet mellan noderna som passeras för att komma till hyllan
+                            if ((ds.startpunkt[m] == Integer.parseInt(path.get(b - 1).getId())) && (ds.slutpunkt[m] == Integer.parseInt(path.get(b).getId()))) {
+                                nuvarande_langd = (nuvarande_langd + ds.avstand[m]);
                                 }
                             }
                         }
@@ -175,7 +172,7 @@ public class OptPlan {
                     }
                 }
 
-            }
+           
         } else if (dummafel == 0) {
             snabbaste_rutten[0] = ds.startnod;
             //snabbaste_rutten[1]=ds.slutnod;
@@ -193,11 +190,10 @@ public class OptPlan {
         //Rita ut vägen för den snabbaste rutten
         snabbaste_rutten[order_kvar] = ds.slutnod;
 
+
         for (int j = 0; j < order_kvar + 1; j++) {
             System.out.println("Rutten är " + snabbaste_rutten[j]);
         }
-
-        for (int k = 0; k < (order_kvar); k++) {
 
             // Set up network
             for (int i = 0; i < ds.nodes; i++) {
@@ -213,7 +209,9 @@ public class OptPlan {
                 //for-loop kolumner
                 //if start noden kopplas till rätt slutnod, ta längden och sätt in i Edge
                 //Else, fortsätt loopa
-                for (int m = 0; m < 98; m++) {
+
+                for (int m = 0; m < ds.arcs*2; m++) {
+                    
                     if ((ds.startpunkt[m] == ds.arcStart[i]) && ds.slutpunkt[m] == ds.arcEnd[i]) {
                         //System.out.println("inne i if-satsen"); 
                         dist = ds.avstand[m];
@@ -240,6 +238,12 @@ public class OptPlan {
             for (int i = 1; i < path.size(); i++) {
                 //System.out.println("Noder som ska passeras: " + path.get(i));
                 ds.nodeColor[Integer.parseInt(path.get(i).getId()) - 1] = 1;
+                
+                 for (int f = 0; f < ds.antalnoderfil; f++) {      //Kopia för att sätta färgen grön
+                            
+                            ds.nodeColor[ds.vilkanoder[f]-1] = 2;
+                        }
+                ds.nodeColor[ds.slutnod-1]=3;
 
                 //Sparar de noder vi vill boka i en array
                 noder_boka[z] = Integer.parseInt(path.get(i).getId());
@@ -257,7 +261,13 @@ public class OptPlan {
 
                         //System.out.println("Arc: " + j);
                         ds.arcColor[j] = 1;
+                       
+                       //Sparar de länkar vi vill boka i en array
+                        länkar_boka[c] = j+ds.nodes+1;
+                                           
+                        c = c + 1;                      
 
+                        //boka = Arrays.toString(länkar_boka);
                         //Sparar de länkar vi vill boka i en array
                         länkar_boka[c] = j + (ds.nodes + 1);
                         //System.out.println("Boka av c " +  länkar_boka[c]);
@@ -267,6 +277,8 @@ public class OptPlan {
                     }
                 }
             }
+        }
+    }
         }
 
         int j = 0;
@@ -285,3 +297,4 @@ public class OptPlan {
 
     }
 }
+        

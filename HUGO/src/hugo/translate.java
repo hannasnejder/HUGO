@@ -23,7 +23,8 @@ public class translate {
     //Säkerhetsstopp?
     public void interpret(){
         
-        System.out.println("Går in i translate");
+
+        //System.out.println("Går in i translate");
         //Spara resursnmmrena på det som blev bokat
         //När det som kommer från roboten är ett kommando + l/h?
         //Ta fram det som blev bokat och avboka

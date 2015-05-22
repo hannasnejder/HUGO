@@ -67,6 +67,7 @@ public class RobotRead implements Runnable {
             //StreamConnection anslutning = (StreamConnection)
             //Connector.open("btspp://C0F8DAE35DC6:1");       
             //Roboten 98D331902C27
+
             
             // PrintStream bluetooth_ut = new PrintStream(anslutning.openOutputStream());
         
@@ -160,6 +161,7 @@ public class RobotRead implements Runnable {
 =======
                 //System.out.println("från_robot: " + Arrays.toString(från_robot));*/
             ds.updateUIflag = true;
+            ds.robotflag = false;
             
             //Bokaflag sätts till true för att gå tillbaka till boka
             ds.bokaflag = true;
