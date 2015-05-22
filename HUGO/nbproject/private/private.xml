@@ -2,6 +2,7 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group>
             <file>file:/C:/Users/Sara/Desktop/hugo/HUGO/HUGO/src/hugo/OptOnline.java</file>
             <file>file:/C:/Users/Sara/Desktop/hugo/HUGO/HUGO/src/hugo/RobotRead.java</file>
@@ -10,6 +11,19 @@
             <file>file:/C:/Users/Sara/Desktop/hugo/HUGO/HUGO/src/hugo/translate.java</file>
             <file>file:/C:/Users/Sara/Desktop/hugo/HUGO/HUGO/src/hugo/threads.java</file>
             <file>file:/C:/Users/Sara/Desktop/hugo/HUGO/HUGO/src/hugo/Boka.java</file>
+=======
+        <group name="Product">
+            <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/GuiUpdate.java</file>
+            <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/Boka.java</file>
+            <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/OptPlan.java</file>
+<<<<<<< HEAD
+            <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/OptOnline.java</file>
+            <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/Avboka.java</file>
+=======
+>>>>>>> 66cb5e605a5ae7d0acb31493f95a5f1deedb46bb
+            <file>file:/Users/CarolineAskerud/Desktop/Hugo/HUGO/src/hugo/RobotRead.java</file>
+>>>>>>> 16a6ed7f4c4b0ff35d6e9bdd06654c33a3ff85b8
         </group>
+        <group/>
     </open-files>
 </project-private>

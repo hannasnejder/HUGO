@@ -1,80 +1,95 @@
 package hugo;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 public class GuiUpdate implements Runnable{
-        private int sleepTime;
-        private static Random generator = new Random();
+        //private int sleepTime;
+        //private static Random generator = new Random();
         private ControlUI cui;
         private DataStore ds;
         public OptPlan opt;
+        public drive dr;
  
-        int x [] = new int[10000];
-
+        double kopiaX1, kopiaY1, X2, Y2;
         
-    public GuiUpdate(DataStore ds, ControlUI cui, OptPlan opt){
+    public GuiUpdate(DataStore ds, ControlUI cui, OptPlan opt, drive dr){
         this.cui = cui;
         this.ds = ds;
-        x=opt.noder_boka;
+        this.dr=dr;
+        this.opt=opt;    
+    } 
         
-        sleepTime = generator.nextInt(20000);
-    }
-        
+    
+        //I drive anropas run(). Vill att allt nedanför run() ska köras då
         @Override 
         public void run(){
             try{
                // cui.appendStatus("GuiUpdate startar och kommer att köra i " + sleepTime + " millisekunder. ");
                 cui.appendStatus("Hyllplatser: " + ds.besoknoder);
                 cui.appendStatus("Resurser: " + Arrays.toString(ds.resurser_boka));
-
-                //System.out.println(Arrays.toString(x));
-              
+          
                 while(ds.updateUIflag==false){
-                    Thread.sleep(sleepTime / 20); 
+                    TimeUnit.SECONDS.sleep(3);      //FÖRDRÖJNING? 1? 3?
                 }
-                
-                int j = 1;
-                
-                //Ska kolla om looparna går att kombinera med Johannas kod
-                //Försöker få roboten att flytta sig efter order
-                while(j <= x[3]){
-                         Thread.sleep(sleepTime/20);
-                            
-                    ds.robotY = j*14.33;
-                    robotrorelse(); 
-                    
-                    //System.out.println("while går " + j + " varv");
-                    j++;
-                }
-                
-                int k = 23;
-                
-                //Behöver fixa så att picken rör sig långsammare, som i loopen ovan
-                while(x[3] <= k && k <= x[10]){
-                    Thread.sleep(sleepTime/20);      
-                    // System.out.println("Går igenom while-loopen " + k);
         
-                    ds.robotX = k*14;
-                    robotrorelse(); 
-                    //System.out.println("k " + k );
-                    k++;    
-                }
-      
-            //startnodens koordinater finns sparade i startnodX och startnodY i DataStore
-               //System.out.println("startnodX "+ds.startnodX);
-                //System.out.println("startnodY "+ds.startnodY);
-                ds.robotX=ds.startnodX; //Nod 1s x-koordinat 
-                ds.robotY=ds.startnodY;
-                
-        }catch(InterruptedException exception){
+            //drive: kopiaX1 och kopiaY1 är startnodens koordinater
+            //drive: X2 och Y2 är första bokade nodens koordinater
+            System.out.println("Inne i GuiUpdate");
             
+            //while(en flagga i drive har satts till true)
+
+             //åk till vänster på kartan
+             while (kopiaX1 > X2) {
+                TimeUnit.SECONDS.sleep(3);      //Hur länge ska tråden sova?
+                ds.robotX = kopiaX1;
+                kopiaX1 = kopiaX1 - 10;         //Öka 10 för att pricken ska åka snabbare. Gäller även för resterande while-looparna
+                robotrorelse();                
+                break;
+            }
+
+           //åk till höger på kartan
+            while (kopiaX1 < X2) {
+                TimeUnit.SECONDS.sleep(3);
+                ds.robotX = kopiaX1;
+                kopiaX1 = kopiaX1 + 10;
+                robotrorelse();
+                break;
+            }
+
+            //åk neråt på kartan
+             while (kopiaY1 > Y2) {
+                TimeUnit.SECONDS.sleep(3);
+                System.out.println("KOM IN HÄR");
+                ds.robotY = kopiaY1;
+                kopiaY1 = kopiaY1 - 10;
+                robotrorelse();
+                break;
+            }
+
+            //åk uppåt på kartan          
+         while (kopiaY1 < Y2) {
+                TimeUnit.SECONDS.sleep(3);
+                ds.robotY = kopiaY1;
+                kopiaY1 = kopiaY1 + 10;
+                robotrorelse();
+               break;
+            }
+
+       
+            
+           // System.out.println("Flaggan i GuiUpdate är sann");
+
+          
+          // } //stäng loopen
+        } catch (InterruptedException exception) {
         }
         cui.appendStatus("GuiUpdate är nu klar! ");
-        }
+    }
 
-     //Uppdaterar kartan med robotens position
-    public void robotrorelse(){
+    //Uppdaterar kartan med robotens position
+
+   public void robotrorelse() {
         cui.repaint();
-    }      
+    }
 }
-
