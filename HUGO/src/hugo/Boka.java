@@ -43,7 +43,7 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr, Avboka avboka
     
      try {
         int i;
-        int p = 1;
+        
         //TimeUnit.SECONDS.sleep(1);        
         System.out.println("Går den in i boka igen");
         
@@ -53,7 +53,7 @@ public Boka(OptPlan opt, DataStore ds, OptOnline online, drive dr, Avboka avboka
         //while(ds.bokaflag == true){
         TimeUnit.SECONDS.sleep(1); 
         
-        //if(ds.bokaom == 1){
+       // if(ds.bokaom == 1){
            
             ds.raknare = 0;
             ds.okej = new int[2];
@@ -164,7 +164,7 @@ public void vanta() {
      System.out.println("Avvakta i 4 sekunder");
      TimeUnit.SECONDS.sleep(4);
     }catch (Exception e) {System.out.print("det här är e, vänta" + e.toString());
-}
+            }
         
-}
+    }
 }
